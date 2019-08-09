@@ -8,7 +8,7 @@
             <gradient
                 android:centerY="0.50"
                 android:endColor="#D441EC"
-                android:startColor="#9168DD"
+                android:startColor="#3D1785"
                 android:type="linear" />
         </shape>
     </item>
@@ -22,7 +22,7 @@
                 <gradient
                     android:centerY="0.50"
                     android:endColor="#D441EC"
-                    android:startColor="#9168DD"
+                    android:startColor="#391779"
                     android:type="linear"
                     android:useLevel="false" />
             </shape>
