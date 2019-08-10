@@ -1,6 +1,8 @@
 package com.example.studentmanagement.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +12,9 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studentmanagement.R;
-import com.squareup.picasso.Picasso;
+import com.example.studentmanagement.activity.StudentListActivity;
+
+import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -19,11 +23,11 @@ public class HomeAdapterHome extends RecyclerView.Adapter<HomeAdapterHome.ViewHo
 
     private Activity activity;
     private String[] name;
-    private Integer[] image;
+    private ArrayList<Integer> image;
     private int row_index = -1;
 
 
-    public HomeAdapterHome(Activity activity, String[] name, Integer[] image) {
+    public HomeAdapterHome(Activity activity, String[] name, ArrayList<Integer> image) {
         this.activity = activity;
         this.name = name;
         this.image = image;
@@ -40,7 +44,8 @@ public class HomeAdapterHome extends RecyclerView.Adapter<HomeAdapterHome.ViewHo
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
-        Picasso.with(activity).load(image[position]).into(holder.imageView);
+        //Picasso.with(activity).load(image[position]).into(holder.imageView);
+        holder.imageView.setImageResource(image.get(position));
         holder.textView_Name.setText(name[position]);
 
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
@@ -48,6 +53,17 @@ public class HomeAdapterHome extends RecyclerView.Adapter<HomeAdapterHome.ViewHo
             public void onClick(View view) {
                 row_index = position;
                 notifyDataSetChanged();
+
+                switch (name[position]){
+
+                    case "Student":
+                        activity.startActivity(new Intent(activity, StudentListActivity.class));
+                        break;
+                        default:
+                            break;
+
+                }
+
             }
         });
 

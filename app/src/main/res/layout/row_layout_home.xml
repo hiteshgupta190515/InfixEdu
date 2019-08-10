@@ -4,7 +4,9 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="2dp"
+    >
 
 
     <androidx.cardview.widget.CardView
@@ -12,8 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:foreground="?attr/selectableItemBackground"
-        app:cardCornerRadius="4dp"
-        android:background="@mipmap/bg">
+        app:cardCornerRadius="4dp">
         <com.balysv.materialripple.MaterialRippleLayout
             android:id="@+id/ripple"
             android:layout_width="match_parent"
@@ -25,14 +26,13 @@
             <LinearLayout
                 android:id="@+id/linearLayout_home_adapter"
                 android:layout_width="match_parent"
-                android:layout_height="90dp"
+                android:layout_height="100dp"
                 android:gravity="center"
                 android:orientation="vertical">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/icon_attendance"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:id="@+id/home_imageview"
                     />
 
@@ -41,7 +41,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="1" android:text="student"
-                    android:textColor="@color/text_color"
+                    android:textColor="@color/drawar_text"
                     android:textSize="12sp"
                     android:textStyle="bold"
                     android:fontFamily="@font/neosans_pro_regular"/>
