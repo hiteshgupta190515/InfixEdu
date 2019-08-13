@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="2dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/toolbar_gradient"
+    android:layout_margin="5dp"
+    android:id="@+id/reletive"
+    >
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="10dp"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/book_icon"
+        android:layout_width="80dp"
+        android:layout_height="90dp"
+        android:src="@mipmap/book_icon_round"/>
+
+    <TextView
+        android:id="@+id/book_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/book_icon"
+        android:padding="5dp"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:fontFamily="@font/neosans_pro_regular"
+        android:text="The Jungle Book"/>
+
+    <TextView
+        android:id="@+id/book_author"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:fontFamily="@font/neosanspro_medium"
+        android:layout_toRightOf="@+id/book_icon"
+        android:layout_below="@+id/book_title"
+        android:text="by Rudyard Kipling"
+        />
+</RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>

@@ -17,7 +17,7 @@
         android:layout_gravity="center_vertical"
         android:layout_marginTop="16dp"
         android:transitionName="profile"
-        android:src="@mipmap/student_icon"
+        android:src="@mipmap/student_face"
         app:civ_border_width="0dp" />
 
 

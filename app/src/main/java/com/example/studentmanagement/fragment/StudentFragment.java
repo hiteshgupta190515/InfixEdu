@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -33,6 +34,7 @@ public class StudentFragment extends Fragment {
     private RecyclerView studentRecyclerView;
     private StudentListAdapter adapter;
     final ArrayList<Student> students = new ArrayList<>();
+    private ProgressBar progressBar;
     public StudentFragment(){}
 
 
@@ -45,6 +47,9 @@ public class StudentFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_student_list, container, false);
+
+        progressBar = view.findViewById(R.id.loading);
+        progressBar.setVisibility(View.VISIBLE);
 
         studentRecyclerView = view.findViewById(R.id.studentRecycler);
         studentRecyclerView.setHasFixedSize(true);
@@ -125,6 +130,7 @@ public class StudentFragment extends Fragment {
                             adapter = new StudentListAdapter(students,getActivity());
                             studentRecyclerView.setAdapter(adapter);
                             adapter.notifyDataSetChanged();
+                            progressBar.setVisibility(View.GONE);
 
                         }
 
@@ -132,7 +138,7 @@ public class StudentFragment extends Fragment {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                progressBar.setVisibility(View.GONE);
             }
         });
         RequestQueue req = Volley.newRequestQueue(getActivity());

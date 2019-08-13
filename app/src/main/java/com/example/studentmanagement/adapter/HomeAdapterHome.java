@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studentmanagement.R;
+import com.example.studentmanagement.activity.LibraryActivity;
 import com.example.studentmanagement.activity.StudentListActivity;
 
 import java.util.ArrayList;
@@ -59,8 +60,11 @@ public class HomeAdapterHome extends RecyclerView.Adapter<HomeAdapterHome.ViewHo
                     case "Student":
                         activity.startActivity(new Intent(activity, StudentListActivity.class));
                         break;
-                        default:
-                            break;
+                    case "Library":
+                        activity.startActivity(new Intent(activity, LibraryActivity.class));
+                        break;
+                    default:
+                        break;
 
                 }
 

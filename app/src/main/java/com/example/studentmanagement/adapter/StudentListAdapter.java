@@ -1,18 +1,25 @@
 package com.example.studentmanagement.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.util.Pair;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.studentmanagement.R;
+import com.example.studentmanagement.activity.StudentInformation;
 import com.example.studentmanagement.model.Student;
 
 import java.util.ArrayList;
@@ -39,7 +46,7 @@ public class StudentListAdapter  extends RecyclerView.Adapter<StudentListAdapter
     }
 
     @Override
-    public void onBindViewHolder(@NonNull studentViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull studentViewHolder holder, final int position) {
 
         String url =students.get(position).getStudent_photo();
         String name = students.get(position).getFull_name();
@@ -59,6 +66,31 @@ public class StudentListAdapter  extends RecyclerView.Adapter<StudentListAdapter
             holder.txtDes.setText(des);
 
         }
+
+        holder.layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //Toast.makeText(ctx,students.get(position).getFull_name(), Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(ctx, StudentInformation.class);
+
+                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
+
+                    Pair<View, String> p1 = Pair.create(view.findViewById(R.id.student_poster), "profile");
+                    Pair<View, String> p2 = Pair.create(view.findViewById(R.id.student_name), "name");
+
+                    ActivityOptionsCompat options = ActivityOptionsCompat.
+                            makeSceneTransitionAnimation((Activity) ctx, p1, p2);
+                    ctx.startActivity(intent, options.toBundle());
+
+                } else {
+                    ctx.startActivity(intent);
+                }
+
+
+            }
+        });
 
     }
 
