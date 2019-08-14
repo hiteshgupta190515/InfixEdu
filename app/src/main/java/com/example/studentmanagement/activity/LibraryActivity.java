@@ -4,8 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -15,6 +21,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.studentmanagement.R;
+import com.example.studentmanagement.adapter.AutoCompleteBookAdapter;
 import com.example.studentmanagement.adapter.BookAdapter;
 import com.example.studentmanagement.adapter.StudentListAdapter;
 import com.example.studentmanagement.model.Book;
@@ -29,17 +36,43 @@ import java.util.ArrayList;
  public class LibraryActivity extends AppCompatActivity {
 
     private ArrayList<Book> books = new ArrayList<>();
+    private ArrayList<Book> tmp_books = new ArrayList<>();
     private RecyclerView recyclerView;
     private BookAdapter adapter;
+    private AutoCompleteTextView completeTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_library);
 
+        completeTextView = findViewById(R.id.actBookSearch);
+
         recyclerView = findViewById(R.id.libraryRecycler);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        completeTextView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int i, int i1, int i2) {
+
+                tmp_books.clear();
+
+                if(i2 == 0 ) {
+                    getAllBooks();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
         getAllBooks();
 
@@ -109,6 +142,19 @@ import java.util.ArrayList;
                     adapter = new BookAdapter(books,getApplicationContext());
                     recyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
+
+
+                    AutoCompleteBookAdapter bookAdapter = new AutoCompleteBookAdapter(getApplicationContext(), R.layout.book_list_item, books);
+                    completeTextView.setAdapter(bookAdapter);
+
+                    completeTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                            Intent intent = new Intent(getApplicationContext(),BookDetailsActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    });
 
                 }
 

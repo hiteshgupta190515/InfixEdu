@@ -1,5 +1,6 @@
 package com.example.studentmanagement.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -14,8 +15,14 @@ public class BookDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_details);
 
+    }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
 
-
+        Intent intent = new Intent(getApplicationContext(),LibraryActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

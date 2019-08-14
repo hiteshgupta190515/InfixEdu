@@ -28,6 +28,39 @@ public class Book {
         this.active_status = active_status;
     }
 
+    public Book(String bookTitle) {
+        this.bookTitle = bookTitle;
+    }
+
+    public boolean checkAndSet(String str , int count){
+
+        String sub = this.getBookTitle().substring(0,count);
+
+        if(sub.equalsIgnoreCase(str)){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
+//    @Override
+//    public boolean equals(Object obj) {
+//
+//        if (obj == null) {
+//            return false;
+//        }
+//
+//        if (!(obj instanceof Book)) {
+//            return false;
+//        }
+//
+//       Book book = (Book) obj;
+//
+//        return this.bookTitle.contains(book.bookTitle);
+//
+//    }
+
     public String getBookPublisher() {
         return bookPublisher;
     }
