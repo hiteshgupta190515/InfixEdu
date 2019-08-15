@@ -13,4 +13,13 @@
         <item>Library</item>
     </string-array>
 
+    <string-array name="inventory_functions_name">
+        <item>all</item>
+        <item>issued</item>
+        <item>deleted store</item>
+        <item>suppliers</item>
+        <item>deleted supplies</item>
+        <item>return</item>
+    </string-array>
+
 </resources>

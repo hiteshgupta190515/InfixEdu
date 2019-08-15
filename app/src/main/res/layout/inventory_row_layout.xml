@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <io.armcha.elasticview.ElasticView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    app:cardCornerRadius="6dp"
+                    app:cardElevation="6dp">
+                 <LinearLayout android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:orientation="vertical">
+                 <TextView android:id="@+id/txtInventoryName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="1dp"
+                     android:fontFamily="@font/neosanspro_medium"
+                    android:text="Item name 1"
+                    android:textColor="@color/blue"
+                    android:textSize="18sp" />
+                <TextView android:id="@+id/txtInventoryDescription"
+                    android:layout_width="match_parent"
+                    android:text="Android RecyclerView. Now in this article, we are going to learn Android CardView with RecyclerView.
+CardView is the new control introduced in v7 Support Library. Its a FrameLayout with shadow, corner radius and elevation property after Android Lollipop."
+                    android:layout_height="wrap_content"
+                    android:padding="1dp"
+                    android:maxLines="4"
+                    android:fontFamily="@font/neosans_pro_regular"
+                    android:textColor="@color/black" />
+                <TextView android:id="@+id/txtInventoryCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="1dp"
+                    android:fontFamily="@font/neosans_pro_regular"
+                    android:text="Category : Raw Materials Inventory"
+                    android:textColor="@color/black" />
+                <TextView android:id="@+id/txtInventoryStock"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="stock : 5"
+                    android:fontFamily="@font/neosans_pro_regular"
+                    android:padding="1dp"
+                    android:textColor="@color/black" />
+        </LinearLayout>
+    </io.armcha.elasticview.ElasticView>
+
+</LinearLayout>

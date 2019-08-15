@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studentmanagement.R;
+import com.example.studentmanagement.activity.InventoryActivity;
 import com.example.studentmanagement.activity.LibraryActivity;
 import com.example.studentmanagement.activity.StudentListActivity;
 
@@ -62,6 +63,9 @@ public class HomeAdapterHome extends RecyclerView.Adapter<HomeAdapterHome.ViewHo
                         break;
                     case "Library":
                         activity.startActivity(new Intent(activity, LibraryActivity.class));
+                        break;
+                    case "Inventory":
+                        activity.startActivity(new Intent(activity, InventoryActivity.class));
                         break;
                     default:
                         break;

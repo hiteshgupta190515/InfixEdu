@@ -95,17 +95,6 @@ import java.util.ArrayList;
 
 
 
-//                            String title = array.getJSONObject(0).getString("book_title");
-//                            String author = array.getJSONObject(0).getString("author_name");
-//                            String publisher = array.getJSONObject(0).getString("publisher_name");
-//
-//
-//
-//
-//                        Toast.makeText(getApplicationContext(),title +" "+author+" "+publisher, Toast.LENGTH_SHORT).show();
-
-
-
                         for(int i = 0 ; i < array.length() ; i++){
 
                             String title = array.getJSONObject(i).getString("book_title");
@@ -180,7 +169,6 @@ import java.util.ArrayList;
                 Intent intent = new Intent(this,BookDetailsActivity.class);
                 startActivity(intent);
                 finish();
-
 
      }
  }

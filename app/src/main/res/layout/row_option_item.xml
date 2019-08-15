@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <io.armcha.elasticview.ElasticView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="6dp"
+        app:flexibility="10"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="all"
+            android:textSize="15dp"
+            android:padding="5dp"
+            android:fontFamily="@font/neosanspro_medium"
+            android:id="@+id/txtOptName"
+            />
+
+    </io.armcha.elasticview.ElasticView>
+
+</LinearLayout>
