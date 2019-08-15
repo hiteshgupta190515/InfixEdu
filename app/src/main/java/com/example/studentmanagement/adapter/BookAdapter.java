@@ -1,5 +1,6 @@
 package com.example.studentmanagement.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -24,8 +25,9 @@ import java.util.ArrayList;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder>{
 
-    private ArrayList<Book> books;
+    private static ArrayList<Book> books;
     private Context ctx;
+    private static ClickListener clickListener;
 
     public BookAdapter(ArrayList<Book> books, Context ctx) {
         this.books = books;
@@ -47,11 +49,14 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         holder.titleName.setText(books.get(position).getBookTitle());
         holder.author.setText(books.get(position).getBookAuthor());
 
-        holder.relative.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+//        holder.relative.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Intent intent = new Intent(ctx,BookDetailsActivity.class);
+//                ctx.startActivity(intent);
+//                ((Activity)ctx).finish();
 
-                ctx.startActivity(new Intent(ctx, BookDetailsActivity.class));
 //                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(ctx);
 //                View mView = LayoutInflater.from(ctx).inflate(R.layout.activity_book_details, null);
 //
@@ -63,8 +68,8 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 //                alertBuilder.setView(mView);
 //                AlertDialog dialog = alertBuilder.create();
 //                dialog.show();
-            }
-        });
+//            }
+//        });
 
     }
 
@@ -72,6 +77,17 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     public int getItemCount() {
         return books.size();
     }
+
+    public void setClickListener(ClickListener clickListener) {
+        this.clickListener = clickListener;
+    }
+
+    public interface ClickListener {
+
+        void itemClicked(Book setterGetter, int position, View view);
+
+    }
+
 
     public static class BookViewHolder extends RecyclerView.ViewHolder{
 
@@ -86,6 +102,16 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             titleName = v.findViewById(R.id.book_title);
             author = v.findViewById(R.id.book_author);
             relative = v.findViewById(R.id.reletive);
+
+
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (clickListener != null) {
+                        clickListener.itemClicked(books.get(getPosition()), getPosition(),view);
+                    }
+                }
+            });
 
         }
     }

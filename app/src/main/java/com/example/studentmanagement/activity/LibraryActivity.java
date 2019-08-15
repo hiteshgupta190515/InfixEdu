@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -33,7 +34,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
- public class LibraryActivity extends AppCompatActivity {
+ public class LibraryActivity extends AppCompatActivity implements BookAdapter.ClickListener{
 
     private ArrayList<Book> books = new ArrayList<>();
     private ArrayList<Book> tmp_books = new ArrayList<>();
@@ -140,6 +141,7 @@ import java.util.ArrayList;
                 if(books.size() > 0){
 
                     adapter = new BookAdapter(books,getApplicationContext());
+                    adapter.setClickListener(LibraryActivity.this);
                     recyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
 
@@ -171,4 +173,14 @@ import java.util.ArrayList;
 
     }
 
-}
+
+     @Override
+     public void itemClicked(Book setterGetter, int position, View view) {
+
+                Intent intent = new Intent(this,BookDetailsActivity.class);
+                startActivity(intent);
+                finish();
+
+
+     }
+ }
