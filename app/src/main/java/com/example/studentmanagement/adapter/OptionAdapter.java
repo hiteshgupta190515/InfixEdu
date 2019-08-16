@@ -11,12 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studentmanagement.R;
 
-import java.util.ArrayList;
-
 public class OptionAdapter extends RecyclerView.Adapter <OptionAdapter.OptionViewHolder>{
 
-    String[] items;
+    static String[] items;
     Context ctx;
+    private static ClickListener clickListener;
 
     public OptionAdapter(String[] items, Context ctx) {
         this.items = items;
@@ -44,6 +43,17 @@ public class OptionAdapter extends RecyclerView.Adapter <OptionAdapter.OptionVie
         return items.length;
     }
 
+    public void setClickListener(ClickListener clickListener) {
+        this.clickListener = clickListener;
+    }
+
+    public interface ClickListener {
+
+        void itemClicked(String s, int position, View view);
+
+    }
+
+
     public static class OptionViewHolder extends RecyclerView.ViewHolder{
 
         TextView txtOptionName;
@@ -52,6 +62,15 @@ public class OptionAdapter extends RecyclerView.Adapter <OptionAdapter.OptionVie
             super(v);
 
             txtOptionName = v.findViewById(R.id.txtOptName);
+
+            txtOptionName.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (clickListener != null) {
+                        clickListener.itemClicked(items[getPosition()], getPosition(),view);
+                    }
+                }
+            });
 
         }
     }

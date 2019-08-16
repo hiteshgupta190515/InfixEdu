@@ -35,7 +35,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class InventoryActivity extends AppCompatActivity {
+public class InventoryActivity extends AppCompatActivity implements OptionAdapter.ClickListener {
 
     private ArrayList<Inventory> inventories = new ArrayList<>();
     private ArrayList<Book> tmp_books = new ArrayList<>();
@@ -69,6 +69,7 @@ public class InventoryActivity extends AppCompatActivity {
 
         names = getResources().getStringArray(R.array.inventory_functions_name);
         OptionAdapter optionAdapter = new OptionAdapter(names,InventoryActivity.this);
+        optionAdapter.setClickListener(InventoryActivity.this);
         recyclerViewOption.setAdapter(optionAdapter);
 
         getAlInventories();
@@ -137,4 +138,10 @@ public class InventoryActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void itemClicked(String s, int position, View view) {
+
+        Toast.makeText(getApplicationContext(),s, Toast.LENGTH_SHORT).show();
+
+    }
 }

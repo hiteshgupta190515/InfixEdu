@@ -3,21 +3,40 @@ package com.example.studentmanagement.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.studentmanagement.R;
+import com.example.studentmanagement.adapter.OptionAdapter;
 import com.example.studentmanagement.fragment.StudentFragment;
 
-public class StudentListActivity extends AppCompatActivity {
+public class StudentListActivity extends AppCompatActivity implements OptionAdapter.ClickListener {
 
     private Fragment mainFragment;
+    private RecyclerView recyclerViewOption;
+    private StaggeredGridLayoutManager gridLayoutManager;
+    private String[] names;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_list);
+
+
+        recyclerViewOption = findViewById(R.id.studentRecyclerOptions);
+        recyclerViewOption.setHasFixedSize(true);
+        gridLayoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
+        recyclerViewOption.setLayoutManager(gridLayoutManager);
+
+        names = getResources().getStringArray(R.array.student_functions_name);
+        OptionAdapter optionAdapter = new OptionAdapter(names,StudentListActivity.this);
+        optionAdapter.setClickListener(StudentListActivity.this);
+        recyclerViewOption.setAdapter(optionAdapter);
 
         mainFragment = new StudentFragment();
         replaceFragment(mainFragment);
@@ -33,4 +52,10 @@ public class StudentListActivity extends AppCompatActivity {
         transaction.commit();
     }
 
+    @Override
+    public void itemClicked(String s, int position, View view) {
+
+        Toast.makeText(getApplicationContext(),s, Toast.LENGTH_SHORT).show();
+
+    }
 }

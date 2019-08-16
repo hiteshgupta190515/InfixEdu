@@ -22,4 +22,21 @@
         <item>return</item>
     </string-array>
 
+    <string-array name="student_functions_name">
+        <item>all</item>
+        <item>search student</item>
+        <item>student-attendance-store</item>
+        <item>student-attendance-report</item>
+        <item>delete student</item>
+    </string-array>
+
+    <string-array name="library_functions_name">
+        <item>all</item>
+        <item>member-list</item>
+        <item>issue-books</item>
+        <item>return-book</item>
+        <item>all-issed-book</item>
+        <item>library-member</item>
+    </string-array>
+
 </resources>

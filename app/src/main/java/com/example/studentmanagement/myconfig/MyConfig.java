@@ -44,4 +44,35 @@ public class MyConfig {
 return category;
     }
 
+    public static String getUserRole(int id){
+
+        String category;
+
+        switch (id){
+
+            case 1:
+
+                category = "Super admin";
+                break;
+            case 2:
+                category = "Student";
+                break;
+            case 3:
+                category = "Parents";
+                break;
+            case 4:
+                category = "Teacher";
+                break;
+            case 5:
+                category = "Admin";
+            case 6:
+                category = "Accountant";
+            default:
+                category = "Others";
+                break;
+
+        }
+        return category;
+    }
+
 }

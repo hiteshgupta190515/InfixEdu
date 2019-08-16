@@ -11,14 +11,13 @@
         android:layout_margin="8dp"
         app:cardCornerRadius="6dp"
         app:cardElevation="6dp"
-        app:flexibility="10"
         >
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="all"
-            android:textSize="15dp"
+            android:textSize="12dp"
             android:padding="5dp"
             android:fontFamily="@font/neosanspro_medium"
             android:id="@+id/txtOptName"

@@ -3,6 +3,7 @@
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -24,6 +25,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.studentmanagement.R;
 import com.example.studentmanagement.adapter.AutoCompleteBookAdapter;
 import com.example.studentmanagement.adapter.BookAdapter;
+import com.example.studentmanagement.adapter.OptionAdapter;
 import com.example.studentmanagement.adapter.StudentListAdapter;
 import com.example.studentmanagement.model.Book;
 import com.example.studentmanagement.myconfig.MyConfig;
@@ -34,13 +36,16 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
- public class LibraryActivity extends AppCompatActivity implements BookAdapter.ClickListener{
+ public class LibraryActivity extends AppCompatActivity implements BookAdapter.ClickListener,OptionAdapter.ClickListener{
 
     private ArrayList<Book> books = new ArrayList<>();
     private ArrayList<Book> tmp_books = new ArrayList<>();
     private RecyclerView recyclerView;
     private BookAdapter adapter;
     private AutoCompleteTextView completeTextView;
+     private RecyclerView recyclerViewOption;
+     private StaggeredGridLayoutManager gridLayoutManager;
+     private String[] names;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +54,21 @@ import java.util.ArrayList;
 
         completeTextView = findViewById(R.id.actBookSearch);
 
+        //main recyclerview
         recyclerView = findViewById(R.id.libraryRecycler);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        //option recyclerview
+        recyclerViewOption = findViewById(R.id.libraryRecyclerOptions);
+        recyclerViewOption.setHasFixedSize(true);
+        gridLayoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
+        recyclerViewOption.setLayoutManager(gridLayoutManager);
+
+        names = getResources().getStringArray(R.array.library_functions_name);
+        OptionAdapter optionAdapter = new OptionAdapter(names,LibraryActivity.this);
+        optionAdapter.setClickListener(LibraryActivity.this);
+        recyclerViewOption.setAdapter(optionAdapter);
 
         completeTextView.addTextChangedListener(new TextWatcher() {
             @Override
@@ -170,5 +187,10 @@ import java.util.ArrayList;
                 startActivity(intent);
                 finish();
 
+     }
+
+     @Override
+     public void itemClicked(String s, int position, View view) {
+         Toast.makeText(getApplicationContext(),s, Toast.LENGTH_SHORT).show();
      }
  }

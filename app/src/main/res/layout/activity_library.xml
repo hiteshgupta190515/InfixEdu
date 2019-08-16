@@ -6,12 +6,21 @@
         android:padding="16dp"
     >
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/libraryRecyclerOptions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        />
 
     <AutoCompleteTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/actBookSearch"
         android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/libraryRecyclerOptions"
         android:hint="search.." />
 
     <androidx.recyclerview.widget.RecyclerView
