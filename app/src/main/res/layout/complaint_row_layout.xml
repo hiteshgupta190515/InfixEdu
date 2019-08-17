@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    >
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/details_complaint"
+        >
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:id="@+id/txtByName"
+        android:text="Mamun Hossain"
+        android:fontFamily="@font/neosans_pro_regular"
+        android:textSize="13dp"
+        android:padding="5dp"
+        />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:id="@+id/txtCompDate"
+        android:text="12.16.2019"
+        android:fontFamily="@font/neosans_pro_regular"
+        android:textSize="13dp"
+        android:padding="5dp"
+        />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:id="@+id/txtAction"
+        android:text="ratione"
+        android:fontFamily="@font/neosans_pro_regular"
+        android:textSize="13dp"
+        android:padding="5dp"
+        />
+
+</LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/drawar_text"/>
+
+</LinearLayout>

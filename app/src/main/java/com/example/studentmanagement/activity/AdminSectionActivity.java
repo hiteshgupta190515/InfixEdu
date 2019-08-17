@@ -42,7 +42,7 @@ public class AdminSectionActivity extends AppCompatActivity implements View.OnCl
                 startActivity(new Intent(this,VisitorActivity.class));
                 break;
             case R.id.complaint:
-
+                startActivity(new Intent(this,ComplaintActivity.class));
                 break;
                 default:
                     break;

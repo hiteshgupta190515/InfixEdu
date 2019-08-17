@@ -7,6 +7,7 @@ public class MyConfig {
     final public static String BOOK_LIST = BASE_URL+"book-list";
     final public static String INVENTORY_LIST = BASE_URL+"item-list";
     final public static String VISITOR_LIST = BASE_URL+"visitor";
+    final public static String COMPLAINT_LIST = BASE_URL+"complaint";
 
     public static String getLoginUrl(String email,String password){
 
@@ -43,6 +44,37 @@ public class MyConfig {
 
         }
 return category;
+    }
+
+    public static String getComplaintType(int id){
+
+        String category;
+
+        switch (id){
+
+            case 1:
+
+                category = "Raw Materials Inventory";
+                break;
+            case 2:
+                category = "Transit Inventory";
+                break;
+            case 3:
+                category = "Buffer Inventory";
+                break;
+            case 4:
+                category = "Application Inventory";
+                break;
+            case 5:
+                category = "Enterprice Inventory";
+            case 6:
+                category = "Others Inventory";
+            default:
+                category = "Others Inventory";
+                break;
+
+        }
+        return category;
     }
 
     public static String getUserRole(int id){
