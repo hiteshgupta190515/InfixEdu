@@ -6,6 +6,7 @@ public class MyConfig {
     final public static String STUDENT_LIST = BASE_URL+"student-list";
     final public static String BOOK_LIST = BASE_URL+"book-list";
     final public static String INVENTORY_LIST = BASE_URL+"item-list";
+    final public static String VISITOR_LIST = BASE_URL+"visitor";
 
     public static String getLoginUrl(String email,String password){
 

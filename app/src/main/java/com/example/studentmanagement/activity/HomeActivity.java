@@ -50,16 +50,16 @@ public class HomeActivity extends AppCompatActivity {
 
         switch (role){
             case 1:
-                names = getResources().getStringArray(R.array.teachers_functions_name);
+                names = getResources().getStringArray(R.array.admins_functions_name);
                 break;
             case 2:
-
+                names = getResources().getStringArray(R.array.students_functions_name);
                 break;
             case 3:
-
+                names = getResources().getStringArray(R.array.parents_functions_name);
                 break;
                 case 4:
-
+                    names = getResources().getStringArray(R.array.teachers_functions_name);
                 break;
 
                 default:

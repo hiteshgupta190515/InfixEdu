@@ -13,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.InventoryActivity"></activity>
+        <activity android:name=".activity.VisitorActivity"></activity>
+        <activity android:name=".activity.AdminSectionActivity" />
+        <activity android:name=".activity.InventoryActivity" />
         <activity android:name=".activity.LibraryActivity" />
         <activity android:name=".activity.StudentListActivity" />
         <activity android:name=".activity.LoginActivity" />
