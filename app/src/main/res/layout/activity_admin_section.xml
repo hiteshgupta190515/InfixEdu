@@ -67,5 +67,27 @@
 
     </io.armcha.elasticview.ElasticView>
 
+    <io.armcha.elasticview.ElasticView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="6dp"
+        android:id="@+id/postalReceive"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Postal Receive"
+            android:textSize="18dp"
+            android:padding="5dp"
+            android:textColor="@color/drawar_text"
+            android:fontFamily="@font/neosanspro_medium"
+            />
+
+    </io.armcha.elasticview.ElasticView>
+
 
 </LinearLayout>

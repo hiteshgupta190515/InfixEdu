@@ -16,6 +16,7 @@ public class AdminSectionActivity extends AppCompatActivity implements View.OnCl
     private Toolbar toolbar;
     private ElasticView elVisitor;
     private ElasticView elVComplaint;
+    private ElasticView elVPostal;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -34,6 +34,19 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputEditText etEmail;
     private TextInputEditText etPassword;
     private Button login;
+    private String name;
+    private String fatherName;
+    private String motherName;
+    private String section;
+    private String roll;
+    private String className;
+    private String admission_no;
+    private String religion;
+    private String presentAddress;
+    private String permanentAddress;
+    private String bloodGroup;
+    private String dateOfBirth;
+    private int rule;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,8 +83,6 @@ public class LoginActivity extends AppCompatActivity {
                         //If we are getting success from server
                         if(response.contains("success")){
 
-                            int rule = 0;
-
                             //Creating a shared preference
                             SharedPreferences sharedPreferences = LoginActivity.this.getSharedPreferences("default", Context.MODE_PRIVATE);
 
@@ -79,13 +90,27 @@ public class LoginActivity extends AppCompatActivity {
                             SharedPreferences.Editor editor = sharedPreferences.edit();
 
 
-                            JSONObject rootObj = null;
+                            JSONObject rootObj;
                             JSONObject secdObj = null;
+                            JSONObject detailsObj;
                             try {
                                 rootObj = new JSONObject(response);
-                                secdObj = rootObj.getJSONObject("data");
+                                secdObj = rootObj.getJSONObject("data").getJSONObject("user");
+                                detailsObj = rootObj.getJSONObject("data").getJSONObject("userDetails");
 
-                                 rule = secdObj.getJSONObject("user").getInt("role_id");
+                                rule = secdObj.getInt("role_id");
+                                fatherName = detailsObj.getString("fathers_name");
+                                motherName = detailsObj.getString("mothers_name");
+                                name = detailsObj.getString("full_name");
+                                section = detailsObj.getString("section_name");
+                                roll = detailsObj.getString("roll_no");
+                                className = detailsObj.getString("class_name");
+                                admission_no = detailsObj.getString("admission_no");
+                                presentAddress = detailsObj.getString("current_address");
+                                permanentAddress = detailsObj.getString("permanent_address");
+                                religion = detailsObj.getString("permanent_address");
+                                bloodGroup = detailsObj.getString("email");
+                                dateOfBirth = detailsObj.getString("date_of_birth");
 
 
                             } catch (JSONException e) {
@@ -95,12 +120,27 @@ public class LoginActivity extends AppCompatActivity {
                             //Adding values to editor
                             editor.putBoolean("isLoged", true);
                             editor.putString("email", email);
+                            editor.putString("name", name);
+                            editor.putString("fatherName", fatherName);
+                            editor.putString("motherName", motherName);
+                            editor.putString("section", section);
+                            editor.putString("roll", roll);
+                            editor.putString("className", className);
+                            editor.putString("admissionNo", admission_no);
+                            editor.putString("permanentAd", permanentAddress);
+                            editor.putString("presentAd", presentAddress);
+                            editor.putString("bloodGroup", bloodGroup);
+                            editor.putString("dateOfBirth", dateOfBirth);
+                            editor.putString("religion", religion);
                             editor.putInt("role", rule);
 
                             //Saving values to editor
                             editor.commit();
 
-                            Toast.makeText(LoginActivity.this, "login success", Toast.LENGTH_LONG).show();
+
+                                Toast.makeText(LoginActivity.this, "success", Toast.LENGTH_LONG).show();
+
+
 
                             //Starting profile activity
                             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);

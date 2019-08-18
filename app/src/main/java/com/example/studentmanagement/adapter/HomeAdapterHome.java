@@ -15,6 +15,7 @@ import com.example.studentmanagement.R;
 import com.example.studentmanagement.activity.AdminSectionActivity;
 import com.example.studentmanagement.activity.InventoryActivity;
 import com.example.studentmanagement.activity.LibraryActivity;
+import com.example.studentmanagement.activity.ProfileActivity;
 import com.example.studentmanagement.activity.StudentListActivity;
 
 import java.util.ArrayList;
@@ -70,6 +71,9 @@ public class HomeAdapterHome extends RecyclerView.Adapter<HomeAdapterHome.ViewHo
                         break;
                     case "Admin Section":
                         activity.startActivity(new Intent(activity, AdminSectionActivity.class));
+                        break;
+                    case "Profile":
+                        activity.startActivity(new Intent(activity, ProfileActivity.class));
                         break;
                     default:
                         break;
