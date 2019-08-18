@@ -46,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
     private String permanentAddress;
     private String bloodGroup;
     private String dateOfBirth;
+    private String phone;
     private int rule;
 
     @Override
@@ -108,9 +109,10 @@ public class LoginActivity extends AppCompatActivity {
                                 admission_no = detailsObj.getString("admission_no");
                                 presentAddress = detailsObj.getString("current_address");
                                 permanentAddress = detailsObj.getString("permanent_address");
-                                religion = detailsObj.getString("permanent_address");
-                                bloodGroup = detailsObj.getString("email");
+                                religion = rootObj.getJSONObject("data").getJSONObject("religion").getString("name");
+                                bloodGroup = rootObj.getJSONObject("data").getJSONObject("blood_group").getString("name");
                                 dateOfBirth = detailsObj.getString("date_of_birth");
+                                phone = detailsObj.getString("mobile");
 
 
                             } catch (JSONException e) {
@@ -132,6 +134,7 @@ public class LoginActivity extends AppCompatActivity {
                             editor.putString("bloodGroup", bloodGroup);
                             editor.putString("dateOfBirth", dateOfBirth);
                             editor.putString("religion", religion);
+                            editor.putString("phone", phone);
                             editor.putInt("role", rule);
 
                             //Saving values to editor

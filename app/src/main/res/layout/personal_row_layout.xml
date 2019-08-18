@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
 <LinearLayout
     android:layout_width="0dp"
@@ -10,7 +10,6 @@
     android:layout_weight="1"
     android:orientation="vertical"
     android:layout_margin="5dp"
-    android:padding="5dp"
     >
 
     <TextView
@@ -18,12 +17,15 @@
         android:layout_height="wrap_content"
         android:id="@+id/p_key"
         android:text="Date of Birth"
+        android:fontFamily="@font/neosans_pro_regular"
+        android:maxLines="1"
         android:textColor="@color/profile_light_text_color"
+        android:layout_marginBottom="5dp"
         />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.5dp"
         android:background="@color/profile_light_text_color"
         />
 
@@ -43,12 +45,15 @@
             android:layout_height="wrap_content"
             android:id="@+id/p_value"
             android:text="05/05/2015"
+            android:maxLines="1"
+            android:layout_marginBottom="5dp"
+            android:fontFamily="@font/neosans_pro_regular"
             android:textColor="@color/profile_light_text_color"
             />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0.5dp"
             android:background="@color/profile_light_text_color"
             />
 
