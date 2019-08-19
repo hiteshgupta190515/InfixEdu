@@ -10,6 +10,7 @@
     android:layout_weight="1"
     android:orientation="vertical"
     android:layout_margin="5dp"
+    android:padding="5dp"
     >
 
     <TextView
@@ -45,7 +46,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/p_value"
             android:text="05/05/2015"
-            android:maxLines="1"
+            android:maxLines="2"
             android:layout_marginBottom="5dp"
             android:fontFamily="@font/neosans_pro_regular"
             android:textColor="@color/profile_light_text_color"

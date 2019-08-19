@@ -16,6 +16,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.studentmanagement.MainActivity;
@@ -35,8 +36,25 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputEditText etPassword;
     private Button login;
     private String name;
+    private String height;
+    private String weight;
+    private String castle;
+    private String nationalId;
     private String fatherName;
+    private String fatherPhone;
+    private String fatherOcupation;
     private String motherName;
+    private String motherPhone;
+    private String motherOcupation;
+    private String gurdianName;
+    private String gurdianPhone;
+    private String gurdianOcupation;
+    private String gurdianRelation;
+    private String gurdianEmail;
+    private String driverName;
+    private String driverCarNo;
+    private String driverCarModel;
+    private String driverCarDeatils;
     private String section;
     private String roll;
     private String className;
@@ -75,7 +93,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void login(final String email, final String password){
-
         //Creating a string request
         StringRequest stringRequest = new StringRequest(Request.Method.POST, MyConfig.getLoginUrl(email,password),
                 new Response.Listener<String>() {
@@ -94,15 +111,30 @@ public class LoginActivity extends AppCompatActivity {
                             JSONObject rootObj;
                             JSONObject secdObj = null;
                             JSONObject detailsObj;
+                            JSONObject driverObj;
                             try {
                                 rootObj = new JSONObject(response);
                                 secdObj = rootObj.getJSONObject("data").getJSONObject("user");
                                 detailsObj = rootObj.getJSONObject("data").getJSONObject("userDetails");
+                                driverObj = rootObj.getJSONObject("data").getJSONObject("transport");
 
                                 rule = secdObj.getInt("role_id");
                                 fatherName = detailsObj.getString("fathers_name");
+                                fatherOcupation = detailsObj.getString("fathers_occupation");
+                                fatherPhone = detailsObj.getString("fathers_mobile");
                                 motherName = detailsObj.getString("mothers_name");
+                                motherPhone = detailsObj.getString("mothers_mobile");
+                                motherOcupation = detailsObj.getString("mothers_occupation");
+                                gurdianName = detailsObj.getString("guardians_name");
+                                gurdianPhone = detailsObj.getString("guardians_mobile");
+                                gurdianOcupation = detailsObj.getString("guardians_occupation");
+                                gurdianEmail = detailsObj.getString("guardians_email");
+                                gurdianRelation = detailsObj.getString("guardians_relation");
                                 name = detailsObj.getString("full_name");
+                                height = detailsObj.getString("height");
+                                weight = detailsObj.getString("weight");
+                                castle = detailsObj.getString("caste");
+                                nationalId = detailsObj.getString("national_id_no");
                                 section = detailsObj.getString("section_name");
                                 roll = detailsObj.getString("roll_no");
                                 className = detailsObj.getString("class_name");
@@ -114,6 +146,11 @@ public class LoginActivity extends AppCompatActivity {
                                 dateOfBirth = detailsObj.getString("date_of_birth");
                                 phone = detailsObj.getString("mobile");
 
+                                driverName = driverObj.getString("driver_name");
+                                driverCarNo = driverObj.getString("vehicle_no");
+                                driverCarModel = driverObj.getString("vehicle_model");
+                                driverCarDeatils = driverObj.getString("note");
+
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -122,9 +159,27 @@ public class LoginActivity extends AppCompatActivity {
                             //Adding values to editor
                             editor.putBoolean("isLoged", true);
                             editor.putString("email", email);
+                            editor.putString("password", password);
                             editor.putString("name", name);
+                            editor.putString("height", height);
+                            editor.putString("weight", weight);
+                            editor.putString("castle", castle);
+                            editor.putString("nationalId",nationalId);
                             editor.putString("fatherName", fatherName);
+                            editor.putString("fatherPhone", fatherPhone);
+                            editor.putString("fatherOccupation", fatherOcupation);
                             editor.putString("motherName", motherName);
+                            editor.putString("motherOcupation", motherOcupation);
+                            editor.putString("motherPhone", motherPhone);
+                            editor.putString("gurdName", gurdianName);
+                            editor.putString("gurdOcupation", gurdianOcupation);
+                            editor.putString("gurdPhone", gurdianPhone);
+                            editor.putString("gurdRelation", gurdianRelation);
+                            editor.putString("gurdEmail", gurdianEmail);
+                            editor.putString("driverName", driverName);
+                            editor.putString("driverCarNo", driverCarNo);
+                            editor.putString("drivercarModel", driverCarModel);
+                            editor.putString("driverDetails", driverCarDeatils);
                             editor.putString("section", section);
                             editor.putString("roll", roll);
                             editor.putString("className", className);

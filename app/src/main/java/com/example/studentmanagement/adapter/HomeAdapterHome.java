@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studentmanagement.R;
 import com.example.studentmanagement.activity.AdminSectionActivity;
+import com.example.studentmanagement.activity.FeesActivity;
 import com.example.studentmanagement.activity.InventoryActivity;
 import com.example.studentmanagement.activity.LibraryActivity;
 import com.example.studentmanagement.activity.ProfileActivity;
@@ -74,6 +75,9 @@ public class HomeAdapterHome extends RecyclerView.Adapter<HomeAdapterHome.ViewHo
                         break;
                     case "Profile":
                         activity.startActivity(new Intent(activity, ProfileActivity.class));
+                        break;
+                    case "Fees":
+                        activity.startActivity(new Intent(activity, FeesActivity.class));
                         break;
                     default:
                         break;

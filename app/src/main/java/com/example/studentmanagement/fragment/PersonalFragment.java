@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.studentmanagement.R;
 import com.example.studentmanagement.adapter.PersonalAdapter;
@@ -22,7 +23,7 @@ import com.example.studentmanagement.model.Visitor;
 import java.util.ArrayList;
 
 
-public class PersonalFragment extends Fragment {
+public class PersonalFragment extends Fragment{
 
     private String name;
     private String fatherName;
@@ -64,6 +65,7 @@ public class PersonalFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_personal, container, false);
 
+
         recyclerView = v.findViewById(R.id.personalRecyclerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -104,6 +106,4 @@ public class PersonalFragment extends Fragment {
 
         return v;
     }
-
-
 }

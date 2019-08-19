@@ -1,0 +1,193 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Admission fees - class 5"
+        android:textSize="18dp"
+        android:textColor="#415094"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:id="@+id/txtFeeClass"
+        android:fontFamily="@font/neosanspro_medium"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="view"
+        android:textSize="18dp"
+        android:textColor="#415094"
+        android:layout_margin="5dp"
+        android:id="@+id/txtFeeClassView"
+        android:textAlignment="textEnd"
+        android:fontFamily="@font/neosanspro_medium"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_below="@+id/txtFeeClass"
+        android:layout_marginLeft="10dp"
+        >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Amount"
+                android:textSize="13dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/neosans_pro_regular"
+                android:textColor="@color/profile_light_text_color"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4500.0"
+                android:textSize="12dp"
+                android:id="@+id/amount"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/neosans_pro_regular"
+                android:textColor="@color/profile_light_text_color"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="status"
+                android:textSize="13dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/neosans_pro_regular"
+                android:textColor="@color/profile_light_text_color"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="500.0"
+                android:background="@color/colorPrimary"
+                android:textSize="12dp"
+                android:id="@+id/status"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/neosans_pro_regular"
+                android:textColor="#fff"
+                android:padding="2dp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fine"
+                android:textSize="13dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/neosans_pro_regular"
+                android:textColor="@color/profile_light_text_color"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="400.0"
+                android:textSize="12dp"
+                android:id="@+id/fine"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/neosans_pro_regular"
+                android:textColor="@color/profile_light_text_color"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Paid"
+                android:textSize="13dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/neosans_pro_regular"
+                android:textColor="@color/profile_light_text_color"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3500.0"
+                android:textSize="12dp"
+                android:id="@+id/paid"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/neosans_pro_regular"
+                android:textColor="@color/profile_light_text_color"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Balance"
+                android:textSize="13dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/neosans_pro_regular"
+                android:textColor="@color/profile_light_text_color"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1500.0"
+                android:textSize="12dp"
+                android:id="@+id/balance"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/neosans_pro_regular"
+                android:textColor="@color/profile_light_text_color"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.ProfileActivity"></activity>
+        <activity android:name=".activity.FeesActivity"></activity>
+        <activity android:name=".activity.ProfileActivity" />
         <activity android:name=".activity.ComplaintActivity" />
         <activity android:name=".activity.VisitorActivity" />
         <activity android:name=".activity.AdminSectionActivity" />
