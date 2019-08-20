@@ -36,12 +36,12 @@
     <string-array name="students_functions_name">
         <item>Profile</item>
         <item>Fees</item>
-        <item>Class Routine</item>
+        <item>Routine</item>
         <item>Homework</item>
-        <item>Attendence</item>
+        <item>Attendance</item>
         <item>Examination</item>
         <item>Online Exam</item>
-        <item>Noticeboard</item>
+        <item>Notice</item>
         <item>Subjects</item>
         <item>Teacher</item>
         <item>Library</item>

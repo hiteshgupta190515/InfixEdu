@@ -70,7 +70,7 @@ public class HomeActivity extends AppCompatActivity {
 
         for(String n : names){
 
-            images.add(imageSearch(n.toLowerCase()));
+            images.add(imageSearch(n.toLowerCase().replace(" ","")));
         }
 
         HomeAdapterHome homeAdapterHome = new HomeAdapterHome(this,names,images);

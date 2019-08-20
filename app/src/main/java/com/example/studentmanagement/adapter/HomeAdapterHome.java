@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -107,7 +108,7 @@ public class HomeAdapterHome extends RecyclerView.Adapter<HomeAdapterHome.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private CircleImageView imageView;
+        private ImageView imageView;
         private TextView textView_Name;
         private LinearLayout linearLayout;
 
@@ -115,9 +116,9 @@ public class HomeAdapterHome extends RecyclerView.Adapter<HomeAdapterHome.ViewHo
         public ViewHolder(View itemView) {
             super(itemView);
 
-            imageView = (CircleImageView) itemView.findViewById(R.id.home_imageview);
-            textView_Name = (TextView) itemView.findViewById(R.id.textView_home_adapter);
-            linearLayout = (LinearLayout) itemView.findViewById(R.id.linearLayout_home_adapter);
+            imageView = itemView.findViewById(R.id.home_imageview);
+            textView_Name = itemView.findViewById(R.id.textView_home_adapter);
+            linearLayout = itemView.findViewById(R.id.linearLayout_home_adapter);
 
         }
     }
