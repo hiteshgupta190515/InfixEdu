@@ -5,10 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.ClassRoutineActivity"
-    android:layout_margin="20dp">
+    tools:context=".activity.ClassRoutineActivity">
 
     <include layout="@layout/toolbar"/>
     <include layout="@layout/content_routine_layout"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/recyclerSaturday"
+        ></androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>

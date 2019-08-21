@@ -8,18 +8,20 @@
     android:weightSum="8"
     tools:context=".activity.FeesActivity">
 
-   <include layout="@layout/toolbar"/>
+   <include layout="@layout/toolbar"
+       android:layout_width="match_parent"
+       android:layout_height="0dp"
+       android:layout_weight="1"
+       />
 
     <io.armcha.elasticview.ElasticView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="1.5"
         android:elevation="8dp"
-        android:divider="@android:color/holo_purple"
-        android:dividerHeight="0.0px"
         android:clipToPadding="false"
         android:clipChildren="false"
-        app:cardElevation="10dp"
+        app:cardElevation="8dp"
         app:cardPreventCornerOverlap="false"
         >
 
@@ -206,7 +208,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_weight="4"
+        android:layout_weight="5.5"
         android:layout_height="0dp"
         android:id="@+id/feeRecyclerView"
         ></androidx.recyclerview.widget.RecyclerView>

@@ -18,6 +18,7 @@ public class RoutineAdapter extends RecyclerView.Adapter <RoutineAdapter.Routine
 
     private ArrayList<Routine> routines;
     private Context ctx;
+    private boolean firstTime = true;
 
     public RoutineAdapter(ArrayList<Routine> routines, Context ctx) {
         this.routines = routines;
@@ -36,16 +37,34 @@ public class RoutineAdapter extends RecyclerView.Adapter <RoutineAdapter.Routine
     @Override
     public void onBindViewHolder(@NonNull RoutineViewHolder holder, int position) {
 
-        holder.txtTime.setText(routines.get(position).getStartTime()+"-"+routines.get(position).getEndTime());
-        holder.txtSubject.setText(routines.get(position).getSubject());
-        holder.txtRoomNo.setText(routines.get(position).getRoomNo());
-        holder.txtWeekName.setText(routines.get(position).getWeekName());
+        if(firstTime){
+
+            holder.txtWeekName.setVisibility(View.VISIBLE);
+            firstTime = false;
+
+            holder.txtTime.setText(routines.get(position).getStartTime());
+            holder.txtSubject.setText(routines.get(position).getSubject());
+            holder.txtRoomNo.setText(routines.get(position).getRoomNo());
+            holder.txtWeekName.setText(routines.get(position).getWeekName());
+        }else{
+            holder.txtTime.setTextSize(10);
+            holder.txtRoomNo.setTextSize(10);
+            holder.txtSubject.setTextSize(10);
+
+            holder.txtTime.setText(routines.get(position).getStartTime()+"-"+routines.get(position).getEndTime());
+            holder.txtSubject.setText(routines.get(position).getSubject());
+            holder.txtRoomNo.setText(routines.get(position).getRoomNo());
+        }
+
 
     }
 
     @Override
     public int getItemCount() {
+        if(routines != null)
         return routines.size();
+        else
+            return 0;
     }
 
     public static class RoutineViewHolder extends RecyclerView.ViewHolder{

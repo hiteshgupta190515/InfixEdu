@@ -74,6 +74,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private String dateOfBirth;
     private String phone;
     private int rule;
+    private int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -170,6 +171,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                                 driverObj = rootObj.getJSONObject("data").getJSONObject("transport");
 
                                 rule = secdObj.getInt("role_id");
+                                id = secdObj.getInt("id");
                                 fatherName = detailsObj.getString("fathers_name");
                                 fatherOcupation = detailsObj.getString("fathers_occupation");
                                 fatherPhone = detailsObj.getString("fathers_mobile");
@@ -245,6 +247,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                             editor.putString("religion", religion);
                             editor.putString("phone", phone);
                             editor.putInt("role", rule);
+                            editor.putInt("id", id);
 
                             //Saving values to editor
                             editor.commit();

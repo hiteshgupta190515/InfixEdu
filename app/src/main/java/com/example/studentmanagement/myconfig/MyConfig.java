@@ -18,6 +18,10 @@ public class MyConfig {
         return BASE_URL+"student-class-routine/"+id;
     }
 
+    public static String getFeesUrl(int id){
+        return BASE_URL+"fees-collect-student-wise/"+id;
+    }
+
 
     public static String getInventory(int id){
 

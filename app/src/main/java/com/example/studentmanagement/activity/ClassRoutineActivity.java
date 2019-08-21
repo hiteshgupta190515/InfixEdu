@@ -2,11 +2,13 @@ package com.example.studentmanagement.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,6 +48,7 @@ public class ClassRoutineActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_class_routine);
 
+
         sharedPreferences = getSharedPreferences("default", Context.MODE_PRIVATE);
         id = sharedPreferences.getInt("id",0);
 
@@ -54,9 +57,10 @@ public class ClassRoutineActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
-        txtToolbarText.setText("Class Routine");
+        txtToolbarText.setText("Routine");
 
         initRecyclerview();
+
         getAllRoutine(id);
 
     }
@@ -70,6 +74,29 @@ public class ClassRoutineActivity extends AppCompatActivity {
         recyThursday = findViewById(R.id.recyclerThursday);
         recyWednesday = findViewById(R.id.recyclerWednesday);
         recyFriday = findViewById(R.id.recyclerFriday);
+
+        recySaturday.setHasFixedSize(true);
+        recySaturday.setLayoutManager(new LinearLayoutManager(this));
+
+        recySunday.setHasFixedSize(true);
+        recySunday.setLayoutManager(new LinearLayoutManager(this));
+
+        recyMonday.setHasFixedSize(true);
+        recyMonday.setLayoutManager(new LinearLayoutManager(this));
+
+        recyTuesday.setHasFixedSize(true);
+        recyTuesday.setLayoutManager(new LinearLayoutManager(this));
+
+        recyThursday.setHasFixedSize(true);
+        recyThursday.setLayoutManager(new LinearLayoutManager(this));
+
+        recyWednesday.setHasFixedSize(true);
+        recyWednesday.setLayoutManager(new LinearLayoutManager(this));
+
+        recyFriday.setHasFixedSize(true);
+        recyFriday.setLayoutManager(new LinearLayoutManager(this));
+
+
 
         stringSaturday = "Saturday";
         stringSunday = "Sunday";
@@ -100,25 +127,22 @@ public class ClassRoutineActivity extends AppCompatActivity {
                 try {
                     if(response.getBoolean("success")){
 
-                        JSONArray array = response.getJSONObject("data").getJSONArray("items");
+                        JSONArray satArray = response.getJSONObject("data").getJSONArray("Saturday");
+                        JSONArray sunArray = response.getJSONObject("data").getJSONArray("Sunday");
+                        JSONArray monArray = response.getJSONObject("data").getJSONArray("Monday");
+                        JSONArray tuesArray = response.getJSONObject("data").getJSONArray("Tuesday");
+                        JSONArray wedsArray = response.getJSONObject("data").getJSONArray("Wednesday");
+                        JSONArray thursArray = response.getJSONObject("data").getJSONArray("Thursday");
+                        JSONArray frisArray = response.getJSONObject("data").getJSONArray("Friday");
 
+                        getRoutineFromJson(satArray,saturs,stringSaturday);
+                        getRoutineFromJson(sunArray,suns,stringSunday);
+                        getRoutineFromJson(monArray,mons,stringMonday);
+                        getRoutineFromJson(tuesArray,tues,stringTuesday);
+                        getRoutineFromJson(wedsArray,weds,stringWednesday);
+                        getRoutineFromJson(thursArray,thurs,stringThursday);
+                        getRoutineFromJson(frisArray,fris,stringFriday);
 
-
-                        for(int i = 0 ; i < array.length() ; i++){
-
-                            String name = array.getJSONObject(i).getString("item_name");
-                            int category_name = array.getJSONObject(i).getInt("category_name");
-                            String des = array.getJSONObject(i).getString("description");
-                            int total_in_stock = array.getJSONObject(i).getInt("total_in_stock");
-                            int id = array.getJSONObject(i).getInt("id");
-                            int school_id = array.getJSONObject(i).getInt("school_id");
-
-
-
-                        }
-
-
-//                        Toast.makeText(getApplicationContext(),title +" "+array.length(), Toast.LENGTH_SHORT).show();
 
                     }
 
@@ -126,12 +150,6 @@ public class ClassRoutineActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                if(saturs.size() > 0){
-
-                    adapter = new RoutineAdapter(saturs,getApplicationContext());
-                    recySaturday.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
-                }
 
             }
         }, new Response.ErrorListener() {
@@ -143,6 +161,74 @@ public class ClassRoutineActivity extends AppCompatActivity {
 
         RequestQueue req = Volley.newRequestQueue(this);
         req.add(request);
+
+    }
+
+    public ArrayList<Routine> getRoutineFromJson(JSONArray array,ArrayList<Routine> routines,String week) throws JSONException {
+
+        routines.clear();
+
+        routines.add(new Routine("Time","Subject","Room",week));
+
+
+        for(int i = 0 ; i < array.length() ; i++){
+
+            String start_time = array.getJSONObject(i).getString("start_time");
+            String end_time = array.getJSONObject(i).getString("end_time");
+            String subject = array.getJSONObject(i).getString("subject_name");
+            String room = array.getJSONObject(i).getString("room_no");
+
+            routines.add(new Routine(getAmPm(start_time),getAmPm(end_time),subject,room,week));
+
+        }
+
+        adapter = new RoutineAdapter(routines,this);
+
+        switch (week){
+
+            case "Saturday":
+                recySaturday.setAdapter(adapter);
+                break;
+            case "Sunday":
+                recySunday.setAdapter(adapter);
+                break;
+            case "Monday":
+                recyMonday.setAdapter(adapter);
+                break;
+            case "Tuesday":
+                recyTuesday.setAdapter(adapter);
+                break;
+            case "Wednesday":
+                recyWednesday.setAdapter(adapter);
+                break;
+            case "Thursday":
+                recyThursday.setAdapter(adapter);
+                break;
+            case "Friday":
+                recyFriday.setAdapter(adapter);
+                break;
+
+        }
+
+        adapter.notifyDataSetChanged();
+
+        return routines;
+    }
+
+    String getAmPm(String time){
+
+        String[] parts = time.split(":");
+        String part1 = parts[0];
+        String part2 = parts[1];
+
+        int hr = Integer.parseInt(part1);
+        int min = Integer.parseInt(part2);
+
+        if(hr <= 12){
+            return hr+":"+min+" ÄM ";
+        }else{
+            return hr+":"+min+" PM ";
+        }
 
     }
 

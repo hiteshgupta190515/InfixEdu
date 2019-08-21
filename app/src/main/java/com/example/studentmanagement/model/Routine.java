@@ -16,6 +16,13 @@ public class Routine {
         this.weekName = weekName;
     }
 
+    public Routine(String startTime, String subject, String roomNo, String weekName) {
+        this.startTime = startTime;
+        this.subject = subject;
+        this.roomNo = roomNo;
+        this.weekName = weekName;
+    }
+
     public String getWeekName() {
         return weekName;
     }
