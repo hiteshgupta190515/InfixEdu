@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studentmanagement.R;
 import com.example.studentmanagement.activity.AdminSectionActivity;
+import com.example.studentmanagement.activity.ClassRoutineActivity;
 import com.example.studentmanagement.activity.FeesActivity;
 import com.example.studentmanagement.activity.InventoryActivity;
 import com.example.studentmanagement.activity.LibraryActivity;
@@ -79,6 +80,9 @@ public class HomeAdapterHome extends RecyclerView.Adapter<HomeAdapterHome.ViewHo
                         break;
                     case "Fees":
                         activity.startActivity(new Intent(activity, FeesActivity.class));
+                        break;
+                    case "Routine":
+                        activity.startActivity(new Intent(activity, ClassRoutineActivity.class));
                         break;
                     default:
                         break;

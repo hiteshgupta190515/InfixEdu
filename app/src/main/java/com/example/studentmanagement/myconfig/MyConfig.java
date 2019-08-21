@@ -14,6 +14,10 @@ public class MyConfig {
         return BASE_URL+"login?email="+email+"&password="+password;
     }
 
+    public static String getRoutineUrl(int id){
+        return BASE_URL+"student-class-routine/"+id;
+    }
+
 
     public static String getInventory(int id){
 

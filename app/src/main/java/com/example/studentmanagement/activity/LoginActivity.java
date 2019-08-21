@@ -66,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
     private String dateOfBirth;
     private String phone;
     private int rule;
+    private int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +120,7 @@ public class LoginActivity extends AppCompatActivity {
                                 driverObj = rootObj.getJSONObject("data").getJSONObject("transport");
 
                                 rule = secdObj.getInt("role_id");
+                                rule = secdObj.getInt("id");
                                 fatherName = detailsObj.getString("fathers_name");
                                 fatherOcupation = detailsObj.getString("fathers_occupation");
                                 fatherPhone = detailsObj.getString("fathers_mobile");
@@ -190,6 +192,7 @@ public class LoginActivity extends AppCompatActivity {
                             editor.putString("dateOfBirth", dateOfBirth);
                             editor.putString("religion", religion);
                             editor.putString("phone", phone);
+                            editor.putInt("id", id);
                             editor.putInt("role", rule);
 
                             //Saving values to editor

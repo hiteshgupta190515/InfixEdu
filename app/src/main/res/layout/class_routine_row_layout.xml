@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Monday"
+        android:id="@+id/weekName"
         android:textColor="#415094"
         android:fontFamily="@font/neosanspro_medium"
         />
