@@ -1,6 +1,7 @@
 package com.example.studentmanagement.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -76,6 +77,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private int rule;
     private int id;
 
+    private Toolbar toolbar;
+    private TextView txtToolbarText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,6 +93,14 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         txtName = findViewById(R.id.student_name);
         txtClassSection = findViewById(R.id.student_class_section);
         txtRollAdm = findViewById(R.id.student_roll_adm);
+
+        toolbar = findViewById(R.id.toolbar);
+        txtToolbarText = findViewById(R.id.txtTitle);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        txtToolbarText.setText("Student Info");
 
         txtOther.setOnClickListener(this);
         txtParent.setOnClickListener(this);
@@ -204,10 +216,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                                 driverCarModel = driverObj.getString("vehicle_model");
                                 driverCarDeatils = driverObj.getString("note");
 
-                                txtName.setText(name);
-                                txtClassSection.setText("Class : "+className+"   Section : "+section);
-                                txtRollAdm.setText("Roll : "+roll+"   Admission no : "+admission_no);
-
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -261,6 +269,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 //                            Toast.makeText(ProfileActivity.this, "update not successful", Toast.LENGTH_LONG).show();
                             Log.e("volley", response);
                         }
+
+                        txtName.setText(name);
+                        txtClassSection.setText("Class : "+className+"   Section : "+section);
+                        txtRollAdm.setText("Roll : "+roll+"   Admission no : "+admission_no);
+
                     }
                 },
                 new Response.ErrorListener() {

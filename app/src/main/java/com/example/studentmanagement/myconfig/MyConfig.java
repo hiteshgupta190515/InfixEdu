@@ -3,6 +3,7 @@ package com.example.studentmanagement.myconfig;
 public class MyConfig {
 
     final public static String BASE_URL = "http://infixedu.com/api/";
+    final public static String ROOT_URL = "http://infixedu.com/";
     final public static String STUDENT_LIST = BASE_URL+"student-list";
     final public static String BOOK_LIST = BASE_URL+"book-list";
     final public static String INVENTORY_LIST = BASE_URL+"item-list";
@@ -20,6 +21,9 @@ public class MyConfig {
 
     public static String getFeesUrl(int id){
         return BASE_URL+"fees-collect-student-wise/"+id;
+    }
+    public static String getzhomeWorksUrl(int id){
+        return BASE_URL+"student-homework/"+id;
     }
 
 

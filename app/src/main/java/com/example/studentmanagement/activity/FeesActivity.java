@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -35,11 +36,19 @@ public class FeesActivity extends AppCompatActivity {
     private FeeAdapter adapter;
     private SharedPreferences sharedPreferences;
     private int id;
+    private int totalAmount,totalFine,totalDiscount,totalPaid,totalBalance;
+    private TextView txamount,txfine,txdiscount,txpaid,txbalance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fees);
+
+        txamount = findViewById(R.id.amount);
+        txdiscount = findViewById(R.id.discount);
+        txbalance = findViewById(R.id.balance);
+        txfine = findViewById(R.id.fine);
+        txpaid = findViewById(R.id.paid);
 
         sharedPreferences = getSharedPreferences("default", Context.MODE_PRIVATE);
         id = sharedPreferences.getInt("id",0);
@@ -66,8 +75,13 @@ public class FeesActivity extends AppCompatActivity {
                 try {
                     if(response.getBoolean("success")){
 
-                        JSONArray array = response.getJSONObject("data").getJSONArray("fees");
+                        totalAmount = 0;
+                        totalDiscount = 0;
+                        totalFine = 0;
+                        totalPaid = 0;
+                        totalBalance = 0;
 
+                        JSONArray array = response.getJSONObject("data").getJSONArray("fees");
 
 
                         for(int i = 0 ; i < array.length() ; i++){
@@ -80,7 +94,13 @@ public class FeesActivity extends AppCompatActivity {
                             int discount = array.getJSONObject(i).getInt("discount_amount");
                             int balance = array.getJSONObject(i).getInt("balance");
 
-                            Fee fee = new Fee(title,due_date,"paid",amount,paid,discount,balance);
+                            totalBalance = totalBalance + balance;
+                            totalPaid = totalPaid + paid;
+                            totalFine = totalFine + fine;
+                            totalAmount = totalAmount + amount;
+                            totalDiscount = totalDiscount + discount;
+
+                            Fee fee = new Fee(title,due_date,"paid",amount,paid,discount,fine,balance);
                             fees.add(fee);
 
                         }
@@ -96,7 +116,13 @@ public class FeesActivity extends AppCompatActivity {
 
                 if(fees.size() > 0){
 
-                    adapter = new FeeAdapter(fees,getApplicationContext());
+                    txamount.setText("$"+totalAmount);
+                    txbalance.setText("$"+totalBalance);
+                    txdiscount.setText("$"+totalDiscount);
+                    txfine.setText("$"+totalFine);
+                    txpaid.setText("$"+totalPaid);
+
+                    adapter = new FeeAdapter(fees,FeesActivity.this);
                     recyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
 

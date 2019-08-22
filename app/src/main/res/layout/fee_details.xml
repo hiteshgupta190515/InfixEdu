@@ -16,18 +16,6 @@
         android:fontFamily="@font/neosanspro_medium"
         />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="view"
-        android:textSize="18dp"
-        android:textColor="#7C32FF"
-        android:layout_margin="5dp"
-        android:id="@+id/txtFeeClassView"
-        android:textAlignment="textEnd"
-        android:fontFamily="@font/neosanspro_medium"
-        />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,36 +24,6 @@
         android:layout_marginLeft="10dp"
         android:id="@+id/linear"
         >
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Due Date"
-                android:textSize="13dp"
-                android:textStyle="bold"
-                android:fontFamily="@font/neosans_pro_regular"
-                android:textColor="@color/profile_light_text_color"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="05.12.2000"
-                android:textSize="12dp"
-                android:id="@+id/dueDate"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/neosans_pro_regular"
-                android:textColor="@color/profile_light_text_color"
-                />
-
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -87,9 +45,39 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="5000.0"
+                android:text="$1523"
                 android:textSize="12dp"
-                android:id="@+id/feeAmount"
+                android:id="@+id/amount"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/neosans_pro_regular"
+                android:textColor="@color/profile_light_text_color"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Discount"
+                android:textSize="13dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/neosans_pro_regular"
+                android:textColor="@color/profile_light_text_color"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$5000.0"
+                android:textSize="12dp"
+                android:id="@+id/feeDiscount"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/neosans_pro_regular"
                 android:padding="2dp"
@@ -108,7 +96,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="paid"
+                android:text="Fine"
                 android:textSize="13dp"
                 android:textStyle="bold"
                 android:fontFamily="@font/neosans_pro_regular"
@@ -118,12 +106,42 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="400.0"
+                android:text="$400.0"
                 android:textSize="12dp"
-                android:id="@+id/feePaid"
+                android:id="@+id/feeFine"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/neosans_pro_regular"
                 android:textColor="@color/profile_light_text_color"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Paid"
+                android:textSize="13dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/neosans_pro_regular"
+                android:textColor="@color/profile_light_text_color"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$4578"
+                android:textSize="12dp"
+                android:textColor="@color/profile_light_text_color"
+                android:id="@+id/paid"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/neosans_pro_regular"
                 />
 
         </LinearLayout>
@@ -158,40 +176,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Status"
-                android:textSize="13dp"
-                android:textStyle="bold"
-                android:fontFamily="@font/neosans_pro_regular"
-                android:textColor="@color/profile_light_text_color"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="paid"
-                android:textSize="12dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:paddingTop="3dp"
-                android:paddingBottom="3dp"
-                android:background="@color/colorPrimary"
-                android:textColor="#fff"
-                android:id="@+id/status"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/neosans_pro_regular"
-                />
-
-        </LinearLayout>
 
     </LinearLayout>
 

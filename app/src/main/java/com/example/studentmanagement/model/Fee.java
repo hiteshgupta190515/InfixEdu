@@ -8,16 +8,26 @@ public class Fee {
     private int amount;
     private int paid;
     private int discount;
+    private int fine;
     private int balance;
 
-    public Fee(String title, String dueDate, String status, int amount, int paid, int discount, int balance) {
+    public Fee(String title, String dueDate, String status, int amount, int paid, int discount, int fine, int balance) {
         this.title = title;
         this.dueDate = dueDate;
         this.status = status;
         this.amount = amount;
         this.paid = paid;
         this.discount = discount;
+        this.fine = fine;
         this.balance = balance;
+    }
+
+    public int getFine() {
+        return fine;
+    }
+
+    public void setFine(int fine) {
+        this.fine = fine;
     }
 
     public String getStatus() {
