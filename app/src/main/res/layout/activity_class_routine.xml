@@ -10,10 +10,4 @@
     <include layout="@layout/toolbar"/>
     <include layout="@layout/content_routine_layout"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/recyclerSaturday"
-        ></androidx.recyclerview.widget.RecyclerView>
-
 </LinearLayout>
