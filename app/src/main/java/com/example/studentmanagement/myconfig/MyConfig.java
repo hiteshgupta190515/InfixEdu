@@ -23,6 +23,13 @@ public class MyConfig {
         return BASE_URL+"fees-collect-student-wise/"+id;
     }
     public static String getzhomeWorksUrl(int id){
+        return BASE_URL+"student-noticeboard/"+id;
+    }
+    public static String getSubjectsUrl(int id){
+        return BASE_URL+"studentSubject/"+id;
+    }
+
+    public static String getNoticeUrl(int id){
         return BASE_URL+"student-homework/"+id;
     }
 

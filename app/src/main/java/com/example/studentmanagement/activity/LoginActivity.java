@@ -92,6 +92,90 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    private void login1(final String email, final String password){
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, MyConfig.getLoginUrl(email, password), null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                try {
+                    if(response.getBoolean("success")){
+
+                        JSONObject user;
+                        JSONObject detailsObj;
+                        JSONObject driverObj;
+
+
+                        user = response.getJSONObject("data").getJSONObject("user");
+                        detailsObj = response.getJSONObject("data").getJSONObject("userDetails");
+                        driverObj = response.getJSONObject("data").getJSONObject("transport");
+
+                         id = user.getInt("id");
+                         rule = user.getInt("role_id");
+
+//                        fatherName = detailsObj.getString("fathers_name");
+//                        fatherOcupation = detailsObj.getString("fathers_occupation");
+//                        fatherPhone = detailsObj.getString("fathers_mobile");
+//                        motherName = detailsObj.getString("mothers_name");
+//                        motherPhone = detailsObj.getString("mothers_mobile");
+//                        motherOcupation = detailsObj.getString("mothers_occupation");
+//                        gurdianName = detailsObj.getString("guardians_name");
+//                        gurdianPhone = detailsObj.getString("guardians_mobile");
+//                        gurdianOcupation = detailsObj.getString("guardians_occupation");
+//                        gurdianEmail = detailsObj.getString("guardians_email");
+//                        gurdianRelation = detailsObj.getString("guardians_relation");
+//                        name = detailsObj.getString("full_name");
+//                        height = detailsObj.getString("height");
+//                        weight = detailsObj.getString("weight");
+//                        castle = detailsObj.getString("caste");
+//                        nationalId = detailsObj.getString("national_id_no");
+//                        section = detailsObj.getString("section_name");
+//                        roll = detailsObj.getString("roll_no");
+//                        className = detailsObj.getString("class_name");
+//                        admission_no = detailsObj.getString("admission_no");
+//                        presentAddress = detailsObj.getString("current_address");
+//                        permanentAddress = detailsObj.getString("permanent_address");
+//                        religion = response.getJSONObject("data").getJSONObject("religion").getString("name");
+//                        bloodGroup = response.getJSONObject("data").getJSONObject("blood_group").getString("name");
+//                        dateOfBirth = detailsObj.getString("date_of_birth");
+//                        phone = detailsObj.getString("mobile");
+//
+//                        driverName = driverObj.getString("driver_name");
+//                        driverCarNo = driverObj.getString("vehicle_no");
+//                        driverCarModel = driverObj.getString("vehicle_model");
+//                        driverCarDeatils = driverObj.getString("note");
+
+
+                        Toast.makeText(LoginActivity.this, response.getJSONObject("data").getJSONObject("user").toString(), Toast.LENGTH_LONG).show();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(LoginActivity.this, "Invalid username/password", Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                //Adding parameters to request
+                params.put("email", email);
+                params.put("password", password);
+
+                //returning parameter
+                return params;
+            }
+        };
+        //Adding the string request to the queue
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(request);
+    }
 
     private void login(final String email, final String password){
         //Creating a string request
@@ -110,7 +194,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
                             JSONObject rootObj;
-                            JSONObject secdObj = null;
+                            JSONObject secdObj;
                             JSONObject detailsObj;
                             JSONObject driverObj;
                             try {
@@ -120,7 +204,7 @@ public class LoginActivity extends AppCompatActivity {
                                 driverObj = rootObj.getJSONObject("data").getJSONObject("transport");
 
                                 rule = secdObj.getInt("role_id");
-                                rule = secdObj.getInt("id");
+                                id = secdObj.getInt("id");
                                 fatherName = detailsObj.getString("fathers_name");
                                 fatherOcupation = detailsObj.getString("fathers_occupation");
                                 fatherPhone = detailsObj.getString("fathers_mobile");
@@ -152,6 +236,8 @@ public class LoginActivity extends AppCompatActivity {
                                 driverCarNo = driverObj.getString("vehicle_no");
                                 driverCarModel = driverObj.getString("vehicle_model");
                                 driverCarDeatils = driverObj.getString("note");
+
+                                Toast.makeText(LoginActivity.this, rule+"  "+id, Toast.LENGTH_LONG).show();
 
 
                             } catch (JSONException e) {
@@ -199,18 +285,16 @@ public class LoginActivity extends AppCompatActivity {
                             editor.commit();
 
 
-                                Toast.makeText(LoginActivity.this, "success", Toast.LENGTH_LONG).show();
-
-
-
-                            //Starting profile activity
-                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                            startActivity(intent);
-                            finish();
+                                if(rule != 0 && id != 0){
+                                    //Starting profile activity
+                                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
                         }else{
                             //If the server response is not success
                             //Displaying an error message on toast
-                            Toast.makeText(LoginActivity.this, "Invalid username/password", Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, "responce is not success", Toast.LENGTH_LONG).show();
                             Log.e("volley", response);
                         }
                     }

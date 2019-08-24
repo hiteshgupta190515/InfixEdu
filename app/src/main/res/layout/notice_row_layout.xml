@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="5dp"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="General Notice"
+        android:textSize="18dp"
+        android:textColor="#415094"
+        android:layout_alignParentStart="true"
+        android:id="@+id/txtTitle"
+        android:maxLines="1"
+        android:fontFamily="@font/neosanspro_medium"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="20 Aug, 2019"
+        android:textSize="13dp"
+        android:textStyle="bold"
+        android:maxLines="1"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/neosans_pro_regular"
+        android:textColor="@color/profile_light_text_color"
+        />
+
+
+</LinearLayout>

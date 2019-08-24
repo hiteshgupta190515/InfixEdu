@@ -1,8 +1,11 @@
 package com.example.studentmanagement.adapter;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.studentmanagement.MainActivity;
 import com.example.studentmanagement.R;
 import com.example.studentmanagement.activity.AdminSectionActivity;
 import com.example.studentmanagement.activity.ClassRoutineActivity;
@@ -19,6 +23,7 @@ import com.example.studentmanagement.activity.FeesActivity;
 import com.example.studentmanagement.activity.HomeWorkActivity;
 import com.example.studentmanagement.activity.InventoryActivity;
 import com.example.studentmanagement.activity.LibraryActivity;
+import com.example.studentmanagement.activity.LoginActivity;
 import com.example.studentmanagement.activity.ProfileActivity;
 import com.example.studentmanagement.activity.StudentListActivity;
 
@@ -33,13 +38,14 @@ public class HomeAdapterHome extends RecyclerView.Adapter<HomeAdapterHome.ViewHo
     private String[] name;
     private ArrayList<Integer> image;
     private int row_index = -1;
+    private Context ctx;
 
 
-    public HomeAdapterHome(Activity activity, String[] name, ArrayList<Integer> image) {
+    public HomeAdapterHome(Activity activity, String[] name, ArrayList<Integer> image,Context ctx) {
         this.activity = activity;
         this.name = name;
         this.image = image;
-
+        this.ctx =ctx;
     }
 
     @Override
@@ -86,7 +92,25 @@ public class HomeAdapterHome extends RecyclerView.Adapter<HomeAdapterHome.ViewHo
                         activity.startActivity(new Intent(activity, ClassRoutineActivity.class));
                         break;
                     case "Homework":
-                        activity.startActivity(new Intent(activity, HomeWorkActivity.class));
+                        activity.startActivity(new Intent(activity, MainActivity.class));
+                        break;
+                    case "Logout":
+
+//                        SharedPreferences sharedPreferences = ctx.getSharedPreferences("default", Context.MODE_PRIVATE);
+//                        sharedPreferences.edit().clear().commit();
+
+                        //PreferenceManager.getDefaultSharedPreferences(ctx).edit().clear().apply();
+
+                        SharedPreferences pref = ctx.getSharedPreferences("default", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = pref.edit();
+                        editor.clear();
+                        editor.commit();
+
+                        editor.putBoolean("isLoged", false);
+
+
+                        activity.startActivity(new Intent(activity, LoginActivity.class));
+                        activity.finish();
                         break;
                     default:
                         break;
