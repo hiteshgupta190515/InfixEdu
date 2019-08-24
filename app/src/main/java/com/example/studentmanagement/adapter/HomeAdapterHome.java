@@ -96,11 +96,6 @@ public class HomeAdapterHome extends RecyclerView.Adapter<HomeAdapterHome.ViewHo
                         break;
                     case "Logout":
 
-//                        SharedPreferences sharedPreferences = ctx.getSharedPreferences("default", Context.MODE_PRIVATE);
-//                        sharedPreferences.edit().clear().commit();
-
-                        //PreferenceManager.getDefaultSharedPreferences(ctx).edit().clear().apply();
-
                         SharedPreferences pref = ctx.getSharedPreferences("default", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = pref.edit();
                         editor.clear();
