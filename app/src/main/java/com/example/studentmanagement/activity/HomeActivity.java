@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Toast;
 
 import com.example.studentmanagement.R;
@@ -24,6 +23,7 @@ public class HomeActivity extends AppCompatActivity {
     private RecyclerView recycler;
     private StaggeredGridLayoutManager gridLayoutManager;
     private int role_id;
+    private int id;
     private String email;
     private String name;
 
@@ -41,14 +41,9 @@ public class HomeActivity extends AppCompatActivity {
 
         //Fetching the boolean value form sharedpreferences
         role_id = sharedPreferences.getInt("role", 0);
+        id = sharedPreferences.getInt("id", 0);
         email = sharedPreferences.getString("email", null);
         name = sharedPreferences.getString("name", null);
-
-        if(role_id == 0){
-            Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
-            startActivity(intent);
-            finish();
-        }
 
         getFunctionality(role_id);
 

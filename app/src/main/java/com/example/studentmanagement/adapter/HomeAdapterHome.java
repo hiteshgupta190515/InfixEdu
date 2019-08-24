@@ -92,7 +92,7 @@ public class HomeAdapterHome extends RecyclerView.Adapter<HomeAdapterHome.ViewHo
                         activity.startActivity(new Intent(activity, ClassRoutineActivity.class));
                         break;
                     case "Homework":
-                        activity.startActivity(new Intent(activity, MainActivity.class));
+                        activity.startActivity(new Intent(activity, HomeWorkActivity.class));
                         break;
                     case "Logout":
 

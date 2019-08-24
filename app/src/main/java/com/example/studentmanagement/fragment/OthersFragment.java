@@ -12,12 +12,26 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.studentmanagement.R;
 import com.example.studentmanagement.adapter.PersonalAdapter;
 import com.example.studentmanagement.model.PersonalData;
+import com.example.studentmanagement.myconfig.MyConfig;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class OthersFragment extends Fragment {
 
@@ -30,6 +44,8 @@ public class OthersFragment extends Fragment {
     private String weight;
     private String castle;
     private String nationalId;
+
+    private String email,password;
 
     public OthersFragment() {
         // Required empty public constructor
@@ -51,26 +67,75 @@ public class OthersFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+
         sharedPreferences = getActivity().getSharedPreferences("default", Context.MODE_PRIVATE);
 
-        height = sharedPreferences.getString("height",null);
-        weight = sharedPreferences.getString("weight",null);
-        castle = sharedPreferences.getString("castle",null);
-        nationalId = sharedPreferences.getString("nationalId",null);
+        email = sharedPreferences.getString("email",null);
+        password = sharedPreferences.getString("password",null);
 
-        personalData.add(new PersonalData("Height",height));
-        personalData.add(new PersonalData("Weight",weight));
-        personalData.add(new PersonalData("Castle",castle));
-        personalData.add(new PersonalData("National Id",nationalId));
-
-
-        adapter = new PersonalAdapter(personalData,getContext());
-        recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        getOthers(email,password);
 
         return v;
     }
 
+    private void getOthers(final String email, final String password){
 
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, MyConfig.getLoginUrl(email, password), null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                try {
+                    if(response.getBoolean("success")) {
+
+                        JSONObject detailsObj;
+                        detailsObj = response.getJSONObject("data").optJSONObject("userDetails");
+
+                        if (detailsObj != null){
+
+                            height = detailsObj.getString("height");
+                            weight = detailsObj.getString("weight");
+                            castle = detailsObj.getString("caste");
+                            nationalId = detailsObj.getString("national_id_no");
+
+                            personalData.add(new PersonalData("Height",height));
+                            personalData.add(new PersonalData("Weight",weight));
+                            personalData.add(new PersonalData("Castle",castle));
+                            personalData.add(new PersonalData("National Id",nationalId));
+
+                        }
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+                if(personalData.size() > 0) {
+                    adapter = new PersonalAdapter(personalData, getContext());
+                    recyclerView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "Invalid username/password", Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                //Adding parameters to request
+                params.put("email", email);
+                params.put("password", password);
+
+                //returning parameter
+                return params;
+            }
+        };
+        //Adding the string request to the queue
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(request);
+    }
 
 }

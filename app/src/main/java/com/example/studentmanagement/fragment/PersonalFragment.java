@@ -13,25 +13,34 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.studentmanagement.R;
 import com.example.studentmanagement.adapter.PersonalAdapter;
 import com.example.studentmanagement.adapter.VisitorAdapter;
 import com.example.studentmanagement.model.PersonalData;
 import com.example.studentmanagement.model.Visitor;
+import com.example.studentmanagement.myconfig.MyConfig;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class PersonalFragment extends Fragment{
 
-    private String name;
     private String fatherName;
     private String motherName;
-    private String section;
-    private String roll;
-    private String className;
-    private String admission_no;
     private String religion;
     private String presentAddress;
     private String permanentAddress;
@@ -39,6 +48,8 @@ public class PersonalFragment extends Fragment{
     private String studentEmail;
     private String dateOfBirth;
     private String phone;
+    private String email;
+    private String password;
 
     private ArrayList<PersonalData> personalData = new ArrayList<>();
     private RecyclerView recyclerView;
@@ -72,38 +83,79 @@ public class PersonalFragment extends Fragment{
 
         sharedPreferences = getActivity().getSharedPreferences("default", Context.MODE_PRIVATE);
 
-        //get the from sharedPref
-        name = sharedPreferences.getString("name",null);
-        fatherName = sharedPreferences.getString("fatherName",null);
-        motherName = sharedPreferences.getString("motherName",null);
-        section = sharedPreferences.getString("section",null);
-        roll = sharedPreferences.getString("roll",null);
-        className = sharedPreferences.getString("className",null);
-        admission_no = sharedPreferences.getString("admissionNo",null);
-        religion = sharedPreferences.getString("religion",null);
-        presentAddress = sharedPreferences.getString("presentAd",null);
-        permanentAddress = sharedPreferences.getString("permanentAd",null);
-        bloodGroup = sharedPreferences.getString("bloodGroup",null);
-        studentEmail = sharedPreferences.getString("email",null);
-        dateOfBirth = sharedPreferences.getString("dateOfBirth",null);
-        phone = sharedPreferences.getString("phone",null);
+        email = sharedPreferences.getString("email",null);
+        password = sharedPreferences.getString("password",null);
 
-        personalData.add(new PersonalData("Date Of Birth",dateOfBirth));
-        personalData.add(new PersonalData("Religion",religion));
-        personalData.add(new PersonalData("Phone Number",phone));
-        personalData.add(new PersonalData("Email address",studentEmail));
-        personalData.add(new PersonalData("Present address",presentAddress));
-        personalData.add(new PersonalData("Parmanent address",permanentAddress));
-        personalData.add(new PersonalData("Father’s name",fatherName));
-        personalData.add(new PersonalData("Mother’s name",motherName));
-        personalData.add(new PersonalData("Blood group",bloodGroup));
-
-
-        adapter = new PersonalAdapter(personalData,getContext());
-        recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        getPersonal(email,password);
 
 
         return v;
     }
+
+    private void getPersonal(final String email, final String password){
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, MyConfig.getLoginUrl(email, password), null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+
+                try {
+                    if(response.getBoolean("success")){
+
+                        JSONObject detailsObj;
+
+                        detailsObj = response.getJSONObject("data").optJSONObject("userDetails");
+
+                                fatherName = detailsObj.getString("fathers_name");
+                                motherName = detailsObj.getString("mothers_name");
+                                presentAddress = detailsObj.getString("current_address");
+                                permanentAddress = detailsObj.getString("permanent_address");
+                                religion = response.getJSONObject("data").getJSONObject("religion").getString("name");
+                                bloodGroup = response.getJSONObject("data").getJSONObject("blood_group").getString("name");
+                                dateOfBirth = detailsObj.getString("date_of_birth");
+                                phone = detailsObj.getString("mobile");
+
+                        personalData.add(new PersonalData("Date Of Birth",dateOfBirth));
+                        personalData.add(new PersonalData("Religion",religion));
+                        personalData.add(new PersonalData("Phone Number",phone));
+                        personalData.add(new PersonalData("Email address",email));
+                        personalData.add(new PersonalData("Present address",presentAddress));
+                        personalData.add(new PersonalData("Parmanent address",permanentAddress));
+                        personalData.add(new PersonalData("Father’s name",fatherName));
+                        personalData.add(new PersonalData("Mother’s name",motherName));
+                        personalData.add(new PersonalData("Blood group",bloodGroup));
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                adapter = new PersonalAdapter(personalData,getContext());
+                recyclerView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "Invalid username/password", Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                //Adding parameters to request
+                params.put("email", email);
+                params.put("password", password);
+
+                //returning parameter
+                return params;
+            }
+        };
+        //Adding the string request to the queue
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(request);
+    }
+
+
 }
