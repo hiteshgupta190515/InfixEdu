@@ -22,6 +22,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.studentmanagement.R;
 import com.example.studentmanagement.adapter.PersonalAdapter;
 import com.example.studentmanagement.fragment.OthersFragment;
@@ -38,13 +40,16 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
     private SharedPreferences sharedPreferences;
     private Fragment profileFragment;
     private TextView txtPersonal,txtTransport,txtParent,txtOther;
     private TextView txtName,txtClassSection,txtRollAdm;
-    private String stName,stClass,stSection,stRoll,stAdm;
+    private String stName,stClass,stSection,stRoll,stAdm,image;
+    private CircleImageView studentPhoto;
 
     private String email;
     private String password;
@@ -61,6 +66,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         txtParent = findViewById(R.id.parents);
         txtTransport = findViewById(R.id.transport);
         txtOther = findViewById(R.id.others);
+
+        studentPhoto = findViewById(R.id.student_poster);
 
         txtName = findViewById(R.id.student_name);
         txtClassSection = findViewById(R.id.student_class_section);
@@ -147,6 +154,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                                 stRoll = detailsObj.getString("roll_no");
                                 stClass = detailsObj.getString("class_name");
                                 stAdm = detailsObj.getString("admission_no");
+                                image = detailsObj.getString("student_photo");
 
                     }
                 } catch (JSONException e) {
@@ -157,11 +165,21 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 txtClassSection.setText("Class : "+stClass+" | Section :"+stSection);
                 txtRollAdm.setText("Roll : "+stRoll+" | Adm :"+stAdm);
 
+                try {
+                    Glide.with(ProfileActivity.this)
+                            .load(MyConfig.ROOT_URL+image)
+                            .diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .fitCenter()
+                            .into(studentPhoto);
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(ProfileActivity.this, "Invalid username/password", Toast.LENGTH_LONG).show();
+                Toast.makeText(ProfileActivity.this, "Loading error", Toast.LENGTH_LONG).show();
             }
         }){
             @Override

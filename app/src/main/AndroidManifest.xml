@@ -14,10 +14,19 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".activity.StudentTeacherActivity"></activity>
+        <activity android:name=".activity.StudentSubjectActivity" />
+        <activity
+            android:name=".activity.NoticeActivity"
+            android:parentActivityName=".activity.HomeActivity" />
 
-        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
 
-        <activity android:name=".activity.NoticeDeatlsActivity"></activity>
+        <activity
+            android:name=".activity.NoticeDeatlsActivity"
+            android:parentActivityName=".activity.NoticeActivity" />
         <activity android:name=".activity.HomeWorkActivity" />
         <activity android:name=".activity.ClassRoutineActivity" />
         <activity android:name=".activity.FeesActivity" />

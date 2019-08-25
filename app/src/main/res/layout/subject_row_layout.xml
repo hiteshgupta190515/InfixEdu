@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Subject"
+            android:textSize="12dp"
+            android:id="@+id/subject"
+            android:textColor="@color/profile_light_text_color"
+            android:fontFamily="@font/neosanspro_medium"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Teacher"
+            android:textSize="12dp"
+            android:id="@+id/teacher"
+            android:textColor="@color/profile_light_text_color"
+            android:fontFamily="@font/neosanspro_medium"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Type"
+            android:textSize="12dp"
+            android:id="@+id/type"
+            android:textColor="@color/profile_light_text_color"
+            android:fontFamily="@font/neosanspro_medium"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/lightGrey"
+        android:layout_marginTop="10dp"
+        />
+
+</LinearLayout>

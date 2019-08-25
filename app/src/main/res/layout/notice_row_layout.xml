@@ -2,18 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="5dp"
+    android:id="@+id/noticeClick"
     >
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="General Notice"
-        android:textSize="18dp"
+        android:textSize="16dp"
         android:textColor="#415094"
         android:layout_alignParentStart="true"
-        android:id="@+id/txtTitle"
+        android:id="@+id/txtNoticeTitle"
         android:maxLines="1"
         android:fontFamily="@font/neosanspro_medium"
         />
@@ -24,10 +25,17 @@
         android:textSize="13dp"
         android:textStyle="bold"
         android:maxLines="1"
+        android:id="@+id/txtDate"
         android:layout_marginTop="5dp"
         android:fontFamily="@font/neosans_pro_regular"
         android:textColor="@color/profile_light_text_color"
         />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/lightGrey"
+        android:layout_marginTop="10dp"
+        />
 
 </LinearLayout>

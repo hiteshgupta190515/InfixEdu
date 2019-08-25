@@ -24,8 +24,11 @@ import com.example.studentmanagement.activity.HomeWorkActivity;
 import com.example.studentmanagement.activity.InventoryActivity;
 import com.example.studentmanagement.activity.LibraryActivity;
 import com.example.studentmanagement.activity.LoginActivity;
+import com.example.studentmanagement.activity.NoticeActivity;
 import com.example.studentmanagement.activity.ProfileActivity;
 import com.example.studentmanagement.activity.StudentListActivity;
+import com.example.studentmanagement.activity.StudentSubjectActivity;
+import com.example.studentmanagement.activity.StudentTeacherActivity;
 
 import java.util.ArrayList;
 
@@ -93,6 +96,15 @@ public class HomeAdapterHome extends RecyclerView.Adapter<HomeAdapterHome.ViewHo
                         break;
                     case "Homework":
                         activity.startActivity(new Intent(activity, HomeWorkActivity.class));
+                        break;
+                    case "Notice":
+                        activity.startActivity(new Intent(activity, NoticeActivity.class));
+                        break;
+                    case "Subjects":
+                        activity.startActivity(new Intent(activity, StudentSubjectActivity.class));
+                        break;
+                    case "Teacher":
+                        activity.startActivity(new Intent(activity, StudentTeacherActivity.class));
                         break;
                     case "Logout":
 
