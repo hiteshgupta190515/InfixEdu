@@ -1,77 +1,59 @@
 package com.example.studentmanagement.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.example.studentmanagement.R;
 import com.example.studentmanagement.adapter.HomeAdapterHome;
 
 import java.util.ArrayList;
 
-public class HomeActivity extends AppCompatActivity {
+public class StudentLibraryActivity extends AppCompatActivity {
 
     private String[] names;
     private RecyclerView recycler;
     private StaggeredGridLayoutManager gridLayoutManager;
-    private int role_id;
     private int id;
-    private String email;
-    private String name;
+    ArrayList<Integer> images;
+
+    private Toolbar toolbar;
+    private TextView txtToolbarText;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_student_library);
 
-        recycler = findViewById(R.id.home_recycler);
+        images = new ArrayList<>();
+        images.clear();
+
+        recycler = findViewById(R.id.library_recycler);
+
+        toolbar = findViewById(R.id.toolbar);
+        txtToolbarText = findViewById(R.id.txtTitle);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        txtToolbarText.setText("Library");
 
         gridLayoutManager = new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL);
         recycler.setLayoutManager(gridLayoutManager);
 
         SharedPreferences sharedPreferences = getSharedPreferences("default", Context.MODE_PRIVATE);
 
-        //Fetching the boolean value form sharedpreferences
-        role_id = sharedPreferences.getInt("role", 0);
         id = sharedPreferences.getInt("id", 0);
-        email = sharedPreferences.getString("email", null);
-        name = sharedPreferences.getString("name", null);
 
-        getFunctionality(role_id);
-
-    }
-
-    private void getFunctionality(int role) {
-
-        ArrayList<Integer> images = new ArrayList<>();
-        images.clear();
-
-        switch (role){
-            case 1:
-                names = getResources().getStringArray(R.array.admins_functions_name);
-                break;
-            case 2:
-                names = getResources().getStringArray(R.array.students_functions_name);
-                break;
-            case 3:
-                names = getResources().getStringArray(R.array.parents_functions_name);
-                break;
-                case 4:
-                    names = getResources().getStringArray(R.array.teachers_functions_name);
-                break;
-
-                default:
-                    //names = getResources().getStringArray(R.array.teachers_functions_name);
-                    break;
-
-        }
+        names = getResources().getStringArray(R.array.library_student_functions_name);
 
         for(String n : names){
 
@@ -82,6 +64,7 @@ public class HomeActivity extends AppCompatActivity {
         recycler.setAdapter(homeAdapterHome);
 
     }
+
     private int imageSearch(String text) {
 
         int img = 0;
@@ -96,16 +79,6 @@ public class HomeActivity extends AppCompatActivity {
         }catch (Exception e){
             e.printStackTrace();
         }
-  return img;
+        return img;
     }
-
-
-
-    @Override
-    public void onBackPressed() {
-
-        finish();
-
-    }
-
 }

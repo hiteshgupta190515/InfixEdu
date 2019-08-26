@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="80dp"
     android:orientation="vertical"
+    android:background="@mipmap/tool_bar_bg"
     tools:context=".activity.FeesActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -12,7 +13,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:minHeight="80dp"
-        android:background="@mipmap/tool_bar_bg"
+        app:contentInsetEnd="0dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:theme="@style/ThemeOverlay.AppCompat">
 
@@ -29,7 +34,7 @@
             android:text="Fees"
             android:gravity="center"
             android:textColor="#fff"
-            android:textSize="20sp" />
+            android:textSize="16dp" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="50dp"

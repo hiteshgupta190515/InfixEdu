@@ -38,6 +38,9 @@ public class MyConfig {
     public static String getStudentTimelineUrl(int id){
         return BASE_URL+"student-dashboard/"+id;
     }
+    public static String getStudentIssuedBooks(int id){
+        return BASE_URL+"student-library/"+id;
+    }
 
 
     public static String getInventory(int id){

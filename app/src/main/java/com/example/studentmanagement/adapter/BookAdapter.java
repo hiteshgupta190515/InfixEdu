@@ -47,29 +47,12 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
 
         holder.titleName.setText(books.get(position).getBookTitle());
-        holder.author.setText(books.get(position).getBookAuthor());
-
-//        holder.relative.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                Intent intent = new Intent(ctx,BookDetailsActivity.class);
-//                ctx.startActivity(intent);
-//                ((Activity)ctx).finish();
-
-//                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(ctx);
-//                View mView = LayoutInflater.from(ctx).inflate(R.layout.activity_book_details, null);
-//
-//                TextView txtTitle = mView.findViewById(R.id.book_title);
-//                TextView txtAuthor = mView.findViewById(R.id.book_author);
-//                TextView txtPublisher = mView.findViewById(R.id.txtPublisher);
-//
-//
-//                alertBuilder.setView(mView);
-//                AlertDialog dialog = alertBuilder.create();
-//                dialog.show();
-//            }
-//        });
+        holder.subTitle.setText(books.get(position).getBookAuthor() +" | "+books.get(position).getBookPublisher());
+        holder.subBookQuantity.setText(books.get(position).getQuantity()+"");
+        holder.subName.setText(books.get(position).getSubject_name());
+        holder.subBookPrice.setText(books.get(position).getBookPrice()+"");
+        holder.subBookAddOn.setText(books.get(position).getBookReck());
+        holder.subBookNo.setText(books.get(position).getBook_no());
 
     }
 
@@ -92,16 +75,24 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     public static class BookViewHolder extends RecyclerView.ViewHolder{
 
         TextView titleName;
-        TextView author;
-        RelativeLayout relative;
+        TextView subTitle;
+        TextView subName;
+        TextView subBookNo;
+        TextView subBookQuantity;
+        TextView subBookPrice;
+        TextView subBookAddOn;
 
 
         public BookViewHolder(@NonNull View v) {
             super(v);
 
-            titleName = v.findViewById(R.id.book_title);
-            author = v.findViewById(R.id.book_author);
-            relative = v.findViewById(R.id.reletive);
+            titleName = v.findViewById(R.id.txtLibBookTitle);
+            subTitle = v.findViewById(R.id.txtLibSubTitle);
+            subName = v.findViewById(R.id.libSubject);
+            subBookNo = v.findViewById(R.id.libBookNo);
+            subBookQuantity = v.findViewById(R.id.libQuantity);
+            subBookPrice = v.findViewById(R.id.libprice);
+            subBookAddOn = v.findViewById(R.id.libAddOn);
 
 
             v.setOnClickListener(new View.OnClickListener() {

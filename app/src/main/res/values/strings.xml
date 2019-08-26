@@ -80,6 +80,11 @@
         <item>library-member</item>
     </string-array>
 
+    <string-array name="library_student_functions_name">
+        <item>Books List</item>
+        <item>Books Issued</item>
+    </string-array>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

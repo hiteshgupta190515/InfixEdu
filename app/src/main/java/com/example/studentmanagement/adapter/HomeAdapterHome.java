@@ -22,10 +22,12 @@ import com.example.studentmanagement.activity.ClassRoutineActivity;
 import com.example.studentmanagement.activity.FeesActivity;
 import com.example.studentmanagement.activity.HomeWorkActivity;
 import com.example.studentmanagement.activity.InventoryActivity;
+import com.example.studentmanagement.activity.IssuedBookActivity;
 import com.example.studentmanagement.activity.LibraryActivity;
 import com.example.studentmanagement.activity.LoginActivity;
 import com.example.studentmanagement.activity.NoticeActivity;
 import com.example.studentmanagement.activity.ProfileActivity;
+import com.example.studentmanagement.activity.StudentLibraryActivity;
 import com.example.studentmanagement.activity.StudentListActivity;
 import com.example.studentmanagement.activity.StudentSubjectActivity;
 import com.example.studentmanagement.activity.StudentTeacherActivity;
@@ -77,7 +79,7 @@ public class HomeAdapterHome extends RecyclerView.Adapter<HomeAdapterHome.ViewHo
                         activity.startActivity(new Intent(activity, StudentListActivity.class));
                         break;
                     case "Library":
-                        activity.startActivity(new Intent(activity, LibraryActivity.class));
+                        activity.startActivity(new Intent(activity, StudentLibraryActivity.class));
                         break;
                     case "Inventory":
                         activity.startActivity(new Intent(activity, InventoryActivity.class));
@@ -106,6 +108,12 @@ public class HomeAdapterHome extends RecyclerView.Adapter<HomeAdapterHome.ViewHo
                     case "Teacher":
                         activity.startActivity(new Intent(activity, StudentTeacherActivity.class));
                         break;
+                    case "Books List":
+                        activity.startActivity(new Intent(activity, LibraryActivity.class));
+                        break;
+                    case "Books Issued":
+                        activity.startActivity(new Intent(activity, IssuedBookActivity.class));
+                        break;
                     case "Logout":
 
                         SharedPreferences pref = ctx.getSharedPreferences("default", Context.MODE_PRIVATE);
@@ -130,7 +138,7 @@ public class HomeAdapterHome extends RecyclerView.Adapter<HomeAdapterHome.ViewHo
         if (row_index == position) {
             holder.linearLayout.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.draware_selected_background));
             holder.textView_Name.setTextColor(activity.getResources().getColor(R.color.drawar_text_select));
-            //  holder.imageView.setColorFilter(activity.getResources().getColor(R.color.drawar_image_select));
+             holder.imageView.setColorFilter(activity.getResources().getColor(R.color.drawar_image_select));
         } else {
             holder.linearLayout.setBackgroundColor(activity.getResources().getColor(R.color.drawar_layout_background));
             holder.textView_Name.setTextColor(activity.getResources().getColor(R.color.black));

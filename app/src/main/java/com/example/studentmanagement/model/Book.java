@@ -9,12 +9,15 @@ public class Book {
     private String bookReck;
     private String bookDes;
     private String isbn_no;
+    private String subject_name;
+    private String book_no;
     private int id;
     private int category_id;
     private int quantity;
     private double active_status;
 
-    public Book(String bookTitle, String bookAuthor, String bookPublisher, double bookPrice, String bookReck, String bookDes, String isbn_no, int id, int category_id, int quantity, double active_status) {
+    public Book(String bookTitle, String bookAuthor, String bookPublisher, double bookPrice, String bookReck,
+                String bookDes, String isbn_no, int id, int category_id, int quantity, double active_status,String subject_name,String book_no) {
         this.bookTitle = bookTitle;
         this.bookAuthor = bookAuthor;
         this.bookPublisher = bookPublisher;
@@ -26,6 +29,8 @@ public class Book {
         this.category_id = category_id;
         this.quantity = quantity;
         this.active_status = active_status;
+        this.subject_name =subject_name;
+        this.book_no = book_no;
     }
 
     public Book(String bookTitle) {
@@ -60,6 +65,23 @@ public class Book {
 //        return this.bookTitle.contains(book.bookTitle);
 //
 //    }
+
+
+    public String getBook_no() {
+        return book_no;
+    }
+
+    public void setBook_no(String book_no) {
+        this.book_no = book_no;
+    }
+
+    public String getSubject_name() {
+        return subject_name;
+    }
+
+    public void setSubject_name(String subject_name) {
+        this.subject_name = subject_name;
+    }
 
     public String getBookPublisher() {
         return bookPublisher;

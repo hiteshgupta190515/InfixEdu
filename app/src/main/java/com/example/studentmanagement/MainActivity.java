@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.studentmanagement.activity.HomeActivity;
@@ -19,11 +20,45 @@ public class MainActivity extends AppCompatActivity {
     /** Duration of wait **/
     private final int SPLASH_DISPLAY_LENGTH = 1000;
     private boolean loggedIn = false;
+    ProgressBar bar;
+    Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        bar =  findViewById(R.id.splash_progress);
+
+        new Thread(new Runnable() {
+
+            int i = 0;
+            int progressStatus = 0;
+
+            public void run() {
+                while (progressStatus < 100) {
+                    progressStatus += doWork();
+                    try {
+                        Thread.sleep(120);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    // Update the progress bar
+                    handler.post(new Runnable() {
+                        public void run() {
+                            bar.setProgress(progressStatus);
+                            i++;
+                        }
+                    });
+                }
+            }
+            private int doWork() {
+
+                return i * 3;
+            }
+
+        }).start();
 
 
         /* New Handler to start the Menu-Activity

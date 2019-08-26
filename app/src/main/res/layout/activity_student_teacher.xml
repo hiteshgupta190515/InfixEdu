@@ -13,9 +13,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="5dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
         >
 
         <TextView
@@ -24,10 +24,10 @@
             android:layout_weight="1"
             android:text="Teacher Name"
             android:textStyle="bold"
-            android:textSize="13dp"
+            android:textSize="10dp"
             android:id="@+id/subject"
             android:textColor="#727FC8"
-            android:fontFamily="@font/neosans_pro_regular"
+            android:fontFamily="@font/neosanspro_medium"
             />
 
         <TextView
@@ -35,11 +35,11 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="email"
-            android:textSize="13dp"
+            android:textSize="10dp"
             android:textStyle="bold"
             android:id="@+id/teacher"
             android:textColor="#727FC8"
-            android:fontFamily="@font/neosans_pro_regular"
+            android:fontFamily="@font/neosanspro_medium"
             />
 
         <TextView
@@ -47,11 +47,11 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="phone"
-            android:textSize="13dp"
+            android:textSize="10dp"
             android:textStyle="bold"
             android:id="@+id/type"
             android:textColor="#727FC8"
-            android:fontFamily="@font/neosans_pro_regular"
+            android:fontFamily="@font/neosanspro_medium"
             />
 
     </LinearLayout>
@@ -59,7 +59,6 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="5dp"
         android:layout_marginLeft="20dp"
         android:id="@+id/teacherRecycler"
         />

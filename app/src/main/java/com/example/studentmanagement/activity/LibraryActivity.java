@@ -1,6 +1,7 @@
  package com.example.studentmanagement.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -36,61 +38,55 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
- public class LibraryActivity extends AppCompatActivity implements BookAdapter.ClickListener,OptionAdapter.ClickListener{
+ public class LibraryActivity extends AppCompatActivity implements BookAdapter.ClickListener{
 
     private ArrayList<Book> books = new ArrayList<>();
-    private ArrayList<Book> tmp_books = new ArrayList<>();
     private RecyclerView recyclerView;
     private BookAdapter adapter;
-    private AutoCompleteTextView completeTextView;
-     private RecyclerView recyclerViewOption;
-     private StaggeredGridLayoutManager gridLayoutManager;
-     private String[] names;
+
+     private Toolbar toolbar;
+     private TextView txtToolbarText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_library);
 
-        completeTextView = findViewById(R.id.actBookSearch);
+        toolbar = findViewById(R.id.toolbar);
+        txtToolbarText = findViewById(R.id.txtTitle);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        txtToolbarText.setText("Books List");
+
 
         //main recyclerview
         recyclerView = findViewById(R.id.libraryRecycler);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        //option recyclerview
-        recyclerViewOption = findViewById(R.id.libraryRecyclerOptions);
-        recyclerViewOption.setHasFixedSize(true);
-        gridLayoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
-        recyclerViewOption.setLayoutManager(gridLayoutManager);
-
-        names = getResources().getStringArray(R.array.library_functions_name);
-        OptionAdapter optionAdapter = new OptionAdapter(names,LibraryActivity.this);
-        optionAdapter.setClickListener(LibraryActivity.this);
-        recyclerViewOption.setAdapter(optionAdapter);
-
-        completeTextView.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int i, int i1, int i2) {
-
-                tmp_books.clear();
-
-                if(i2 == 0 ) {
-                    getAllBooks();
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
+//        completeTextView.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int i, int i1, int i2) {
+//
+//                tmp_books.clear();
+//
+//                if(i2 == 0 ) {
+//                    getAllBooks();
+//                }
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable editable) {
+//
+//            }
+//        });
 
         getAllBooks();
 
@@ -125,13 +121,14 @@ import java.util.ArrayList;
                             int cate_id = array.getJSONObject(i).getInt("book_category_id");
                             int quantity = array.getJSONObject(i).getInt("quantity");
                             int active_status = array.getJSONObject(i).getInt("active_status");
+                            String book_number = array.getJSONObject(i).getString("book_number");
+                            String subject = array.getJSONObject(i).getString("subject_name");
 
                             Book book = new Book(title,author,publisher,price,rack_number
-                                    ,description,isbn_no,id,cate_id,quantity,active_status);
+                                    ,description,isbn_no,id,cate_id,quantity,active_status,subject,book_number);
 
                             books.add(book);
 
-                            Log.d("books",title);
 
                         }
 
@@ -150,19 +147,6 @@ import java.util.ArrayList;
                     adapter.setClickListener(LibraryActivity.this);
                     recyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
-
-
-                    AutoCompleteBookAdapter bookAdapter = new AutoCompleteBookAdapter(getApplicationContext(), R.layout.book_list_item, books);
-                    completeTextView.setAdapter(bookAdapter);
-
-                    completeTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                            Intent intent = new Intent(getApplicationContext(),BookDetailsActivity.class);
-                            startActivity(intent);
-                            finish();
-                        }
-                    });
 
                 }
 
@@ -189,8 +173,4 @@ import java.util.ArrayList;
 
      }
 
-     @Override
-     public void itemClicked(String s, int position, View view) {
-         Toast.makeText(getApplicationContext(),s, Toast.LENGTH_SHORT).show();
-     }
  }

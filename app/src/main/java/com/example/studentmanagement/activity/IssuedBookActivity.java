@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,8 +18,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.studentmanagement.R;
-import com.example.studentmanagement.adapter.NoticeAdapter;
-import com.example.studentmanagement.model.Notice;
+import com.example.studentmanagement.adapter.BookAdapter;
+import com.example.studentmanagement.adapter.BookIssuedAdapter;
+import com.example.studentmanagement.model.Book;
+import com.example.studentmanagement.model.BookIssue;
 import com.example.studentmanagement.myconfig.MyConfig;
 
 import org.json.JSONArray;
@@ -29,25 +30,25 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class NoticeActivity extends AppCompatActivity {
+public class IssuedBookActivity extends AppCompatActivity {
 
-    private ArrayList<Notice> notices = new ArrayList<>();
+    private ArrayList<BookIssue> books = new ArrayList<>();
     private RecyclerView recyclerView;
-    private NoticeAdapter adapter;
-    private int id;
-    private SharedPreferences sharedPreferences;
+    private BookIssuedAdapter adapter;
+
     private Toolbar toolbar;
     private TextView txtToolbarText;
 
+    private SharedPreferences sharedPreferences;
+    private int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notice);
+        setContentView(R.layout.activity_issued_book);
 
-        recyclerView = findViewById(R.id.noticeRecyclerview);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        sharedPreferences = getSharedPreferences("default", Context.MODE_PRIVATE);
+        id = sharedPreferences.getInt("id",0);
 
 
         toolbar = findViewById(R.id.toolbar);
@@ -56,48 +57,52 @@ public class NoticeActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        txtToolbarText.setText("Notice Board");
+        txtToolbarText.setText("Books Issued");
 
 
-        sharedPreferences = getSharedPreferences("default", Context.MODE_PRIVATE);
-        id = sharedPreferences.getInt("id", 0);
+        //main recyclerview
+        recyclerView = findViewById(R.id.issuedBookRecycler);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        getAllNotice(id);
-
+        getAllIssuedBooks(id);
 
     }
 
+    void getAllIssuedBooks(int id){
 
+        books.clear();
 
-    void getAllNotice(int id){
-
-        notices.clear();
-
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, MyConfig.getNoticeUrl(id), null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, MyConfig.getStudentIssuedBooks(id), null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+
 
                 try {
                     if(response.getBoolean("success")){
 
-
-                        JSONArray array = response.getJSONObject("data").getJSONArray("allNotices");
+                        JSONArray array = response.getJSONObject("data").getJSONArray("issueBooks");
 
 
 
                         for(int i = 0 ; i < array.length() ; i++){
 
+                            String title = array.getJSONObject(i).getString("book_title");
+                            String author = array.getJSONObject(i).getString("author_name");
+                            String publisher = array.getJSONObject(i).getString("publisher_name");
+                            String book_number = array.getJSONObject(i).getString("book_number");
+                            String issue = array.getJSONObject(i).getString("given_date");
+                            String givenDate = array.getJSONObject(i).getString("given_date");
 
-                            String title = array.getJSONObject(i).getString("notice_title");
-                            String date = array.getJSONObject(i).getString("notice_date");
-                            String des = array.getJSONObject(i).getString("notice_message");
+                           BookIssue book = new BookIssue(issue,givenDate,book_number,"issued",title,author);
 
-                            Notice notice = new Notice(title,des,date);
+                            books.add(book);
 
-                            notices.add(notice);
 
                         }
 
+
+//                        Toast.makeText(getApplicationContext(),title +" "+array.length(), Toast.LENGTH_SHORT).show();
 
                     }
 
@@ -105,9 +110,9 @@ public class NoticeActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                if(notices.size() > 0){
+                if(books.size() > 0){
 
-                    adapter = new NoticeAdapter(notices, NoticeActivity.this);
+                    adapter = new BookIssuedAdapter(books,getApplicationContext());
                     recyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
 
