@@ -2,10 +2,13 @@ package com.example.studentmanagement.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -63,8 +66,7 @@ public class FeeAdapter extends RecyclerView.Adapter<FeeAdapter.FeeViewHolder>{
         holder.txtView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(ctx);
+                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(ctx,R.style.DialogTheme);
                 View mView = LayoutInflater.from(ctx).inflate(R.layout.fee_details, null);
 
                 TextView txtTitle = mView.findViewById(R.id.txtFeeTitle);
@@ -85,8 +87,17 @@ public class FeeAdapter extends RecyclerView.Adapter<FeeAdapter.FeeViewHolder>{
 
                 alertBuilder.setView(mView);
                 AlertDialog dialog = alertBuilder.create();
+
+                Rect displayRectangle = new Rect();
+                Window window = dialog.getWindow();
+                window.getDecorView().getWindowVisibleDisplayFrame(displayRectangle);
+
+                mView.setMinimumWidth((int)(displayRectangle.width()));
+                mView.setMinimumHeight((int)(displayRectangle.height() * 0.5f));
+
                 dialog.getWindow().setGravity(Gravity.BOTTOM);
                 dialog.show();
+
 
             }
         });

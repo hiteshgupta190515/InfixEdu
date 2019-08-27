@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/noticeClick"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:text="Campus to Dhanmondi"
+            android:textSize="16dp"
+            android:textColor="#415094"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="15dp"
+            android:layout_alignParentStart="true"
+            android:id="@+id/txtTransportTitle"
+            android:maxLines="1"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="View"
+            android:textSize="13dp"
+            android:padding="5dp"
+            android:gravity="end"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="15dp"
+            android:textColor="#415094"
+            android:layout_alignParentStart="true"
+            android:id="@+id/txtTransportView"
+            android:maxLines="1"
+            android:fontFamily="@font/neosans_pro_regular"
+            />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vehicle: Vehicle102"
+        android:textSize="13dp"
+        android:maxLines="1"
+        android:id="@+id/txtVehicleNo"
+        android:layout_marginTop="5dp"
+        android:textColor="#727FC8"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#ddd"
+        android:layout_marginTop="20dp"
+        />
+
+</LinearLayout>

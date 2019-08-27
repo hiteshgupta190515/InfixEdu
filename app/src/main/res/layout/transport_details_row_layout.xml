@@ -1,30 +1,25 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    >
+    android:layout_height="match_parent">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Admission fees - class 5"
+        android:text="Route: Campus to Dhanmondi"
         android:textSize="18dp"
         android:textColor="#415094"
         android:layout_marginTop="30dp"
         android:layout_marginStart="20dp"
-        android:id="@+id/txtFeeTitle"
-        android:fontFamily="@font/neosanspro_medium"
+        android:id="@+id/txtDRoute"
         />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@+id/txtFeeTitle"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="25dp"
-        android:id="@+id/linear"
+        android:layout_marginTop="30dp"
         >
 
         <LinearLayout
@@ -32,54 +27,25 @@
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:layout_marginStart="25dp"
             >
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Amount"
+                android:text="Vehicle No."
                 android:textSize="13dp"
                 android:textStyle="bold"
                 android:fontFamily="@font/neosans_pro_regular"
-                android:textColor="#727FC8"
+                android:textColor="#A8727FC8"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="$1523"
+                android:text="Vehicle102"
                 android:textSize="12dp"
-                android:id="@+id/amount"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/neosans_pro_regular"
-                android:textColor="@color/profile_light_text_color"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Discount"
-                android:textSize="13dp"
-                android:textStyle="bold"
-                android:fontFamily="@font/neosans_pro_regular"
-                android:textColor="#727FC8"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="$5000.0"
-                android:textSize="12dp"
-                android:id="@+id/feeDiscount"
+                android:id="@+id/txtDVehicleNo"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/neosans_pro_regular"
                 android:padding="2dp"
@@ -98,87 +64,171 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Fine"
+                android:text="Vehicle Model"
                 android:textSize="13dp"
                 android:textStyle="bold"
                 android:fontFamily="@font/neosans_pro_regular"
-                android:textColor="#727FC8"
+                android:textColor="#A8727FC8"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="$400.0"
+                android:text="Atlanta"
                 android:textSize="12dp"
-                android:id="@+id/feeFine"
+                android:id="@+id/txtDVehicalModel"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/neosans_pro_regular"
+                android:padding="2dp"
                 android:textColor="@color/profile_light_text_color"
                 />
 
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Paid"
-                android:textSize="13dp"
-                android:textStyle="bold"
-                android:fontFamily="@font/neosans_pro_regular"
-                android:textColor="#727FC8"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="$4578"
-                android:textSize="12dp"
-                android:textColor="@color/profile_light_text_color"
-                android:id="@+id/paid"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/neosans_pro_regular"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Balance"
-                android:textSize="13dp"
-                android:textStyle="bold"
-                android:fontFamily="@font/neosans_pro_regular"
-                android:textColor="#727FC8"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="35000.0"
-                android:textSize="12dp"
-                android:id="@+id/feeBalance"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/neosans_pro_regular"
-                android:textColor="@color/profile_light_text_color"
-                />
-
-        </LinearLayout>
-
 
     </LinearLayout>
 
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginStart="25dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Made Year."
+                android:textSize="13dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/neosans_pro_regular"
+                android:textColor="#A8727FC8"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2007"
+                android:textSize="12dp"
+                android:id="@+id/txtDVehicleMadeYear"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/neosans_pro_regular"
+                android:padding="2dp"
+                android:textColor="@color/profile_light_text_color"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Driver Name"
+                android:textSize="13dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/neosans_pro_regular"
+                android:textColor="#A8727FC8"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Travor James"
+                android:textSize="12dp"
+                android:id="@+id/txtDVehicalDriverName"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/neosans_pro_regular"
+                android:padding="2dp"
+                android:textColor="@color/profile_light_text_color"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginStart="25dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Driving License"
+                android:textSize="13dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/neosans_pro_regular"
+                android:textColor="#A8727FC8"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:text="6598742365"
+                android:id="@+id/txtDVehicleLicence"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/neosans_pro_regular"
+                android:padding="2dp"
+                android:textColor="@color/profile_light_text_color"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Driver Contact"
+                android:textSize="13dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/neosans_pro_regular"
+                android:textColor="#A8727FC8"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="44698574123"
+                android:textSize="12dp"
+                android:id="@+id/txtDVehicalContact"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/neosans_pro_regular"
+                android:padding="2dp"
+                android:textColor="@color/profile_light_text_color"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

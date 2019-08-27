@@ -14,7 +14,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.IssuedBookActivity"></activity>
+        <activity android:name=".activity.TransportActivity"></activity>
+        <activity android:name=".activity.DormitoryActivity" />
+        <activity android:name=".activity.IssuedBookActivity" />
         <activity
             android:name=".activity.StudentLibraryActivity"
             android:parentActivityName=".activity.HomeActivity" />

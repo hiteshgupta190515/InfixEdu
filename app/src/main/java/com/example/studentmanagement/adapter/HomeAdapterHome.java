@@ -19,6 +19,7 @@ import com.example.studentmanagement.MainActivity;
 import com.example.studentmanagement.R;
 import com.example.studentmanagement.activity.AdminSectionActivity;
 import com.example.studentmanagement.activity.ClassRoutineActivity;
+import com.example.studentmanagement.activity.DormitoryActivity;
 import com.example.studentmanagement.activity.FeesActivity;
 import com.example.studentmanagement.activity.HomeWorkActivity;
 import com.example.studentmanagement.activity.InventoryActivity;
@@ -31,6 +32,7 @@ import com.example.studentmanagement.activity.StudentLibraryActivity;
 import com.example.studentmanagement.activity.StudentListActivity;
 import com.example.studentmanagement.activity.StudentSubjectActivity;
 import com.example.studentmanagement.activity.StudentTeacherActivity;
+import com.example.studentmanagement.activity.TransportActivity;
 
 import java.util.ArrayList;
 
@@ -113,6 +115,12 @@ public class HomeAdapterHome extends RecyclerView.Adapter<HomeAdapterHome.ViewHo
                         break;
                     case "Books Issued":
                         activity.startActivity(new Intent(activity, IssuedBookActivity.class));
+                        break;
+                    case "Dormitory":
+                        activity.startActivity(new Intent(activity, DormitoryActivity.class));
+                        break;
+                    case "Transport":
+                        activity.startActivity(new Intent(activity, TransportActivity.class));
                         break;
                     case "Logout":
 
