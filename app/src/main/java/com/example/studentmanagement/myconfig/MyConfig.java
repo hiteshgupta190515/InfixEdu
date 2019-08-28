@@ -37,11 +37,14 @@ public class MyConfig {
     public static String getStudentTeacherUrl(int id){
         return BASE_URL+"studentTeacher/"+id;
     }
-    public static String getStudentTimelineUrl(int id){
-        return BASE_URL+"student-dashboard/"+id;
-    }
     public static String getStudentIssuedBooks(int id){
         return BASE_URL+"student-library/"+id;
+    }
+    public static String getStudentTimeline(int id){
+        return BASE_URL+"student-timeline/"+id;
+    }
+    public static String getStudentAttendence(int id,int month,int year){
+        return BASE_URL+"student-my-attendance/"+id+"?month="+month+"&year="+year;
     }
 
 

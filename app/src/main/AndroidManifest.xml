@@ -14,7 +14,11 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.TransportActivity"></activity>
+        <activity android:name=".activity.AttendenceCalenderActivity"></activity>
+        <activity
+            android:name=".activity.TimelineActivity"
+            android:parentActivityName=".activity.HomeActivity" />
+        <activity android:name=".activity.TransportActivity" />
         <activity android:name=".activity.DormitoryActivity" />
         <activity android:name=".activity.IssuedBookActivity" />
         <activity
@@ -33,9 +37,15 @@
         <activity
             android:name=".activity.NoticeDeatlsActivity"
             android:parentActivityName=".activity.NoticeActivity" />
-        <activity android:name=".activity.HomeWorkActivity" />
-        <activity android:name=".activity.ClassRoutineActivity" />
-        <activity android:name=".activity.FeesActivity" />
+        <activity
+            android:name=".activity.HomeWorkActivity"
+            android:parentActivityName=".activity.HomeActivity" />
+        <activity
+            android:name=".activity.ClassRoutineActivity"
+            android:parentActivityName=".activity.HomeActivity" />
+        <activity
+            android:name=".activity.FeesActivity"
+            android:parentActivityName=".activity.HomeActivity" />
         <activity
             android:name=".activity.ProfileActivity"
             android:parentActivityName=".activity.HomeActivity" />

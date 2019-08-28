@@ -57,6 +57,7 @@ public class ClassRoutineActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         txtToolbarText.setText("Routine");
 
         initRecyclerview();

@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.studentmanagement.MainActivity;
 import com.example.studentmanagement.R;
 import com.example.studentmanagement.activity.AdminSectionActivity;
+import com.example.studentmanagement.activity.AttendenceCalenderActivity;
 import com.example.studentmanagement.activity.ClassRoutineActivity;
 import com.example.studentmanagement.activity.DormitoryActivity;
 import com.example.studentmanagement.activity.FeesActivity;
@@ -32,6 +33,7 @@ import com.example.studentmanagement.activity.StudentLibraryActivity;
 import com.example.studentmanagement.activity.StudentListActivity;
 import com.example.studentmanagement.activity.StudentSubjectActivity;
 import com.example.studentmanagement.activity.StudentTeacherActivity;
+import com.example.studentmanagement.activity.TimelineActivity;
 import com.example.studentmanagement.activity.TransportActivity;
 
 import java.util.ArrayList;
@@ -122,6 +124,12 @@ public class HomeAdapterHome extends RecyclerView.Adapter<HomeAdapterHome.ViewHo
                     case "Transport":
                         activity.startActivity(new Intent(activity, TransportActivity.class));
                         break;
+                    case "Timeline":
+                        activity.startActivity(new Intent(activity, TimelineActivity.class));
+                        break;
+                    case "Attendance":
+                        activity.startActivity(new Intent(activity, AttendenceCalenderActivity.class));
+                        break;
                     case "Logout":
 
                         SharedPreferences pref = ctx.getSharedPreferences("default", Context.MODE_PRIVATE);
@@ -130,7 +138,6 @@ public class HomeAdapterHome extends RecyclerView.Adapter<HomeAdapterHome.ViewHo
                         editor.commit();
 
                         editor.putBoolean("isLoged", false);
-
 
                         activity.startActivity(new Intent(activity, LoginActivity.class));
                         activity.finish();

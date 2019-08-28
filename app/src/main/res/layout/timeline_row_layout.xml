@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.github.vipulasri.timelineview.TimelineView
+        android:id="@+id/timeline"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:markerSize="10dp"
+        app:marker="@drawable/custom_gradient"
+        app:lineWidth="1dp"
+        app:markerInCenter="false"
+        app:startLineColor="#DBD1EE"
+        app:endLineColor="#DBD1EE"
+        app:lineStyle="normal"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginStart="15dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/text_timeline_title"
+                android:textStyle="bold"
+                android:text="Top Scorer in Fall Trimester"
+                android:textColor="#415094"
+                android:textSize="13dp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/text_timeline_date"
+                android:textSize="12sp"
+                android:textColor="@color/profile_light_text_color"
+                tools:text="24 JAN"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:lineSpacingExtra="5dp"
+                android:layout_marginBottom="20dp"
+                android:maxLines="5"
+                android:id="@+id/text_timeline_description"
+                android:textColor="@android:color/darker_gray"
+                tools:text="Lorem ipsum dolor sit amet, consectetur
+                adipisicing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua."/>
+
+        </LinearLayout>
+
+</LinearLayout>

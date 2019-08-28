@@ -39,6 +39,7 @@
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
+                    android:id="@+id/profile"
                     android:layout_alignParentEnd="true"
                     android:src="@mipmap/student_face"
                     android:layout_marginEnd="20dp"

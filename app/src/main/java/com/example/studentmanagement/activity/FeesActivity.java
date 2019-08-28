@@ -1,6 +1,7 @@
 package com.example.studentmanagement.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -38,6 +39,8 @@ public class FeesActivity extends AppCompatActivity {
     private int id;
     private int totalAmount,totalFine,totalDiscount,totalPaid,totalBalance;
     private TextView txamount,txfine,txdiscount,txpaid,txbalance;
+    private Toolbar toolbar;
+    private TextView txtToolbarText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +53,16 @@ public class FeesActivity extends AppCompatActivity {
         txfine = findViewById(R.id.fine);
         txpaid = findViewById(R.id.paid);
 
+        toolbar = findViewById(R.id.toolbar);
+        txtToolbarText = findViewById(R.id.txtTitle);
+
         sharedPreferences = getSharedPreferences("default", Context.MODE_PRIVATE);
         id = sharedPreferences.getInt("id",0);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        txtToolbarText.setText("Fees");
 
         recyclerView = findViewById(R.id.feeRecyclerView);
         recyclerView.setHasFixedSize(true);

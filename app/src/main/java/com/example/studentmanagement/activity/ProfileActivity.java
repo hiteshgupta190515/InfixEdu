@@ -140,8 +140,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onResponse(JSONObject response) {
 
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-
                 try {
                     if(response.getBoolean("success")){
 

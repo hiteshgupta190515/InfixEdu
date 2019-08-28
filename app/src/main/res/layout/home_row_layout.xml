@@ -169,7 +169,7 @@
                 android:paddingRight="10dp"
                 android:paddingTop="3dp"
                 android:paddingBottom="3dp"
-                android:background="@color/brown"
+                android:background="@color/blue"
                 android:textColor="#fff"
                 android:id="@+id/status"
                 android:layout_marginTop="10dp"

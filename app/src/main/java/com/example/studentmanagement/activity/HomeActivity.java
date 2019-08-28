@@ -11,10 +11,27 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.studentmanagement.R;
 import com.example.studentmanagement.adapter.HomeAdapterHome;
+import com.example.studentmanagement.myconfig.MyConfig;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -24,7 +41,9 @@ public class HomeActivity extends AppCompatActivity {
     private int role_id;
     private int id;
     private String email;
+    private String password;
     private String name;
+    private CircleImageView profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +51,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         recycler = findViewById(R.id.home_recycler);
+        profile = findViewById(R.id.profile);
 
         gridLayoutManager = new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL);
         recycler.setLayoutManager(gridLayoutManager);
@@ -42,9 +62,11 @@ public class HomeActivity extends AppCompatActivity {
         role_id = sharedPreferences.getInt("role", 0);
         id = sharedPreferences.getInt("id", 0);
         email = sharedPreferences.getString("email", null);
+        password = sharedPreferences.getString("password",null);
         name = sharedPreferences.getString("name", null);
 
         getFunctionality(role_id);
+        update_profile_image(email,password);
 
     }
 
@@ -106,6 +128,54 @@ public class HomeActivity extends AppCompatActivity {
 
         finish();
 
+    }
+
+    private void update_profile_image(final String email, final String password){
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, MyConfig.getLoginUrl(email, password), null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                try {
+                    if(response.getBoolean("success")){
+
+                        JSONObject detailsObj;
+
+                        detailsObj = response.getJSONObject("data").optJSONObject("userDetails");
+                        String image = detailsObj.getString("student_photo");
+
+                        Glide.with(HomeActivity.this)
+                                .load(MyConfig.ROOT_URL+image)
+                                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                .fitCenter()
+                                .into(profile);
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(HomeActivity.this, "Loading error", Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                //Adding parameters to request
+                params.put("email", email);
+                params.put("password", password);
+
+                //returning parameter
+                return params;
+            }
+        };
+        //Adding the string request to the queue
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(request);
     }
 
 }

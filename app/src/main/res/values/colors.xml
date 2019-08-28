@@ -15,6 +15,10 @@
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="blue">#044271</color>
+    <color name="green">#3EC900</color>
+    <color name="red">#FF3B00</color>
+    <color name="yellow">#EDD200</color>
+    <color name="pink">#C738D8</color>
     <color name="lightGrey">#f4f4f4</color>
     <color name="profile_light_text_color">#9EA8E6</color>
 </resources>
