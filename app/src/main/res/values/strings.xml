@@ -86,6 +86,11 @@
         <item>Books Issued</item>
     </string-array>
 
+    <string-array name="online_exam_student_functions_name">
+        <item>Active Exams</item>
+        <item>Exam Result</item>
+    </string-array>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

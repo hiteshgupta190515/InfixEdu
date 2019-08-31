@@ -106,8 +106,6 @@ import java.util.ArrayList;
 
                         JSONArray array = response.getJSONArray("data");
 
-
-
                         for(int i = 0 ; i < array.length() ; i++){
 
                             String title = array.getJSONObject(i).getString("book_title");
@@ -115,7 +113,7 @@ import java.util.ArrayList;
                             String publisher = array.getJSONObject(i).getString("publisher_name");
                             String rack_number = array.getJSONObject(i).getString("rack_number");
                             String description = array.getJSONObject(i).getString("details");
-                            double price = array.getJSONObject(i).getDouble("book_price");
+                            int price = array.getJSONObject(i).getInt("book_price");
                             String isbn_no = array.getJSONObject(i).getString("isbn_no");
                             int id = array.getJSONObject(i).getInt("id");
                             int cate_id = array.getJSONObject(i).getInt("book_category_id");

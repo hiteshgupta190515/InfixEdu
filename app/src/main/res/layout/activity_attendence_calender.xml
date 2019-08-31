@@ -37,6 +37,7 @@
                 android:gravity="center"
                 android:layout_height="match_parent"
                 android:text="August 2019"
+                android:id="@+id/txtPageTitle"
                 />
 
             <ImageView
@@ -60,29 +61,35 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="2"
+        android:weightSum="3"
         android:orientation="vertical"
+        android:layout_marginStart="5dp"
         >
+
+   <include layout="@layout/week_day_row_layout"
+       android:layout_width="match_parent"
+       android:layout_height="0dp"
+       android:layout_weight="0.2"
+       />
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="1.2"
             android:id="@+id/calenderRecycler"
             />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="1.6"
             android:orientation="vertical"
             >
 
             <include layout="@layout/content_calender"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
                 />
 
         </LinearLayout>

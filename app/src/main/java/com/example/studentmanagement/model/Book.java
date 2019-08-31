@@ -5,7 +5,7 @@ public class Book {
     private String bookTitle;
     private String bookAuthor;
     private String bookPublisher;
-    private double bookPrice;
+    private int bookPrice;
     private String bookReck;
     private String bookDes;
     private String isbn_no;
@@ -16,7 +16,7 @@ public class Book {
     private int quantity;
     private double active_status;
 
-    public Book(String bookTitle, String bookAuthor, String bookPublisher, double bookPrice, String bookReck,
+    public Book(String bookTitle, String bookAuthor, String bookPublisher, int bookPrice, String bookReck,
                 String bookDes, String isbn_no, int id, int category_id, int quantity, double active_status,String subject_name,String book_no) {
         this.bookTitle = bookTitle;
         this.bookAuthor = bookAuthor;
@@ -107,11 +107,11 @@ public class Book {
         this.bookAuthor = bookAuthor;
     }
 
-    public double getBookPrice() {
+    public int getBookPrice() {
         return bookPrice;
     }
 
-    public void setBookPrice(double bookPrice) {
+    public void setBookPrice(int bookPrice) {
         this.bookPrice = bookPrice;
     }
 

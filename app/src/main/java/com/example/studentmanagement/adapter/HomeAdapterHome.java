@@ -28,6 +28,7 @@ import com.example.studentmanagement.activity.IssuedBookActivity;
 import com.example.studentmanagement.activity.LibraryActivity;
 import com.example.studentmanagement.activity.LoginActivity;
 import com.example.studentmanagement.activity.NoticeActivity;
+import com.example.studentmanagement.activity.OnlineExamActivity;
 import com.example.studentmanagement.activity.ProfileActivity;
 import com.example.studentmanagement.activity.StudentLibraryActivity;
 import com.example.studentmanagement.activity.StudentListActivity;
@@ -129,6 +130,9 @@ public class HomeAdapterHome extends RecyclerView.Adapter<HomeAdapterHome.ViewHo
                         break;
                     case "Attendance":
                         activity.startActivity(new Intent(activity, AttendenceCalenderActivity.class));
+                        break;
+                    case "Online Exam":
+                        activity.startActivity(new Intent(activity, OnlineExamActivity.class));
                         break;
                     case "Logout":
 

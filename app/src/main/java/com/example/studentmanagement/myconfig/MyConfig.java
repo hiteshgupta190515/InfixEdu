@@ -34,6 +34,14 @@ public class MyConfig {
     public static String getNoticeUrl(int id){
         return BASE_URL+"student-noticeboard/"+id;
     }
+    public static String getOnlineExamNameUrl(int id){
+        return BASE_URL+"student-online-exam/"+id;
+    }
+    public static String getOnlineExamChooseUrl(int id){
+        return BASE_URL+"choose-exam/"+id;
+    }    public static String getOnlineExamResultUrl(int id){
+        return BASE_URL+"exam-result/"+id;
+    }
     public static String getStudentTeacherUrl(int id){
         return BASE_URL+"studentTeacher/"+id;
     }
@@ -106,6 +114,84 @@ return category;
                 category = "Others Inventory";
                 break;
 
+        }
+        return category;
+    }
+
+    public static String getMonth(int id){
+
+        String category = null;
+
+        switch (id){
+
+            case 1:
+                category = "January";
+                break;
+            case 2:
+                category = "February";
+                break;
+            case 3:
+                category = "March";
+                break;
+            case 4:
+                category = "April";
+                break;
+            case 5:
+                category = "May";
+                break;
+            case 6:
+                category = "June";
+                break;
+            case 7:
+                category = "July";
+                break;
+            case 8:
+                category = "August";
+                break;
+            case 9:
+                category = "September";
+                break;
+            case 10:
+                category = "October";
+                break;
+            case 11:
+                category = "November";
+                break;
+            case 12:
+                category = "December ";
+                break;
+        }
+        return category;
+    }
+
+    public static int getWeekDay(String week){
+
+        int category;
+
+        switch (week){
+
+            case "Mon":
+
+                category = 0;
+                break;
+            case "Tue":
+                category = 1;
+                break;
+            case "Wed":
+                category = 2;
+                break;
+            case "Thu":
+                category = 3;
+                break;
+            case "Fri":
+                category = 4;
+            case "Sat":
+                category = 5;
+            case "Sun":
+                category = 6;
+            default:
+                category = 0;
+                break;
         }
         return category;
     }

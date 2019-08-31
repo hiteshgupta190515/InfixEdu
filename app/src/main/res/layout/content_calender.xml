@@ -6,7 +6,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="30dp"
         android:orientation="horizontal"
         android:layout_margin="5dp"
         >
@@ -25,7 +25,7 @@
             android:text="Present"
             android:fontFamily="@font/poppins_light"
             android:textStyle="bold"
-            android:textSize="22dp"
+            android:textSize="16dp"
             android:gravity="center"
             />
 
@@ -35,18 +35,19 @@
             android:layout_height="match_parent"
             android:text="09 Days"
             android:gravity="end"
+            android:id="@+id/present"
             android:layout_marginEnd="10dp"
             android:textColor="#727FC8"
             android:fontFamily="@font/poppins_light"
             android:textStyle="bold"
-            android:textSize="20dp"
+            android:textSize="16dp"
             />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="30dp"
         android:orientation="horizontal"
         android:layout_margin="5dp"
         >
@@ -65,7 +66,7 @@
             android:text="Absent"
             android:fontFamily="@font/poppins_light"
             android:textStyle="bold"
-            android:textSize="22dp"
+            android:textSize="16dp"
             android:gravity="center"
             />
 
@@ -75,18 +76,19 @@
             android:layout_height="match_parent"
             android:text="09 Days"
             android:gravity="end"
+            android:id="@+id/absent"
             android:layout_marginEnd="10dp"
             android:textColor="#727FC8"
             android:fontFamily="@font/poppins_light"
             android:textStyle="bold"
-            android:textSize="20dp"
+            android:textSize="16dp"
             />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="30dp"
         android:orientation="horizontal"
         android:layout_margin="5dp"
         >
@@ -105,7 +107,7 @@
             android:text="Late"
             android:fontFamily="@font/poppins_light"
             android:textStyle="bold"
-            android:textSize="22dp"
+            android:textSize="16dp"
             android:gravity="center"
             />
 
@@ -115,18 +117,19 @@
             android:layout_height="match_parent"
             android:text="09 Days"
             android:gravity="end"
+            android:id="@+id/late"
             android:layout_marginEnd="10dp"
             android:textColor="#727FC8"
             android:fontFamily="@font/poppins_light"
             android:textStyle="bold"
-            android:textSize="20dp"
+            android:textSize="16dp"
             />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="30dp"
         android:orientation="horizontal"
         android:layout_margin="5dp"
         >
@@ -145,7 +148,7 @@
             android:text="Holiday"
             android:fontFamily="@font/poppins_light"
             android:textStyle="bold"
-            android:textSize="22dp"
+            android:textSize="16dp"
             android:gravity="center"
             />
 
@@ -155,18 +158,19 @@
             android:layout_height="match_parent"
             android:text="09 Days"
             android:gravity="end"
+            android:id="@+id/holiday"
             android:layout_marginEnd="10dp"
             android:textColor="#727FC8"
             android:fontFamily="@font/poppins_light"
             android:textStyle="bold"
-            android:textSize="20dp"
+            android:textSize="16dp"
             />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="30dp"
         android:orientation="horizontal"
         android:layout_margin="5dp"
         >
@@ -185,7 +189,7 @@
             android:text="Halfday"
             android:fontFamily="@font/poppins_light"
             android:textStyle="bold"
-            android:textSize="22dp"
+            android:textSize="16dp"
             android:gravity="center"
             />
 
@@ -195,11 +199,12 @@
             android:layout_height="match_parent"
             android:text="09 Days"
             android:gravity="end"
+            android:id="@+id/halfday"
             android:layout_marginEnd="10dp"
             android:textColor="#727FC8"
             android:fontFamily="@font/poppins_light"
             android:textStyle="bold"
-            android:textSize="20dp"
+            android:textSize="16dp"
             />
 
     </LinearLayout>
