@@ -14,8 +14,13 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.ActiveOnlineExamActivity"></activity>
-        <activity android:name=".activity.OnlineExamActivity" />
+        <activity android:name=".activity.ExamChooseActivity"></activity>
+        <activity
+            android:name=".activity.ActiveOnlineExamActivity"
+            android:parentActivityName=".activity.OnlineExamActivity" />
+        <activity
+            android:name=".activity.OnlineExamActivity"
+            android:parentActivityName=".activity.HomeActivity" />
         <activity android:name=".activity.AttendenceCalenderActivity" />
         <activity
             android:name=".activity.TimelineActivity"

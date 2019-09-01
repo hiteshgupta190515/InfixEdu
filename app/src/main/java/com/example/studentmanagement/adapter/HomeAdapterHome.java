@@ -17,10 +17,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.studentmanagement.MainActivity;
 import com.example.studentmanagement.R;
+import com.example.studentmanagement.activity.ActiveOnlineExamActivity;
 import com.example.studentmanagement.activity.AdminSectionActivity;
 import com.example.studentmanagement.activity.AttendenceCalenderActivity;
 import com.example.studentmanagement.activity.ClassRoutineActivity;
 import com.example.studentmanagement.activity.DormitoryActivity;
+import com.example.studentmanagement.activity.ExamChooseActivity;
 import com.example.studentmanagement.activity.FeesActivity;
 import com.example.studentmanagement.activity.HomeWorkActivity;
 import com.example.studentmanagement.activity.InventoryActivity;
@@ -133,6 +135,12 @@ public class HomeAdapterHome extends RecyclerView.Adapter<HomeAdapterHome.ViewHo
                         break;
                     case "Online Exam":
                         activity.startActivity(new Intent(activity, OnlineExamActivity.class));
+                        break;
+                    case "Active Exams":
+                        activity.startActivity(new Intent(activity, ActiveOnlineExamActivity.class));
+                        break;
+                    case "Exam Result":
+                        activity.startActivity(new Intent(activity, ExamChooseActivity.class));
                         break;
                     case "Logout":
 

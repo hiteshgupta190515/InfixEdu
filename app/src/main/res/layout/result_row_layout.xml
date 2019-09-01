@@ -1,0 +1,161 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="English"
+        android:textSize="16dp"
+        android:textColor="#415094"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="10dp"
+        android:id="@+id/txtResultTitle"
+        android:fontFamily="@font/poppins_medium"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/txtResultTitle"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        android:id="@+id/linear"
+        >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Full Marks"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="#727FC8"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="100"
+                android:textSize="12dp"
+                android:id="@+id/resultFullMarks"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_light"
+                android:textColor="@color/profile_light_text_color"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pass Marks"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="#727FC8"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="40"
+                android:textSize="12dp"
+                android:id="@+id/result_pass_marks"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_light"
+                android:padding="2dp"
+                android:textColor="@color/profile_light_text_color"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Obtained"
+                android:textColor="#727FC8"
+                android:textSize="12dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="75"
+                android:textSize="12dp"
+                android:id="@+id/resultMarkObtained"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_light"
+                android:textColor="@color/profile_light_text_color"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Result"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="#727FC8"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="A"
+                android:textSize="12dp"
+                android:id="@+id/resultGrade"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_light"
+                android:textColor="@color/profile_light_text_color"
+                />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/linear"
+        android:layout_margin="10dp"
+        android:background="@color/profile_light_text_color"
+        />
+
+</RelativeLayout>

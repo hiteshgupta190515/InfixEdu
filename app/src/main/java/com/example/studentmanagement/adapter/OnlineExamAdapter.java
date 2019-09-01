@@ -1,5 +1,6 @@
 package com.example.studentmanagement.adapter;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +37,13 @@ public class OnlineExamAdapter extends RecyclerView.Adapter<OnlineExamAdapter.On
         holder.txtTitle.setText(onlineExams.get(position).getExam_title());
         holder.txtSubject.setText(onlineExams.get(position).getSubject());
         holder.txtdate.setText(onlineExams.get(position).getDate());
-        holder.txtStatus.setText(onlineExams.get(position).getStatus());
+
+        if(onlineExams.get(position).getStatus() == 0){
+            holder.txtStatus.setText("Not Yet");
+            holder.txtStatus.setBackgroundColor(Color.RED);
+        }else{
+            holder.txtStatus.setText("alreday submitted");
+        }
 
     }
 

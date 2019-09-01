@@ -39,8 +39,6 @@ public class MyConfig {
     }
     public static String getOnlineExamChooseUrl(int id){
         return BASE_URL+"choose-exam/"+id;
-    }    public static String getOnlineExamResultUrl(int id){
-        return BASE_URL+"exam-result/"+id;
     }
     public static String getStudentTeacherUrl(int id){
         return BASE_URL+"studentTeacher/"+id;
@@ -50,6 +48,9 @@ public class MyConfig {
     }
     public static String getStudentTimeline(int id){
         return BASE_URL+"student-timeline/"+id;
+    }
+    public static String getStudentOnlineResult(int id,int exam_id){
+        return BASE_URL+"exam-result/"+id+"/"+exam_id;
     }
     public static String getStudentAttendence(int id,int month,int year){
         return BASE_URL+"student-my-attendance/"+id+"?month="+month+"&year="+year;

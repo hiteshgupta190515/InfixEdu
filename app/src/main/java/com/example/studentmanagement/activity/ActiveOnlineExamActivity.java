@@ -18,9 +18,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.studentmanagement.R;
-import com.example.studentmanagement.adapter.BookIssuedAdapter;
 import com.example.studentmanagement.adapter.OnlineExamAdapter;
-import com.example.studentmanagement.model.BookIssue;
 import com.example.studentmanagement.model.OnlineExam;
 import com.example.studentmanagement.myconfig.MyConfig;
 
@@ -58,21 +56,22 @@ public class ActiveOnlineExamActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        txtToolbarText.setText("Books Issued");
+        txtToolbarText.setText("Active Exams");
 
 
-        //main recyclerview
-        recyclerView = findViewById(R.id.onlineExamRecycler);
+        recyclerView = findViewById(R.id.activeOnlineExamRecycler);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        getAllOnlineExam(id);
+
     }
 
-    void getAllIssuedBooks(int id){
+    void getAllOnlineExam(int id){
 
         onlineExams.clear();
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, MyConfig.getStudentIssuedBooks(id), null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, MyConfig.getOnlineExamNameUrl(id), null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 
@@ -80,7 +79,7 @@ public class ActiveOnlineExamActivity extends AppCompatActivity {
                 try {
                     if(response.getBoolean("success")){
 
-                        JSONArray array = response.getJSONObject("data").getJSONArray("issueBooks");
+                        JSONArray array = response.getJSONObject("data").getJSONArray("online_exams");
 
 
 
@@ -90,9 +89,10 @@ public class ActiveOnlineExamActivity extends AppCompatActivity {
                             String date = array.getJSONObject(i).getString("date");
                             String subject_name = array.getJSONObject(i).getString("subject_name");
                             String onlineExamStatus = array.getJSONObject(i).getString("onlineExamStatus");
-                            String onlineExamTakeStatus = array.getJSONObject(i).getString("onlineExamTakeStatus");
+                            int onlineExamTakeStatus = array.getJSONObject(i).getInt("onlineExamTakeStatus");
 
-
+                            OnlineExam onlineExam = new OnlineExam(title,subject_name,date,onlineExamTakeStatus);
+                            onlineExams.add(onlineExam);
 
                         }
 
