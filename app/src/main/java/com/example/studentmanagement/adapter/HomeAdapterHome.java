@@ -20,6 +20,8 @@ import com.example.studentmanagement.R;
 import com.example.studentmanagement.activity.ActiveOnlineExamActivity;
 import com.example.studentmanagement.activity.AdminSectionActivity;
 import com.example.studentmanagement.activity.AttendenceCalenderActivity;
+import com.example.studentmanagement.activity.ClassExamActivity;
+import com.example.studentmanagement.activity.ClassExamScheduleActivity;
 import com.example.studentmanagement.activity.ClassRoutineActivity;
 import com.example.studentmanagement.activity.DormitoryActivity;
 import com.example.studentmanagement.activity.ExamChooseActivity;
@@ -141,6 +143,12 @@ public class HomeAdapterHome extends RecyclerView.Adapter<HomeAdapterHome.ViewHo
                         break;
                     case "Exam Result":
                         activity.startActivity(new Intent(activity, ExamChooseActivity.class));
+                        break;
+                    case "Examination":
+                        activity.startActivity(new Intent(activity, ClassExamActivity.class));
+                        break;
+                    case "Schedule":
+                        activity.startActivity(new Intent(activity, ClassExamScheduleActivity.class));
                         break;
                     case "Logout":
 

@@ -13,7 +13,7 @@
         android:id="@+id/weekName"
         android:textColor="#415094"
         android:visibility="gone"
-        android:fontFamily="@font/neosanspro_medium"
+        android:fontFamily="@font/poppins_medium"
         />
 
     <LinearLayout
@@ -42,7 +42,7 @@
             android:textSize="13dp"
             android:id="@+id/subject"
             android:textColor="@color/profile_light_text_color"
-            android:fontFamily="@font/neosans_pro_regular"
+            android:fontFamily="@font/poppins_light"
             />
 
         <TextView
@@ -53,7 +53,7 @@
             android:textSize="13dp"
             android:id="@+id/room"
             android:textColor="@color/profile_light_text_color"
-            android:fontFamily="@font/neosans_pro_regular"
+            android:fontFamily="@font/poppins_light"
             />
 
     </LinearLayout>

@@ -15,7 +15,7 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.5"
+            android:layout_weight="2"
             android:background="@color/white"
             android:scrollbars="vertical"
             android:id="@+id/relative_layout"
@@ -74,7 +74,9 @@
                 android:layout_below="@id/student_roll_adm"
                 android:gravity="bottom"
                 android:layout_marginBottom="20dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:id="@+id/p_linear"
+                >
 
                 <TextView
                     android:id="@+id/personal"
@@ -83,6 +85,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="PERSONAL"
+                    android:padding="5dp"
                     android:textSize="10dp"
                     android:textColor="#415094" />
 
@@ -93,6 +96,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="PARENTS"
+                    android:padding="5dp"
                     android:textSize="10dp"
                     android:textColor="#415094" />
 
@@ -103,6 +107,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="TRAMSPORT"
+                    android:padding="5dp"
                     android:textSize="10dp"
                     android:textColor="#415094" />
 
@@ -113,17 +118,25 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="OTHERS"
+                    android:padding="5dp"
                     android:textSize="10dp"
                     android:textColor="#415094" />
 
             </LinearLayout>
 
+
         </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@drawable/bottom_gradient_bacground"
+        />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="4.5"
+        android:layout_weight="4"
         android:id="@+id/profile_fragmengt_container"
         />
 

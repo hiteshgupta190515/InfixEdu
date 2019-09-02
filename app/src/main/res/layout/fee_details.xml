@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     >
 
     <TextView
@@ -14,7 +14,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginStart="20dp"
         android:id="@+id/txtFeeTitle"
-        android:fontFamily="@font/neosanspro_medium"
+        android:fontFamily="@font/poppins_medium"
         />
 
     <LinearLayout
@@ -40,7 +40,7 @@
                 android:text="Amount"
                 android:textSize="13dp"
                 android:textStyle="bold"
-                android:fontFamily="@font/neosans_pro_regular"
+                android:fontFamily="@font/poppins_medium"
                 android:textColor="#727FC8"
                 />
 
@@ -51,7 +51,7 @@
                 android:textSize="12dp"
                 android:id="@+id/amount"
                 android:layout_marginTop="10dp"
-                android:fontFamily="@font/neosans_pro_regular"
+                android:fontFamily="@font/poppins_light"
                 android:textColor="@color/profile_light_text_color"
                 />
 
@@ -70,7 +70,7 @@
                 android:text="Discount"
                 android:textSize="13dp"
                 android:textStyle="bold"
-                android:fontFamily="@font/neosans_pro_regular"
+                android:fontFamily="@font/poppins_medium"
                 android:textColor="#727FC8"
                 />
 
@@ -81,8 +81,7 @@
                 android:textSize="12dp"
                 android:id="@+id/feeDiscount"
                 android:layout_marginTop="10dp"
-                android:fontFamily="@font/neosans_pro_regular"
-                android:padding="2dp"
+                android:fontFamily="@font/poppins_light"
                 android:textColor="@color/profile_light_text_color"
                 />
 
@@ -101,7 +100,7 @@
                 android:text="Fine"
                 android:textSize="13dp"
                 android:textStyle="bold"
-                android:fontFamily="@font/neosans_pro_regular"
+                android:fontFamily="@font/poppins_medium"
                 android:textColor="#727FC8"
                 />
 
@@ -112,7 +111,7 @@
                 android:textSize="12dp"
                 android:id="@+id/feeFine"
                 android:layout_marginTop="10dp"
-                android:fontFamily="@font/neosans_pro_regular"
+                android:fontFamily="@font/poppins_light"
                 android:textColor="@color/profile_light_text_color"
                 />
 
@@ -131,7 +130,7 @@
                 android:text="Paid"
                 android:textSize="13dp"
                 android:textStyle="bold"
-                android:fontFamily="@font/neosans_pro_regular"
+                android:fontFamily="@font/poppins_medium"
                 android:textColor="#727FC8"
                 />
 
@@ -143,7 +142,7 @@
                 android:textColor="@color/profile_light_text_color"
                 android:id="@+id/paid"
                 android:layout_marginTop="10dp"
-                android:fontFamily="@font/neosans_pro_regular"
+                android:fontFamily="@font/poppins_light"
                 />
 
         </LinearLayout>
@@ -161,7 +160,7 @@
                 android:text="Balance"
                 android:textSize="13dp"
                 android:textStyle="bold"
-                android:fontFamily="@font/neosans_pro_regular"
+                android:fontFamily="@font/poppins_medium"
                 android:textColor="#727FC8"
                 />
 
@@ -172,7 +171,7 @@
                 android:textSize="12dp"
                 android:id="@+id/feeBalance"
                 android:layout_marginTop="10dp"
-                android:fontFamily="@font/neosans_pro_regular"
+                android:fontFamily="@font/poppins_light"
                 android:textColor="@color/profile_light_text_color"
                 />
 

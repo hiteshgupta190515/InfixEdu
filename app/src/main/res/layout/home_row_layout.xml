@@ -8,24 +8,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="General Maths"
-        android:textSize="18dp"
+        android:textSize="16dp"
         android:textColor="#415094"
         android:layout_margin="5dp"
-        android:padding="5dp"
         android:layout_toLeftOf="@id/txtDownload"
         android:maxLines="1"
         android:layout_alignParentStart="true"
         android:id="@+id/txtHWTitle"
-        android:fontFamily="@font/neosanspro_medium"
+        android:fontFamily="@font/poppins_medium"
         />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="download"
-        android:textSize="16dp"
+        android:textSize="13dp"
         android:textColor="#415094"
         android:layout_margin="5dp"
+        android:padding="5dp"
         android:id="@+id/txtDownload"
         android:layout_toLeftOf="@+id/txtHWClassView"
         android:fontFamily="@font/neosanspro_medium"
@@ -35,9 +35,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="view"
-        android:textSize="16dp"
+        android:textSize="13dp"
         android:textColor="#7C32FF"
         android:layout_margin="5dp"
+        android:padding="5dp"
         android:id="@+id/txtHWClassView"
         android:layout_alignParentEnd="true"
         android:fontFamily="@font/neosanspro_medium"
@@ -63,9 +64,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Created"
-                android:textSize="13dp"
+                android:textSize="12dp"
                 android:textStyle="bold"
-                android:fontFamily="@font/neosans_pro_regular"
+                android:fontFamily="@font/poppins_medium"
                 android:textColor="@color/profile_light_text_color"
                 />
 
@@ -73,10 +74,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="05.12.2000"
-                android:textSize="12dp"
+                android:textSize="10dp"
                 android:id="@+id/created"
                 android:layout_marginTop="10dp"
-                android:fontFamily="@font/neosans_pro_regular"
+                android:fontFamily="@font/poppins_light"
                 android:textColor="@color/profile_light_text_color"
                 />
 
@@ -93,9 +94,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Submission"
-                android:textSize="13dp"
+                android:textSize="12dp"
                 android:textStyle="bold"
-                android:fontFamily="@font/neosans_pro_regular"
+                android:fontFamily="@font/poppins_medium"
                 android:textColor="@color/profile_light_text_color"
                 />
 
@@ -103,11 +104,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="05.12.2000"
-                android:textSize="12dp"
+                android:textSize="10dp"
                 android:id="@+id/submission"
                 android:layout_marginTop="10dp"
-                android:fontFamily="@font/neosans_pro_regular"
-                android:padding="2dp"
+                android:fontFamily="@font/poppins_light"
                 android:textColor="@color/profile_light_text_color"
                 />
 
@@ -124,9 +124,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Evaluation"
-                android:textSize="13dp"
+                android:textSize="12dp"
                 android:textStyle="bold"
-                android:fontFamily="@font/neosans_pro_regular"
+                android:fontFamily="@font/poppins_medium"
                 android:textColor="@color/profile_light_text_color"
                 />
 
@@ -134,10 +134,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="05.12.2000"
-                android:textSize="12dp"
+                android:textSize="10dp"
                 android:id="@+id/evaluation"
                 android:layout_marginTop="10dp"
-                android:fontFamily="@font/neosans_pro_regular"
+                android:fontFamily="@font/poppins_light"
                 android:textColor="@color/profile_light_text_color"
                 />
 
@@ -154,9 +154,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Status"
-                android:textSize="13dp"
+                android:textSize="12dp"
                 android:textStyle="bold"
-                android:fontFamily="@font/neosans_pro_regular"
+                android:fontFamily="@font/poppins_medium"
                 android:textColor="@color/profile_light_text_color"
                 />
 
@@ -164,16 +164,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="completed"
-                android:textSize="12dp"
+                android:textSize="10dp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:paddingTop="3dp"
                 android:paddingBottom="3dp"
-                android:background="@color/blue"
+                android:background="@color/yellow"
                 android:textColor="#fff"
                 android:id="@+id/status"
                 android:layout_marginTop="10dp"
-                android:fontFamily="@font/neosans_pro_regular"
+                android:fontFamily="@font/poppins_light"
                 />
 
         </LinearLayout>

@@ -1,9 +1,13 @@
 package com.example.studentmanagement.myconfig;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class MyConfig {
 
-    final public static String BASE_URL = "http://infixedu.com/api/";
-    final public static String ROOT_URL = "http://infixedu.com/";
+    final public static String BASE_URL = "http://spondan.com/edu/api/";
+    final public static String ROOT_URL = "http://spondan.com/edu";
     final public static String STUDENT_LIST = BASE_URL+"student-list";
     final public static String STUDENT_DORMITORY_LIST = BASE_URL+"student-dormitory";
     final public static String STUDENT_TRANSPORT_LIST = BASE_URL+"student-transport-report";
@@ -50,10 +54,17 @@ public class MyConfig {
         return BASE_URL+"student-timeline/"+id;
     }
     public static String getStudentOnlineResult(int id,int exam_id){
-        return BASE_URL+"exam-result/"+id+"/"+exam_id;
+        return BASE_URL+"online-exam-result/"+id+"/"+exam_id;
+    }
+    public static String getStudentClassExamName(int id){
+        return BASE_URL+"exam-list/"+id;
     }
     public static String getStudentAttendence(int id,int month,int year){
         return BASE_URL+"student-my-attendance/"+id+"?month="+month+"&year="+year;
+    }
+
+    public static String getStudentClsExamShedule(int id,int code){
+        return BASE_URL+"exam-schedule/"+id+"/"+code;
     }
 
 
@@ -255,6 +266,23 @@ return category;
 
         }
         return category;
+    }
+
+    public static String getAmPm(String time){
+
+        String[] parts = time.split(":");
+        String part1 = parts[0];
+        String part2 = parts[1];
+
+        int hr = Integer.parseInt(part1);
+        int min = Integer.parseInt(part2);
+
+        if(hr <= 12){
+            return hr+":"+min+" ÄM ";
+        }else{
+            return hr+":"+min+" PM ";
+        }
+
     }
 
 }
