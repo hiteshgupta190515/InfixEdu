@@ -7,7 +7,7 @@ import java.util.Date;
 public class MyConfig {
 
     final public static String BASE_URL = "http://spondan.com/edu/api/";
-    final public static String ROOT_URL = "http://spondan.com/edu";
+    final public static String ROOT_URL = "http://spondan.com/edu/";
     final public static String STUDENT_LIST = BASE_URL+"student-list";
     final public static String STUDENT_DORMITORY_LIST = BASE_URL+"student-dormitory";
     final public static String STUDENT_TRANSPORT_LIST = BASE_URL+"student-transport-report";
@@ -55,6 +55,9 @@ public class MyConfig {
     }
     public static String getStudentOnlineResult(int id,int exam_id){
         return BASE_URL+"online-exam-result/"+id+"/"+exam_id;
+    }
+    public static String getStudentClassExamResult(int id,int exam_id){
+        return BASE_URL+"exam-result/"+id+"/"+exam_id;
     }
     public static String getStudentClassExamName(int id){
         return BASE_URL+"exam-list/"+id;

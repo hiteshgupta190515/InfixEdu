@@ -1,12 +1,14 @@
 package com.example.studentmanagement.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.example.studentmanagement.R;
 import com.example.studentmanagement.adapter.HomeAdapterHome;
@@ -28,6 +30,9 @@ public class ClassExamActivity extends AppCompatActivity {
     private String name;
     private CircleImageView profile;
 
+    private Toolbar toolbar;
+    private TextView txtToolbarText;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +44,14 @@ public class ClassExamActivity extends AppCompatActivity {
 
         recycler = findViewById(R.id.cls_exam_home_recycler);
         profile = findViewById(R.id.profile);
+
+        toolbar = findViewById(R.id.toolbar);
+        txtToolbarText = findViewById(R.id.txtTitle);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        txtToolbarText.setText("Examination");
 
         gridLayoutManager = new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL);
         recycler.setLayoutManager(gridLayoutManager);

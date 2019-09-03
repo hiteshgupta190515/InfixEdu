@@ -13,7 +13,7 @@
 
         <View
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0.7"
             android:layout_height="match_parent"
             android:background="#3EC900"
             />
@@ -31,7 +31,7 @@
 
         <TextView
             android:layout_width="1dp"
-            android:layout_weight="2"
+            android:layout_weight="3"
             android:layout_height="match_parent"
             android:text="09 Days"
             android:gravity="end"
@@ -54,7 +54,7 @@
 
         <View
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0.7"
             android:layout_height="match_parent"
             android:background="#FF3B00"
             />
@@ -63,7 +63,7 @@
             android:layout_width="1dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
-            android:text="Absent"
+            android:text="Absent "
             android:fontFamily="@font/poppins_light"
             android:textStyle="bold"
             android:textSize="16dp"
@@ -72,7 +72,7 @@
 
         <TextView
             android:layout_width="1dp"
-            android:layout_weight="2"
+            android:layout_weight="3"
             android:layout_height="match_parent"
             android:text="09 Days"
             android:gravity="end"
@@ -95,7 +95,7 @@
 
         <View
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0.7"
             android:layout_height="match_parent"
             android:background="#EDD200"
             />
@@ -104,7 +104,7 @@
             android:layout_width="1dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
-            android:text="Late"
+            android:text="Late     "
             android:fontFamily="@font/poppins_light"
             android:textStyle="bold"
             android:textSize="16dp"
@@ -113,7 +113,7 @@
 
         <TextView
             android:layout_width="1dp"
-            android:layout_weight="2"
+            android:layout_weight="3"
             android:layout_height="match_parent"
             android:text="09 Days"
             android:gravity="end"
@@ -136,7 +136,7 @@
 
         <View
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0.7"
             android:layout_height="match_parent"
             android:background="#C738D8"
             />
@@ -154,7 +154,7 @@
 
         <TextView
             android:layout_width="1dp"
-            android:layout_weight="2"
+            android:layout_weight="3"
             android:layout_height="match_parent"
             android:text="09 Days"
             android:gravity="end"
@@ -177,7 +177,7 @@
 
         <View
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0.7"
             android:layout_height="match_parent"
             android:background="#415094"
             />
@@ -195,7 +195,7 @@
 
         <TextView
             android:layout_width="1dp"
-            android:layout_weight="2"
+            android:layout_weight="3"
             android:layout_height="match_parent"
             android:text="09 Days"
             android:gravity="end"
