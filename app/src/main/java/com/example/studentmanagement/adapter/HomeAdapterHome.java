@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
@@ -154,18 +155,6 @@ public class HomeAdapterHome extends RecyclerView.Adapter<HomeAdapterHome.ViewHo
                     case "Class Exam Result":
                         activity.startActivity(new Intent(activity, ClassExamResultActivity.class));
                         break;
-                    case "Logout":
-
-                        SharedPreferences pref = ctx.getSharedPreferences("default", Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = pref.edit();
-                        editor.clear();
-                        editor.commit();
-
-                        editor.putBoolean("isLoged", false);
-
-                        activity.startActivity(new Intent(activity, LoginActivity.class));
-                        activity.finish();
-                        break;
                     default:
                         break;
 
@@ -175,12 +164,12 @@ public class HomeAdapterHome extends RecyclerView.Adapter<HomeAdapterHome.ViewHo
         });
 
         if (row_index == position) {
-            holder.linearLayout.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.draware_selected_background));
+            holder.linearLayout.setBackgroundDrawable(activity.getResources().getDrawable(R.mipmap.card_select_background));
             holder.textView_Name.setTextColor(activity.getResources().getColor(R.color.drawar_text_select));
-             holder.imageView.setColorFilter(activity.getResources().getColor(R.color.drawar_image_select));
+            holder.imageView.setColorFilter(activity.getResources().getColor(R.color.drawar_image_select));
         } else {
-            holder.linearLayout.setBackgroundColor(activity.getResources().getColor(R.color.drawar_layout_background));
-            holder.textView_Name.setTextColor(activity.getResources().getColor(R.color.black));
+            holder.linearLayout.setBackgroundDrawable(activity.getResources().getDrawable(R.mipmap.bg));
+            holder.textView_Name.setTextColor(Color.GRAY);
             holder.imageView.setColorFilter(0);
         }
 

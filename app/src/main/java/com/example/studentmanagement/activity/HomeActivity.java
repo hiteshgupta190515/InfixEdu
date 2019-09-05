@@ -1,15 +1,26 @@
 package com.example.studentmanagement.activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -22,9 +33,13 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.studentmanagement.R;
+import com.example.studentmanagement.adapter.BookIssuedAdapter;
 import com.example.studentmanagement.adapter.HomeAdapterHome;
+import com.example.studentmanagement.model.BookIssue;
 import com.example.studentmanagement.myconfig.MyConfig;
+import com.google.android.material.textfield.TextInputEditText;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -34,17 +49,23 @@ import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity{
 
     private String[] names;
     private RecyclerView recycler;
-    private StaggeredGridLayoutManager gridLayoutManager;
+    private GridLayoutManager gridLayoutManager;
     private int role_id;
     private int id;
     private String email;
     private String password;
     private String name;
     private CircleImageView profile;
+
+    private Toolbar toolbar;
+    private TextView txtToolbarText;
+    private AlertDialog.Builder alertBuilder;
+    private AlertDialog dialog;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +75,15 @@ public class HomeActivity extends AppCompatActivity {
         recycler = findViewById(R.id.home_recycler);
         profile = findViewById(R.id.profile);
 
-        gridLayoutManager = new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL);
+        toolbar = findViewById(R.id.toolbar);
+        txtToolbarText = findViewById(R.id.txtTitle);
+
+
+
+        gridLayoutManager = new GridLayoutManager(HomeActivity.this,4);
         recycler.setLayoutManager(gridLayoutManager);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("default", Context.MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("default", Context.MODE_PRIVATE);
 
         //Fetching the boolean value form sharedpreferences
         role_id = sharedPreferences.getInt("role", 0);
@@ -74,11 +100,154 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View view) {
 
 
+                alertBuilder = new AlertDialog.Builder(HomeActivity.this);
+                View mView = LayoutInflater.from(HomeActivity.this).inflate(R.layout.user_image_click_layout, null);
+
+                TextView txtProfile = mView.findViewById(R.id.profile);
+                TextView txtChangePassword = mView.findViewById(R.id.change_password);
+                TextView txtLogout = mView.findViewById(R.id.logout);
+
+                txtProfile.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        startActivity(new Intent(HomeActivity.this, ProfileActivity.class));
+                        dialog.dismiss();
+                    }
+                });
+                txtChangePassword.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
+                        builder.setTitle("change password");
+                        View v = LayoutInflater.from(HomeActivity.this).inflate(R.layout.change_password_layout,null);
+
+                        final TextInputEditText etCurrentPass = v.findViewById(R.id.etCurrentPassword);
+                        final TextInputEditText etNewPass = v.findViewById(R.id.etNewPassword);
+                        Button btnEnter = v.findViewById(R.id.btn_change_password_enter);
+
+                        builder.setView(v);
+                        final AlertDialog d = builder.create();
+
+                        btnEnter.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                                String current = etCurrentPass.getText().toString();
+                                String newP = etNewPass.getText().toString();
+
+
+                                if(current != "" && newP != ""){
+
+                                    if(newP.length() > 6){
+
+                                        changePassword(current,newP);
+                                        d.dismiss();
+
+                                    }else{
+                                        Toast.makeText(getApplicationContext(),"Password is too short",Toast.LENGTH_SHORT).show();
+                                    }
+
+                                }
+
+
+                            }
+                        });
+
+
+                        d.show();
+
+
+                    }
+                });
+                txtLogout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                AlertDialog.Builder bld = new AlertDialog.Builder(HomeActivity.this);
+
+                        bld.setTitle("Logout").setMessage("Do you want to logout?").create();
+
+                        bld.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        SharedPreferences pref = getSharedPreferences("default", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = pref.edit();
+                        editor.clear();
+                        editor.commit();
+
+                        editor.putBoolean("isLoged", false);
+
+                        startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+                        finish();
+                    }
+                }).setNegativeButton("No",null);
+
+                        AlertDialog dg = bld.create();
+                        dg.show();
+
+                    }
+                });
+
+
+
+                alertBuilder.setView(mView);
+                dialog = alertBuilder.create();
+
+                Rect displayRectangle = new Rect();
+                Window window = dialog.getWindow();
+                window.getDecorView().getWindowVisibleDisplayFrame(displayRectangle);
+
+
+                dialog.getWindow().setGravity(Gravity.RIGHT|Gravity.TOP);
+                WindowManager.LayoutParams layoutParams = dialog.getWindow().getAttributes();
+                layoutParams.y = 100; // top margin
+                dialog.getWindow().setAttributes(layoutParams);
+                dialog.show();
 
             }
         });
 
     }
+
+    private void changePassword(String current, String newP) {
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, MyConfig.changePassword(id,current,newP), null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                try {
+                    if(response.getBoolean("success")){
+
+                        Toast.makeText(getApplicationContext(),"password change successfully!", Toast.LENGTH_SHORT).show();
+                        editor.putString("password", password);
+                        editor.commit();
+
+                    }else{
+                        Toast.makeText(getApplicationContext(),"password change unsuccessful!", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(),"error", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        RequestQueue req = Volley.newRequestQueue(this);
+        req.add(request);
+
+    }
+
 
     private void getFunctionality(int role) {
 
@@ -187,5 +356,6 @@ public class HomeActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(request);
     }
+
 
 }

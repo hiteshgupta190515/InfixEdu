@@ -6,8 +6,8 @@ import java.util.Date;
 
 public class MyConfig {
 
-    final public static String BASE_URL = "http://spondan.com/edu/api/";
-    final public static String ROOT_URL = "http://spondan.com/edu/";
+    final public static String BASE_URL = "https://infixedu.com/api/";
+    final public static String ROOT_URL = "https://infixedu.com/";
     final public static String STUDENT_LIST = BASE_URL+"student-list";
     final public static String STUDENT_DORMITORY_LIST = BASE_URL+"student-dormitory";
     final public static String STUDENT_TRANSPORT_LIST = BASE_URL+"student-transport-report";
@@ -68,6 +68,9 @@ public class MyConfig {
 
     public static String getStudentClsExamShedule(int id,int code){
         return BASE_URL+"exam-schedule/"+id+"/"+code;
+    }
+    public static String changePassword(int id,String current,String newP){
+        return BASE_URL+"change-password?id="+id+"&current_password="+current+"&new_password="+newP;
     }
 
 

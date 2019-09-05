@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Student Management</string>
+    <string name="app_name">InfixEdu</string>
 
     <string-array name="admins_functions_name">
         <item>Student</item>
@@ -48,7 +48,6 @@
         <item>Library</item>
         <item>Transport</item>
         <item>Dormitory</item>
-        <item>Logout</item>
     </string-array>
 
     <string-array name="parents_functions_name">
