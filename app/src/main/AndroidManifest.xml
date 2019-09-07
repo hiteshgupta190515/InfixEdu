@@ -1,81 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.studentmanagement">
+    package="com.infix.studentmanagement">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/inflex_edu_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/inflex_edu_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.ClassExamResultActivity"  android:parentActivityName=".activity.ClassExamActivity"/>
-        <activity android:name=".activity.ClassExamScheduleActivity" android:parentActivityName=".activity.ClassExamActivity"/>
-        <activity android:name=".activity.ClassExamActivity"  android:parentActivityName=".activity.HomeActivity"/>
-        <activity android:name=".activity.ExamChooseActivity" />
+        <activity android:name="com.infix.studentmanagement.activity.ChildListActivity"></activity>
         <activity
-            android:name=".activity.ActiveOnlineExamActivity"
-            android:parentActivityName=".activity.OnlineExamActivity" />
+            android:name="com.infix.studentmanagement.activity.ClassExamResultActivity"
+            android:parentActivityName="com.infix.studentmanagement.activity.ClassExamActivity" />
         <activity
-            android:name=".activity.OnlineExamActivity"
-            android:parentActivityName=".activity.HomeActivity" />
+            android:name="com.infix.studentmanagement.activity.ClassExamScheduleActivity"
+            android:parentActivityName="com.infix.studentmanagement.activity.ClassExamActivity" />
         <activity
-            android:name=".activity.AttendenceCalenderActivity"
-            android:parentActivityName=".activity.HomeActivity" />
+            android:name="com.infix.studentmanagement.activity.ClassExamActivity"
+            android:parentActivityName="com.infix.studentmanagement.activity.HomeActivity" />
+        <activity android:name="com.infix.studentmanagement.activity.ExamChooseActivity" />
         <activity
-            android:name=".activity.TimelineActivity"
-            android:parentActivityName=".activity.HomeActivity" />
-        <activity android:name=".activity.TransportActivity" />
-        <activity android:name=".activity.DormitoryActivity" />
-        <activity android:name=".activity.IssuedBookActivity" />
+            android:name="com.infix.studentmanagement.activity.ActiveOnlineExamActivity"
+            android:parentActivityName="com.infix.studentmanagement.activity.OnlineExamActivity" />
         <activity
-            android:name=".activity.StudentLibraryActivity"
-            android:parentActivityName=".activity.HomeActivity" />
-        <activity android:name=".activity.StudentTeacherActivity" />
-        <activity android:name=".activity.StudentSubjectActivity" />
+            android:name="com.infix.studentmanagement.activity.OnlineExamActivity"
+            android:parentActivityName="com.infix.studentmanagement.activity.HomeActivity" />
         <activity
-            android:name=".activity.NoticeActivity"
-            android:parentActivityName=".activity.HomeActivity" />
+            android:name="com.infix.studentmanagement.activity.AttendenceCalenderActivity"
+            android:parentActivityName="com.infix.studentmanagement.activity.HomeActivity" />
+        <activity
+            android:name="com.infix.studentmanagement.activity.TimelineActivity"
+            android:parentActivityName="com.infix.studentmanagement.activity.HomeActivity" />
+        <activity android:name="com.infix.studentmanagement.activity.TransportActivity" />
+        <activity android:name="com.infix.studentmanagement.activity.DormitoryActivity" />
+        <activity android:name="com.infix.studentmanagement.activity.IssuedBookActivity" />
+        <activity
+            android:name="com.infix.studentmanagement.activity.StudentLibraryActivity"
+            android:parentActivityName="com.infix.studentmanagement.activity.HomeActivity" />
+        <activity android:name="com.infix.studentmanagement.activity.StudentTeacherActivity" />
+        <activity android:name="com.infix.studentmanagement.activity.StudentSubjectActivity" />
+        <activity
+            android:name="com.infix.studentmanagement.activity.NoticeActivity"
+            android:parentActivityName="com.infix.studentmanagement.activity.HomeActivity" />
 
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
 
         <activity
-            android:name=".activity.NoticeDeatlsActivity"
-            android:parentActivityName=".activity.NoticeActivity" />
+            android:name="com.infix.studentmanagement.activity.NoticeDeatlsActivity"
+            android:parentActivityName="com.infix.studentmanagement.activity.NoticeActivity" />
         <activity
-            android:name=".activity.HomeWorkActivity"
-            android:parentActivityName=".activity.HomeActivity" />
+            android:name="com.infix.studentmanagement.activity.HomeWorkActivity"
+            android:parentActivityName="com.infix.studentmanagement.activity.HomeActivity" />
         <activity
-            android:name=".activity.ClassRoutineActivity"
-            android:parentActivityName=".activity.HomeActivity" />
+            android:name="com.infix.studentmanagement.activity.ClassRoutineActivity"
+            android:parentActivityName="com.infix.studentmanagement.activity.HomeActivity" />
         <activity
-            android:name=".activity.FeesActivity"
-            android:parentActivityName=".activity.HomeActivity" />
+            android:name="com.infix.studentmanagement.activity.FeesActivity"
+            android:parentActivityName="com.infix.studentmanagement.activity.HomeActivity" />
         <activity
-            android:name=".activity.ProfileActivity"
-            android:parentActivityName=".activity.HomeActivity" />
-        <activity android:name=".activity.ComplaintActivity" />
-        <activity android:name=".activity.VisitorActivity" />
-        <activity android:name=".activity.AdminSectionActivity" />
-        <activity android:name=".activity.InventoryActivity" />
+            android:name="com.infix.studentmanagement.activity.ProfileActivity"
+            android:parentActivityName="com.infix.studentmanagement.activity.HomeActivity" />
+        <activity android:name="com.infix.studentmanagement.activity.ComplaintActivity" />
+        <activity android:name="com.infix.studentmanagement.activity.VisitorActivity" />
+        <activity android:name="com.infix.studentmanagement.activity.AdminSectionActivity" />
+        <activity android:name="com.infix.studentmanagement.activity.InventoryActivity" />
         <activity
-            android:name=".activity.LibraryActivity"
-            android:parentActivityName=".activity.StudentLibraryActivity" />
-        <activity android:name=".activity.StudentListActivity" />
-        <activity android:name=".activity.LoginActivity" />
-        <activity android:name=".activity.HomeActivity" />
-        <activity android:name=".activity.BookDetailsActivity" />
+            android:name="com.infix.studentmanagement.activity.LibraryActivity"
+            android:parentActivityName="com.infix.studentmanagement.activity.StudentLibraryActivity" />
+        <activity android:name="com.infix.studentmanagement.activity.StudentListActivity" />
+        <activity android:name="com.infix.studentmanagement.activity.LoginActivity" />
+        <activity android:name="com.infix.studentmanagement.activity.HomeActivity" />
+        <activity android:name="com.infix.studentmanagement.activity.BookDetailsActivity" />
         <activity
-            android:name=".activity.StudentInformation"
-            android:parentActivityName=".activity.StudentListActivity" />
-        <activity android:name=".MainActivity">
+            android:name="com.infix.studentmanagement.activity.StudentInformation"
+            android:parentActivityName="com.infix.studentmanagement.activity.StudentListActivity" />
+        <activity android:name="com.infix.studentmanagement.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.ExamChooseActivity">
+    tools:context="com.infix.studentmanagement.activity.ExamChooseActivity">
 
     <include layout="@layout/toolbar"/>
 

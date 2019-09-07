@@ -51,7 +51,12 @@
     </string-array>
 
     <string-array name="parents_functions_name">
-        <item>Dashboard</item>
+        <item>My Child</item>
+        <item>About</item>
+    </string-array>
+
+    <string-array name="default_functions_name">
+        <item>About</item>
     </string-array>
 
     <string-array name="inventory_functions_name">

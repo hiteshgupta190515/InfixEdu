@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:orientation="vertical"
-        tools:context=".activity.FeesActivity">
+        tools:context="com.infix.studentmanagement.activity.FeesActivity">
 
       <include layout="@layout/toolbar"/>
 

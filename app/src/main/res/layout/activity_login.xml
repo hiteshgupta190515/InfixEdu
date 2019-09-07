@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="2"
-    tools:context=".activity.LoginActivity">
+    tools:context="com.infix.studentmanagement.activity.LoginActivity">
 
 
     <LinearLayout
