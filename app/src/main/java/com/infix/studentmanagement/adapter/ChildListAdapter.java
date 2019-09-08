@@ -5,14 +5,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.util.Pair;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,12 +19,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.infix.studentmanagement.R;
+import com.infix.studentmanagement.activity.HomeActivity;
 import com.infix.studentmanagement.activity.StudentInformation;
 import com.infix.studentmanagement.model.Child;
 import com.infix.studentmanagement.myconfig.MyConfig;
-
 import java.util.ArrayList;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ChildListAdapter extends RecyclerView.Adapter<ChildListAdapter.ChildViewHolder> {
@@ -39,9 +37,8 @@ public class ChildListAdapter extends RecyclerView.Adapter<ChildListAdapter.Chil
 
     }
 
-    @NonNull
     @Override
-    public ChildViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ChildViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.student_list_row_layout,parent,false);
 
@@ -49,20 +46,12 @@ public class ChildListAdapter extends RecyclerView.Adapter<ChildListAdapter.Chil
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ChildViewHolder holder, final int position) {
+    public void onBindViewHolder(ChildViewHolder holder, final int position) {
 
-        String url =childs.get(position).getImgUrl();
+        String url = MyConfig.ROOT_URL+childs.get(position).getImgUrl();
         String name = childs.get(position).getName();
         String des = "Class "+childs.get(position).getmClass()+" | "+"Section "+childs.get(position).getSection()+" | Roll "+childs.get(position).getRoll();
 
-        try {
-            Glide.with(ctx)
-                    .load(MyConfig.ROOT_URL+url)
-                    .diskCacheStrategy(DiskCacheStrategy.NONE)
-                    .fitCenter()
-                    .into(holder.image);
-        } catch (Exception e){
-        }
         if(name != null && des != null){
 
             holder.txtName.setText(name);
@@ -70,13 +59,16 @@ public class ChildListAdapter extends RecyclerView.Adapter<ChildListAdapter.Chil
 
         }
 
+        holder.setImage(url);
+
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                //Toast.makeText(ctx,students.get(position).getFull_name(), Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(ctx, StudentInformation.class);
+                Intent intent = new Intent(ctx, HomeActivity.class);
+                intent.putExtra("rule_id",2);
+                intent.putExtra("id",childs.get(position).getId());
 
                 if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
 
@@ -118,6 +110,17 @@ public class ChildListAdapter extends RecyclerView.Adapter<ChildListAdapter.Chil
             layout = v.findViewById(R.id.relative_layout);
 
         }
+
+        public void setImage(String url){
+            try {
+                Glide.with(image.getContext())
+                        .load(url)
+                        .placeholder(R.mipmap.face)
+                        .into(image);
+            } catch (Exception e){
+            }
+        }
+
     }
 
 }

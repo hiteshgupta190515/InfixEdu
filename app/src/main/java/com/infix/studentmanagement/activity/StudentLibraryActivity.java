@@ -60,7 +60,7 @@ public class StudentLibraryActivity extends AppCompatActivity {
             images.add(imageSearch(n.toLowerCase().replace(" ","")));
         }
 
-        HomeAdapterHome homeAdapterHome = new HomeAdapterHome(this,names,images,this);
+        HomeAdapterHome homeAdapterHome = new HomeAdapterHome(this,names,images,0,this);
         recycler.setAdapter(homeAdapterHome);
 
     }

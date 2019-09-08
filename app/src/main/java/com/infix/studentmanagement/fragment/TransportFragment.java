@@ -41,6 +41,8 @@ public class TransportFragment extends Fragment {
     private SharedPreferences sharedPreferences;
     private String name,model,no,des;
     private String email,password;
+    private String url;
+    private int id;
 
     public TransportFragment() {
         // Required empty public constructor
@@ -61,14 +63,23 @@ public class TransportFragment extends Fragment {
         email = sharedPreferences.getString("email",null);
         password = sharedPreferences.getString("password",null);
 
-        getDriver(email,password);
+        //getting id role_id url based on parents and child
+        if(getActivity().getIntent().getIntExtra("id",0) != 0){
+            id = getActivity().getIntent().getIntExtra("id",0);
+            url = MyConfig.getChildren(id);
+        }else{
+            id = sharedPreferences.getInt("id", 0);
+            url = MyConfig.getLoginUrl(email, password);
+        }
+
+        getDriver(url);
 
         return v;
     }
 
-    private void getDriver(final String email, final String password){
+    private void getDriver(String url){
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, MyConfig.getLoginUrl(email, password), null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 
@@ -107,7 +118,7 @@ public class TransportFragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity(), "Invalid username/password", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "server error!", Toast.LENGTH_LONG).show();
             }
         }){
             @Override

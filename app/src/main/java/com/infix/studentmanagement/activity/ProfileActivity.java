@@ -51,6 +51,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private Toolbar toolbar;
     private TextView txtToolbarText;
 
+    private String url;
+    private int id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,7 +88,17 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         email = sharedPreferences.getString("email",null);
         password = sharedPreferences.getString("password",null);
 
-        update(email,password);
+        //getting id role_id url based on parents and child
+        if(getIntent().getIntExtra("id",0) != 0){
+            id = getIntent().getIntExtra("id",0);
+            url = MyConfig.getChildren(id);
+        }else{
+            id = sharedPreferences.getInt("id", 0);
+            url = MyConfig.getLoginUrl(email, password);
+        }
+
+
+        update(url);
 
         profileFragment = new PersonalFragment();
         replaceFragment(profileFragment);
@@ -128,9 +141,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     }
 
 
-    private void update(final String email, final String password){
+    private void update(String url){
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, MyConfig.getLoginUrl(email, password), null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 

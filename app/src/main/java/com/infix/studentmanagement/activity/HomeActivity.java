@@ -51,10 +51,12 @@ public class HomeActivity extends AppCompatActivity{
     private GridLayoutManager gridLayoutManager;
     private int role_id;
     private int id;
+    private int iId;
     private String email;
     private String password;
     private String name;
     private CircleImageView profile;
+    private String url;
 
     private Toolbar toolbar;
     private TextView txtToolbarText;
@@ -81,14 +83,23 @@ public class HomeActivity extends AppCompatActivity{
         sharedPreferences = getSharedPreferences("default", Context.MODE_PRIVATE);
 
         //Fetching the boolean value form sharedpreferences
-        role_id = sharedPreferences.getInt("role", 0);
-        id = sharedPreferences.getInt("id", 0);
         email = sharedPreferences.getString("email", null);
         password = sharedPreferences.getString("password",null);
         name = sharedPreferences.getString("name", null);
 
+        //getting id role_id url based on parents and child
+        if(getIntent().getIntExtra("rule_id",0) == 2){
+            iId = getIntent().getIntExtra("id",0);
+            role_id = getIntent().getIntExtra("rule_id",0);
+            url = MyConfig.getChildren(id);
+        }else{
+            role_id = sharedPreferences.getInt("role", 0);
+            id = sharedPreferences.getInt("id", 0);
+            url = MyConfig.getLoginUrl(email, password);
+        }
+
         getFunctionality(role_id);
-        update_profile_image(email,password);
+        update_profile_image(url);
 
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -304,7 +315,7 @@ public class HomeActivity extends AppCompatActivity{
             images.add(imageSearch(n.toLowerCase().replace(" ","")));
         }
 
-        HomeAdapterHome homeAdapterHome = new HomeAdapterHome(this,names,images,this);
+        HomeAdapterHome homeAdapterHome = new HomeAdapterHome(this,names,images,iId,this);
         recycler.setAdapter(homeAdapterHome);
 
     }
@@ -334,9 +345,9 @@ public class HomeActivity extends AppCompatActivity{
 
     }
 
-    private void update_profile_image(final String email, final String password){
+    private void update_profile_image(String url){
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, MyConfig.getLoginUrl(email, password), null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 

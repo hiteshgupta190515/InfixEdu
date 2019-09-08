@@ -2,6 +2,7 @@ package com.infix.studentmanagement.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
@@ -42,6 +43,8 @@ public class ChildListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_child_list);
 
         recyclerView = findViewById(R.id.childlistRecycler);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         toolbar = findViewById(R.id.toolbar);
         txtToolbarText = findViewById(R.id.txtTitle);

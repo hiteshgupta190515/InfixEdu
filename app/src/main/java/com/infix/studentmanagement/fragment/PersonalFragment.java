@@ -32,6 +32,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 
 public class PersonalFragment extends Fragment{
 
@@ -46,6 +48,8 @@ public class PersonalFragment extends Fragment{
     private String phone;
     private String email;
     private String password;
+    private String url;
+    private int id;
 
     private ArrayList<PersonalData> personalData = new ArrayList<>();
     private RecyclerView recyclerView;
@@ -82,15 +86,24 @@ public class PersonalFragment extends Fragment{
         email = sharedPreferences.getString("email",null);
         password = sharedPreferences.getString("password",null);
 
-        getPersonal(email,password);
+        //getting id role_id url based on parents and child
+        if(getActivity().getIntent().getIntExtra("id",0) != 0){
+            id = getActivity().getIntent().getIntExtra("id",0);
+            url = MyConfig.getChildren(id);
+        }else{
+            id = sharedPreferences.getInt("id", 0);
+            url = MyConfig.getLoginUrl(email, password);
+        }
+
+        getPersonal(url);
 
 
         return v;
     }
 
-    private void getPersonal(final String email, final String password){
+    private void getPersonal(String url){
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, MyConfig.getLoginUrl(email, password), null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,url,null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 

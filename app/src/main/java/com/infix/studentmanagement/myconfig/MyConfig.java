@@ -37,6 +37,9 @@ public class MyConfig {
     public static String getParentChildList(int id){
         return BASE_URL+"child-list/"+id;
     }
+    public static String getChildren(int id){
+        return BASE_URL+"childInfo/"+id;
+    }
 
     public static String getNoticeUrl(int id){
         return BASE_URL+"student-noticeboard/"+id;

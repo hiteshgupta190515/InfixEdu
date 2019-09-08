@@ -56,6 +56,8 @@ public class ParentsFragment extends Fragment {
     private String gurdianEmail;
     private String email;
     private String password;
+    private String url;
+    private int id;
 
 
     private SharedPreferences sharedPreferences;
@@ -81,15 +83,24 @@ public class ParentsFragment extends Fragment {
         email = sharedPreferences.getString("email",null);
         password = sharedPreferences.getString("password",null);
 
-        getParents(email,password);
+        //getting id role_id url based on parents and child
+        if(getActivity().getIntent().getIntExtra("id",0) != 0){
+            id = getActivity().getIntent().getIntExtra("id",0);
+            url = MyConfig.getChildren(id);
+        }else{
+            id = sharedPreferences.getInt("id", 0);
+            url = MyConfig.getLoginUrl(email, password);
+        }
+
+        getParents(url);
 
         // Inflate the layout for this fragment
         return v;
     }
 
-    private void getParents(final String email, final String password){
+    private void getParents(String url){
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, MyConfig.getLoginUrl(email, password), null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 

@@ -49,13 +49,15 @@ public class HomeAdapterHome extends RecyclerView.Adapter<HomeAdapterHome.ViewHo
     private ArrayList<Integer> image;
     private int row_index = -1;
     private Context ctx;
+    private int id;
 
 
-    public HomeAdapterHome(Activity activity, String[] name, ArrayList<Integer> image,Context ctx) {
+    public HomeAdapterHome(Activity activity, String[] name, ArrayList<Integer> image,int id,Context ctx) {
         this.activity = activity;
         this.name = name;
         this.image = image;
         this.ctx =ctx;
+        this.id = id;
     }
 
     @Override
@@ -93,13 +95,19 @@ public class HomeAdapterHome extends RecyclerView.Adapter<HomeAdapterHome.ViewHo
                         activity.startActivity(new Intent(activity, AdminSectionActivity.class));
                         break;
                     case "Profile":
-                        activity.startActivity(new Intent(activity, ProfileActivity.class));
+                        Intent profile = new Intent(activity, ProfileActivity.class);
+                        profile.putExtra("id",id);
+                        activity.startActivity(profile);
                         break;
                     case "Fees":
-                        activity.startActivity(new Intent(activity, FeesActivity.class));
+                        Intent fees = new Intent(activity, FeesActivity.class);
+                        fees.putExtra("id",id);
+                        activity.startActivity(fees);
                         break;
                     case "Routine":
-                        activity.startActivity(new Intent(activity, ClassRoutineActivity.class));
+                        Intent routines = new Intent(activity, ClassRoutineActivity.class);
+                        routines.putExtra("id",id);
+                        activity.startActivity(routines);
                         break;
                     case "Homework":
                         activity.startActivity(new Intent(activity, HomeWorkActivity.class));
