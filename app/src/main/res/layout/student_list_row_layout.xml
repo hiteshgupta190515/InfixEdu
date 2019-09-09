@@ -11,10 +11,8 @@
         android:id="@+id/student_poster"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_gravity="center_vertical"
         android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp"
-        android:transitionName="profile"
         android:src="@mipmap/student_face"
         app:civ_border_width="0dp" />
 
@@ -29,8 +27,7 @@
         android:layout_toRightOf="@id/student_poster"
         android:fontFamily="sans-serif-condensed"
         android:textAppearance="?android:textAppearanceMedium"
-        android:text="Mamun Hossain"
-        android:transitionName="name" />
+        android:text="Mamun Hossain"/>
 
     <TextView
         android:id="@+id/student_description"

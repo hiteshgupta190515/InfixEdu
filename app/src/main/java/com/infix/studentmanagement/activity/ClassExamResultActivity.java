@@ -56,8 +56,12 @@ public class ClassExamResultActivity extends AppCompatActivity {
         spnSearchExam = findViewById(R.id.choose_class_exam_spinner);
 
 
-        sharedPreferences = getSharedPreferences("default", Context.MODE_PRIVATE);
-        id = sharedPreferences.getInt("id",0);
+        if(getIntent().getIntExtra("id",0) != 0){
+            id = getIntent().getIntExtra("id",0);
+        }else {
+            sharedPreferences = getSharedPreferences("default", Context.MODE_PRIVATE);
+            id = sharedPreferences.getInt("id",0);
+        }
 
 
         toolbar = findViewById(R.id.toolbar);

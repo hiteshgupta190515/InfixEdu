@@ -32,6 +32,7 @@ public class ClassExamActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private TextView txtToolbarText;
+    private SharedPreferences sharedPreferences;
 
 
     @Override
@@ -56,14 +57,12 @@ public class ClassExamActivity extends AppCompatActivity {
         gridLayoutManager = new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL);
         recycler.setLayoutManager(gridLayoutManager);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("default", Context.MODE_PRIVATE);
-
-        //Fetching the boolean value form sharedpreferences
-        role_id = sharedPreferences.getInt("role", 0);
-        id = sharedPreferences.getInt("id", 0);
-        email = sharedPreferences.getString("email", null);
-        password = sharedPreferences.getString("password",null);
-        name = sharedPreferences.getString("name", null);
+        if(getIntent().getIntExtra("id",0) != 0){
+            id = getIntent().getIntExtra("id",0);
+        }else {
+            sharedPreferences = getSharedPreferences("default", Context.MODE_PRIVATE);
+            id = sharedPreferences.getInt("id",0);
+        }
 
         names = getResources().getStringArray(R.array.class_exam_student_functions_name);
 
@@ -72,7 +71,7 @@ public class ClassExamActivity extends AppCompatActivity {
             images.add(imageSearch(n.toLowerCase().replace(" ","")));
         }
 
-        HomeAdapterHome homeAdapterHome = new HomeAdapterHome(this,names,images,0,this);
+        HomeAdapterHome homeAdapterHome = new HomeAdapterHome(this,names,images,id,this);
         recycler.setAdapter(homeAdapterHome);
 
 

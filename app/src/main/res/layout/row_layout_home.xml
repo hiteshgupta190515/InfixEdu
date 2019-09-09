@@ -35,12 +35,12 @@
                 <TextView android:id="@+id/textView_home_adapter"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLines="1"
+                    android:ellipsize="end"
                     android:text="student"
                     android:gravity="center"
                     android:textColor="@color/lightGrey"
                     android:textSize="9dp"
-                    android:maxEms="1"
+                    android:maxLength="10"
                     android:layout_marginTop="3dp"
                     android:fontFamily="@font/poppins_light"/>
             </LinearLayout>

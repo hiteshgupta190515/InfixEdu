@@ -77,8 +77,13 @@ public class AttendenceCalenderActivity extends AppCompatActivity {
         right_image = findViewById(R.id.nextButton );
 
 
-        sharedPreferences = getSharedPreferences("default", Context.MODE_PRIVATE);
-        id = sharedPreferences.getInt("id",0);
+        //getting id role_id url based on parents and child
+        if(getIntent().getIntExtra("id",0) != 0){
+            id = getIntent().getIntExtra("id",0);
+        }else {
+            sharedPreferences = getSharedPreferences("default", Context.MODE_PRIVATE);
+            id = sharedPreferences.getInt("id",0);
+        }
 
         Calendar calendar = Calendar.getInstance();
         month = calendar.get(Calendar.MONTH) + 1;

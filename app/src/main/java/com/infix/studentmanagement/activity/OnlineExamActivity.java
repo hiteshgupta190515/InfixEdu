@@ -22,9 +22,9 @@ public class OnlineExamActivity extends AppCompatActivity {
     private StaggeredGridLayoutManager gridLayoutManager;
     private int id;
     ArrayList<Integer> images;
-
     private Toolbar toolbar;
     private TextView txtToolbarText;
+    private SharedPreferences sharedPreferences;
 
 
 
@@ -50,9 +50,13 @@ public class OnlineExamActivity extends AppCompatActivity {
         gridLayoutManager = new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL);
         recycler.setLayoutManager(gridLayoutManager);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("default", Context.MODE_PRIVATE);
-
-        id = sharedPreferences.getInt("id", 0);
+        //getting id role_id url based on parents and child
+        if(getIntent().getIntExtra("id",0) != 0){
+            id = getIntent().getIntExtra("id",0);
+        }else {
+            sharedPreferences = getSharedPreferences("default", Context.MODE_PRIVATE);
+            id = sharedPreferences.getInt("id",0);
+        };
 
         names = getResources().getStringArray(R.array.online_exam_student_functions_name);
 
@@ -61,7 +65,7 @@ public class OnlineExamActivity extends AppCompatActivity {
             images.add(imageSearch(n.toLowerCase().replace(" ","")));
         }
 
-        HomeAdapterHome homeAdapterHome = new HomeAdapterHome(this,names,images,0,this);
+        HomeAdapterHome homeAdapterHome = new HomeAdapterHome(this,names,images,id,this);
         recycler.setAdapter(homeAdapterHome);
 
     }

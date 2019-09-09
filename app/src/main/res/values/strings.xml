@@ -92,7 +92,7 @@
 
     <string-array name="class_exam_student_functions_name">
         <item>Schedule</item>
-        <item>Class Exam Result</item>
+        <item>Result</item>
     </string-array>
 
     <string-array name="online_exam_student_functions_name">

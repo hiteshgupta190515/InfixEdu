@@ -57,8 +57,13 @@ public class ClassExamScheduleActivity extends AppCompatActivity {
 
         spnSearchExam = findViewById(R.id.class_schidule_spinner);
 
-        sharedPreferences = getSharedPreferences("default", Context.MODE_PRIVATE);
-        id = sharedPreferences.getInt("id",0);
+        //getting id role_id url based on parents and child
+        if(getIntent().getIntExtra("id",0) != 0){
+            id = getIntent().getIntExtra("id",0);
+        }else {
+            sharedPreferences = getSharedPreferences("default", Context.MODE_PRIVATE);
+            id = sharedPreferences.getInt("id",0);
+        }
 
         toolbar = findViewById(R.id.toolbar);
         txtToolbarText = findViewById(R.id.txtTitle);
@@ -68,6 +73,7 @@ public class ClassExamScheduleActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         txtToolbarText.setText("Schedule");
 
+
         getAllClassExamName(id);
 
     }
@@ -76,7 +82,7 @@ public class ClassExamScheduleActivity extends AppCompatActivity {
 
         examNames.clear();
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, MyConfig.getOnlineExamChooseUrl(id), null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, MyConfig.getStudentClassExamName(id), null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 

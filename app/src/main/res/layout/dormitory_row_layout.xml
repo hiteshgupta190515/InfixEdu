@@ -14,6 +14,7 @@
         android:textColor="#415094"
         android:layout_alignParentStart="true"
         android:id="@+id/txtDormitoryTitle"
+        android:fontFamily="@font/poppins_medium"
         android:maxLines="1"
         android:textStyle="bold"
         />
@@ -30,6 +31,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="Room No."
+            android:fontFamily="@font/poppins_medium"
             android:textStyle="bold"
             android:textSize="12dp"
             android:padding="2dp"
@@ -42,6 +44,7 @@
             android:layout_weight="1"
             android:text="No. of Bed"
             android:textSize="12dp"
+            android:fontFamily="@font/poppins_medium"
             android:padding="2dp"
             android:textStyle="bold"
             android:textColor="#727FC8"
@@ -53,6 +56,7 @@
             android:layout_weight="1"
             android:text="Cost"
             android:padding="2dp"
+            android:fontFamily="@font/poppins_medium"
             android:textSize="12dp"
             android:textStyle="bold"
             android:textColor="#727FC8"
@@ -63,6 +67,7 @@
             android:layout_weight="1"
             android:text="Status"
             android:padding="2dp"
+            android:fontFamily="@font/poppins_medium"
             android:textSize="12dp"
             android:textStyle="bold"
             android:textColor="#727FC8"
@@ -86,7 +91,7 @@
             android:id="@+id/roomNo"
             android:textColor="#727FC8"
             android:padding="2dp"
-            android:fontFamily="@font/neosans_pro_regular"
+            android:fontFamily="@font/poppins_light"
             />
 
         <TextView
@@ -98,7 +103,7 @@
             android:id="@+id/bedNoo"
             android:textColor="#727FC8"
             android:padding="2dp"
-            android:fontFamily="@font/neosans_pro_regular"
+            android:fontFamily="@font/poppins_light"
             />
 
         <TextView
@@ -110,11 +115,11 @@
             android:id="@+id/bedCost"
             android:textColor="#727FC8"
             android:padding="2dp"
-            android:fontFamily="@font/neosans_pro_regular"
+            android:fontFamily="@font/poppins_light"
             />
         <TextView
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Issued"
             android:textSize="12dp"
@@ -123,7 +128,7 @@
             android:background="#3EC900"
             android:padding="2dp"
             android:paddingStart="4dp"
-            android:fontFamily="@font/neosans_pro_regular"
+            android:fontFamily="@font/poppins_light"
             />
 
 

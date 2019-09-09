@@ -57,8 +57,13 @@ public class ExamChooseActivity extends AppCompatActivity {
         spnSearchExam = findViewById(R.id.choose_exam_spinner);
 
 
-        sharedPreferences = getSharedPreferences("default", Context.MODE_PRIVATE);
-        id = sharedPreferences.getInt("id",0);
+        //getting id role_id url based on parents and child
+        if(getIntent().getIntExtra("id",0) != 0){
+            id = getIntent().getIntExtra("id",0);
+        }else {
+            sharedPreferences = getSharedPreferences("default", Context.MODE_PRIVATE);
+            id = sharedPreferences.getInt("id",0);
+        };
 
         getAllOnlineExamName(id);
 

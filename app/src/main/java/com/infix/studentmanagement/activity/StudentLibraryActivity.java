@@ -26,6 +26,8 @@ public class StudentLibraryActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TextView txtToolbarText;
 
+    private SharedPreferences sharedPreferences;
+
 
 
     @Override
@@ -49,9 +51,13 @@ public class StudentLibraryActivity extends AppCompatActivity {
         gridLayoutManager = new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL);
         recycler.setLayoutManager(gridLayoutManager);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("default", Context.MODE_PRIVATE);
-
-        id = sharedPreferences.getInt("id", 0);
+        //getting id role_id url based on parents and child
+        if(getIntent().getIntExtra("id",0) != 0){
+            id = getIntent().getIntExtra("id",0);
+        }else {
+            sharedPreferences = getSharedPreferences("default", Context.MODE_PRIVATE);
+            id = sharedPreferences.getInt("id",0);
+        }
 
         names = getResources().getStringArray(R.array.library_student_functions_name);
 
@@ -60,7 +66,7 @@ public class StudentLibraryActivity extends AppCompatActivity {
             images.add(imageSearch(n.toLowerCase().replace(" ","")));
         }
 
-        HomeAdapterHome homeAdapterHome = new HomeAdapterHome(this,names,images,0,this);
+        HomeAdapterHome homeAdapterHome = new HomeAdapterHome(this,names,images,id,this);
         recycler.setAdapter(homeAdapterHome);
 
     }

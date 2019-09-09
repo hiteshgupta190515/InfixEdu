@@ -56,9 +56,14 @@ public class StudentSubjectActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         txtToolbarText.setText("Subjects");
-        sharedPreferences = getSharedPreferences("default", Context.MODE_PRIVATE);
-        id = sharedPreferences.getInt("id", 0);
 
+        //getting id role_id url based on parents and child
+        if(getIntent().getIntExtra("id",0) != 0){
+            id = getIntent().getIntExtra("id",0);
+        }else {
+            sharedPreferences = getSharedPreferences("default", Context.MODE_PRIVATE);
+            id = sharedPreferences.getInt("id",0);
+        }
 
         getAllSUbject(id);
 

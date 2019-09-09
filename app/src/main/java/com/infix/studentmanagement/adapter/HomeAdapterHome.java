@@ -86,7 +86,9 @@ public class HomeAdapterHome extends RecyclerView.Adapter<HomeAdapterHome.ViewHo
                         activity.startActivity(new Intent(activity, StudentListActivity.class));
                         break;
                     case "Library":
-                        activity.startActivity(new Intent(activity, StudentLibraryActivity.class));
+                        Intent library = new Intent(activity, StudentLibraryActivity.class);
+                        library.putExtra("id",id);
+                        activity.startActivity(library);
                         break;
                     case "Inventory":
                         activity.startActivity(new Intent(activity, InventoryActivity.class));
@@ -110,52 +112,82 @@ public class HomeAdapterHome extends RecyclerView.Adapter<HomeAdapterHome.ViewHo
                         activity.startActivity(routines);
                         break;
                     case "Homework":
-                        activity.startActivity(new Intent(activity, HomeWorkActivity.class));
+                        Intent homeworks = new Intent(activity, HomeWorkActivity.class);
+                        homeworks.putExtra("id",id);
+                        activity.startActivity(homeworks);
                         break;
                     case "Notice":
-                        activity.startActivity(new Intent(activity, NoticeActivity.class));
+                        Intent notices = new Intent(activity, NoticeActivity.class);
+                        notices.putExtra("id",id);
+                        activity.startActivity(notices);
                         break;
                     case "Subjects":
-                        activity.startActivity(new Intent(activity, StudentSubjectActivity.class));
+                        Intent subject = new Intent(activity, StudentSubjectActivity.class);
+                        subject.putExtra("id",id);
+                        activity.startActivity(subject);
                         break;
                     case "Teacher":
-                        activity.startActivity(new Intent(activity, StudentTeacherActivity.class));
+                        Intent teacher = new Intent(activity, StudentTeacherActivity.class);
+                        teacher.putExtra("id",id);
+                        activity.startActivity(teacher);
                         break;
                     case "Books List":
                         activity.startActivity(new Intent(activity, LibraryActivity.class));
                         break;
                     case "Books Issued":
-                        activity.startActivity(new Intent(activity, IssuedBookActivity.class));
+                        Intent issued = new Intent(activity, IssuedBookActivity.class);
+                        issued.putExtra("id",id);
+                        activity.startActivity(issued);
                         break;
                     case "Dormitory":
-                        activity.startActivity(new Intent(activity, DormitoryActivity.class));
+                        Intent dormitory = new Intent(activity, DormitoryActivity.class);
+                        dormitory.putExtra("id",id);
+                        activity.startActivity(dormitory);
                         break;
                     case "Transport":
-                        activity.startActivity(new Intent(activity, TransportActivity.class));
+                        Intent transport = new Intent(activity, TransportActivity.class);
+                        transport.putExtra("id",id);
+                        activity.startActivity(transport);
                         break;
                     case "Timeline":
-                        activity.startActivity(new Intent(activity, TimelineActivity.class));
+                        Intent timelines = new Intent(activity, TimelineActivity.class);
+                        timelines.putExtra("id",id);
+                        activity.startActivity(timelines);
                         break;
                     case "Attendance":
-                        activity.startActivity(new Intent(activity, AttendenceCalenderActivity.class));
+                        Intent attends = new Intent(activity, AttendenceCalenderActivity.class);
+                        attends.putExtra("id",id);
+                        activity.startActivity(attends);
                         break;
                     case "Online Exam":
-                        activity.startActivity(new Intent(activity, OnlineExamActivity.class));
+                        Intent onlineExam = new Intent(activity, OnlineExamActivity.class);
+                        onlineExam.putExtra("id",id);
+                        activity.startActivity(onlineExam);
                         break;
                     case "Active Exams":
-                        activity.startActivity(new Intent(activity, ActiveOnlineExamActivity.class));
+                        Intent activeOnlineExam = new Intent(activity, ActiveOnlineExamActivity.class);
+                        activeOnlineExam.putExtra("id",id);
+                        activity.startActivity(activeOnlineExam);
                         break;
                     case "Exam Result":
-                        activity.startActivity(new Intent(activity, ExamChooseActivity.class));
+                        Intent activeResultOnlineExam = new Intent(activity, ExamChooseActivity.class);
+                        activeResultOnlineExam.putExtra("id",id);
+                        activity.startActivity(activeResultOnlineExam);
                         break;
                     case "Examination":
-                        activity.startActivity(new Intent(activity, ClassExamActivity.class));
+                        Intent classExam = new Intent(activity, ClassExamActivity.class);
+                        classExam.putExtra("id",id);
+                        activity.startActivity(classExam);
                         break;
                     case "Schedule":
-                        activity.startActivity(new Intent(activity, ClassExamScheduleActivity.class));
+                        Intent schedule = new Intent(activity, ClassExamScheduleActivity.class);
+                        schedule.putExtra("id",id);
+                        activity.startActivity(schedule);
                         break;
-                    case "Class Exam Result":
-                        activity.startActivity(new Intent(activity, ClassExamResultActivity.class));
+                    case "Result":
+                        Intent classResult = new Intent(activity, ClassExamResultActivity.class);
+                        classResult.putExtra("id",id);
+                        activity.startActivity(classResult);
                         break;
                     case "My Child":
                         activity.startActivity(new Intent(activity, ChildListActivity.class));

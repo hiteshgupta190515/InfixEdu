@@ -59,6 +59,8 @@ public class ChildListAdapter extends RecyclerView.Adapter<ChildListAdapter.Chil
 
         }
 
+        Log.d("image",url);
+
         holder.setImage(url);
 
         holder.layout.setOnClickListener(new View.OnClickListener() {
@@ -113,9 +115,11 @@ public class ChildListAdapter extends RecyclerView.Adapter<ChildListAdapter.Chil
 
         public void setImage(String url){
             try {
-                Glide.with(image.getContext())
+
+                Glide.with(ctx)
                         .load(url)
-                        .placeholder(R.mipmap.face)
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .fitCenter()
                         .into(image);
             } catch (Exception e){
             }

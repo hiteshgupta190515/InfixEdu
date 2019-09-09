@@ -17,6 +17,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.infix.studentmanagement.R;
 import com.infix.studentmanagement.adapter.ChildListAdapter;
 import com.infix.studentmanagement.model.Child;
@@ -28,6 +30,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class ChildListActivity extends AppCompatActivity {
 
     private ArrayList<Child> childs = new ArrayList<>();
@@ -36,6 +40,7 @@ public class ChildListActivity extends AppCompatActivity {
     private int id;
     private Toolbar toolbar;
     private TextView txtToolbarText;
+    private CircleImageView profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,12 +57,21 @@ public class ChildListActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         txtToolbarText.setText("Child List");
+        profile = findViewById(R.id.profile);
 
         SharedPreferences sharedPreferences = getSharedPreferences("default", Context.MODE_PRIVATE);
 
         id = sharedPreferences.getInt("id", 0);
 
+        //getting all list list from server
         getAllChild(id);
+
+        //getting parent image for profile
+        Glide.with(ChildListActivity.this)
+                .load(MyConfig.ROOT_URL+"public/uploads/staff/father.png")
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .fitCenter()
+                .into(profile);
 
     }
 

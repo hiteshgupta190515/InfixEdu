@@ -57,6 +57,7 @@ public class HomeActivity extends AppCompatActivity{
     private String name;
     private CircleImageView profile;
     private String url;
+    private String profile_image_tag;
 
     private Toolbar toolbar;
     private TextView txtToolbarText;
@@ -91,15 +92,23 @@ public class HomeActivity extends AppCompatActivity{
         if(getIntent().getIntExtra("rule_id",0) == 2){
             iId = getIntent().getIntExtra("id",0);
             role_id = getIntent().getIntExtra("rule_id",0);
-            url = MyConfig.getChildren(id);
+            url = MyConfig.getChildren(iId);
+            profile_image_tag = "student_photo";
         }else{
             role_id = sharedPreferences.getInt("role", 0);
             id = sharedPreferences.getInt("id", 0);
             url = MyConfig.getLoginUrl(email, password);
+
+            //getting this content by role_id and show profile image by this tag
+            if(role_id == 2)
+                profile_image_tag = "student_photo";
+            if(role_id == 3)
+                profile_image_tag = "fathers_photo";
         }
 
+
         getFunctionality(role_id);
-        update_profile_image(url);
+        update_profile_image(url,profile_image_tag);
 
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -345,7 +354,7 @@ public class HomeActivity extends AppCompatActivity{
 
     }
 
-    private void update_profile_image(String url){
+    private void update_profile_image(String url, final String s){
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
@@ -357,7 +366,7 @@ public class HomeActivity extends AppCompatActivity{
                         JSONObject detailsObj;
 
                         detailsObj = response.getJSONObject("data").optJSONObject("userDetails");
-                        String image = detailsObj.getString("student_photo");
+                        String image = detailsObj.getString(s);
 
                         Glide.with(HomeActivity.this)
                                 .load(MyConfig.ROOT_URL+image)

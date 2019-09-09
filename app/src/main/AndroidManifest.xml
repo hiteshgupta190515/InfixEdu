@@ -14,13 +14,14 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="com.infix.studentmanagement.activity.ChildListActivity"></activity>
+        <activity android:name="com.infix.studentmanagement.activity.ChildListActivity"
+            android:parentActivityName="com.infix.studentmanagement.activity.HomeActivity"/>
         <activity
             android:name="com.infix.studentmanagement.activity.ClassExamResultActivity"
-            android:parentActivityName="com.infix.studentmanagement.activity.ClassExamActivity" />
+            android:parentActivityName="com.infix.studentmanagement.activity.HomeActivity" />
         <activity
             android:name="com.infix.studentmanagement.activity.ClassExamScheduleActivity"
-            android:parentActivityName="com.infix.studentmanagement.activity.ClassExamActivity" />
+            android:parentActivityName="com.infix.studentmanagement.activity.HomeActivity" />
         <activity
             android:name="com.infix.studentmanagement.activity.ClassExamActivity"
             android:parentActivityName="com.infix.studentmanagement.activity.HomeActivity" />
@@ -37,8 +38,10 @@
         <activity
             android:name="com.infix.studentmanagement.activity.TimelineActivity"
             android:parentActivityName="com.infix.studentmanagement.activity.HomeActivity" />
-        <activity android:name="com.infix.studentmanagement.activity.TransportActivity" />
-        <activity android:name="com.infix.studentmanagement.activity.DormitoryActivity" />
+        <activity android:name="com.infix.studentmanagement.activity.TransportActivity"
+            android:parentActivityName="com.infix.studentmanagement.activity.HomeActivity"/>
+        <activity android:name="com.infix.studentmanagement.activity.DormitoryActivity"
+            android:parentActivityName="com.infix.studentmanagement.activity.HomeActivity"/>
         <activity android:name="com.infix.studentmanagement.activity.IssuedBookActivity" />
         <activity
             android:name="com.infix.studentmanagement.activity.StudentLibraryActivity"

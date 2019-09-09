@@ -43,7 +43,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private TextView txtPersonal,txtTransport,txtParent,txtOther;
     private TextView txtName,txtClassSection,txtRollAdm;
     private String stName,stClass,stSection,stRoll,stAdm,image;
-    private CircleImageView studentPhoto;
+    private CircleImageView studentPhoto,toolbarImage;
 
     private String email;
     private String password;
@@ -65,6 +65,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         txtOther = findViewById(R.id.others);
 
         studentPhoto = findViewById(R.id.student_poster);
+        toolbarImage = findViewById(R.id.profile);
+        toolbarImage.setVisibility(View.GONE);
 
         txtName = findViewById(R.id.student_name);
         txtClassSection = findViewById(R.id.student_class_section);
