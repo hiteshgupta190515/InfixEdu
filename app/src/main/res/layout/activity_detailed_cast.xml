@@ -137,7 +137,7 @@
                                 android:layout_weight="1"
                                 android:text="Class : two"
                                 android:textSize="13dp"
-                                android:fontFamily="@font/neosans_pro_regular"
+                                android:fontFamily="@font/poppins_medium"
                                 android:maxLines="1"
                                 android:id="@+id/txtClass"
                                 />
@@ -149,7 +149,7 @@
                                 android:text="Section : B"
                                 android:textSize="13dp"
                                 android:maxLines="1"
-                                android:fontFamily="@font/neosans_pro_regular"
+                                android:fontFamily="@font/poppins_medium"
                                 android:id="@+id/txtSection"/>
 
                         </LinearLayout>
@@ -170,7 +170,7 @@
                                 android:text="Roll : 02"
                                 android:textSize="13dp"
                                 android:maxLines="1"
-                                android:fontFamily="@font/neosans_pro_regular"
+                                android:fontFamily="@font/poppins_medium"
                                 android:id="@+id/txtRoll"
                                 />
 
@@ -181,7 +181,7 @@
                                 android:text="admission no : 2525"
                                 android:textSize="13dp"
                                 android:maxLines="1"
-                                android:fontFamily="@font/neosans_pro_regular"
+                                android:fontFamily="@font/poppins_medium"
                                 android:id="@+id/txtAdmission"
                                 />
 
@@ -203,7 +203,7 @@
                                 android:layout_weight="1"
                                 android:text="Nationality : Bengali"
                                 android:textSize="13dp"
-                                android:fontFamily="@font/neosans_pro_regular"
+                                android:fontFamily="@font/poppins_medium"
                                 android:id="@+id/txtNationality"
                                 android:maxLines="1"
                                 />
@@ -214,7 +214,7 @@
                                 android:layout_weight="1"
                                 android:text="Religion : Islam"
                                 android:textSize="13dp"
-                                android:fontFamily="@font/neosans_pro_regular"
+                                android:fontFamily="@font/poppins_medium"
                                 android:id="@+id/txtReligion"
                                 android:maxLines="1"
                                 />
@@ -236,7 +236,7 @@
                                 android:layout_weight="1"
                                 android:text="Father : Abul kasem"
                                 android:textSize="13dp"
-                                android:fontFamily="@font/neosans_pro_regular"
+                                android:fontFamily="@font/poppins_medium"
                                 android:id="@+id/txtFather"
                                 android:maxLines="1"
                                 />
@@ -248,7 +248,7 @@
                                 android:text="Mother : Hazara begum"
                                 android:textSize="13dp"
                                 android:maxLines="1"
-                                android:fontFamily="@font/neosans_pro_regular"
+                                android:fontFamily="@font/poppins_medium"
                                 android:id="@+id/txtMother"
                                 />
 
@@ -270,7 +270,7 @@
                                 android:layout_weight="1"
                                 android:text="Phone : 01903273865"
                                 android:textSize="13dp"
-                                android:fontFamily="@font/neosans_pro_regular"
+                                android:fontFamily="@font/poppins_medium"
                                 android:id="@+id/txtPhone"
                                 android:maxLines="1"
                                 />
@@ -281,7 +281,7 @@
                                 android:layout_weight="1"
                                 android:text="Bloog group : O+"
                                 android:textSize="13dp"
-                                android:fontFamily="@font/neosans_pro_regular"
+                                android:fontFamily="@font/poppins_medium"
                                 android:id="@+id/txtBlood"
                                 android:maxLines="1"
                                 />

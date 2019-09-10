@@ -25,7 +25,8 @@
         <activity
             android:name="com.infix.studentmanagement.activity.ClassExamActivity"
             android:parentActivityName="com.infix.studentmanagement.activity.HomeActivity" />
-        <activity android:name="com.infix.studentmanagement.activity.ExamChooseActivity" />
+        <activity android:name="com.infix.studentmanagement.activity.ExamChooseActivity"
+            android:parentActivityName="com.infix.studentmanagement.activity.HomeActivity" />
         <activity
             android:name="com.infix.studentmanagement.activity.ActiveOnlineExamActivity"
             android:parentActivityName="com.infix.studentmanagement.activity.OnlineExamActivity" />
@@ -42,7 +43,8 @@
             android:parentActivityName="com.infix.studentmanagement.activity.HomeActivity"/>
         <activity android:name="com.infix.studentmanagement.activity.DormitoryActivity"
             android:parentActivityName="com.infix.studentmanagement.activity.HomeActivity"/>
-        <activity android:name="com.infix.studentmanagement.activity.IssuedBookActivity" />
+        <activity android:name="com.infix.studentmanagement.activity.IssuedBookActivity"
+            android:parentActivityName="com.infix.studentmanagement.activity.HomeActivity"/>
         <activity
             android:name="com.infix.studentmanagement.activity.StudentLibraryActivity"
             android:parentActivityName="com.infix.studentmanagement.activity.HomeActivity" />

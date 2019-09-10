@@ -31,7 +31,7 @@
             android:textSize="13dp"
             android:id="@+id/time"
             android:textColor="@color/profile_light_text_color"
-            android:fontFamily="@font/neosans_pro_regular"
+            android:fontFamily="@font/poppins_medium"
             />
 
         <TextView

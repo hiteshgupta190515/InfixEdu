@@ -33,7 +33,7 @@
                     android:layout_height="match_parent"
                     android:src="@mipmap/inflex_edu_logo"
                     android:foregroundGravity="center"
-                    android:id="@+id/profileImage"
+                    android:id="@+id/logoBarImage"
                     />
 
                 <de.hdodenhof.circleimageview.CircleImageView

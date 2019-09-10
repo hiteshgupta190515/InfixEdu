@@ -26,7 +26,7 @@
         android:maxLines="1"
         android:id="@+id/txtLibIssueSubTitle"
         android:layout_marginTop="5dp"
-        android:fontFamily="@font/neosans_pro_regular"
+        android:fontFamily="@font/poppins_medium"
         android:textColor="@color/profile_light_text_color"
         />
 
@@ -98,7 +98,7 @@
             android:id="@+id/issueDate"
             android:textColor="#727FC8"
             android:padding="2dp"
-            android:fontFamily="@font/neosans_pro_regular"
+            android:fontFamily="@font/poppins_medium"
             />
 
         <TextView
@@ -110,7 +110,7 @@
             android:id="@+id/returnDate"
             android:textColor="#727FC8"
             android:padding="2dp"
-            android:fontFamily="@font/neosans_pro_regular"
+            android:fontFamily="@font/poppins_medium"
             />
 
         <TextView
@@ -122,7 +122,7 @@
             android:id="@+id/issuedBookNo"
             android:textColor="#727FC8"
             android:padding="2dp"
-            android:fontFamily="@font/neosans_pro_regular"
+            android:fontFamily="@font/poppins_medium"
             />
         <TextView
             android:layout_width="0dp"
@@ -133,9 +133,10 @@
             android:id="@+id/issueBookStatus"
             android:textColor="#FFFFFF"
             android:background="#3EC900"
-            android:padding="2dp"
+            android:padding="5dp"
+            android:layout_marginEnd="5dp"
             android:paddingStart="4dp"
-            android:fontFamily="@font/neosans_pro_regular"
+            android:fontFamily="@font/poppins_medium"
             />
 
 

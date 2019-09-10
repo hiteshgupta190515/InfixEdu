@@ -138,7 +138,7 @@
                                 android:layout_weight="1"
                                 android:text="No of person : 2"
                                 android:textSize="13dp"
-                                android:fontFamily="@font/neosans_pro_regular"
+                                android:fontFamily="@font/poppins_medium"
                                 android:maxLines="1"
                                 android:id="@+id/txtNoOfVisitor"
                                 />
@@ -150,7 +150,7 @@
                                 android:text="date : 12.16.2019"
                                 android:textSize="13dp"
                                 android:maxLines="1"
-                                android:fontFamily="@font/neosans_pro_regular"
+                                android:fontFamily="@font/poppins_medium"
                                 android:id="@+id/txtDate"/>
 
                         </LinearLayout>
@@ -171,7 +171,7 @@
                                 android:text="in time : 01:52 AM"
                                 android:textSize="13dp"
                                 android:maxLines="1"
-                                android:fontFamily="@font/neosans_pro_regular"
+                                android:fontFamily="@font/poppins_medium"
                                 android:id="@+id/txtInTime"
                                 />
 
@@ -182,7 +182,7 @@
                                 android:text="out time : 12:32 PM"
                                 android:textSize="13dp"
                                 android:maxLines="1"
-                                android:fontFamily="@font/neosans_pro_regular"
+                                android:fontFamily="@font/poppins_medium"
                                 android:id="@+id/txtOutTime"
                                 />
 

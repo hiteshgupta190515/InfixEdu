@@ -122,6 +122,8 @@ public class HomeActivity extends AppCompatActivity{
                 TextView txtChangePassword = mView.findViewById(R.id.change_password);
                 TextView txtLogout = mView.findViewById(R.id.logout);
 
+                if(role_id != 2)txtProfile.setVisibility(View.GONE);
+
                 txtProfile.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

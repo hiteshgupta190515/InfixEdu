@@ -126,7 +126,7 @@
             android:id="@+id/bedtatus"
             android:textColor="#FFFFFF"
             android:background="#3EC900"
-            android:padding="2dp"
+            android:padding="5dp"
             android:paddingStart="4dp"
             android:fontFamily="@font/poppins_light"
             />

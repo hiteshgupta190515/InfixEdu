@@ -40,7 +40,7 @@
             android:textSize="18dp"
             android:padding="5dp"
             android:textColor="@color/drawar_text"
-            android:fontFamily="@font/neosanspro_medium"
+            android:fontFamily="@font/poppins_medium"
             />
 
     </io.armcha.elasticview.ElasticView>
@@ -62,7 +62,7 @@
             android:textSize="18dp"
             android:padding="5dp"
             android:textColor="@color/drawar_text"
-            android:fontFamily="@font/neosanspro_medium"
+            android:fontFamily="@font/poppins_medium"
             />
 
     </io.armcha.elasticview.ElasticView>
@@ -84,7 +84,7 @@
             android:textSize="18dp"
             android:padding="5dp"
             android:textColor="@color/drawar_text"
-            android:fontFamily="@font/neosanspro_medium"
+            android:fontFamily="@font/poppins_medium"
             />
 
     </io.armcha.elasticview.ElasticView>

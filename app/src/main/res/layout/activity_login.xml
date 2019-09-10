@@ -78,7 +78,7 @@
         android:layout_weight="1"
         android:text="Remember me"
         android:id="@+id/chkRemember"
-        android:fontFamily="@font/neosanspro_medium"
+        android:fontFamily="@font/poppins_medium"
         android:textColor="@color/drawar_text"
         />
 
@@ -90,7 +90,7 @@
         android:text="Forgot passord?"
         android:gravity="end"
         android:textColor="@color/drawar_text"
-        android:fontFamily="@font/neosanspro_medium"
+        android:fontFamily="@font/poppins_medium"
         />
 
     </LinearLayout>

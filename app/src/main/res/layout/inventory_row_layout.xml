@@ -19,7 +19,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="1dp"
-                     android:fontFamily="@font/neosanspro_medium"
+                     android:fontFamily="@font/poppins_medium"
                     android:text="Item name 1"
                     android:textColor="@color/blue"
                     android:textSize="18sp" />
@@ -30,20 +30,20 @@ CardView is the new control introduced in v7 Support Library. Its a FrameLayout 
                     android:layout_height="wrap_content"
                     android:padding="1dp"
                     android:maxLines="4"
-                    android:fontFamily="@font/neosans_pro_regular"
+                    android:fontFamily="@font/poppins_medium"
                     android:textColor="@color/black" />
                 <TextView android:id="@+id/txtInventoryCategory"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="1dp"
-                    android:fontFamily="@font/neosans_pro_regular"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="Category : Raw Materials Inventory"
                     android:textColor="@color/black" />
                 <TextView android:id="@+id/txtInventoryStock"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="stock : 5"
-                    android:fontFamily="@font/neosans_pro_regular"
+                    android:fontFamily="@font/poppins_medium"
                     android:padding="1dp"
                     android:textColor="@color/black" />
         </LinearLayout>

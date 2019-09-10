@@ -28,7 +28,7 @@
             android:padding="2dp"
             android:id="@+id/subject"
             android:textColor="#727FC8"
-            android:fontFamily="@font/neosanspro_medium"
+            android:fontFamily="@font/poppins_medium"
             />
 
         <TextView
@@ -41,7 +41,7 @@
             android:padding="2dp"
             android:id="@+id/teacher"
             android:textColor="#727FC8"
-            android:fontFamily="@font/neosanspro_medium"
+            android:fontFamily="@font/poppins_medium"
             />
 
         <TextView
@@ -54,7 +54,7 @@
             android:textStyle="bold"
             android:id="@+id/type"
             android:textColor="#727FC8"
-            android:fontFamily="@font/neosanspro_medium"
+            android:fontFamily="@font/poppins_medium"
             />
 
     </LinearLayout>

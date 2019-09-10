@@ -19,7 +19,7 @@
         android:layout_weight="1"
         android:id="@+id/txtByName"
         android:text="Mamun Hossain"
-        android:fontFamily="@font/neosans_pro_regular"
+        android:fontFamily="@font/poppins_medium"
         android:textSize="13dp"
         android:padding="5dp"
         />
@@ -30,7 +30,7 @@
         android:layout_weight="1"
         android:id="@+id/txtCompDate"
         android:text="12.16.2019"
-        android:fontFamily="@font/neosans_pro_regular"
+        android:fontFamily="@font/poppins_medium"
         android:textSize="13dp"
         android:padding="5dp"
         />
@@ -41,7 +41,7 @@
         android:layout_weight="1"
         android:id="@+id/txtAction"
         android:text="ratione"
-        android:fontFamily="@font/neosans_pro_regular"
+        android:fontFamily="@font/poppins_medium"
         android:textSize="13dp"
         android:padding="5dp"
         />
