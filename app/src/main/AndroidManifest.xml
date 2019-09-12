@@ -1,93 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.infix.studentmanagement">
+    package="com.infix.edu">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/inflex_edu_logo"
+        android:icon="@mipmap/infix_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/inflex_edu_logo"
+        android:roundIcon="@mipmap/infix_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="com.infix.studentmanagement.activity.ChildListActivity"
-            android:parentActivityName="com.infix.studentmanagement.activity.HomeActivity"/>
+        <activity android:name="com.infix.edu.activity.ParentsAboutActivity"
+            android:parentActivityName="com.infix.edu.activity.HomeActivity"
+            android:screenOrientation="portrait"
+            />
         <activity
-            android:name="com.infix.studentmanagement.activity.ClassExamResultActivity"
-            android:parentActivityName="com.infix.studentmanagement.activity.HomeActivity" />
+            android:name="com.infix.edu.activity.ChildListActivity"
+            android:parentActivityName="com.infix.edu.activity.HomeActivity"
+            android:screenOrientation="portrait"
+            />
         <activity
-            android:name="com.infix.studentmanagement.activity.ClassExamScheduleActivity"
-            android:parentActivityName="com.infix.studentmanagement.activity.HomeActivity" />
+            android:name="com.infix.edu.activity.ClassExamResultActivity"
+            android:parentActivityName="com.infix.edu.activity.HomeActivity"
+            android:screenOrientation="portrait"
+            />
         <activity
-            android:name="com.infix.studentmanagement.activity.ClassExamActivity"
-            android:parentActivityName="com.infix.studentmanagement.activity.HomeActivity" />
-        <activity android:name="com.infix.studentmanagement.activity.ExamChooseActivity"
-            android:parentActivityName="com.infix.studentmanagement.activity.HomeActivity" />
+            android:name="com.infix.edu.activity.ClassExamScheduleActivity"
+            android:parentActivityName="com.infix.edu.activity.HomeActivity"
+            android:screenOrientation="portrait"
+            />
         <activity
-            android:name="com.infix.studentmanagement.activity.ActiveOnlineExamActivity"
-            android:parentActivityName="com.infix.studentmanagement.activity.OnlineExamActivity" />
+            android:name="com.infix.edu.activity.ClassExamActivity"
+            android:parentActivityName="com.infix.edu.activity.HomeActivity"
+            android:screenOrientation="portrait"
+            />
         <activity
-            android:name="com.infix.studentmanagement.activity.OnlineExamActivity"
-            android:parentActivityName="com.infix.studentmanagement.activity.HomeActivity" />
+            android:name="com.infix.edu.activity.ExamChooseActivity"
+            android:parentActivityName="com.infix.edu.activity.HomeActivity"
+            android:screenOrientation="portrait"
+            />
         <activity
-            android:name="com.infix.studentmanagement.activity.AttendenceCalenderActivity"
-            android:parentActivityName="com.infix.studentmanagement.activity.HomeActivity" />
+            android:name="com.infix.edu.activity.ActiveOnlineExamActivity"
+            android:parentActivityName="com.infix.edu.activity.OnlineExamActivity"
+            android:screenOrientation="portrait"
+            />
         <activity
-            android:name="com.infix.studentmanagement.activity.TimelineActivity"
-            android:parentActivityName="com.infix.studentmanagement.activity.HomeActivity" />
-        <activity android:name="com.infix.studentmanagement.activity.TransportActivity"
-            android:parentActivityName="com.infix.studentmanagement.activity.HomeActivity"/>
-        <activity android:name="com.infix.studentmanagement.activity.DormitoryActivity"
-            android:parentActivityName="com.infix.studentmanagement.activity.HomeActivity"/>
-        <activity android:name="com.infix.studentmanagement.activity.IssuedBookActivity"
-            android:parentActivityName="com.infix.studentmanagement.activity.HomeActivity"/>
+            android:name="com.infix.edu.activity.OnlineExamActivity"
+            android:parentActivityName="com.infix.edu.activity.HomeActivity"
+            android:screenOrientation="portrait"
+            />
         <activity
-            android:name="com.infix.studentmanagement.activity.StudentLibraryActivity"
-            android:parentActivityName="com.infix.studentmanagement.activity.HomeActivity" />
-        <activity android:name="com.infix.studentmanagement.activity.StudentTeacherActivity" />
-        <activity android:name="com.infix.studentmanagement.activity.StudentSubjectActivity" />
+            android:name="com.infix.edu.activity.AttendenceCalenderActivity"
+            android:parentActivityName="com.infix.edu.activity.HomeActivity"
+            android:screenOrientation="portrait"
+            />
         <activity
-            android:name="com.infix.studentmanagement.activity.NoticeActivity"
-            android:parentActivityName="com.infix.studentmanagement.activity.HomeActivity" />
+            android:name="com.infix.edu.activity.TimelineActivity"
+            android:parentActivityName="com.infix.edu.activity.HomeActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name="com.infix.edu.activity.TransportActivity"
+            android:parentActivityName="com.infix.edu.activity.HomeActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name="com.infix.edu.activity.DormitoryActivity"
+            android:parentActivityName="com.infix.edu.activity.HomeActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name="com.infix.edu.activity.IssuedBookActivity"
+            android:parentActivityName="com.infix.edu.activity.HomeActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name="com.infix.edu.activity.StudentLibraryActivity"
+            android:parentActivityName="com.infix.edu.activity.HomeActivity"
+            android:screenOrientation="portrait"
+            />
+
+        <activity android:name="com.infix.edu.activity.StudentTeacherActivity"
+            android:parentActivityName="com.infix.edu.activity.HomeActivity"
+            android:screenOrientation="portrait"
+            />
+
+        <activity android:name="com.infix.edu.activity.StudentSubjectActivity"
+            android:parentActivityName="com.infix.edu.activity.HomeActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name="com.infix.edu.activity.NoticeActivity"
+            android:parentActivityName="com.infix.edu.activity.HomeActivity"
+            android:screenOrientation="portrait"
+            />
 
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
 
         <activity
-            android:name="com.infix.studentmanagement.activity.NoticeDeatlsActivity"
-            android:parentActivityName="com.infix.studentmanagement.activity.NoticeActivity" />
+            android:name="com.infix.edu.activity.NoticeDeatlsActivity"
+            android:parentActivityName="com.infix.edu.activity.NoticeActivity"
+            android:screenOrientation="portrait"
+            />
         <activity
-            android:name="com.infix.studentmanagement.activity.HomeWorkActivity"
-            android:parentActivityName="com.infix.studentmanagement.activity.HomeActivity" />
+            android:name="com.infix.edu.activity.HomeWorkActivity"
+            android:parentActivityName="com.infix.edu.activity.HomeActivity"
+            android:screenOrientation="portrait"
+            />
         <activity
-            android:name="com.infix.studentmanagement.activity.ClassRoutineActivity"
-            android:parentActivityName="com.infix.studentmanagement.activity.HomeActivity" />
+            android:name="com.infix.edu.activity.ClassRoutineActivity"
+            android:parentActivityName="com.infix.edu.activity.HomeActivity"
+            android:screenOrientation="portrait"
+            />
         <activity
-            android:name="com.infix.studentmanagement.activity.FeesActivity"
-            android:parentActivityName="com.infix.studentmanagement.activity.HomeActivity" />
+            android:name="com.infix.edu.activity.FeesActivity"
+            android:parentActivityName="com.infix.edu.activity.HomeActivity"
+            android:screenOrientation="portrait"
+            />
         <activity
-            android:name="com.infix.studentmanagement.activity.ProfileActivity"
-            android:parentActivityName="com.infix.studentmanagement.activity.HomeActivity" />
-        <activity android:name="com.infix.studentmanagement.activity.ComplaintActivity" />
-        <activity android:name="com.infix.studentmanagement.activity.VisitorActivity" />
-        <activity android:name="com.infix.studentmanagement.activity.AdminSectionActivity" />
-        <activity android:name="com.infix.studentmanagement.activity.InventoryActivity" />
+            android:name="com.infix.edu.activity.ProfileActivity"
+            android:parentActivityName="com.infix.edu.activity.HomeActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name="com.infix.edu.activity.ComplaintActivity"  android:screenOrientation="portrait"/>
+        <activity android:name="com.infix.edu.activity.VisitorActivity"  android:screenOrientation="portrait"/>
+        <activity android:name="com.infix.edu.activity.AdminSectionActivity"  android:screenOrientation="portrait"/>
+        <activity android:name="com.infix.edu.activity.InventoryActivity"  android:screenOrientation="portrait"/>
         <activity
-            android:name="com.infix.studentmanagement.activity.LibraryActivity"
-            android:parentActivityName="com.infix.studentmanagement.activity.StudentLibraryActivity" />
-        <activity android:name="com.infix.studentmanagement.activity.StudentListActivity" />
-        <activity android:name="com.infix.studentmanagement.activity.LoginActivity" />
-        <activity android:name="com.infix.studentmanagement.activity.HomeActivity" />
-        <activity android:name="com.infix.studentmanagement.activity.BookDetailsActivity" />
+            android:name="com.infix.edu.activity.LibraryActivity"
+            android:parentActivityName="com.infix.edu.activity.StudentLibraryActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name="com.infix.edu.activity.StudentListActivity"  android:screenOrientation="portrait"/>
+        <activity android:name="com.infix.edu.activity.LoginActivity"  android:screenOrientation="portrait"/>
+        <activity android:name="com.infix.edu.activity.HomeActivity"  android:screenOrientation="portrait"/>
+        <activity android:name="com.infix.edu.activity.BookDetailsActivity"  android:screenOrientation="portrait"/>
         <activity
-            android:name="com.infix.studentmanagement.activity.StudentInformation"
-            android:parentActivityName="com.infix.studentmanagement.activity.StudentListActivity" />
-        <activity android:name="com.infix.studentmanagement.MainActivity">
+            android:name="com.infix.edu.activity.StudentInformation"
+            android:parentActivityName="com.infix.edu.activity.StudentListActivity" />
+        <activity android:name="com.infix.edu.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

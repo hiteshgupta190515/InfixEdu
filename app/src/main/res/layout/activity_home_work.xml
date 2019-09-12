@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.infix.studentmanagement.activity.ClassRoutineActivity">
+    tools:context="com.infix.studentmanagement.com.infix.edu.activity.ClassRoutineActivity">
 
     <include layout="@layout/toolbar"/>
 
@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/homeWOrkRecyclerview"
+        android:padding="10dp"
         ></androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>

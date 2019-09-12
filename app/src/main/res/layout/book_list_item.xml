@@ -3,7 +3,6 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
     >
 
     <TextView
@@ -16,7 +15,6 @@
         android:id="@+id/txtLibBookTitle"
         android:maxLines="1"
         android:fontFamily="@font/poppins_medium"
-        android:textStyle="bold"
         />
     <TextView
         android:layout_width="wrap_content"

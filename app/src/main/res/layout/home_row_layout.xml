@@ -161,12 +161,11 @@
                 />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="completed"
                 android:textSize="10dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
+                android:gravity="center"
                 android:paddingTop="3dp"
                 android:paddingBottom="3dp"
                 android:background="@color/yellow"

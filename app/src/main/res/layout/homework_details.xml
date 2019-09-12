@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/txtHWTitle"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/linear"
+        android:layout_marginTop="10dp"
+        >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Created"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/profile_light_text_color"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="05.12.2000"
+                android:textSize="10dp"
+                android:id="@+id/dcreated"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_light"
+                android:textColor="@color/profile_light_text_color"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Submission"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/profile_light_text_color"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="05.12.2000"
+                android:textSize="10dp"
+                android:id="@+id/dsubmission"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_light"
+                android:textColor="@color/profile_light_text_color"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Evaluation"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/profile_light_text_color"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="05.12.2000"
+                android:textSize="10dp"
+                android:id="@+id/devaluation"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_light"
+                android:textColor="@color/profile_light_text_color"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Status"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/profile_light_text_color"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="completed"
+                android:textSize="10dp"
+                android:gravity="center"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:layout_marginEnd="5dp"
+                android:background="@color/yellow"
+                android:textColor="#fff"
+                android:id="@+id/dstatus"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_light"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="General Maths"
+        android:textSize="14dp"
+        android:textAlignment="textStart"
+        android:textColor="#415094"
+        android:layout_margin="10dp"
+        android:layout_toLeftOf="@id/txtDownload"
+        android:maxLines="5"
+        android:id="@+id/txtHWTitle"
+        android:fontFamily="@font/poppins_light"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        />
+
+</LinearLayout>

@@ -12,7 +12,6 @@
         android:textColor="#415094"
         android:layout_margin="5dp"
         android:padding="5dp"
-        android:textStyle="bold"
         android:id="@+id/txtFeeTitle"
         android:fontFamily="@font/poppins_medium"
         />
@@ -181,13 +180,12 @@
                 />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="paid"
                 android:textSize="12dp"
                 android:textStyle="bold"
-                android:paddingLeft="5dp"
-                android:paddingRight="10dp"
+                android:gravity="center"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
                 android:background="@color/colorPrimary"

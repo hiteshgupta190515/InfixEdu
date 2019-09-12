@@ -3,7 +3,6 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
     >
 
     <TextView
@@ -93,11 +92,11 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:maxLines="2"
             android:text="17 Aug, 2019"
             android:textSize="12dp"
             android:id="@+id/issueDate"
             android:textColor="#727FC8"
-            android:padding="2dp"
             android:fontFamily="@font/poppins_medium"
             />
 
@@ -107,9 +106,10 @@
             android:layout_weight="1"
             android:text="25 Aug, 2019"
             android:textSize="12dp"
+            android:maxLines="2"
             android:id="@+id/returnDate"
             android:textColor="#727FC8"
-            android:padding="2dp"
+            android:paddingLeft="2dp"
             android:fontFamily="@font/poppins_medium"
             />
 
@@ -119,23 +119,24 @@
             android:layout_weight="1"
             android:text="25 Aug, 2019"
             android:textSize="12dp"
+            android:maxLines="2"
             android:id="@+id/issuedBookNo"
             android:textColor="#727FC8"
-            android:padding="2dp"
+            android:paddingLeft="2dp"
             android:fontFamily="@font/poppins_medium"
             />
         <TextView
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Issued"
+            android:gravity="center"
             android:textSize="12dp"
             android:id="@+id/issueBookStatus"
             android:textColor="#FFFFFF"
             android:background="#3EC900"
             android:padding="5dp"
             android:layout_marginEnd="5dp"
-            android:paddingStart="4dp"
             android:fontFamily="@font/poppins_medium"
             />
 
