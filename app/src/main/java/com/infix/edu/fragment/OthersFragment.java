@@ -109,8 +109,8 @@ public class OthersFragment extends Fragment {
                             castle = detailsObj.getString("caste");
                             nationalId = detailsObj.getString("national_id_no");
 
-                            personalData.add(new PersonalData("Height",height));
-                            personalData.add(new PersonalData("Weight",weight));
+                            personalData.add(new PersonalData("Height",height+"(inch)"));
+                            personalData.add(new PersonalData("Weight",weight+"(kg)"));
                             personalData.add(new PersonalData("Castle",castle));
                             personalData.add(new PersonalData("National Id",nationalId));
 

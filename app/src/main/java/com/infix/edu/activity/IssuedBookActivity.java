@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -75,6 +76,16 @@ public class IssuedBookActivity extends AppCompatActivity {
         getAllIssuedBooks(id);
         MyConfig.getProfileImage(profile_image_url,profile,IssuedBookActivity.this);
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     void getAllIssuedBooks(int id){
