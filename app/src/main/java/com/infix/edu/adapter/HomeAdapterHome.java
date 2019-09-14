@@ -206,8 +206,8 @@ public class HomeAdapterHome extends RecyclerView.Adapter<HomeAdapterHome.ViewHo
 
         if (row_index == position) {
             holder.linearLayout.setBackgroundDrawable(activity.getResources().getDrawable(R.mipmap.card_select_background));
-            holder.textView_Name.setTextColor(activity.getResources().getColor(R.color.drawar_text_select));
-            holder.imageView.setColorFilter(activity.getResources().getColor(R.color.drawar_image_select));
+            holder.textView_Name.setTextColor(activity.getResources().getColor(R.color.white));
+            holder.imageView.setColorFilter(activity.getResources().getColor(R.color.white));
         } else {
             holder.linearLayout.setBackgroundDrawable(activity.getResources().getDrawable(R.mipmap.bg));
             holder.textView_Name.setTextColor(Color.GRAY);

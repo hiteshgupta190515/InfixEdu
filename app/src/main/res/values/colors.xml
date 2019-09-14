@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6325CE</color>
+    <color name="colorPrimary">#5B18CF</color>
     <color name="colorPrimaryDark">#300480</color>
     <color name="colorAccent">#D420F3</color>
     <color name="divider">#f2f2f2</color>
     <color name="text_color">#0f0f0f</color>
     <color name="drawar_text">#FF929292</color>
-    <color name="drawar_text_select">#FFFFFF</color>
-    <color name="drawar_image_select">#FFFFFF</color>
-    <color name="drawar_layout_background">#FFFFFF</color>
+
 
     <color name="transparent">#00000000</color>
     <color name="brown">#b87e00</color>
