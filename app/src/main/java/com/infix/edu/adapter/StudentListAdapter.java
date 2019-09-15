@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityOptionsCompat;
@@ -20,6 +21,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.infix.edu.activity.StudentInformation;
 import com.infix.edu.R;
 import com.infix.edu.model.Student;
+import com.infix.edu.model.Tstudent;
+import com.infix.edu.myconfig.MyConfig;
 
 import java.util.ArrayList;
 
@@ -27,10 +30,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class StudentListAdapter  extends RecyclerView.Adapter<StudentListAdapter.studentViewHolder> {
 
-    private ArrayList<Student> students;
+    private ArrayList<Tstudent> students;
     private Context ctx;
 
-    public StudentListAdapter(ArrayList<Student> students, Context ctx){
+    public StudentListAdapter(ArrayList<Tstudent> students, Context ctx){
         this.students = students;
         this.ctx = ctx;
     }
@@ -47,9 +50,9 @@ public class StudentListAdapter  extends RecyclerView.Adapter<StudentListAdapter
     @Override
     public void onBindViewHolder(@NonNull studentViewHolder holder, final int position) {
 
-        String url =students.get(position).getStudent_photo();
-        String name = students.get(position).getFull_name();
-        String des = students.get(position).getEmail();
+        final String url =MyConfig.ROOT_URL+students.get(position).getImage();
+        String name = students.get(position).getName();
+        String des = "Class "+students.get(position).getClassName()+" | Section "+students.get(position).getSectionName()+" | Roll "+students.get(position).getRoll();
 
         try {
             Glide.with(ctx)
@@ -65,6 +68,7 @@ public class StudentListAdapter  extends RecyclerView.Adapter<StudentListAdapter
             holder.txtDes.setText(des);
 
         }
+
 
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,7 +112,7 @@ public class StudentListAdapter  extends RecyclerView.Adapter<StudentListAdapter
         public studentViewHolder(View v) {
             super(v);
 
-            image = v.findViewWithTag(R.id.student_poster);
+            image = v.findViewById(R.id.student_poster);
             txtName = v.findViewById(R.id.student_name);
             txtDes = v.findViewById(R.id.student_description);
             layout = v.findViewById(R.id.relative_layout);

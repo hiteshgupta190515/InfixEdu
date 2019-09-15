@@ -30,11 +30,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="Room No."
-            android:fontFamily="@font/poppins_medium"
-            android:textStyle="bold"
             android:textSize="12dp"
-            android:padding="2dp"
-            android:textColor="#727FC8"
+            style="@style/poppins_light_text.fees_text_light.fees_text_medium"
             />
 
         <TextView
@@ -43,10 +40,7 @@
             android:layout_weight="1"
             android:text="No. of Bed"
             android:textSize="12dp"
-            android:fontFamily="@font/poppins_medium"
-            android:padding="2dp"
-            android:textStyle="bold"
-            android:textColor="#727FC8"
+            style="@style/poppins_light_text.fees_text_light.fees_text_medium"
             />
 
         <TextView
@@ -54,22 +48,16 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="Cost"
-            android:padding="2dp"
-            android:fontFamily="@font/poppins_medium"
             android:textSize="12dp"
-            android:textStyle="bold"
-            android:textColor="#727FC8"
+            style="@style/poppins_light_text.fees_text_light.fees_text_medium"
             />
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="Status"
-            android:padding="2dp"
-            android:fontFamily="@font/poppins_medium"
             android:textSize="12dp"
-            android:textStyle="bold"
-            android:textColor="#727FC8"
+            style="@style/poppins_light_text.fees_text_light.fees_text_medium"
             />
 
     </LinearLayout>
@@ -86,11 +74,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="101"
-            android:textSize="12dp"
+            style="@style/poppins_light_text"
             android:id="@+id/roomNo"
-            android:textColor="#727FC8"
-            android:padding="2dp"
-            android:fontFamily="@font/poppins_light"
             />
 
         <TextView
@@ -98,11 +83,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="02"
-            android:textSize="12dp"
             android:id="@+id/bedNoo"
-            android:textColor="#727FC8"
-            android:padding="2dp"
-            android:fontFamily="@font/poppins_light"
+            style="@style/poppins_light_text"
             />
 
         <TextView
@@ -110,11 +92,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="$300"
-            android:textSize="12dp"
             android:id="@+id/bedCost"
-            android:textColor="#727FC8"
-            android:padding="2dp"
-            android:fontFamily="@font/poppins_light"
+            style="@style/poppins_light_text"
             />
         <TextView
             android:layout_width="0dp"

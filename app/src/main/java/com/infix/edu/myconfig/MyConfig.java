@@ -1,6 +1,8 @@
 package com.infix.edu.myconfig;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -81,6 +83,15 @@ public class MyConfig {
     }
     public static String changePassword(int id,String current,String newP){
         return BASE_URL+"change-password?id="+id+"&current_password="+current+"&new_password="+newP;
+    }
+    public static String getStudentByClassAndSection(int mClass,int mSection){
+        return BASE_URL+"search-student?section="+mSection+"&class="+mClass;
+    }
+    public static String getStudentByClass(int mClass){
+        return BASE_URL+"search-student?class="+mClass;
+    }
+    public static String getClassAndSection(){
+        return BASE_URL+"class";
     }
 
     public static void getProfileImage(String url, CircleImageView image, Context ctx){
@@ -306,6 +317,19 @@ return category;
             return hr+":"+min+" PM ";
         }
 
+    }
+
+    public static boolean isDeviceOnline(Context context) {
+        boolean isConnectionAvail = false;
+        try {
+            ConnectivityManager cm = (ConnectivityManager) context
+                    .getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo netInfo = cm.getActiveNetworkInfo();
+            return netInfo.isConnected();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return isConnectionAvail;
     }
 
 }

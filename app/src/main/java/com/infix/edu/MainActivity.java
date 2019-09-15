@@ -2,9 +2,12 @@ package com.infix.edu;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ProgressBar;
@@ -12,9 +15,11 @@ import android.widget.ProgressBar;
 import com.infix.edu.R;
 import com.infix.edu.activity.HomeActivity;
 import com.infix.edu.activity.LoginActivity;
+import com.infix.edu.myconfig.MyReceiver;
 
 public class MainActivity extends AppCompatActivity {
 
+    private BroadcastReceiver myReceiver = null;
 
     /** Duration of wait **/
     private final int SPLASH_DISPLAY_LENGTH = 1000;
@@ -28,6 +33,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         bar =  findViewById(R.id.splash_progress);
+
+        myReceiver = new MyReceiver();
+
+        broadcastIntent();
 
         new Thread(new Runnable() {
 
@@ -92,6 +101,15 @@ public class MainActivity extends AppCompatActivity {
         //Fetching the boolean value form sharedpreferences
         loggedIn = sharedPreferences.getBoolean("isLoged", false);
 
+    }
+
+    public void broadcastIntent() {
+        registerReceiver(myReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(myReceiver);
     }
 
 }

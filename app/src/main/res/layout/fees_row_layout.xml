@@ -48,22 +48,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Due Date"
-                android:textSize="10dp"
-                android:textStyle="bold"
-                android:fontFamily="@font/poppins_medium"
-                android:textColor="@color/profile_light_text_color"
+                style="@style/poppins_light_text.fees_text_light.fees_text_medium"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="05.12.2000"
-                android:textSize="10dp"
                 android:id="@+id/dueDate"
-                android:layout_marginTop="10dp"
-                android:padding="2dp"
-                android:fontFamily="@font/poppins_light"
-                android:textColor="@color/profile_light_text_color"
+                style="@style/poppins_light_text.fees_text_light"
                 />
 
         </LinearLayout>
@@ -80,22 +73,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Amount"
-                android:textSize="10dp"
-                android:textStyle="bold"
-                android:fontFamily="@font/poppins_medium"
-                android:textColor="@color/profile_light_text_color"
+                style="@style/poppins_light_text.fees_text_light.fees_text_medium"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5000.0"
-                android:textSize="10dp"
+                style="@style/poppins_light_text.fees_text_light"
                 android:id="@+id/feeAmount"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/poppins_light"
-                android:padding="2dp"
-                android:textColor="@color/profile_light_text_color"
                 />
 
         </LinearLayout>
@@ -111,22 +97,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="paid"
-                android:textSize="10dp"
-                android:textStyle="bold"
-                android:fontFamily="@font/poppins_medium"
-                android:textColor="@color/profile_light_text_color"
+                style="@style/poppins_light_text.fees_text_light.fees_text_medium"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="400.0"
-                android:textSize="10dp"
+                style="@style/poppins_light_text.fees_text_light"
                 android:id="@+id/feePaid"
-                android:layout_marginTop="10dp"
-                android:padding="2dp"
-                android:fontFamily="@font/poppins_light"
-                android:textColor="@color/profile_light_text_color"
                 />
 
         </LinearLayout>
@@ -142,22 +121,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Balance"
-                android:textSize="10dp"
-                android:textStyle="bold"
-                android:fontFamily="@font/poppins_medium"
-                android:textColor="@color/profile_light_text_color"
+                style="@style/poppins_light_text.fees_text_light.fees_text_medium"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="35000.0"
-                android:textSize="10dp"
+                style="@style/poppins_light_text.fees_text_light"
                 android:id="@+id/feeBalance"
-                android:layout_marginTop="10dp"
-                android:padding="2dp"
-                android:fontFamily="@font/poppins_light"
-                android:textColor="@color/profile_light_text_color"
                 />
 
         </LinearLayout>
@@ -173,10 +145,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Status"
-                android:textSize="10dp"
-                android:textStyle="bold"
-                android:fontFamily="@font/poppins_medium"
-                android:textColor="@color/profile_light_text_color"
+                style="@style/poppins_light_text.fees_text_light.fees_text_medium"
                 />
 
             <TextView

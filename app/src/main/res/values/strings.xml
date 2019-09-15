@@ -19,18 +19,15 @@
     </string-array>
 
     <string-array name="teachers_functions_name">
-        <item>Student</item>
-        <item>Inventory</item>
-        <item>Dashboard</item>
-        <item>Report</item>
+        <item>Students</item>
+        <item>Academics</item>
         <item>attendance</item>
         <item>Leave</item>
-        <item>Syllabus</item>
-        <item>Fees</item>
+        <item>Contents</item>
         <item>Notice</item>
         <item>Library</item>
         <item>Homework</item>
-        <item>Report</item>
+        <item>About</item>
     </string-array>
 
     <string-array name="students_functions_name">

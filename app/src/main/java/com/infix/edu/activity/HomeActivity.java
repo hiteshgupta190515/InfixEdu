@@ -32,6 +32,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.infix.edu.R;
 import com.infix.edu.adapter.HomeAdapterHome;
+import com.infix.edu.adapter.TeacherHomeAdapter;
 import com.infix.edu.myconfig.MyConfig;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -312,19 +313,18 @@ public class HomeActivity extends AppCompatActivity{
         images.clear();
 
         switch (role){
-            case 1:
-                names = getResources().getStringArray(R.array.admins_functions_name);
+                case 1:
+                    names = getResources().getStringArray(R.array.admins_functions_name);
                 break;
-            case 2:
-                names = getResources().getStringArray(R.array.students_functions_name);
+                case 2:
+                    names = getResources().getStringArray(R.array.students_functions_name);
                 break;
-            case 3:
-                names = getResources().getStringArray(R.array.parents_functions_name);
+                case 3:
+                    names = getResources().getStringArray(R.array.parents_functions_name);
                 break;
                 case 4:
                     names = getResources().getStringArray(R.array.teachers_functions_name);
                 break;
-
                 default:
                     names = getResources().getStringArray(R.array.default_functions_name);
                     break;
@@ -336,8 +336,13 @@ public class HomeActivity extends AppCompatActivity{
             images.add(imageSearch(n.toLowerCase().replace(" ","")));
         }
 
-        HomeAdapterHome homeAdapterHome = new HomeAdapterHome(this,names,images,iId,this);
-        recycler.setAdapter(homeAdapterHome);
+        if(role_id == 4){
+            TeacherHomeAdapter teacherHomeAdapter = new TeacherHomeAdapter(this,names,images,this);
+            recycler.setAdapter(teacherHomeAdapter);
+        }else{
+            HomeAdapterHome homeAdapterHome = new HomeAdapterHome(this,names,images,iId,this);
+            recycler.setAdapter(homeAdapterHome);
+        }
 
     }
     private int imageSearch(String text) {

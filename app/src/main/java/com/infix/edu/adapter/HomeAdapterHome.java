@@ -94,7 +94,7 @@ public class HomeAdapterHome extends RecyclerView.Adapter<HomeAdapterHome.ViewHo
                     case "Inventory":
                         activity.startActivity(new Intent(activity, InventoryActivity.class));
                         break;
-                    case "Admin Section":
+                    case "Admin SearchData":
                         activity.startActivity(new Intent(activity, AdminSectionActivity.class));
                         break;
                     case "Profile":
@@ -237,12 +237,6 @@ public class HomeAdapterHome extends RecyclerView.Adapter<HomeAdapterHome.ViewHo
             linearLayout = itemView.findViewById(R.id.linearLayout_home_adapter);
 
         }
-    }
-
-    public interface ClickListener {
-        void onClick(View view, int position);
-
-        void onLongClick(View view, int position);
     }
 
 }

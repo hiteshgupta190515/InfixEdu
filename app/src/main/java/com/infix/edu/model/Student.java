@@ -58,6 +58,8 @@ public class Student {
         this.religion_id = religion_id;
     }
 
+
+
     public Student(String full_name, String email, String student_photo) {
         this.full_name = full_name;
         this.email = email;

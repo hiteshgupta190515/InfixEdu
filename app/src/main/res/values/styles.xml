@@ -19,9 +19,19 @@
     <style name="poppins_light_text" parent="TextAppearance.AppCompat">
         <item name="android:padding">2dp</item>
         <item name="android:fontFamily">@font/poppins_light</item>
-        <item name="android:textColor">#727FC8</item>
+        <item name="android:textColor">@color/profile_light_text_color</item>
         <item name="android:textSize">12dp</item>
     </style>
 
+    <style name="poppins_light_text.fees_text_light">
+    <item name="android:layout_marginTop">10dp</item>
+    <item name="android:textSize">10dp</item>
+    </style>
+
+    <style name="poppins_light_text.fees_text_light.fees_text_medium">
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+        <item name="android:layout_marginTop">0dp</item>
+    </style>
 
 </resources>

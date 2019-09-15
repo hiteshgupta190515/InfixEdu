@@ -124,14 +124,14 @@ public class StudentFragment extends Fragment {
                             e.printStackTrace();
                         }
 
-                        if(students.size() > 0){
-
-                            adapter = new StudentListAdapter(students,getActivity());
-                            studentRecyclerView.setAdapter(adapter);
-                            adapter.notifyDataSetChanged();
-                            progressBar.setVisibility(View.GONE);
-
-                        }
+//                        if(students.size() > 0){
+//
+//                            adapter = new StudentListAdapter(students,getActivity());
+//                            studentRecyclerView.setAdapter(adapter);
+//                            adapter.notifyDataSetChanged();
+//                            progressBar.setVisibility(View.GONE);
+//
+//                        }
 
                     }
                 }, new Response.ErrorListener() {

@@ -179,7 +179,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 }
 
                 txtName.setText(stName);
-                txtClassSection.setText("Class : "+stClass+" | Section :"+stSection);
+                txtClassSection.setText("Class : "+stClass+" | SearchData :"+stSection);
                 txtRollAdm.setText("Roll : "+stRoll+" | Adm :"+stAdm);
 
                 try {
