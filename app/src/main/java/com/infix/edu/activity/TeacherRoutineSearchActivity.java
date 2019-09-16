@@ -31,7 +31,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class StudentSearchActivity extends AppCompatActivity {
+public class TeacherRoutineSearchActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private TextView txtToolbarText;
@@ -46,29 +46,23 @@ public class StudentSearchActivity extends AppCompatActivity {
     private int section_id;
     private String class_name;
     private String section_name;
-    private TextInputEditText etName;
-    private TextInputEditText etRoll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_search);
-
-        etName = findViewById(R.id.etSearchByName);
-        etRoll = findViewById(R.id.etSearchByROll);
-
-        toolbar = findViewById(R.id.toolbar);
-        txtToolbarText = findViewById(R.id.txtTitle);
+        setContentView(R.layout.activity_teacher_search_routine);
 
         spnClass = findViewById(R.id.choose_class_spinner);
         spnSection = findViewById(R.id.choose_section_spinner);
         btnSearch = findViewById(R.id.btnSearch);
 
+        toolbar = findViewById(R.id.toolbar);
+        txtToolbarText = findViewById(R.id.txtTitle);
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        txtToolbarText.setText("Student Search");
-
+        txtToolbarText.setText("Routine Search");
 
         getClassAndSectionName();
 
@@ -76,24 +70,16 @@ public class StudentSearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                String name = etName.getText().toString();
-                String roll = etRoll.getText().toString();
+                if (class_id != 0 && section_id != 0) {
 
-                Intent intent = new Intent(StudentSearchActivity.this,TeacherStudentActivity.class);
-                intent.putExtra("classid",class_id);
-                intent.putExtra("sectionid",section_id);
-                intent.putExtra("name",name);
-                intent.putExtra("roll",roll);
-                startActivity(intent);
+                    Intent intent = new Intent(TeacherRoutineSearchActivity.this, TeacherClassRoutineActivity.class);
+                    intent.putExtra("classid", class_id);
+                    intent.putExtra("sectionid", section_id);
+                    startActivity(intent);
 
-
-                //Toast.makeText(getApplicationContext(),section_id + " "+class_id + " "+name+" "+roll, Toast.LENGTH_SHORT).show();
-
-
-
+                }
             }
         });
-
 
     }
 
@@ -156,10 +142,10 @@ public class StudentSearchActivity extends AppCompatActivity {
 
                 if(classData.size() > 0){
 
-                    ArrayAdapter adapter1 = new ArrayAdapter(StudentSearchActivity.this,R.layout.spinner_row_layout,R.id.spn_text,classes);
+                    ArrayAdapter adapter1 = new ArrayAdapter(TeacherRoutineSearchActivity.this,R.layout.spinner_row_layout,R.id.spn_text,classes);
                     spnClass.setAdapter(adapter1);
 
-                    ArrayAdapter adapter2 = new ArrayAdapter(StudentSearchActivity.this,R.layout.spinner_row_layout,R.id.spn_text,sections);
+                    ArrayAdapter adapter2 = new ArrayAdapter(TeacherRoutineSearchActivity.this,R.layout.spinner_row_layout,R.id.spn_text,sections);
                     spnSection.setAdapter(adapter2);
 
                     spnSection.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

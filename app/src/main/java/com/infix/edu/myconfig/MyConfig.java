@@ -87,8 +87,17 @@ public class MyConfig {
     public static String getStudentByClassAndSection(int mClass,int mSection){
         return BASE_URL+"search-student?section="+mSection+"&class="+mClass;
     }
+    public static String getRoutineByClassAndSection(int id,int mClass,int mSection){
+        return BASE_URL+"section-routine/"+id+"/"+mClass+"/"+mSection;
+    }
     public static String getStudentByClass(int mClass){
         return BASE_URL+"search-student?class="+mClass;
+    }
+    public static String getStudentByName(String name){
+        return BASE_URL+"search-student?name="+name;
+    }
+    public static String getStudentByRoll(String roll){
+        return BASE_URL+"search-student?roll_no="+roll;
     }
     public static String getClassAndSection(){
         return BASE_URL+"class";

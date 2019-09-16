@@ -30,6 +30,14 @@
         <item>About</item>
     </string-array>
 
+    <string-array name="teachers_academics_functions_name">
+        <item>My Routine</item>
+        <item>Class Routine</item>
+        <item>Subjects</item>
+        <item>Classes</item>
+        <item>Section</item>
+    </string-array>
+
     <string-array name="students_functions_name">
         <item>Profile</item>
         <item>Fees</item>

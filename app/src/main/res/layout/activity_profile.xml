@@ -29,7 +29,6 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginTop="16dp"
                 android:transitionName="profile"
-                android:src="@mipmap/student_face"
                 app:civ_border_width="0dp"
                 android:layout_margin="20dp"
 
@@ -46,7 +45,7 @@
                 android:fontFamily="@font/poppins_medium"
                 android:textAppearance="?android:textAppearanceMedium"
                 android:textColor="#415094"
-                android:transitionName="name" />
+                android:transitionName="name"/>
 
             <TextView
                 android:id="@+id/student_class_section"

@@ -5,24 +5,29 @@
     android:layout_height="match_parent"
     >
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
 
-        <FrameLayout
-            android:id="@+id/fragment_container"
+        <include layout="@layout/toolbar"/>
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            >
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/studentRecycler"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-        </FrameLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/studentRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="785dp"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    </RelativeLayout>
+        </RelativeLayout>
+
+    </LinearLayout>
 
     <ProgressBar
         android:id="@+id/loading"

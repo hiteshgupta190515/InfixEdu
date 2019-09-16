@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.infix.edu.R;
 import com.infix.edu.activity.StudentSearchActivity;
+import com.infix.edu.activity.TeacherAcademicsActivity;
+import com.infix.edu.activity.TeacherRoutineSearchActivity;
 
 import java.util.ArrayList;
 
@@ -62,6 +64,15 @@ public class TeacherHomeAdapter extends RecyclerView.Adapter<TeacherHomeAdapter.
                         Intent library = new Intent(activity, StudentSearchActivity.class);
                         activity.startActivity(library);
                         break;
+                    case "Academics":
+                        Intent academics = new Intent(activity, TeacherAcademicsActivity.class);
+                        activity.startActivity(academics);
+                        break;
+                    case "Class Routine":
+                        Intent classRoutine = new Intent(activity, TeacherRoutineSearchActivity.class);
+                        activity.startActivity(classRoutine);
+                        break;
+
                 }
 
             }

@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.infix.edu.activity.ProfileActivity;
 import com.infix.edu.activity.StudentInformation;
 import com.infix.edu.R;
 import com.infix.edu.model.Student;
@@ -76,7 +77,8 @@ public class StudentListAdapter  extends RecyclerView.Adapter<StudentListAdapter
 
                 //Toast.makeText(ctx,students.get(position).getFull_name(), Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(ctx, StudentInformation.class);
+                Intent intent = new Intent(ctx, ProfileActivity.class);
+                intent.putExtra("id",students.get(position).getId());
 
                 if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
 

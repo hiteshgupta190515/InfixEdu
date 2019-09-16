@@ -16,7 +16,10 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.TeacherStudentActivity"></activity>
+        <activity android:name=".activity.TeacherClassRoutineActivity"></activity>
+        <activity android:name=".activity.TeacherRoutineSearchActivity" />
+        <activity android:name=".activity.TeacherAcademicsActivity" />
+        <activity android:name=".activity.TeacherStudentActivity" />
         <activity android:name=".activity.StudentSearchActivity" />
         <activity
             android:name=".activity.ParentsAboutActivity"

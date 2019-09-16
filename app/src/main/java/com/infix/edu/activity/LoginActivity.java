@@ -234,7 +234,7 @@ public class LoginActivity extends AppCompatActivity {
 //
 //                                if(rule != 0 && id != 0){
 //                                    //Starting profile activity
-//                                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+//                                    Intent intent = new Intent(LoginActivity.this, HomeActivity.classes);
 //                                    startActivity(intent);
 //                                    finish();
 //                                }
