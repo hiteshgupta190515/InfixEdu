@@ -51,7 +51,7 @@ public class RoutineAdapter extends RecyclerView.Adapter <RoutineAdapter.Routine
             holder.txtRoomNo.setTextSize(10);
             holder.txtSubject.setTextSize(10);
 
-            holder.txtTime.setText(routines.get(position).getStartTime()+"-"+routines.get(position).getEndTime());
+            holder.txtTime.setText(routines.get(position).getStartTime()+" - "+routines.get(position).getEndTime());
             holder.txtSubject.setText(routines.get(position).getSubject());
             holder.txtRoomNo.setText(routines.get(position).getRoomNo());
         }

@@ -90,6 +90,12 @@ public class MyConfig {
     public static String getRoutineByClassAndSection(int id,int mClass,int mSection){
         return BASE_URL+"section-routine/"+id+"/"+mClass+"/"+mSection;
     }
+    public static String getTeacherSubject(int id){
+        return BASE_URL+"subject/"+id;
+    }
+    public static String getTeacherMyRoutine(int id){
+        return BASE_URL+"my-routine/"+id;
+    }
     public static String getStudentByClass(int mClass){
         return BASE_URL+"search-student?class="+mClass;
     }

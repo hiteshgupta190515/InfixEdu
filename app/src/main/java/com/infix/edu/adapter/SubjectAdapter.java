@@ -37,7 +37,12 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
     public void onBindViewHolder(@NonNull SubjectViewHolder holder, int position) {
 
         holder.txtSubject.setText(subjects.get(position).getSubject());
-        holder.txtTeacher.setText(subjects.get(position).getTeacher());
+
+        if(subjects.get(position).getTeacher() == null){
+            holder.txtTeacher.setText(subjects.get(position).getCode());
+        }
+        else
+            holder.txtTeacher.setText(subjects.get(position).getTeacher());
 
         if(subjects.get(position).getType().equalsIgnoreCase("T")){
             holder.txtType.setText("Theory");

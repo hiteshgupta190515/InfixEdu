@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.infix.studentmanagement.com.infix.edu.activity.ProfileActivity"
     android:weightSum="6"
     >
 
@@ -54,7 +53,7 @@
                 android:layout_below="@+id/student_name"
                 android:layout_toRightOf="@id/student_poster"
                 android:textColor="@color/profile_light_text_color"
-                android:fontFamily="sans-serif-condensed"
+                android:fontFamily="@font/poppins_light"
                 android:textAppearance="?android:textAppearanceSmall" />
 
             <TextView
@@ -64,7 +63,7 @@
                 android:layout_below="@+id/student_class_section"
                 android:layout_toRightOf="@id/student_poster"
                 android:textColor="@color/profile_light_text_color"
-                android:fontFamily="sans-serif-condensed"
+                android:fontFamily="@font/poppins_light"
                 android:textAppearance="?android:textAppearanceSmall" />
 
             <LinearLayout
@@ -72,54 +71,127 @@
                 android:layout_height="match_parent"
                 android:layout_below="@id/student_roll_adm"
                 android:gravity="bottom"
-                android:layout_marginBottom="20dp"
                 android:orientation="horizontal"
                 android:id="@+id/p_linear"
                 >
 
-                <TextView
-                    android:id="@+id/personal"
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="PERSONAL"
-                    android:padding="5dp"
-                    android:textSize="10dp"
-                    android:textColor="#415094" />
+                    android:orientation="vertical"
+                    >
 
-                <TextView
-                    android:id="@+id/parents"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="PARENTS"
-                    android:padding="5dp"
-                    android:textSize="10dp"
-                    android:textColor="#415094" />
+                    <TextView
+                        android:id="@+id/personal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="PERSONAL"
+                        android:padding="5dp"
+                        android:textSize="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:textColor="#415094" />
 
-                <TextView
-                    android:id="@+id/transport"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="TRAMSPORT"
-                    android:padding="5dp"
-                    android:textSize="10dp"
-                    android:textColor="#415094" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:id="@+id/personalview"
+                        android:visibility="gone"
+                        android:background="@drawable/custom_gradient"
+                        />
 
-                <TextView
-                    android:id="@+id/others"
+
+                </LinearLayout>
+
+
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="OTHERS"
-                    android:padding="5dp"
-                    android:textSize="10dp"
-                    android:textColor="#415094" />
+                    android:orientation="vertical"
+                    >
+
+                    <TextView
+                        android:id="@+id/parents"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="PARENTS"
+                        android:padding="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:textSize="10dp"
+                        android:textColor="#415094" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:id="@+id/parentsview"
+                        android:visibility="gone"
+                        android:background="@drawable/custom_gradient"
+                        />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    >
+
+                    <TextView
+                        android:id="@+id/transport"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="TRANSPORT"
+                        android:padding="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:textSize="10dp"
+                        android:textColor="#415094" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:id="@+id/transportview"
+                        android:visibility="gone"
+                        android:background="@drawable/custom_gradient"
+                        />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    >
+
+                    <TextView
+                        android:id="@+id/others"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="OTHERS"
+                        android:padding="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:textSize="10dp"
+                        android:textColor="#415094" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:id="@+id/othersview"
+                        android:visibility="gone"
+                        android:background="@drawable/custom_gradient"
+                        />
+
+
+                </LinearLayout>
 
             </LinearLayout>
 

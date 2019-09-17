@@ -43,6 +43,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private SharedPreferences sharedPreferences;
     private Fragment profileFragment;
     private TextView txtPersonal,txtTransport,txtParent,txtOther;
+    private View vPersonal,vTransport,vParent,vOther;
     private TextView txtName,txtClassSection,txtRollAdm;
     private String stName,stClass,stSection,stRoll,stAdm,image;
     private CircleImageView studentPhoto,toolbarImage;
@@ -65,6 +66,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         txtParent = findViewById(R.id.parents);
         txtTransport = findViewById(R.id.transport);
         txtOther = findViewById(R.id.others);
+
+        vPersonal = findViewById(R.id.personalview);
+        vTransport = findViewById(R.id.transportview);
+        vParent = findViewById(R.id.parentsview);
+        vOther = findViewById(R.id.othersview);
 
         studentPhoto = findViewById(R.id.student_poster);
         toolbarImage = findViewById(R.id.profile);
@@ -126,18 +132,34 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.personal:
                 profileFragment = new PersonalFragment();
                 replaceFragment(profileFragment);
+                vPersonal.setVisibility(View.VISIBLE);
+                vParent.setVisibility(View.GONE);
+                vTransport.setVisibility(View.GONE);
+                vOther.setVisibility(View.GONE);
                 break;
             case R.id.parents:
                 profileFragment = new ParentsFragment();
                 replaceFragment(profileFragment);
+                vPersonal.setVisibility(View.GONE);
+                vParent.setVisibility(View.VISIBLE);
+                vTransport.setVisibility(View.GONE);
+                vOther.setVisibility(View.GONE);
                 break;
             case R.id.transport:
                 profileFragment = new TransportFragment();
                 replaceFragment(profileFragment);
+                vPersonal.setVisibility(View.GONE);
+                vParent.setVisibility(View.GONE);
+                vTransport.setVisibility(View.VISIBLE);
+                vOther.setVisibility(View.GONE);
                 break;
             case R.id.others:
                 profileFragment = new OthersFragment();
                 replaceFragment(profileFragment);
+                vPersonal.setVisibility(View.GONE);
+                vParent.setVisibility(View.GONE);
+                vTransport.setVisibility(View.GONE);
+                vOther.setVisibility(View.VISIBLE);
                 break;
 
         }

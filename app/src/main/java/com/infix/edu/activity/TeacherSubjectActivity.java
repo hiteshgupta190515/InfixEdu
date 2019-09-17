@@ -18,10 +18,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.infix.edu.adapter.SubjectAdapter;
-import com.infix.edu.myconfig.MyConfig;
 import com.infix.edu.R;
+import com.infix.edu.adapter.SubjectAdapter;
 import com.infix.edu.model.Subject;
+import com.infix.edu.myconfig.MyConfig;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,7 +31,7 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class StudentSubjectActivity extends AppCompatActivity {
+public class TeacherSubjectActivity extends AppCompatActivity {
 
     private ArrayList<Subject> subjects = new ArrayList<>();
     private RecyclerView recyclerView;
@@ -43,11 +43,10 @@ public class StudentSubjectActivity extends AppCompatActivity {
     private String profile_image_url;
     private CircleImageView profile;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_subject);
+        setContentView(R.layout.activity_teacher_subject);
 
         recyclerView = findViewById(R.id.subjectRecycler);
         recyclerView.setHasFixedSize(true);
@@ -61,20 +60,14 @@ public class StudentSubjectActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         txtToolbarText.setText("Subjects");
+
         sharedPreferences = getSharedPreferences("default", Context.MODE_PRIVATE);
         profile = findViewById(R.id.profile);
         profile_image_url = sharedPreferences.getString("profile_image",null);
-
-        //getting id role_id url based on parents and child
-        if(getIntent().getIntExtra("id",0) != 0){
-            id = getIntent().getIntExtra("id",0);
-        }else {
-            id = sharedPreferences.getInt("id",0);
-        }
+        id = sharedPreferences.getInt("id",0);
 
         getAllSUbject(id);
-        MyConfig.getProfileImage(profile_image_url,profile,StudentSubjectActivity.this);
-
+        MyConfig.getProfileImage(profile_image_url,profile,TeacherSubjectActivity.this);
     }
 
     @Override
@@ -91,7 +84,7 @@ public class StudentSubjectActivity extends AppCompatActivity {
 
         subjects.clear();
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, MyConfig.getSubjectsUrl(id), null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, MyConfig.getTeacherSubject(id), null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 
@@ -99,16 +92,18 @@ public class StudentSubjectActivity extends AppCompatActivity {
                     if(response.getBoolean("success")){
 
 
-                        JSONArray array = response.getJSONObject("data").getJSONArray("student_subjects");
+                        JSONArray array = response.getJSONObject("data").getJSONArray("subjectsName");
+
+
 
                         for(int i = 0 ; i < array.length() ; i++){
 
-                            String teacher_name = array.getJSONObject(i).getString("teacher_name");
-                            String subject_name = array.getJSONObject(i).getString("subject_name");
-                            String subject_type = array.getJSONObject(i).getString("subject_type");
-                            String subject_code = array.getJSONObject(i).getString("subject_code");
 
-                            Subject subject = new Subject(subject_name,teacher_name,subject_type,subject_code);
+                            String subject_name = array.getJSONObject(i).getString("subject_name");
+                            String subject_code = array.getJSONObject(i).getString("subject_code");
+                            String subject_type = array.getJSONObject(i).getString("subject_type");
+
+                            Subject subject = new Subject(subject_name,null,subject_type,subject_code);
 
                             subjects.add(subject);
 
@@ -123,7 +118,7 @@ public class StudentSubjectActivity extends AppCompatActivity {
 
                 if(subjects.size() > 0){
 
-                    adapter = new SubjectAdapter(subjects, StudentSubjectActivity.this);
+                    adapter = new SubjectAdapter(subjects, TeacherSubjectActivity.this);
                     recyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
 
