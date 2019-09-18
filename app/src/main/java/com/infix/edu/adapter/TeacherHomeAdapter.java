@@ -15,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.infix.edu.R;
+import com.infix.edu.activity.AddHomeWorkActivity;
+import com.infix.edu.activity.HomeworkTeacherActivity;
 import com.infix.edu.activity.StudentSearchActivity;
 import com.infix.edu.activity.TeacherAcademicsActivity;
 import com.infix.edu.activity.TeacherOwnRoutineActivity;
@@ -81,6 +83,14 @@ public class TeacherHomeAdapter extends RecyclerView.Adapter<TeacherHomeAdapter.
                     case "Subjects":
                         Intent subjects = new Intent(activity, TeacherSubjectActivity.class);
                         activity.startActivity(subjects);
+                        break;
+                    case "Homework":
+                        Intent homework = new Intent(activity, HomeworkTeacherActivity.class);
+                        activity.startActivity(homework);
+                        break;
+                    case "Add HW":
+                        Intent addhw = new Intent(activity, AddHomeWorkActivity.class);
+                        activity.startActivity(addhw);
                         break;
 
                 }

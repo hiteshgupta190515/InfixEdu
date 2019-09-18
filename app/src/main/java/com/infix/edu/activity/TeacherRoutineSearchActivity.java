@@ -40,12 +40,15 @@ public class TeacherRoutineSearchActivity extends AppCompatActivity {
     private Button btnSearch;
     private ArrayList<SearchData> classData = new ArrayList<>();
     private ArrayList<SearchData> sectionData = new ArrayList<>();
+    private ArrayList<SearchData> subjectData = new ArrayList<>();
     private ArrayList<String> classes = new ArrayList<>();
     private ArrayList<String> sections = new ArrayList<>();
+    private ArrayList<String> subjects = new ArrayList<>();
     private int class_id;
     private int section_id;
     private String class_name;
     private String section_name;
+    private String subject_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

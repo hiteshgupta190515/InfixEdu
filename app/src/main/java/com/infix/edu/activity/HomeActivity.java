@@ -92,6 +92,9 @@ public class HomeActivity extends AppCompatActivity{
         password = sharedPreferences.getString("password",null);
         name = sharedPreferences.getString("name", null);
 
+        //check domain exists or not if not logout
+        isEnabled();
+
         //getting id role_id url based on parents and child
         if(getIntent().getIntExtra("rule_id",0) == 2){
             iId = getIntent().getIntExtra("id",0);
@@ -424,5 +427,39 @@ public class HomeActivity extends AppCompatActivity{
         requestQueue.add(request);
     }
 
+    public void isEnabled(){
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, MyConfig.isEnabled(), null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                try {
+                    if(!response.getBoolean("success")){
+
+                        SharedPreferences pref = getSharedPreferences("default", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = pref.edit();
+                        editor.clear();
+                        editor.commit();
+
+                        Toast.makeText(HomeActivity.this, "please contact with support team!", Toast.LENGTH_LONG).show();
+
+                        startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+                        finish();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(HomeActivity.this, "try again later", Toast.LENGTH_LONG).show();
+            }
+        });
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(request);
+    }
 
 }
