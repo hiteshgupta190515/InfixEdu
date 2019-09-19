@@ -48,6 +48,7 @@ public class StudentSearchActivity extends AppCompatActivity {
     private String section_name;
     private TextInputEditText etName;
     private TextInputEditText etRoll;
+    private String status;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +70,8 @@ public class StudentSearchActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         txtToolbarText.setText("Student Search");
 
+        status = getIntent().getStringExtra("status");
+
 
         getClassAndSectionName();
 
@@ -82,6 +85,7 @@ public class StudentSearchActivity extends AppCompatActivity {
                 Intent intent = new Intent(StudentSearchActivity.this,TeacherStudentActivity.class);
                 intent.putExtra("classid",class_id);
                 intent.putExtra("sectionid",section_id);
+                intent.putExtra("status",status);
                 intent.putExtra("name",name);
                 intent.putExtra("roll",roll);
                 startActivity(intent);

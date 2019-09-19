@@ -46,6 +46,7 @@ public class AttendenceCalenderActivity extends AppCompatActivity {
 
     private SharedPreferences sharedPreferences;
     private int id;
+    private int role_id;
 
     private int present = 0;
     private int absent = 0;
@@ -68,6 +69,8 @@ public class AttendenceCalenderActivity extends AppCompatActivity {
     private String profile_image_url;
     private CircleImageView profile;
 
+    private String status;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +86,8 @@ public class AttendenceCalenderActivity extends AppCompatActivity {
         right_image = findViewById(R.id.nextButton );
 
         sharedPreferences = getSharedPreferences("default", Context.MODE_PRIVATE);
+        role_id = sharedPreferences.getInt("role",0);
+        status = getIntent().getStringExtra("status");
 
         //getting id role_id url based on parents and child
         if(getIntent().getIntExtra("id",0) != 0){
@@ -175,9 +180,28 @@ public class AttendenceCalenderActivity extends AppCompatActivity {
 
     void getAttendanceCalender(int i, final int m, final int y){
 
+        String url;
+
         attendences.clear();
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, MyConfig.getStudentAttendence(i,m,y), null, new Response.Listener<JSONObject>() {
+        //this method execute by role_id and status if
+        //status is attentance then it will show student attendance else
+        //it will show teacher attendance in the end else it will run for only student
+        if(role_id == 4) {
+
+            if (status.equalsIgnoreCase("attendance")) {
+
+                url = MyConfig.getStudentAttendence(i,m,y);
+
+            } else {
+
+                url = MyConfig.getTeacherAttendence(i, m, y);
+
+            }
+        }else
+             url = MyConfig.getStudentAttendence(i,m,y);
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 
@@ -188,8 +212,6 @@ public class AttendenceCalenderActivity extends AppCompatActivity {
                         JSONArray array = response.getJSONObject("data").getJSONArray("attendances");
                         JSONObject prev_month_object = response.getJSONObject("data").getJSONObject("previousMonthDetails");
 
-                        int total_day = response.getJSONObject("data").getInt("days");
-
                         int p_day = prev_month_object.getInt("day");
                         String p_week_name = prev_month_object.getString("week_name");
 
@@ -198,15 +220,6 @@ public class AttendenceCalenderActivity extends AppCompatActivity {
                             attendences.add(new Attendence(String.valueOf(p_day - j),j+1));
 
                         }
-
-//                        for(int a = 1 ; a <= total_day ; a++){
-//
-//                            if(a < 10){
-//                                attendences.add(new Attendence("0"+String.valueOf(a),1));
-//                            }else{
-//                                attendences.add(new Attendence(String.valueOf(a),1));
-//                            }
-//                        }
 
                         for(int k = 0 ; k < array.length() ; k++){
 

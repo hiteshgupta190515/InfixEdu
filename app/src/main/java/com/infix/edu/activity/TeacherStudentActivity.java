@@ -37,6 +37,7 @@ public class TeacherStudentActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TextView txtToolbarText;
     private String url;
+    private String status;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +63,7 @@ public class TeacherStudentActivity extends AppCompatActivity {
         int section_id = getIntent().getIntExtra("sectionid",0);
         String name = getIntent().getStringExtra("name").trim();
         String roll = getIntent().getStringExtra("roll").trim();
+        status = getIntent().getStringExtra("status");
 
         if(!roll.equals("")){
             url = MyConfig.getStudentByRoll(roll);
@@ -126,7 +128,7 @@ public class TeacherStudentActivity extends AppCompatActivity {
 
                         if(students.size() > 0){
 
-                            adapter = new StudentListAdapter(students,TeacherStudentActivity.this);
+                            adapter = new StudentListAdapter(students,TeacherStudentActivity.this,status);
                             studentRecyclerView.setAdapter(adapter);
                             adapter.notifyDataSetChanged();
                         }
@@ -179,7 +181,7 @@ public class TeacherStudentActivity extends AppCompatActivity {
 
                         if(students.size() > 0){
 
-                            adapter = new StudentListAdapter(students,TeacherStudentActivity.this);
+                            adapter = new StudentListAdapter(students,TeacherStudentActivity.this,status);
                             studentRecyclerView.setAdapter(adapter);
                             adapter.notifyDataSetChanged();
                         }

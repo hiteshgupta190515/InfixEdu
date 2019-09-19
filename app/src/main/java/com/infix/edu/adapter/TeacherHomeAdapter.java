@@ -16,11 +16,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.infix.edu.R;
 import com.infix.edu.activity.AddHomeWorkActivity;
+import com.infix.edu.activity.AttendenceCalenderActivity;
 import com.infix.edu.activity.HomeworkTeacherActivity;
 import com.infix.edu.activity.StudentSearchActivity;
 import com.infix.edu.activity.TeacherAcademicsActivity;
+import com.infix.edu.activity.TeacherAttandenceActivity;
 import com.infix.edu.activity.TeacherOwnRoutineActivity;
 import com.infix.edu.activity.TeacherRoutineSearchActivity;
+import com.infix.edu.activity.TeacherStudentActivity;
 import com.infix.edu.activity.TeacherSubjectActivity;
 
 import java.util.ArrayList;
@@ -66,6 +69,7 @@ public class TeacherHomeAdapter extends RecyclerView.Adapter<TeacherHomeAdapter.
 
                     case "Students":
                         Intent library = new Intent(activity, StudentSearchActivity.class);
+                        library.putExtra("status","dashborad");
                         activity.startActivity(library);
                         break;
                     case "Academics":
@@ -91,6 +95,20 @@ public class TeacherHomeAdapter extends RecyclerView.Adapter<TeacherHomeAdapter.
                     case "Add HW":
                         Intent addhw = new Intent(activity, AddHomeWorkActivity.class);
                         activity.startActivity(addhw);
+                        break;
+                    case "Attendance":
+                        Intent atten = new Intent(activity, TeacherAttandenceActivity.class);
+                        activity.startActivity(atten);
+                        break;
+                    case "My Attendance":
+                        Intent myAttend = new Intent(activity, AttendenceCalenderActivity.class);
+                        myAttend.putExtra("status","myattendance");
+                        activity.startActivity(myAttend);
+                        break;
+                    case "Search Attendance":
+                        Intent srAttend = new Intent(activity, StudentSearchActivity.class);
+                        srAttend.putExtra("status","attendance");
+                        activity.startActivity(srAttend);
                         break;
 
                 }

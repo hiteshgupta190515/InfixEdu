@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.infix.edu.activity.AttendenceCalenderActivity;
 import com.infix.edu.activity.ProfileActivity;
 import com.infix.edu.activity.StudentInformation;
 import com.infix.edu.R;
@@ -33,10 +34,12 @@ public class StudentListAdapter  extends RecyclerView.Adapter<StudentListAdapter
 
     private ArrayList<Tstudent> students;
     private Context ctx;
+    private String status;
 
-    public StudentListAdapter(ArrayList<Tstudent> students, Context ctx){
+    public StudentListAdapter(ArrayList<Tstudent> students, Context ctx,String status){
         this.students = students;
         this.ctx = ctx;
+        this.status = status;
     }
 
     @NonNull
@@ -75,9 +78,16 @@ public class StudentListAdapter  extends RecyclerView.Adapter<StudentListAdapter
             @Override
             public void onClick(View view) {
 
-                //Toast.makeText(ctx,students.get(position).getFull_name(), Toast.LENGTH_SHORT).show();
+                Intent intent;
 
-                Intent intent = new Intent(ctx, ProfileActivity.class);
+                //Toast.makeText(ctx,students.get(position).getFull_name(), Toast.LENGTH_SHORT).show();
+                if(status.equalsIgnoreCase("attendance")){
+                     intent = new Intent(ctx, AttendenceCalenderActivity.class);
+                     intent.putExtra("status",status);
+                }else{
+                     intent = new Intent(ctx, ProfileActivity.class);
+                }
+
                 intent.putExtra("id",students.get(position).getId());
 
                 if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {

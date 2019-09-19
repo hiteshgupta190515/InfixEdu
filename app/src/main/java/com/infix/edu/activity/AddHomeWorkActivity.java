@@ -1,12 +1,21 @@
 package com.infix.edu.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -26,15 +35,32 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.infix.edu.R;
-import com.infix.edu.adapter.SubjectAdapter;
+import com.infix.edu.model.AddHomeWork;
 import com.infix.edu.model.SearchData;
-import com.infix.edu.model.Subject;
 import com.infix.edu.myconfig.MyConfig;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -60,7 +86,7 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
     private String section_name;
     private String subject_name;
     private int subject_id;
-    private TextView txtBrowse;
+    private TextView txtBrowse,txt_attach_file;
     private EditText etDescription;
     private LinearLayout assign_date;
     private LinearLayout submission_date;
@@ -73,8 +99,15 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
 
     private int year, month, day;
     private DatePickerDialog datePickerDialog;
-    private String mAssign_date,mSubmission_date;
-    private TextView txtAssign,txtSubmission;
+    private String mAssign_date, mSubmission_date;
+    private TextView txtAssign, txtSubmission;
+
+    private Uri path;
+    //storage permission code
+    private static final int STORAGE_PERMISSION_CODE = 123;
+    private boolean isPermissionGranted = false;
+    String filePath;
+    File file;
 
 
     @Override
@@ -89,6 +122,7 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
 
         txtBrowse = findViewById(R.id.txtBrowse);
         txtBrowse.getPaint().setUnderlineText(true);
+        txt_attach_file = findViewById(R.id.txt_attach_file);
 
         etDescription = findViewById(R.id.comments_textbox);
 
@@ -116,9 +150,9 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
 
         sharedPreferences = getSharedPreferences("default", Context.MODE_PRIVATE);
         profile = findViewById(R.id.profile);
-        profile_image_url = sharedPreferences.getString("profile_image",null);
-        id = sharedPreferences.getInt("id",0);
-        MyConfig.getProfileImage(profile_image_url,profile,AddHomeWorkActivity.this);
+        profile_image_url = sharedPreferences.getString("profile_image", null);
+        id = sharedPreferences.getInt("id", 0);
+        MyConfig.getProfileImage(profile_image_url, profile, AddHomeWorkActivity.this);
 
 
         getClassAndSectionName();
@@ -130,6 +164,9 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
             public void onClick(View view) {
 
                 String description = etDescription.getText().toString();
+
+                AddHomeWork homeWork = new AddHomeWork(mAssign_date,mSubmission_date,description,class_id,section_id,subject_id,id);
+
 
             }
         });
@@ -146,7 +183,22 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
         return super.onOptionsItemSelected(item);
     }
 
-    void getClassAndSectionName(){
+    public void onActivityResult(int requestCode, int resultCode, Intent result) {
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 1) {
+                path = result.getData();
+                file = new File(path.getPath());
+
+                if(file != null)
+                    txt_attach_file.setText(file.toString());
+
+                //Toast.makeText(getApplicationContext(), file + "", Toast.LENGTH_SHORT).show();
+
+            }
+        }
+    }
+
+    void getClassAndSectionName() {
 
         classData.clear();
         sectionData.clear();
@@ -157,7 +209,7 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
 
 
                 try {
-                    if(response.getBoolean("success")){
+                    if (response.getBoolean("success")) {
 
                         JSONObject main = response.getJSONObject("data");
                         JSONArray classNameArray = main.getJSONArray("classes");
@@ -166,21 +218,21 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
                         classes.add("select classes");
                         sections.add("select section");
 
-                        for(int i = 0 ; i < classNameArray.length() ; i++){
+                        for (int i = 0; i < classNameArray.length(); i++) {
 
                             String className = classNameArray.getJSONObject(i).getString("class_name");
                             classes.add(className);
-                            int id = classNameArray.getJSONObject(i).getInt("id");
-                            classData.add(new SearchData(className,id));
+                            class_id = classNameArray.getJSONObject(i).getInt("id");
+                            classData.add(new SearchData(className, class_id));
 
                         }
 
-                        for(int i = 0 ; i < sectionNameArray.length() ; i++){
+                        for (int i = 0; i < sectionNameArray.length(); i++) {
 
                             String sectionName = sectionNameArray.getJSONObject(i).getString("section_name");
                             sections.add(sectionName);
-                            int id = sectionNameArray.getJSONObject(i).getInt("id");
-                            sectionData.add(new SearchData(sectionName,id));
+                            section_id = sectionNameArray.getJSONObject(i).getInt("id");
+                            sectionData.add(new SearchData(sectionName, section_id));
 
                         }
 
@@ -193,21 +245,21 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
                     e.printStackTrace();
                 }
 
-                if(classData.size() > 0){
+                if (classData.size() > 0) {
 
-                    ArrayAdapter adapter1 = new ArrayAdapter(AddHomeWorkActivity.this,R.layout.spinner_row_layout,R.id.spn_text,classes);
+                    ArrayAdapter adapter1 = new ArrayAdapter(AddHomeWorkActivity.this, R.layout.spinner_row_layout, R.id.spn_text, classes);
                     spnClass.setAdapter(adapter1);
 
-                    ArrayAdapter adapter2 = new ArrayAdapter(AddHomeWorkActivity.this,R.layout.spinner_row_layout,R.id.spn_text,sections);
+                    ArrayAdapter adapter2 = new ArrayAdapter(AddHomeWorkActivity.this, R.layout.spinner_row_layout, R.id.spn_text, sections);
                     spnSection.setAdapter(adapter2);
 
                     spnSection.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                            if(i > 0){
-                                section_name = classData.get(i-1).getKey();
-                                section_id = classData.get(i-1).getValue();
+                            if (i > 0) {
+                                section_name = classData.get(i - 1).getKey();
+                                section_id = classData.get(i - 1).getValue();
 //                                Toast.makeText(getApplicationContext(),sectionData.get(i-1).getKey()+"   "+sectionData.get(i-1).getValue(),Toast.LENGTH_SHORT).show();
                             }
 
@@ -223,10 +275,10 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                            if(i > 0){
+                            if (i > 0) {
 
-                                class_name = classData.get(i-1).getKey();
-                                class_id = classData.get(i-1).getValue();
+                                class_name = classData.get(i - 1).getKey();
+                                class_id = classData.get(i - 1).getValue();
 //                                Toast.makeText(getApplicationContext(),classData.get(i-1).getKey()+"   "+classData.get(i-1).getValue(),Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -244,7 +296,7 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),"error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -253,7 +305,7 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
 
     }
 
-    void getAllSUbject(int id){
+    void getAllSUbject(int id) {
 
         subjects.clear();
         subjectData.clear();
@@ -263,19 +315,19 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
             public void onResponse(JSONObject response) {
 
                 try {
-                    if(response.getBoolean("success")){
+                    if (response.getBoolean("success")) {
 
 
                         JSONArray array = response.getJSONObject("data").getJSONArray("subjectsName");
 
                         subjects.add("select subject");
 
-                        for(int i = 0 ; i < array.length() ; i++){
+                        for (int i = 0; i < array.length(); i++) {
 
                             String subject_name = array.getJSONObject(i).getString("subject_name");
-                            int subject_id = array.getJSONObject(i).getInt("subject_id");
+                            subject_id = array.getJSONObject(i).getInt("subject_id");
 
-                            subjectData.add(new SearchData(subject_name,subject_id));
+                            subjectData.add(new SearchData(subject_name, subject_id));
                             subjects.add(subject_name);
 
                         }
@@ -287,19 +339,19 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
                     e.printStackTrace();
                 }
 
-                if(subjects.size() > 0){
+                if (subjects.size() > 0) {
 
-                    ArrayAdapter adapter = new ArrayAdapter(AddHomeWorkActivity.this,R.layout.spinner_row_layout,R.id.spn_text,subjects);
+                    ArrayAdapter adapter = new ArrayAdapter(AddHomeWorkActivity.this, R.layout.spinner_row_layout, R.id.spn_text, subjects);
                     spnSubject.setAdapter(adapter);
 
                     spnSubject.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                            if(i > 0){
-                                subject_id = subjectData.get(i-1).getValue();
+                            if (i > 0) {
+                                subject_id = subjectData.get(i - 1).getValue();
 
-                                Toast.makeText(getApplicationContext(),subject_id+"",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), subject_id + "", Toast.LENGTH_SHORT).show();
 
                             }
                         }
@@ -316,7 +368,7 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),"error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -328,7 +380,7 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onClick(View view) {
 
-        switch (view.getId()){
+        switch (view.getId()) {
 
             case R.id.assign_date:
                 datePickerDialog = new DatePickerDialog(AddHomeWorkActivity.this, new DatePickerDialog.OnDateSetListener() {
@@ -355,7 +407,12 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
                 datePickerDialog.show();
                 break;
             case R.id.attach_file:
-                Toast.makeText(getApplicationContext(),"attach file",Toast.LENGTH_SHORT).show();
+
+                requestStoragePermission();
+
+                if (isPermissionGranted) {
+                    getFile();
+                }
                 break;
 
         }
@@ -381,5 +438,80 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
         return dayMonth + "/" + monthYear + "/" + String.valueOf(year);
 
     }
+
+    public void getFile() {
+        Intent intent = new Intent();
+        intent.setType("*/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select PDF"), 1);
+    }
+
+    //Requesting permission
+    private void requestStoragePermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            isPermissionGranted = true;
+        }
+
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            //If the user has denied the permission previously your code will come to this block
+            //Here you can explain why you need this permission
+            //Explain here why you need this permission
+        }
+        //And finally ask for the permission
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+    }
+
+    //This method will be called when the user will tap on allow or deny
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        //Checking the request code of our request
+        if (requestCode == STORAGE_PERMISSION_CODE) {
+
+            //If permission is granted
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                //Displaying a toast
+                //Toast.makeText(this, "Permission granted now you can read the storage", Toast.LENGTH_LONG).show();
+
+            } else {
+                //Displaying another toast if permission is not granted
+                Toast.makeText(this, "Oops you just denied the permission", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+//            .appendQueryParameter("class", String.valueOf(homeWork.getClassId()))
+//            .appendQueryParameter("section", String.valueOf(homeWork.getSectionId()))
+//            .appendQueryParameter("subject", String.valueOf(homeWork.getSubjectId()))
+//            .appendQueryParameter("assign_date", String.valueOf(homeWork.getAssign_date()))
+//            .appendQueryParameter("submission_date", String.valueOf(homeWork.getSubmission_date()))
+//            .appendQueryParameter("description", String.valueOf(homeWork.getDescription()))
+//            .appendQueryParameter("homework_file", String.valueOf(path))
+//            .appendQueryParameter("teacher_id", String.valueOf(homeWork.getTeacherId()));
+
+//    public static void executeMultipartPost(String url, String imgPath, String field1, String field2){
+//        try {
+//            HttpClient client = new DefaultHttpClient();
+//            HttpPost poster = new HttpPost(url);
+//
+//            File image = new File(imgPath);  //get the actual file from the device
+//            MultipartEntity entity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
+//            entity.addPart("field1", new StringBody(field1));
+//            entity.addPart("field2", new StringBody(field2));
+//            entity.addPart("image", new FileBody(image));
+//            poster.setEntity(entity);
+//
+//            client.execute(poster, new ResponseHandler<Object>() {
+//                public Object handleResponse(HttpResponse response) throws ClientProtocolException, IOException {
+//                    HttpEntity respEntity = response.getEntity();
+//                    String responseString = EntityUtils.toString(respEntity);
+//                    // do something with the response string
+//                    return null;
+//                }
+//            });
+//        } catch (Exception e){
+//            //do something with the error
+//        }
+//    }
 
 }

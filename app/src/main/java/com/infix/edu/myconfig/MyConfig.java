@@ -11,7 +11,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MyConfig {
 
-    final public static String ROOT_URL = "https://demo_spondon_infixedu.com/";
+    final public static String ROOT_URL = "https://infixedu.com/";
     final public static String BASE_URL = ROOT_URL+"api/";
     final public static String STUDENT_LIST = BASE_URL+"student-list";
     final public static String STUDENT_DORMITORY_LIST = BASE_URL+"student-dormitory";
@@ -21,6 +21,7 @@ public class MyConfig {
     final public static String VISITOR_LIST = BASE_URL+"visitor";
     final public static String COMPLAINT_LIST = BASE_URL+"complaint";
     final public static String ABOUT = BASE_URL+"parent-about";
+    final public static String UPLOAD_HOMEWORK = BASE_URL+"add-homework";
 
     public static String getLoginUrl(String email,String password){
 
@@ -80,6 +81,10 @@ public class MyConfig {
     }
     public static String getStudentAttendence(int id,int month,int year){
         return BASE_URL+"student-my-attendance/"+id+"?month="+month+"&year="+year;
+    }
+
+    public static String getTeacherAttendence(int id,int month,int year){
+        return BASE_URL+"my-attendance/"+id+"?month="+month+"&year="+year;
     }
 
     public static String getStudentClsExamShedule(int id,int code){

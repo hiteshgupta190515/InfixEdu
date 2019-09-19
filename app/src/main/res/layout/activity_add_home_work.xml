@@ -168,6 +168,7 @@
             android:layout_height="wrap_content"
             android:minHeight="40dp"
             android:text="Attach File"
+            android:id="@+id/txt_attach_file"
             android:textSize="12dp"
             android:fontFamily="@font/poppins_light"
             />

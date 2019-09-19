@@ -21,7 +21,7 @@
     <string-array name="teachers_functions_name">
         <item>Students</item>
         <item>Academics</item>
-        <item>attendance</item>
+        <item>Attendance</item>
         <item>Leave</item>
         <item>Contents</item>
         <item>Notice</item>
@@ -39,6 +39,11 @@
     <string-array name="teachers_homework_functions_name">
         <item>Add HW</item>
         <item>HW List</item>
+    </string-array>
+
+    <string-array name="teachers_attendance_functions_name">
+        <item>Search Attendance</item>
+        <item>My Attendance</item>
     </string-array>
 
     <string-array name="students_functions_name">
