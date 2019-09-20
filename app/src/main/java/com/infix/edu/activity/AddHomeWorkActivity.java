@@ -13,11 +13,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -36,35 +35,24 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.infix.edu.R;
 import com.infix.edu.model.AddHomeWork;
+import com.infix.edu.model.HomeWork;
 import com.infix.edu.model.SearchData;
 import com.infix.edu.myconfig.MyConfig;
+import com.nbsp.materialfilepicker.ui.FilePickerActivity;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
 
 public class AddHomeWorkActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -167,9 +155,56 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
 
                 AddHomeWork homeWork = new AddHomeWork(mAssign_date,mSubmission_date,description,class_id,section_id,subject_id,id);
 
+                send_data_to_server(homeWork);
+
+            }
+
+        });
+
+    }
+
+    private void send_data_to_server(AddHomeWork homeWork) {
+
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                //File f  = new File(result.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
+                String content_type = getMimeType(file.getPath());
+
+                String file_path = file.getAbsolutePath();
+                OkHttpClient client = new OkHttpClient();
+                RequestBody file_body = RequestBody.create(MediaType.parse(content_type), file);
+
+                RequestBody request_body = new MultipartBody.Builder()
+                        .setType(MultipartBody.FORM)
+                        .addFormDataPart("type", content_type)
+                        .addFormDataPart("uploaded_file", file_path.substring(file_path.lastIndexOf("/") + 1), file_body)
+                        .build();
+
+                okhttp3.Request request = new okhttp3.Request.Builder()
+                        .url(MyConfig.UPLOAD_HOMEWORK)
+                        .post(request_body)
+                        .build();
+
+                try {
+
+                    okhttp3.Response response = client.newCall(request).execute();
+
+                    if (!response.isSuccessful()) {
+                        throw new IOException("Error : " + response);
+                    }
+
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
 
             }
         });
+
+        t.start();
 
     }
 
@@ -183,16 +218,18 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
         return super.onOptionsItemSelected(item);
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent result) {
+    public void onActivityResult(int requestCode, int resultCode, final Intent result) {
+        super.onActivityResult(requestCode, resultCode, result);
         if (resultCode == RESULT_OK) {
             if (requestCode == 1) {
                 path = result.getData();
                 file = new File(path.getPath());
 
-                if(file != null)
+                if (file != null)
                     txt_attach_file.setText(file.toString());
 
-                //Toast.makeText(getApplicationContext(), file + "", Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(getApplicationContext(), file + "", Toast.LENGTH_SHORT).show();
 
             }
         }
@@ -489,29 +526,14 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
 //            .appendQueryParameter("homework_file", String.valueOf(path))
 //            .appendQueryParameter("teacher_id", String.valueOf(homeWork.getTeacherId()));
 
-//    public static void executeMultipartPost(String url, String imgPath, String field1, String field2){
-//        try {
-//            HttpClient client = new DefaultHttpClient();
-//            HttpPost poster = new HttpPost(url);
-//
-//            File image = new File(imgPath);  //get the actual file from the device
-//            MultipartEntity entity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
-//            entity.addPart("field1", new StringBody(field1));
-//            entity.addPart("field2", new StringBody(field2));
-//            entity.addPart("image", new FileBody(image));
-//            poster.setEntity(entity);
-//
-//            client.execute(poster, new ResponseHandler<Object>() {
-//                public Object handleResponse(HttpResponse response) throws ClientProtocolException, IOException {
-//                    HttpEntity respEntity = response.getEntity();
-//                    String responseString = EntityUtils.toString(respEntity);
-//                    // do something with the response string
-//                    return null;
-//                }
-//            });
-//        } catch (Exception e){
-//            //do something with the error
-//        }
-//    }
+
+
+
+    private String getMimeType(String path) {
+
+        String extension = MimeTypeMap.getFileExtensionFromUrl(path);
+
+        return MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
+    }
 
 }
