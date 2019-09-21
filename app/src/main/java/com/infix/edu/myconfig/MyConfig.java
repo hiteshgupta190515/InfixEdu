@@ -21,7 +21,7 @@ public class MyConfig {
     final public static String VISITOR_LIST = BASE_URL+"visitor";
     final public static String COMPLAINT_LIST = BASE_URL+"complaint";
     final public static String ABOUT = BASE_URL+"parent-about";
-    final public static String UPLOAD_HOMEWORK = BASE_URL+"add-homework";
+    final public static String UPLOAD_HOMEWORK = BASE_URL+"add-homework/";
 
     public static String getLoginUrl(String email,String password){
 
@@ -41,6 +41,9 @@ public class MyConfig {
     }
     public static String getzhomeWorksUrl(int id){
         return BASE_URL+"student-homework/"+id;
+    }
+    public static String getHomeWorkListUrl(int id){
+        return BASE_URL+"homework-list/"+id;
     }
     public static String getSubjectsUrl(int id){
         return BASE_URL+"studentSubject/"+id;

@@ -17,7 +17,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.infix.edu.R;
 import com.infix.edu.activity.AddHomeWorkActivity;
 import com.infix.edu.activity.AttendenceCalenderActivity;
+import com.infix.edu.activity.HomeActivity;
+import com.infix.edu.activity.HomeWorkActivity;
 import com.infix.edu.activity.HomeworkTeacherActivity;
+import com.infix.edu.activity.LibraryActivity;
+import com.infix.edu.activity.NoticeActivity;
 import com.infix.edu.activity.StudentSearchActivity;
 import com.infix.edu.activity.TeacherAcademicsActivity;
 import com.infix.edu.activity.TeacherAttandenceActivity;
@@ -109,6 +113,18 @@ public class TeacherHomeAdapter extends RecyclerView.Adapter<TeacherHomeAdapter.
                         Intent srAttend = new Intent(activity, StudentSearchActivity.class);
                         srAttend.putExtra("status","attendance");
                         activity.startActivity(srAttend);
+                        break;
+                    case "Notice":
+                        Intent notice = new Intent(activity, NoticeActivity.class);
+                        activity.startActivity(notice);
+                        break;
+                    case "Library":
+                        Intent lib = new Intent(activity, LibraryActivity.class);
+                        activity.startActivity(lib);
+                        break;
+                    case "HW List":
+                        Intent hw = new Intent(activity, HomeWorkActivity.class);
+                        activity.startActivity(hw);
                         break;
 
                 }

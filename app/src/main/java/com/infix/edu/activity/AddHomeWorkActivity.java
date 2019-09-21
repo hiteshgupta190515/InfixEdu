@@ -13,9 +13,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.FileUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -34,39 +33,33 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.infix.edu.Interface.FileUpload;
+import com.infix.edu.Interface.ProgressRequestBody;
+import com.infix.edu.Interface.RetrofitFileClient;
+import com.infix.edu.Interface.UploadCallBack;
 import com.infix.edu.R;
 import com.infix.edu.model.AddHomeWork;
 import com.infix.edu.model.SearchData;
 import com.infix.edu.myconfig.MyConfig;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
+
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.http.Multipart;
 
-public class AddHomeWorkActivity extends AppCompatActivity implements View.OnClickListener {
+public class AddHomeWorkActivity extends AppCompatActivity implements View.OnClickListener, UploadCallBack {
 
     private Toolbar toolbar;
     private TextView txtToolbarText;
@@ -106,8 +99,14 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
     //storage permission code
     private static final int STORAGE_PERMISSION_CODE = 123;
     private boolean isPermissionGranted = false;
-    String filePath;
     File file;
+    private int serverResponseCode;
+
+    private FileUpload mService;
+
+    private FileUpload getApiUpload(){
+        return RetrofitFileClient.getClient(MyConfig.UPLOAD_HOMEWORK).create(FileUpload.class);
+    }
 
 
     @Override
@@ -148,6 +147,8 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         txtToolbarText.setText("Add Homework");
 
+        mService = getApiUpload();
+
         sharedPreferences = getSharedPreferences("default", Context.MODE_PRIVATE);
         profile = findViewById(R.id.profile);
         profile_image_url = sharedPreferences.getString("profile_image", null);
@@ -159,6 +160,7 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
         getAllSUbject(id);
 
 
+
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -167,6 +169,13 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
 
                 AddHomeWork homeWork = new AddHomeWork(mAssign_date,mSubmission_date,description,class_id,section_id,subject_id,id);
 
+//                try {
+//                    sendDataToServer(file,homeWork);
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+
+                uploadFile();
 
             }
         });
@@ -192,10 +201,49 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
                 if(file != null)
                     txt_attach_file.setText(file.toString());
 
-                //Toast.makeText(getApplicationContext(), file + "", Toast.LENGTH_SHORT).show();
+//                try {
+//                    InputStream input = getContentResolver().openInputStream(path);
+//                    Toast.makeText(getApplicationContext(), input + "", Toast.LENGTH_SHORT).show();
+//                } catch (FileNotFoundException e) {
+//                    e.printStackTrace();
+//                }
+
 
             }
         }
+    }
+
+    public void uploadFile(){
+
+        ProgressRequestBody requestBody = new ProgressRequestBody(file,this);
+
+        final MultipartBody.Part body = MultipartBody.Part.createFormData("homework_file",file.getName(),requestBody);
+
+//        Map<String, RequestBody> map = new HashMap<>();
+//        map.put("file\"; filename=\"pp.png\" ", fbody);
+//        map.put("FirstName", name);
+//        map.put("Id", id);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                mService.uploadFile(body)
+                        .enqueue(new Callback<String>() {
+                            @Override
+                            public void onResponse(Call<String> call, retrofit2.Response<String> response) {
+
+                            }
+
+                            @Override
+                            public void onFailure(Call<String> call, Throwable t) {
+
+                            }
+                        });
+
+            }
+        }).start();
+
     }
 
     void getClassAndSectionName() {
@@ -351,8 +399,6 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
                             if (i > 0) {
                                 subject_id = subjectData.get(i - 1).getValue();
 
-                                Toast.makeText(getApplicationContext(), subject_id + "", Toast.LENGTH_SHORT).show();
-
                             }
                         }
 
@@ -435,7 +481,7 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
             dayMonth = String.valueOf(day);
         }
 
-        return dayMonth + "/" + monthYear + "/" + String.valueOf(year);
+        return year + "-" + monthYear + "-" + dayMonth;
 
     }
 
@@ -444,6 +490,7 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
         intent.setType("*/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select PDF"), 1);
+
     }
 
     //Requesting permission
@@ -480,38 +527,51 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
-//            .appendQueryParameter("class", String.valueOf(homeWork.getClassId()))
-//            .appendQueryParameter("section", String.valueOf(homeWork.getSectionId()))
-//            .appendQueryParameter("subject", String.valueOf(homeWork.getSubjectId()))
-//            .appendQueryParameter("assign_date", String.valueOf(homeWork.getAssign_date()))
-//            .appendQueryParameter("submission_date", String.valueOf(homeWork.getSubmission_date()))
-//            .appendQueryParameter("description", String.valueOf(homeWork.getDescription()))
-//            .appendQueryParameter("homework_file", String.valueOf(path))
-//            .appendQueryParameter("teacher_id", String.valueOf(homeWork.getTeacherId()));
+    private void sendDataToServer(final File f, final AddHomeWork homeWork) throws JSONException {
 
-//    public static void executeMultipartPost(String url, String imgPath, String field1, String field2){
-//        try {
-//            HttpClient client = new DefaultHttpClient();
-//            HttpPost poster = new HttpPost(url);
-//
-//            File image = new File(imgPath);  //get the actual file from the device
-//            MultipartEntity entity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
-//            entity.addPart("field1", new StringBody(field1));
-//            entity.addPart("field2", new StringBody(field2));
-//            entity.addPart("image", new FileBody(image));
-//            poster.setEntity(entity);
-//
-//            client.execute(poster, new ResponseHandler<Object>() {
-//                public Object handleResponse(HttpResponse response) throws ClientProtocolException, IOException {
-//                    HttpEntity respEntity = response.getEntity();
-//                    String responseString = EntityUtils.toString(respEntity);
-//                    // do something with the response string
-//                    return null;
-//                }
-//            });
-//        } catch (Exception e){
-//            //do something with the error
-//        }
-//    }
+        JSONObject params = new JSONObject();
+        //Adding parameters to request
+        params.put("class", homeWork.getClassId());
+        params.put("homework_file",file);
+        params.put("section",homeWork.getSectionId());
+        params.put("subject",homeWork.getSubjectId());
+        params.put("assign_date",homeWork.getAssign_date());
+        params.put("submission_date",homeWork.getSubmission_date());
+        params.put("description",homeWork.getDescription());
+        params.put("teacher_id",homeWork.getTeacherId());
+        params.put("marks","10");
 
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, MyConfig.UPLOAD_HOMEWORK, params, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                try {
+                    if(response.getBoolean("success")){
+                        Toast.makeText(AddHomeWorkActivity.this, "success request", Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(AddHomeWorkActivity.this, "not success request", Toast.LENGTH_LONG).show();
+            }
+        }){
+
+
+        };
+        //Adding the string request to the queue
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(request);
+    }
+
+    @Override
+    public void onProgressUpdate(int percent) {
+
+
+
+    }
 }

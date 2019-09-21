@@ -38,10 +38,12 @@ public class HomeWorkActivity extends AppCompatActivity {
     private HomeWorkAdapter adapter;
     private SharedPreferences sharedPreferences;
     private int id;
+    private int rule_id;
     private Toolbar toolbar;
     private TextView txtToolbarText;
     private String profile_image_url;
     private CircleImageView profile;
+    private String url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,9 +72,16 @@ public class HomeWorkActivity extends AppCompatActivity {
             id = getIntent().getIntExtra("id",0);
         }else {
             id = sharedPreferences.getInt("id",0);
+            rule_id = sharedPreferences.getInt("role", 0);
         }
 
-        getAllHomework(id);
+        if(rule_id == 4){
+            url = MyConfig.getHomeWorkListUrl(id);
+        }else{
+            url = MyConfig.getzhomeWorksUrl(id);
+        }
+
+        getAllHomework(url);
         MyConfig.getProfileImage(profile_image_url,profile,HomeWorkActivity.this);
 
 
@@ -90,11 +99,11 @@ public class HomeWorkActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    void getAllHomework(int id){
+    void getAllHomework(String url){
 
         homeWorks.clear();
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, MyConfig.getzhomeWorksUrl(id), null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 
