@@ -14,6 +14,8 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -96,6 +98,7 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
     private boolean isPermissionGranted = false;
     String filePath;
     File file;
+    public static final MediaType FORM = MediaType.parse("multipart/form-data");
 
 
     @Override
@@ -163,7 +166,7 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
 
     }
 
-    private void send_data_to_server(AddHomeWork homeWork) {
+    private void send_data_to_server(final AddHomeWork homeWork) {
 
         Thread t = new Thread(new Runnable() {
             @Override
@@ -174,11 +177,25 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
 
                 String file_path = file.getAbsolutePath();
                 OkHttpClient client = new OkHttpClient();
-                RequestBody file_body = RequestBody.create(MediaType.parse(content_type), file);
+
+                File f = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)+"/"+file_path.substring(file_path.lastIndexOf("/") + 1));
+
+                if(f.exists()){
+                    Log.d("exists","exists");
+                }
+
+                RequestBody file_body = RequestBody.create(MediaType.parse(content_type),f);
 
                 RequestBody request_body = new MultipartBody.Builder()
-                        .setType(MultipartBody.FORM)
-                        .addFormDataPart("type", content_type)
+                        .setType(FORM)
+                        .addFormDataPart("class", String.valueOf(homeWork.getClassId()))
+                        .addFormDataPart("section", String.valueOf(homeWork.getSectionId()))
+                        .addFormDataPart("subject", String.valueOf(homeWork.getSubjectId()))
+                        .addFormDataPart("assign_date", String.valueOf(homeWork.getAssign_date()))
+                        .addFormDataPart("submission_date", String.valueOf(homeWork.getSubmission_date()))
+                        .addFormDataPart("description", String.valueOf(homeWork.getDescription()))
+                        .addFormDataPart("teacher_id", String.valueOf(homeWork.getTeacherId()))
+                        .addFormDataPart("marks","10")
                         .addFormDataPart("uploaded_file", file_path.substring(file_path.lastIndexOf("/") + 1), file_body)
                         .build();
 
@@ -229,7 +246,7 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
                     txt_attach_file.setText(file.toString());
 
 
-                Toast.makeText(getApplicationContext(), file + "", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), file.getAbsolutePath() + "", Toast.LENGTH_SHORT).show();
 
             }
         }
@@ -516,16 +533,6 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
             }
         }
     }
-
-//            .appendQueryParameter("class", String.valueOf(homeWork.getClassId()))
-//            .appendQueryParameter("section", String.valueOf(homeWork.getSectionId()))
-//            .appendQueryParameter("subject", String.valueOf(homeWork.getSubjectId()))
-//            .appendQueryParameter("assign_date", String.valueOf(homeWork.getAssign_date()))
-//            .appendQueryParameter("submission_date", String.valueOf(homeWork.getSubmission_date()))
-//            .appendQueryParameter("description", String.valueOf(homeWork.getDescription()))
-//            .appendQueryParameter("homework_file", String.valueOf(path))
-//            .appendQueryParameter("teacher_id", String.valueOf(homeWork.getTeacherId()));
-
 
 
 
