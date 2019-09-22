@@ -7,14 +7,17 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -46,7 +49,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -158,7 +164,9 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
 
                 AddHomeWork homeWork = new AddHomeWork(mAssign_date,mSubmission_date,description,class_id,section_id,subject_id,id);
 
-                send_data_to_server(homeWork);
+                if(path != null){
+                    send_data_to_server(homeWork);
+                }
 
             }
 
@@ -173,49 +181,54 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
             public void run() {
 
                 //File f  = new File(result.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
-                String content_type = getMimeType(file.getPath());
 
-                String file_path = file.getAbsolutePath();
                 OkHttpClient client = new OkHttpClient();
 
-                File f = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)+"/"+file_path.substring(file_path.lastIndexOf("/") + 1));
+                File f = new File(getPathFromUri(path,AddHomeWorkActivity.this));
 
-                if(f.exists()){
-                    Log.d("exists","exists");
+                String content_type = getMimeType(f.getPath());
+                String file_path = f.getPath();
+                String file_name = file_path.substring(file_path.lastIndexOf("/") + 1);
+
+
+                if(file_name.matches(".*\\d.*")){
+                    Log.d("find","found  "+content_type);
+                }else{
+                    Log.d("find","not found"+content_type);
                 }
 
-                RequestBody file_body = RequestBody.create(MediaType.parse(content_type),f);
-
-                RequestBody request_body = new MultipartBody.Builder()
-                        .setType(FORM)
-                        .addFormDataPart("class", String.valueOf(homeWork.getClassId()))
-                        .addFormDataPart("section", String.valueOf(homeWork.getSectionId()))
-                        .addFormDataPart("subject", String.valueOf(homeWork.getSubjectId()))
-                        .addFormDataPart("assign_date", String.valueOf(homeWork.getAssign_date()))
-                        .addFormDataPart("submission_date", String.valueOf(homeWork.getSubmission_date()))
-                        .addFormDataPart("description", String.valueOf(homeWork.getDescription()))
-                        .addFormDataPart("teacher_id", String.valueOf(homeWork.getTeacherId()))
-                        .addFormDataPart("marks","10")
-                        .addFormDataPart("uploaded_file", file_path.substring(file_path.lastIndexOf("/") + 1), file_body)
-                        .build();
-
-                okhttp3.Request request = new okhttp3.Request.Builder()
-                        .url(MyConfig.UPLOAD_HOMEWORK)
-                        .post(request_body)
-                        .build();
-
-                try {
-
-                    okhttp3.Response response = client.newCall(request).execute();
-
-                    if (!response.isSuccessful()) {
-                        throw new IOException("Error : " + response);
-                    }
-
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+//                RequestBody file_body = RequestBody.create(MediaType.parse(content_type),f);
+//
+//                RequestBody request_body = new MultipartBody.Builder()
+//                        .setType(FORM)
+//                        .addFormDataPart("class", String.valueOf(homeWork.getClassId()))
+//                        .addFormDataPart("section", String.valueOf(homeWork.getSectionId()))
+//                        .addFormDataPart("subject", String.valueOf(homeWork.getSubjectId()))
+//                        .addFormDataPart("assign_date", String.valueOf(homeWork.getAssign_date()))
+//                        .addFormDataPart("submission_date", String.valueOf(homeWork.getSubmission_date()))
+//                        .addFormDataPart("description", String.valueOf(homeWork.getDescription()))
+//                        .addFormDataPart("teacher_id", String.valueOf(homeWork.getTeacherId()))
+//                        .addFormDataPart("marks","10")
+//                        .addFormDataPart("homework_file",file_name,file_body)
+//                        .build();
+//
+//                okhttp3.Request request = new okhttp3.Request.Builder()
+//                        .url(MyConfig.UPLOAD_HOMEWORK)
+//                        .post(request_body)
+//                        .build();
+//
+//                try {
+//
+//                    okhttp3.Response response = client.newCall(request).execute();
+//
+//                    if (!response.isSuccessful()) {
+//                        throw new IOException("Error : " + response);
+//                    }
+//
+//
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
 
 
             }
@@ -240,16 +253,23 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
         if (resultCode == RESULT_OK) {
             if (requestCode == 1) {
                 path = result.getData();
-                file = new File(path.getPath());
 
-                if (file != null)
-                    txt_attach_file.setText(file.toString());
+                if (path != null)
+                    txt_attach_file.setText(getPathFromUri(path,this));
 
 
-                Toast.makeText(getApplicationContext(), file.getAbsolutePath() + "", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), file.getAbsolutePath() + "", Toast.LENGTH_SHORT).show();
 
             }
         }
+    }
+
+    public String getPathFromUri(Uri uri, Activity activity) {
+        String[] projection = {MediaStore.MediaColumns.DATA};
+        Cursor cursor = activity.managedQuery(uri, projection, null, null, null);
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
     }
 
     void getClassAndSectionName() {
@@ -489,7 +509,7 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
             dayMonth = String.valueOf(day);
         }
 
-        return dayMonth + "/" + monthYear + "/" + String.valueOf(year);
+        return year + "-" + monthYear + "-" + dayMonth;
 
     }
 
