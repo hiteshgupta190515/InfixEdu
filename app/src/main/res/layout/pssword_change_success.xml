@@ -25,6 +25,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/txt_message_body"
         android:text="Your password has been changed successfully"
         android:textSize="13dp"
         android:textAlignment="center"

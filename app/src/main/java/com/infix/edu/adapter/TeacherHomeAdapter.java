@@ -16,10 +16,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.infix.edu.R;
 import com.infix.edu.activity.AddHomeWorkActivity;
+import com.infix.edu.activity.ApplyLeaveActivity;
 import com.infix.edu.activity.AttendenceCalenderActivity;
 import com.infix.edu.activity.HomeActivity;
 import com.infix.edu.activity.HomeWorkActivity;
 import com.infix.edu.activity.HomeworkTeacherActivity;
+import com.infix.edu.activity.LeaveActivity;
 import com.infix.edu.activity.LibraryActivity;
 import com.infix.edu.activity.NoticeActivity;
 import com.infix.edu.activity.StudentSearchActivity;
@@ -126,6 +128,15 @@ public class TeacherHomeAdapter extends RecyclerView.Adapter<TeacherHomeAdapter.
                         Intent hw = new Intent(activity, HomeWorkActivity.class);
                         activity.startActivity(hw);
                         break;
+                    case "Leave":
+                        Intent leave = new Intent(activity, LeaveActivity.class);
+                        activity.startActivity(leave);
+                        break;
+                    case "Apply Leave":
+                        Intent apply = new Intent(activity, ApplyLeaveActivity.class);
+                        activity.startActivity(apply);
+                        break;
+
 
                 }
 

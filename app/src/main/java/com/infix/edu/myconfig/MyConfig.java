@@ -21,7 +21,9 @@ public class MyConfig {
     final public static String VISITOR_LIST = BASE_URL+"visitor";
     final public static String COMPLAINT_LIST = BASE_URL+"complaint";
     final public static String ABOUT = BASE_URL+"parent-about";
-    final public static String UPLOAD_HOMEWORK = BASE_URL+"add-homework/";
+    final public static String UPLOAD_HOMEWORK = BASE_URL+"add-homework";
+    final public static String LEAVE_APPLY = BASE_URL+"staff-apply-leave";
+    final public static String LEAVE_TYPE = BASE_URL+"staff-leave-type";
 
     public static String getLoginUrl(String email,String password){
 
@@ -346,17 +348,24 @@ return category;
 
     }
 
-    public static boolean isDeviceOnline(Context context) {
-        boolean isConnectionAvail = false;
-        try {
-            ConnectivityManager cm = (ConnectivityManager) context
-                    .getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo netInfo = cm.getActiveNetworkInfo();
-            return netInfo.isConnected();
-        } catch (Exception e) {
-            e.printStackTrace();
+    public static String selectDate(int day, int month, int year) {
+
+        String monthYear;
+        String dayMonth;
+
+        if (month + 1 < 10) {
+            monthYear = "0" + String.valueOf(month + 1);
+        } else {
+            monthYear = String.valueOf(month + 1);
         }
-        return isConnectionAvail;
+        if (day < 10) {
+            dayMonth = "0" + String.valueOf(day);
+        } else {
+            dayMonth = String.valueOf(day);
+        }
+
+        return year + "-" + monthYear + "-" + dayMonth;
+
     }
 
 }

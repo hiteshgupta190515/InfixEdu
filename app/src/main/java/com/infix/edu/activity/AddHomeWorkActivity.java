@@ -1,6 +1,7 @@
 package com.infix.edu.activity;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
@@ -14,13 +15,17 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -43,7 +48,6 @@ import com.infix.edu.model.AddHomeWork;
 import com.infix.edu.model.HomeWork;
 import com.infix.edu.model.SearchData;
 import com.infix.edu.myconfig.MyConfig;
-import com.nbsp.materialfilepicker.ui.FilePickerActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -102,8 +106,6 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
     //storage permission code
     private static final int STORAGE_PERMISSION_CODE = 123;
     private boolean isPermissionGranted = false;
-    String filePath;
-    File file;
     public static final MediaType FORM = MediaType.parse("multipart/form-data");
 
 
@@ -176,11 +178,10 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
 
     private void send_data_to_server(final AddHomeWork homeWork) {
 
+
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
-
-                //File f  = new File(result.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
 
                 OkHttpClient client = new OkHttpClient();
 
@@ -191,51 +192,72 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
                 String file_name = file_path.substring(file_path.lastIndexOf("/") + 1);
 
 
-                if(file_name.matches(".*\\d.*")){
-                    Log.d("find","found  "+content_type);
-                }else{
-                    Log.d("find","not found"+content_type);
-                }
-
-//                RequestBody file_body = RequestBody.create(MediaType.parse(content_type),f);
-//
-//                RequestBody request_body = new MultipartBody.Builder()
-//                        .setType(FORM)
-//                        .addFormDataPart("class", String.valueOf(homeWork.getClassId()))
-//                        .addFormDataPart("section", String.valueOf(homeWork.getSectionId()))
-//                        .addFormDataPart("subject", String.valueOf(homeWork.getSubjectId()))
-//                        .addFormDataPart("assign_date", String.valueOf(homeWork.getAssign_date()))
-//                        .addFormDataPart("submission_date", String.valueOf(homeWork.getSubmission_date()))
-//                        .addFormDataPart("description", String.valueOf(homeWork.getDescription()))
-//                        .addFormDataPart("teacher_id", String.valueOf(homeWork.getTeacherId()))
-//                        .addFormDataPart("marks","10")
-//                        .addFormDataPart("homework_file",file_name,file_body)
-//                        .build();
-//
-//                okhttp3.Request request = new okhttp3.Request.Builder()
-//                        .url(MyConfig.UPLOAD_HOMEWORK)
-//                        .post(request_body)
-//                        .build();
-//
-//                try {
-//
-//                    okhttp3.Response response = client.newCall(request).execute();
-//
-//                    if (!response.isSuccessful()) {
-//                        throw new IOException("Error : " + response);
-//                    }
-//
-//
-//                } catch (IOException e) {
-//                    e.printStackTrace();
+//                if(file_name.matches(".*\\d.*")){
+//                    Log.d("find","found  "+content_type);
+//                }else{
+//                    Log.d("find","not found"+content_type);
 //                }
+
+                RequestBody file_body = RequestBody.create(MediaType.parse(content_type),f);
+
+                RequestBody request_body = new MultipartBody.Builder()
+                        .setType(FORM)
+                        .addFormDataPart("class", String.valueOf(homeWork.getClassId()))
+                        .addFormDataPart("section", String.valueOf(homeWork.getSectionId()))
+                        .addFormDataPart("subject", String.valueOf(homeWork.getSubjectId()))
+                        .addFormDataPart("assign_date", String.valueOf(homeWork.getAssign_date()))
+                        .addFormDataPart("submission_date", String.valueOf(homeWork.getSubmission_date()))
+                        .addFormDataPart("description", String.valueOf(homeWork.getDescription()))
+                        .addFormDataPart("teacher_id", String.valueOf(homeWork.getTeacherId()))
+                        .addFormDataPart("marks","10")
+                        .addFormDataPart("homework_file",file_name,file_body)
+                        .build();
+
+                okhttp3.Request request = new okhttp3.Request.Builder()
+                        .url(MyConfig.UPLOAD_HOMEWORK)
+                        .post(request_body)
+                        .build();
+
+                try {
+
+                    okhttp3.Response response = client.newCall(request).execute();
+
+                    if (!response.isSuccessful()) {
+                        throw new IOException("Error : " + response);
+                    }else{
+
+                        String json_responce = response.body().string();
+
+                        try {
+                            JSONObject jsonObject = new JSONObject(json_responce);
+
+                          if(jsonObject.getBoolean("success")){
+
+                              AddHomeWorkActivity.this.runOnUiThread(new Runnable() {
+                                  @Override
+                                  public void run() {
+                                      showSuccess();
+                                  }
+                              });
+
+                          }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
 
             }
         });
 
         t.start();
-
     }
 
     @Override
@@ -252,13 +274,13 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
         super.onActivityResult(requestCode, resultCode, result);
         if (resultCode == RESULT_OK) {
             if (requestCode == 1) {
+
                 path = result.getData();
 
-                if (path != null)
                     txt_attach_file.setText(getPathFromUri(path,this));
 
 
-                //Toast.makeText(getApplicationContext(), file.getAbsolutePath() + "", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), path.toString(), Toast.LENGTH_SHORT).show();
 
             }
         }
@@ -561,6 +583,30 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
         String extension = MimeTypeMap.getFileExtensionFromUrl(path);
 
         return MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
+    }
+
+    private void showSuccess(){
+
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(AddHomeWorkActivity.this,R.style.DialogTheme);
+        View mView = LayoutInflater.from(AddHomeWorkActivity.this).inflate(R.layout.pssword_change_success, null);
+
+        TextView textView = mView.findViewById(R.id.txt_message_body);
+        textView.setText("Homework Uploaded successfully!");
+
+        alertBuilder.setView(mView);
+        AlertDialog dialog = alertBuilder.create();
+
+        Rect displayRectangle = new Rect();
+        Window window = dialog.getWindow();
+        window.getDecorView().getWindowVisibleDisplayFrame(displayRectangle);
+
+        mView.setMinimumWidth((int)(displayRectangle.width()));
+        mView.setMinimumHeight((int)(displayRectangle.height() * 0.5f));
+
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
+        dialog.show();
+
+
     }
 
 }

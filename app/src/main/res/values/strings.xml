@@ -41,6 +41,11 @@
         <item>HW List</item>
     </string-array>
 
+    <string-array name="teachers_leave_functions_name">
+        <item>Leave List</item>
+        <item>Apply Leave</item>
+    </string-array>
+
     <string-array name="teachers_attendance_functions_name">
         <item>Search Attendance</item>
         <item>My Attendance</item>
