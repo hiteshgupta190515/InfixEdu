@@ -7,16 +7,21 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.FileUtils;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -33,33 +38,31 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.infix.edu.Interface.FileUpload;
-import com.infix.edu.Interface.ProgressRequestBody;
-import com.infix.edu.Interface.RetrofitFileClient;
-import com.infix.edu.Interface.UploadCallBack;
 import com.infix.edu.R;
 import com.infix.edu.model.AddHomeWork;
+import com.infix.edu.model.HomeWork;
 import com.infix.edu.model.SearchData;
 import com.infix.edu.myconfig.MyConfig;
+import com.nbsp.materialfilepicker.ui.FilePickerActivity;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.File;
-
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.MediaType;
 import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.http.Multipart;
 
-public class AddHomeWorkActivity extends AppCompatActivity implements View.OnClickListener, UploadCallBack {
+public class AddHomeWorkActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Toolbar toolbar;
     private TextView txtToolbarText;
@@ -99,14 +102,9 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
     //storage permission code
     private static final int STORAGE_PERMISSION_CODE = 123;
     private boolean isPermissionGranted = false;
+    String filePath;
     File file;
-    private int serverResponseCode;
-
-    private FileUpload mService;
-
-    private FileUpload getApiUpload(){
-        return RetrofitFileClient.getClient(MyConfig.UPLOAD_HOMEWORK).create(FileUpload.class);
-    }
+    public static final MediaType FORM = MediaType.parse("multipart/form-data");
 
 
     @Override
@@ -147,8 +145,6 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         txtToolbarText.setText("Add Homework");
 
-        mService = getApiUpload();
-
         sharedPreferences = getSharedPreferences("default", Context.MODE_PRIVATE);
         profile = findViewById(R.id.profile);
         profile_image_url = sharedPreferences.getString("profile_image", null);
@@ -160,7 +156,6 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
         getAllSUbject(id);
 
 
-
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -169,16 +164,77 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
 
                 AddHomeWork homeWork = new AddHomeWork(mAssign_date,mSubmission_date,description,class_id,section_id,subject_id,id);
 
+                if(path != null){
+                    send_data_to_server(homeWork);
+                }
+
+            }
+
+        });
+
+    }
+
+    private void send_data_to_server(final AddHomeWork homeWork) {
+
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                //File f  = new File(result.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
+
+                OkHttpClient client = new OkHttpClient();
+
+                File f = new File(getPathFromUri(path,AddHomeWorkActivity.this));
+
+                String content_type = getMimeType(f.getPath());
+                String file_path = f.getPath();
+                String file_name = file_path.substring(file_path.lastIndexOf("/") + 1);
+
+
+                if(file_name.matches(".*\\d.*")){
+                    Log.d("find","found  "+content_type);
+                }else{
+                    Log.d("find","not found"+content_type);
+                }
+
+//                RequestBody file_body = RequestBody.create(MediaType.parse(content_type),f);
+//
+//                RequestBody request_body = new MultipartBody.Builder()
+//                        .setType(FORM)
+//                        .addFormDataPart("class", String.valueOf(homeWork.getClassId()))
+//                        .addFormDataPart("section", String.valueOf(homeWork.getSectionId()))
+//                        .addFormDataPart("subject", String.valueOf(homeWork.getSubjectId()))
+//                        .addFormDataPart("assign_date", String.valueOf(homeWork.getAssign_date()))
+//                        .addFormDataPart("submission_date", String.valueOf(homeWork.getSubmission_date()))
+//                        .addFormDataPart("description", String.valueOf(homeWork.getDescription()))
+//                        .addFormDataPart("teacher_id", String.valueOf(homeWork.getTeacherId()))
+//                        .addFormDataPart("marks","10")
+//                        .addFormDataPart("homework_file",file_name,file_body)
+//                        .build();
+//
+//                okhttp3.Request request = new okhttp3.Request.Builder()
+//                        .url(MyConfig.UPLOAD_HOMEWORK)
+//                        .post(request_body)
+//                        .build();
+//
 //                try {
-//                    sendDataToServer(file,homeWork);
-//                } catch (JSONException e) {
+//
+//                    okhttp3.Response response = client.newCall(request).execute();
+//
+//                    if (!response.isSuccessful()) {
+//                        throw new IOException("Error : " + response);
+//                    }
+//
+//
+//                } catch (IOException e) {
 //                    e.printStackTrace();
 //                }
 
-                uploadFile();
 
             }
         });
+
+        t.start();
 
     }
 
@@ -192,58 +248,28 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
         return super.onOptionsItemSelected(item);
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent result) {
+    public void onActivityResult(int requestCode, int resultCode, final Intent result) {
+        super.onActivityResult(requestCode, resultCode, result);
         if (resultCode == RESULT_OK) {
             if (requestCode == 1) {
                 path = result.getData();
-                file = new File(path.getPath());
 
-                if(file != null)
-                    txt_attach_file.setText(file.toString());
+                if (path != null)
+                    txt_attach_file.setText(getPathFromUri(path,this));
 
-//                try {
-//                    InputStream input = getContentResolver().openInputStream(path);
-//                    Toast.makeText(getApplicationContext(), input + "", Toast.LENGTH_SHORT).show();
-//                } catch (FileNotFoundException e) {
-//                    e.printStackTrace();
-//                }
 
+                //Toast.makeText(getApplicationContext(), file.getAbsolutePath() + "", Toast.LENGTH_SHORT).show();
 
             }
         }
     }
 
-    public void uploadFile(){
-
-        ProgressRequestBody requestBody = new ProgressRequestBody(file,this);
-
-        final MultipartBody.Part body = MultipartBody.Part.createFormData("homework_file",file.getName(),requestBody);
-
-//        Map<String, RequestBody> map = new HashMap<>();
-//        map.put("file\"; filename=\"pp.png\" ", fbody);
-//        map.put("FirstName", name);
-//        map.put("Id", id);
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                mService.uploadFile(body)
-                        .enqueue(new Callback<String>() {
-                            @Override
-                            public void onResponse(Call<String> call, retrofit2.Response<String> response) {
-
-                            }
-
-                            @Override
-                            public void onFailure(Call<String> call, Throwable t) {
-
-                            }
-                        });
-
-            }
-        }).start();
-
+    public String getPathFromUri(Uri uri, Activity activity) {
+        String[] projection = {MediaStore.MediaColumns.DATA};
+        Cursor cursor = activity.managedQuery(uri, projection, null, null, null);
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
     }
 
     void getClassAndSectionName() {
@@ -399,6 +425,8 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
                             if (i > 0) {
                                 subject_id = subjectData.get(i - 1).getValue();
 
+                                Toast.makeText(getApplicationContext(), subject_id + "", Toast.LENGTH_SHORT).show();
+
                             }
                         }
 
@@ -490,7 +518,6 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
         intent.setType("*/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select PDF"), 1);
-
     }
 
     //Requesting permission
@@ -527,51 +554,13 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
-    private void sendDataToServer(final File f, final AddHomeWork homeWork) throws JSONException {
-
-        JSONObject params = new JSONObject();
-        //Adding parameters to request
-        params.put("class", homeWork.getClassId());
-        params.put("homework_file",file);
-        params.put("section",homeWork.getSectionId());
-        params.put("subject",homeWork.getSubjectId());
-        params.put("assign_date",homeWork.getAssign_date());
-        params.put("submission_date",homeWork.getSubmission_date());
-        params.put("description",homeWork.getDescription());
-        params.put("teacher_id",homeWork.getTeacherId());
-        params.put("marks","10");
-
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, MyConfig.UPLOAD_HOMEWORK, params, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-
-                try {
-                    if(response.getBoolean("success")){
-                        Toast.makeText(AddHomeWorkActivity.this, "success request", Toast.LENGTH_LONG).show();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(AddHomeWorkActivity.this, "not success request", Toast.LENGTH_LONG).show();
-            }
-        }){
 
 
-        };
-        //Adding the string request to the queue
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(request);
+    private String getMimeType(String path) {
+
+        String extension = MimeTypeMap.getFileExtensionFromUrl(path);
+
+        return MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
     }
 
-    @Override
-    public void onProgressUpdate(int percent) {
-
-
-
-    }
 }
