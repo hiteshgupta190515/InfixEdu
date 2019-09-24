@@ -46,6 +46,11 @@
         <item>Apply Leave</item>
     </string-array>
 
+    <string-array name="teachers_contents_functions_name">
+        <item>Content List</item>
+        <item>Upload</item>
+    </string-array>
+
     <string-array name="teachers_attendance_functions_name">
         <item>Search Attendance</item>
         <item>My Attendance</item>

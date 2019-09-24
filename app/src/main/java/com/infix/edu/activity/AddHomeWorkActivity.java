@@ -20,6 +20,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -88,6 +89,7 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
     private int subject_id;
     private TextView txtBrowse,txt_attach_file;
     private EditText etDescription;
+    private EditText etMarks;
     private LinearLayout assign_date;
     private LinearLayout submission_date;
     private LinearLayout attach_file;
@@ -124,6 +126,7 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
         txt_attach_file = findViewById(R.id.txt_attach_file);
 
         etDescription = findViewById(R.id.comments_textbox);
+        etMarks = findViewById(R.id.marks);
 
         toolbar = findViewById(R.id.toolbar);
         txtToolbarText = findViewById(R.id.txtTitle);
@@ -163,11 +166,12 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
             public void onClick(View view) {
 
                 String description = etDescription.getText().toString();
+                String marks = etMarks.getText().toString();
 
                 AddHomeWork homeWork = new AddHomeWork(mAssign_date,mSubmission_date,description,class_id,section_id,subject_id,id);
 
-                if(path != null){
-                    send_data_to_server(homeWork);
+                if(path != null && !TextUtils.isEmpty(marks)){
+                    send_data_to_server(homeWork,marks);
                 }
 
             }
@@ -176,7 +180,7 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
 
     }
 
-    private void send_data_to_server(final AddHomeWork homeWork) {
+    private void send_data_to_server(final AddHomeWork homeWork, final String marks) {
 
 
         Thread t = new Thread(new Runnable() {
@@ -209,7 +213,7 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
                         .addFormDataPart("submission_date", String.valueOf(homeWork.getSubmission_date()))
                         .addFormDataPart("description", String.valueOf(homeWork.getDescription()))
                         .addFormDataPart("teacher_id", String.valueOf(homeWork.getTeacherId()))
-                        .addFormDataPart("marks","10")
+                        .addFormDataPart("marks",marks)
                         .addFormDataPart("homework_file",file_name,file_body)
                         .build();
 

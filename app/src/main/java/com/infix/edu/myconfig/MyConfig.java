@@ -37,6 +37,9 @@ public class MyConfig {
     public static String getRoutineUrl(int id){
         return BASE_URL+"student-class-routine/"+id;
     }
+    public static String getLeaveList(int id){
+        return BASE_URL+"staff-apply-list/"+id;
+    }
 
     public static String getFeesUrl(int id){
         return BASE_URL+"fees-collect-student-wise/"+id;

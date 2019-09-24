@@ -85,7 +85,6 @@ public class HomeWorkActivity extends AppCompatActivity {
         MyConfig.getProfileImage(profile_image_url,profile,HomeWorkActivity.this);
 
 
-
     }
 
 

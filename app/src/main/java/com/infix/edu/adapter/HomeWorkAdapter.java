@@ -36,6 +36,7 @@ public class HomeWorkAdapter extends RecyclerView.Adapter<HomeWorkAdapter.MViewH
 
     private ArrayList<HomeWork> homeWorks;
     private Context ctx;
+    private boolean isGranted;
 
     public HomeWorkAdapter(ArrayList<HomeWork> homeWorks, Context ctx) {
         this.homeWorks = homeWorks;
@@ -117,15 +118,19 @@ public class HomeWorkAdapter extends RecyclerView.Adapter<HomeWorkAdapter.MViewH
             public void onClick(View view) {
 
                 if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
-                    if(askForPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, 1)){
+
+                    askForPermission();
+
+                    if(isGranted){
 
                         final String file  = homeWorks.get(position).getFile();
+
 
                         if(file != "null"){
 
                             AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
 
-                            builder.setMessage("do you want to download this file?");
+                            builder.setMessage("Do you want to download this file?");
 
                             builder.setPositiveButton("download", new DialogInterface.OnClickListener() {
                                 @Override
@@ -148,18 +153,14 @@ public class HomeWorkAdapter extends RecyclerView.Adapter<HomeWorkAdapter.MViewH
 
     }
 
-    private boolean askForPermission(String permission, int requestCode) {
-        if (ContextCompat.checkSelfPermission(ctx, permission)
-                != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) ctx, permission)) {
-                Toast.makeText(ctx, "Please grant the requested permission to download your homework!", Toast.LENGTH_LONG).show();
-                ActivityCompat.requestPermissions((Activity) ctx, new String[]{permission}, requestCode);
-            } else {
-                ActivityCompat.requestPermissions((Activity) ctx, new String[]{permission}, requestCode);
-            }
-            return false;
+    private void askForPermission() {
+        if (ContextCompat.checkSelfPermission(ctx, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                == PackageManager.PERMISSION_GRANTED) {
+
+            isGranted = true;
+
         }
-        return true;
+        ActivityCompat.requestPermissions((Activity) ctx, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 123);
     }
 
     @Override

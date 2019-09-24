@@ -22,11 +22,14 @@ import com.infix.edu.activity.HomeActivity;
 import com.infix.edu.activity.HomeWorkActivity;
 import com.infix.edu.activity.HomeworkTeacherActivity;
 import com.infix.edu.activity.LeaveActivity;
+import com.infix.edu.activity.LeaveListActivity;
 import com.infix.edu.activity.LibraryActivity;
 import com.infix.edu.activity.NoticeActivity;
+import com.infix.edu.activity.ParentsAboutActivity;
 import com.infix.edu.activity.StudentSearchActivity;
 import com.infix.edu.activity.TeacherAcademicsActivity;
 import com.infix.edu.activity.TeacherAttandenceActivity;
+import com.infix.edu.activity.TeacherContentActivity;
 import com.infix.edu.activity.TeacherOwnRoutineActivity;
 import com.infix.edu.activity.TeacherRoutineSearchActivity;
 import com.infix.edu.activity.TeacherStudentActivity;
@@ -136,7 +139,16 @@ public class TeacherHomeAdapter extends RecyclerView.Adapter<TeacherHomeAdapter.
                         Intent apply = new Intent(activity, ApplyLeaveActivity.class);
                         activity.startActivity(apply);
                         break;
-
+                    case "Leave List":
+                        Intent lList = new Intent(activity, LeaveListActivity.class);
+                        activity.startActivity(lList);
+                        break;
+                    case "Contents":
+                        activity.startActivity(new Intent(activity, TeacherContentActivity.class));
+                        break;
+                    case "About":
+                        activity.startActivity(new Intent(activity, ParentsAboutActivity.class));
+                        break;
 
                 }
 
