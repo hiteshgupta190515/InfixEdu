@@ -22,6 +22,7 @@ public class MyConfig {
     final public static String COMPLAINT_LIST = BASE_URL+"complaint";
     final public static String ABOUT = BASE_URL+"parent-about";
     final public static String UPLOAD_HOMEWORK = BASE_URL+"add-homework";
+    final public static String UPLOAD_CONTENT = BASE_URL+"teacher-upload-content";
     final public static String LEAVE_APPLY = BASE_URL+"staff-apply-leave";
     final public static String LEAVE_TYPE = BASE_URL+"staff-leave-type";
 

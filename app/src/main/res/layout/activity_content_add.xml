@@ -4,19 +4,89 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".activity.AddHomeWorkActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".activity.AddHomeWorkActivity">
 
-    <include layout="@layout/toolbar"/>
+        <include layout="@layout/toolbar"/>
+
+        <EditText
+            android:id="@+id/content_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Content Title"
+            android:maxLines="1"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:longClickable="false" />
 
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="40dp"
-            android:id="@+id/choose_class_spinner"
+            android:backgroundTint="#ddd"
+            android:id="@+id/choose_content_type_spinner"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#ddd"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="40dp"
+            android:text="Available for"
+            android:textSize="12dp"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/poppins_light"
+            />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:id="@+id/radio_group"
+            >
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="All Admin"
+                android:button="@drawable/check_box"
+                android:fontFamily="@font/poppins_light"
+                android:paddingLeft="10dp"
+                android:id="@+id/all_admin"
+                />
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Student"
+                android:paddingLeft="10dp"
+                android:button="@drawable/check_box"
+                android:fontFamily="@font/poppins_light"
+                android:id="@+id/student"
+                />
+        </RadioGroup>
+
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="40dp"
+            android:backgroundTint="#ddd"
+            android:id="@+id/choose_classes_spinner"
             android:layout_marginTop="10dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
@@ -36,27 +106,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="40dp"
+            android:backgroundTint="#ddd"
             android:id="@+id/choose_section_spinner"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            />
-
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#ddd"
-            android:layout_marginBottom="10dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            />
-
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="40dp"
-            android:id="@+id/choose_subject_spinner"
             android:layout_marginTop="10dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
@@ -76,7 +127,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:id="@+id/assign_date"
+            android:id="@+id/update_date"
             android:layout_marginTop="10dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
@@ -88,7 +139,7 @@
                 android:layout_weight="8"
                 android:layout_height="wrap_content"
                 android:minHeight="40dp"
-                android:text="Assign date"
+                android:text="Update date"
                 android:textSize="12dp"
                 android:fontFamily="@font/poppins_light"
                 android:id="@+id/choose_assign"
@@ -113,51 +164,9 @@
             android:layout_marginEnd="20dp"
             />
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/submission_date"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="10dp"
-            >
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="8"
-                android:layout_height="wrap_content"
-                android:minHeight="40dp"
-                android:text="Submission date"
-                android:id="@+id/choose_submission"
-                android:textSize="12dp"
-                android:fontFamily="@font/poppins_light"
-                />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_gravity="end"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_calender_gray_24dp"
-                />
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#ddd"
-            android:layout_marginBottom="10dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:id="@+id/attach_file"
             android:layout_marginTop="5dp"
             android:layout_marginStart="20dp"
@@ -166,10 +175,9 @@
             >
 
             <TextView
-                android:layout_width="0dp"
-                android:layout_weight="7"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minHeight="40dp"
+                android:layout_alignParentStart="true"
                 android:text="Attach File"
                 android:id="@+id/txt_attach_file"
                 android:textSize="12dp"
@@ -177,17 +185,18 @@
                 />
 
             <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_gravity="end"
+                android:layout_width="wrap_content"
+                android:gravity="end"
+                android:layout_toRightOf="@+id/txt_attach_file"
                 android:id="@+id/txtBrowse"
+                android:layout_alignParentEnd="true"
                 android:layout_height="wrap_content"
                 android:textColor="#7C32FF"
                 android:text="Browse"
                 android:textSize="12dp"
                 />
 
-        </LinearLayout>
+        </RelativeLayout>
 
         <View
             android:layout_width="match_parent"
@@ -199,21 +208,10 @@
             />
 
         <EditText
-            android:id="@+id/marks"
+            android:id="@+id/reason_textbox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="mark"
-            android:maxLines="1"
-            android:layout_marginBottom="10dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:longClickable="false" />
-
-        <EditText
-            android:id="@+id/comments_textbox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Description"
+            android:hint="Reason"
             android:maxLines="4"
             android:layout_marginBottom="10dp"
             android:layout_marginStart="20dp"
@@ -234,7 +232,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnSaveHomework"
-                android:text="save homework"
+                android:text="save content"
                 android:fontFamily="@font/poppins_light"
                 android:background="@drawable/login_button_shape"
                 android:textColor="@color/white"
@@ -247,6 +245,5 @@
 
         </LinearLayout>
 
-
-</LinearLayout>
+    </LinearLayout>
 </ScrollView>
