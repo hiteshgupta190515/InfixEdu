@@ -152,7 +152,7 @@ public class Helper {
         activity.startActivityForResult(Intent.createChooser(intent, "Select PDF"), 1);
     }
 
-    private String getMimeType(String path) {
+    public String getMimeType(String path) {
 
         String extension = MimeTypeMap.getFileExtensionFromUrl(path);
 

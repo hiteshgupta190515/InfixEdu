@@ -38,6 +38,12 @@ public class MyConfig {
     public static String getRoutineUrl(int id){
         return BASE_URL+"student-class-routine/"+id;
     }
+    public static String getAllContent(){
+        return BASE_URL+"content-list";
+    }
+    public static String deleteContent(int id){
+        return BASE_URL+"delete-content/"+id;
+    }
     public static String getLeaveList(int id){
         return BASE_URL+"staff-apply-list/"+id;
     }

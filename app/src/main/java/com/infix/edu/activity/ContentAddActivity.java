@@ -1,15 +1,25 @@
 package com.infix.edu.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -26,16 +36,29 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.infix.edu.R;
+import com.infix.edu.model.AddHomeWork;
 import com.infix.edu.model.SearchData;
 import com.infix.edu.myconfig.Helper;
+import com.infix.edu.myconfig.MyConfig;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
 
 public class ContentAddActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private Toolbar toolbar;
+    private TextView txtToolbarText;
     private RadioGroup radioGroup;
     private RadioButton radioButton;
     private String strRadio;
@@ -66,6 +89,11 @@ public class ContentAddActivity extends AppCompatActivity implements View.OnClic
     private EditText et_title;
     private EditText et_reason;
     private Button btn_save_content;
+    private int allClasses;
+    private SharedPreferences sharedPreferences;
+    private int id;
+    private String profile_image_url;
+    private CircleImageView profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +112,8 @@ public class ContentAddActivity extends AppCompatActivity implements View.OnClic
         et_reason = findViewById(R.id.reason_textbox);
         btn_save_content = findViewById(R.id.btn_save_content);
         btn_save_content.setOnClickListener(this);
+        toolbar = findViewById(R.id.toolbar);
+        txtToolbarText = findViewById(R.id.txtTitle);
 
         Calendar c = Calendar.getInstance();
         year = c.get(Calendar.YEAR);
@@ -93,6 +123,17 @@ public class ContentAddActivity extends AppCompatActivity implements View.OnClic
         classArray = helper.getClassData(this);
         sectionArray = helper.getSectionData(this);
 
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        txtToolbarText.setText("Upload Content");
+
+        sharedPreferences = getSharedPreferences("default", Context.MODE_PRIVATE);
+        profile = findViewById(R.id.profile);
+        profile_image_url = sharedPreferences.getString("profile_image", null);
+        id = sharedPreferences.getInt("id", 0);
+        MyConfig.getProfileImage(profile_image_url, profile, ContentAddActivity.this);
+
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
@@ -100,18 +141,14 @@ public class ContentAddActivity extends AppCompatActivity implements View.OnClic
                     case R.id.all_admin:
 
                         radioButton = findViewById(R.id.all_admin);
-
                         strRadio  = "admin";
                         break;
 
                     case R.id.student:
 
                         radioButton = findViewById(R.id.student);
-
                         strRadio  = "student";
-
                         showSelectOption();
-
                         break;
 
                 }
@@ -139,6 +176,95 @@ public class ContentAddActivity extends AppCompatActivity implements View.OnClic
             }
         });
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void send_data_to_server(final String title, final String description) {
+
+
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                OkHttpClient client = new OkHttpClient();
+
+                File f = new File(helper.getPathFromUri(path,ContentAddActivity.this));
+
+                String content_type = helper.getMimeType(f.getPath());
+                String file_path = f.getPath();
+                String file_name = file_path.substring(file_path.lastIndexOf("/") + 1);
+
+
+                RequestBody file_body = RequestBody.create(MediaType.parse(content_type),f);
+
+                RequestBody request_body = new MultipartBody.Builder()
+                        .setType(FORM)
+                        .addFormDataPart("content_title",title)
+                        .addFormDataPart("content_type", contentStr)
+                        .addFormDataPart("available_for", strRadio)
+                        .addFormDataPart("all_classes", String.valueOf(allClasses))
+                        .addFormDataPart("class", String.valueOf(class_id))
+                        .addFormDataPart("section", String.valueOf(section_id))
+                        .addFormDataPart("upload_date", update_date)
+                        .addFormDataPart("description",description)
+                        .addFormDataPart("created_by", String.valueOf(id))
+                        .addFormDataPart("attach_file",file_name,file_body)
+                        .build();
+
+                okhttp3.Request request = new okhttp3.Request.Builder()
+                        .url(MyConfig.UPLOAD_CONTENT)
+                        .post(request_body)
+                        .build();
+
+                try {
+
+                    okhttp3.Response response = client.newCall(request).execute();
+
+                    if (!response.isSuccessful()) {
+                        throw new IOException("Error : " + response);
+                    }else{
+
+                        String json_responce = response.body().string();
+
+                        try {
+                            JSONObject jsonObject = new JSONObject(json_responce);
+
+                            if(jsonObject.getBoolean("success")){
+
+                                ContentAddActivity.this.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        showSuccess();
+                                    }
+                                });
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        });
+
+        t.start();
     }
 
     public void onActivityResult(int requestCode, int resultCode, final Intent result) {
@@ -186,6 +312,7 @@ public class ContentAddActivity extends AppCompatActivity implements View.OnClic
 
                    class_id = -1;
                    section_id = -1;
+                   allClasses = 1;
 
                }else{
                    isChecked = false;
@@ -193,7 +320,7 @@ public class ContentAddActivity extends AppCompatActivity implements View.OnClic
 
                    spnClass.setVisibility(View.VISIBLE);
                    spnSection.setVisibility(View.VISIBLE);
-
+                   allClasses = 0;
 
                }
            }
@@ -280,14 +407,84 @@ public class ContentAddActivity extends AppCompatActivity implements View.OnClic
 
             case R.id.btn_save_content:
 
-                String title = et_title.getText().toString();
-                String reason = et_reason.getText().toString();
+                requestStoragePermission();
 
-                Toast.makeText(getApplicationContext(),title+"  "+reason,Toast.LENGTH_SHORT).show();
+                if(isPermissionGranted) {
+
+                    String title = et_title.getText().toString();
+                    String reason = et_reason.getText().toString();
+
+
+                    if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(reason) && !TextUtils.isEmpty(strRadio) && !TextUtils.isEmpty(update_date) &&
+                            !TextUtils.isEmpty(path.toString())) {
+
+                        send_data_to_server(title, reason);
+
+
+                    }
+                }
 
                 break;
 
         }
 
     }
+
+    //Requesting permission
+    private void requestStoragePermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            isPermissionGranted = true;
+        }
+
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            //If the user has denied the permission previously your code will come to this block
+            //Here you can explain why you need this permission
+            //Explain here why you need this permission
+        }
+        //And finally ask for the permission
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        //Checking the request code of our request
+        if (requestCode == STORAGE_PERMISSION_CODE) {
+
+            //If permission is granted
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                //Displaying a toast
+                //Toast.makeText(this, "Permission granted now you can read the storage", Toast.LENGTH_LONG).show();
+
+            } else {
+                //Displaying another toast if permission is not granted
+                Toast.makeText(this, "Oops you just denied the permission", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    private void showSuccess(){
+
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(ContentAddActivity.this,R.style.DialogTheme);
+        View mView = LayoutInflater.from(ContentAddActivity.this).inflate(R.layout.pssword_change_success, null);
+
+        TextView textView = mView.findViewById(R.id.txt_message_body);
+        textView.setText("Content Uploaded successfully!");
+
+        alertBuilder.setView(mView);
+        AlertDialog dialog = alertBuilder.create();
+
+        Rect displayRectangle = new Rect();
+        Window window = dialog.getWindow();
+        window.getDecorView().getWindowVisibleDisplayFrame(displayRectangle);
+
+        mView.setMinimumWidth((int)(displayRectangle.width()));
+        mView.setMinimumHeight((int)(displayRectangle.height() * 0.5f));
+
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
+        dialog.show();
+
+
+    }
+
 }

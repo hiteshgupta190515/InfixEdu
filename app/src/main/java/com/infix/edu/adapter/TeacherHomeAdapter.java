@@ -19,6 +19,7 @@ import com.infix.edu.activity.AddHomeWorkActivity;
 import com.infix.edu.activity.ApplyLeaveActivity;
 import com.infix.edu.activity.AttendenceCalenderActivity;
 import com.infix.edu.activity.ContentAddActivity;
+import com.infix.edu.activity.ContentListActivity;
 import com.infix.edu.activity.HomeActivity;
 import com.infix.edu.activity.HomeWorkActivity;
 import com.infix.edu.activity.HomeworkTeacherActivity;
@@ -152,6 +153,9 @@ public class TeacherHomeAdapter extends RecyclerView.Adapter<TeacherHomeAdapter.
                         break;
                     case "About":
                         activity.startActivity(new Intent(activity, ParentsAboutActivity.class));
+                        break;
+                    case "Content List":
+                        activity.startActivity(new Intent(activity, ContentListActivity.class));
                         break;
 
                 }
