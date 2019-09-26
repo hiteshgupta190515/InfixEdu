@@ -11,7 +11,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MyConfig {
 
-    final public static String ROOT_URL = "https://infixedu.com/";
+    final public static String ROOT_URL = "https://infixedu.com/android/";
     final public static String BASE_URL = ROOT_URL+"api/";
     final public static String STUDENT_LIST = BASE_URL+"student-list";
     final public static String STUDENT_DORMITORY_LIST = BASE_URL+"student-dormitory";
