@@ -22,9 +22,17 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.infix.edu.R;
 import com.infix.edu.model.Content;
 import com.infix.edu.myconfig.MyConfig;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -94,7 +102,7 @@ public class ContentListAdapter extends RecyclerView.Adapter<ContentListAdapter.
                         builder.setPositiveButton("download", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                holder.downloadFile(MyConfig.ROOT_URL+file,contents.get(position).getTitle(),contents.get(position).getType(),ctx);
+                                holder.downloadFile(MyConfig.ROOT_URL+file,contents.get(position).getTitle().trim(),contents.get(position).getType().trim(),ctx);
                             }
                         }).setNegativeButton("no",null);
 
@@ -124,6 +132,22 @@ public class ContentListAdapter extends RecyclerView.Adapter<ContentListAdapter.
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             MyConfig.deleteContent(contents.get(position).getId());
+
+                            JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, MyConfig.deleteContent(contents.get(position).getId()), null, new Response.Listener<JSONObject>() {
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                    Toast.makeText(ctx,"delete successful",Toast.LENGTH_SHORT).show();
+                                    contents.remove(position);
+                                    notifyDataSetChanged();
+                                }
+                            }, new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    Toast.makeText(ctx,"delete unsuccessful",Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                            RequestQueue req = Volley.newRequestQueue(ctx);
+                            req.add(request);
                         }
                     }).setNegativeButton("no",null);
 
@@ -177,16 +201,18 @@ public class ContentListAdapter extends RecyclerView.Adapter<ContentListAdapter.
             txt_delete.getPaint().setUnderlineText(true);
         }
 
-        void downloadFile(String _url,String title,String subject,Context ctx) {
-            DownloadManager.Request request = new DownloadManager.Request(Uri.parse(_url));
-            request.setDescription(title);
-            request.setTitle(title+subject);
+        void downloadFile(String url,String title,String subject,Context ctx) {
+
+            String file_name = url.substring(url.lastIndexOf("/")+1);
+
+            DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+            request.setTitle(file_name);
 // in order for this if to run, you must use the android 3.2 to compile your app
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
                 request.allowScanningByMediaScanner();
                 request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
             }
-            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "data/");
+            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, file_name);
 
 // get download service and enqueue file
             DownloadManager manager = (DownloadManager)ctx.getSystemService(Context.DOWNLOAD_SERVICE);

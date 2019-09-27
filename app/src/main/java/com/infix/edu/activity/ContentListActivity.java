@@ -114,8 +114,6 @@ public class ContentListActivity extends AppCompatActivity {
                         }
 
 
-//                        Toast.makeText(getApplicationContext(),title +" "+array.length(), Toast.LENGTH_SHORT).show();
-
                     }
 
                 } catch (JSONException e) {

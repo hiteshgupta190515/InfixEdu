@@ -280,6 +280,22 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
             if (requestCode == 1) {
 
                 path = result.getData();
+//
+//                if(getPathFromUri(path,this) == null){
+//                    String dir_path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/infix";
+//                    File file = new File(dir_path);
+//
+//                    if(!file.exists()){
+//                        file.mkdir();
+//                    }
+//
+//                    Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+//                    Uri uri = Uri.parse(file.getAbsolutePath());
+//                    intent.setDataAndType(uri, "*/*");
+//                    this.startActivity(Intent.createChooser(intent, "Open folder"));
+//
+//
+//                }
 
                     txt_attach_file.setText(getPathFromUri(path,this));
 
@@ -543,7 +559,8 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
         Intent intent = new Intent();
         intent.setType("*/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select PDF"), 1);
+        startActivityForResult(Intent.createChooser(intent, "Select file"), 1);
+
     }
 
     //Requesting permission

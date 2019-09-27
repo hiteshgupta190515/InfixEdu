@@ -30,6 +30,7 @@ import com.infix.edu.myconfig.MyConfig;
 import com.infix.edu.R;
 import com.infix.edu.model.HomeWork;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class HomeWorkAdapter extends RecyclerView.Adapter<HomeWorkAdapter.MViewHolder>{
@@ -190,16 +191,20 @@ public class HomeWorkAdapter extends RecyclerView.Adapter<HomeWorkAdapter.MViewH
             txtEvaluation = v.findViewById(R.id.evaluation);
         }
 
-        void downloadFile(String _url,String title,String subject,Context ctx) {
-            DownloadManager.Request request = new DownloadManager.Request(Uri.parse(_url));
-            request.setDescription(title);
-            request.setTitle(subject);
+        void downloadFile(String url,String title,String subject,Context ctx) {
+
+            String file_name = url.substring(url.lastIndexOf("/")+1);
+
+            DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+            request.setTitle(file_name);
+
 // in order for this if to run, you must use the android 3.2 to compile your app
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
                 request.allowScanningByMediaScanner();
                 request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
             }
-            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "data/");
+
+            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, file_name);
 
 // get download service and enqueue file
             DownloadManager manager = (DownloadManager)ctx.getSystemService(Context.DOWNLOAD_SERVICE);
