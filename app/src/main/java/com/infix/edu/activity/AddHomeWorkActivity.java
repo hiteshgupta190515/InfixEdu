@@ -49,6 +49,8 @@ import com.infix.edu.model.AddHomeWork;
 import com.infix.edu.model.HomeWork;
 import com.infix.edu.model.SearchData;
 import com.infix.edu.myconfig.MyConfig;
+import com.nbsp.materialfilepicker.MaterialFilePicker;
+import com.nbsp.materialfilepicker.ui.FilePickerActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -189,18 +191,12 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
 
                 OkHttpClient client = new OkHttpClient();
 
-                File f = new File(getPathFromUri(path,AddHomeWorkActivity.this));
+                File f = new File(path.getPath());
 
                 String content_type = getMimeType(f.getPath());
                 String file_path = f.getPath();
                 String file_name = file_path.substring(file_path.lastIndexOf("/") + 1);
 
-
-//                if(file_name.matches(".*\\d.*")){
-//                    Log.d("find","found  "+content_type);
-//                }else{
-//                    Log.d("find","not found"+content_type);
-//                }
 
                 RequestBody file_body = RequestBody.create(MediaType.parse(content_type),f);
 
@@ -279,28 +275,15 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
         if (resultCode == RESULT_OK) {
             if (requestCode == 1) {
 
-                path = result.getData();
-//
-//                if(getPathFromUri(path,this) == null){
-//                    String dir_path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/infix";
-//                    File file = new File(dir_path);
-//
-//                    if(!file.exists()){
-//                        file.mkdir();
-//                    }
-//
-//                    Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-//                    Uri uri = Uri.parse(file.getAbsolutePath());
-//                    intent.setDataAndType(uri, "*/*");
-//                    this.startActivity(Intent.createChooser(intent, "Open folder"));
-//
-//
-//                }
+//                path = result.getData();
 
-                    txt_attach_file.setText(getPathFromUri(path,this));
+                File f  = new File(result.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
+
+                path = Uri.parse(f.getAbsolutePath());
 
 
-//                Toast.makeText(getApplicationContext(), path.toString(), Toast.LENGTH_SHORT).show();
+                txt_attach_file.setText(path.getPath());
+
 
             }
         }
@@ -556,10 +539,16 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
     }
 
     public void getFile() {
-        Intent intent = new Intent();
-        intent.setType("*/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select file"), 1);
+//        Intent intent = new Intent();
+//        intent.setType("*/*");
+//        intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
+//        startActivityForResult(Intent.createChooser(intent, "Select file"), 1);
+
+
+        new MaterialFilePicker()
+                .withActivity(AddHomeWorkActivity.this)
+                .withRequestCode(1)
+                .start();
 
     }
 

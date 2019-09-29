@@ -2,20 +2,15 @@
     <string name="app_name">InfixEdu</string>
 
     <string-array name="admins_functions_name">
-        <item>Student</item>
+        <item>Students</item>
+        <item>Leave</item>
         <item>Teacher</item>
-        <item>Inventory</item>
-        <item>Dashboard</item>
         <item>Dormitory</item>
-        <item>Report</item>
         <item>attendance</item>
         <item>Leave</item>
-        <item>Syllabus</item>
         <item>Fees</item>
         <item>Library</item>
         <item>Transport</item>
-        <item>Settings</item>
-        <item>Admin Section</item>
     </string-array>
 
     <string-array name="teachers_functions_name">
@@ -128,5 +123,11 @@
         <item>syllabus</item>
         <item>other download</item>
     </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="pending">Pending</string>
+    <string name="approved">Approved</string>
+    <string name="rejected">Rejected</string>
 
 </resources>

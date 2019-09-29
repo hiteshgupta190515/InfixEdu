@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="80dp"
     android:orientation="vertical"
-    android:background="@mipmap/tool_bar_bg"
-    tools:context="com.infix.studentmanagement.com.infix.edu.activity.FeesActivity">
+    android:background="@mipmap/tool_bar_bg">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

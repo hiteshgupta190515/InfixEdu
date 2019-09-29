@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,6 +25,7 @@ public class FeeAdapter extends RecyclerView.Adapter<FeeAdapter.FeeViewHolder>{
 
     private ArrayList<Fee> fees;
     private Context ctx;
+    private int last_position = -1;
 
     public FeeAdapter(ArrayList<Fee> fees, Context ctx) {
         this.fees = fees;
@@ -36,6 +39,19 @@ public class FeeAdapter extends RecyclerView.Adapter<FeeAdapter.FeeViewHolder>{
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.fees_row_layout,parent,false);
 
         return new FeeViewHolder(v);
+    }
+
+    public void set_animation(View v,int position){
+
+        if (position > last_position){
+
+            //Load the animation from the xml file and set it to the row
+            Animation animation = AnimationUtils.loadAnimation(ctx, R.anim.push_left_anim);
+            animation.setDuration(500);
+            v.startAnimation(animation);
+            last_position = position;
+        }
+
     }
 
     @Override
@@ -60,6 +76,9 @@ public class FeeAdapter extends RecyclerView.Adapter<FeeAdapter.FeeViewHolder>{
             holder.txtStatus.setText("unpaid");
             holder.txtStatus.setBackgroundColor(Color.RED);
         }
+
+
+        set_animation(holder.mView,position);
 
 
         holder.txtView.setOnClickListener(new View.OnClickListener() {
@@ -118,9 +137,12 @@ public class FeeAdapter extends RecyclerView.Adapter<FeeAdapter.FeeViewHolder>{
         TextView txtFeeBalance;
         TextView txtStatus;
         TextView txtView;
+        View mView;
 
         public FeeViewHolder(@NonNull View v) {
             super(v);
+
+            mView = v;
 
             txtTitle = v.findViewById(R.id.txtFeeTitle);
             txtDueDate = v.findViewById(R.id.dueDate);

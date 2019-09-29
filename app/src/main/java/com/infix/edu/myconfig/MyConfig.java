@@ -25,6 +25,7 @@ public class MyConfig {
     final public static String UPLOAD_CONTENT = BASE_URL+"teacher-upload-content";
     final public static String LEAVE_APPLY = BASE_URL+"staff-apply-leave";
     final public static String LEAVE_TYPE = BASE_URL+"staff-leave-type";
+    final public static String PENDING_LEAVE = BASE_URL+"pending-leave";
 
     public static String getLoginUrl(String email,String password){
 

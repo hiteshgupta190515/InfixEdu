@@ -31,6 +31,7 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.infix.edu.R;
+import com.infix.edu.adapter.AdminAdapter;
 import com.infix.edu.adapter.HomeAdapterHome;
 import com.infix.edu.adapter.TeacherHomeAdapter;
 import com.infix.edu.myconfig.MyConfig;
@@ -342,6 +343,9 @@ public class HomeActivity extends AppCompatActivity{
         if(role_id == 4){
             TeacherHomeAdapter teacherHomeAdapter = new TeacherHomeAdapter(this,names,images,this);
             recycler.setAdapter(teacherHomeAdapter);
+        }else if(role_id == 1){
+            AdminAdapter adminAdapter = new AdminAdapter(this,names,images,this);
+            recycler.setAdapter(adminAdapter);
         }else{
             HomeAdapterHome homeAdapterHome = new HomeAdapterHome(this,names,images,iId,this);
             recycler.setAdapter(homeAdapterHome);

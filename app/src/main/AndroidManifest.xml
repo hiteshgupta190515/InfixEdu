@@ -17,7 +17,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.ContentListActivity"></activity>
+        <activity android:name=".activity.AdminLeaveActivity"></activity>
+        <activity android:name=".activity.ContentListActivity" />
         <activity android:name=".activity.ContentAddActivity" />
         <activity android:name=".activity.TeacherContentActivity" />
         <activity android:name=".activity.LeaveListActivity" />

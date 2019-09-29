@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="feel very sick"
+        android:textSize="16dp"
+        android:textColor="#415094"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="25dp"
+        android:id="@+id/txtDRoute"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp"
+        >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginStart="25dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Leave Type"
+                android:textSize="13dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="#A8727FC8"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Casual Leave"
+                android:textSize="12dp"
+                android:id="@+id/txtDVehicleNo"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_medium"
+                android:padding="2dp"
+                android:textColor="@color/profile_light_text_color"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Leave From"
+                android:textSize="13dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="#A8727FC8"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="29th sep ,2019"
+                android:textSize="12dp"
+                android:id="@+id/txtDVehicalModel"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_medium"
+                android:padding="2dp"
+                android:textColor="@color/profile_light_text_color"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginStart="25dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Leave To"
+                android:textSize="13dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="#A8727FC8"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="29th sep ,2019"
+                android:textSize="12dp"
+                android:id="@+id/txtDVehicleMadeYear"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_medium"
+                android:padding="2dp"
+                android:textColor="@color/profile_light_text_color"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Apply Date"
+                android:textSize="13dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="#A8727FC8"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="29th sep ,2019"
+                android:textSize="12dp"
+                android:id="@+id/txtDVehicalDriverName"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_medium"
+                android:padding="2dp"
+                android:textColor="@color/profile_light_text_color"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Leave Status"
+        android:textSize="12dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/profile_light_text_color"
+        android:fontFamily="@font/poppins_light"
+        />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="25dp"
+        android:id="@+id/radio_group"
+        >
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pending"
+            android:button="@drawable/check_box"
+            android:fontFamily="@font/poppins_bold"
+            android:textColor="#A8727FC8"
+            android:paddingLeft="10dp"
+            android:id="@+id/pending"
+            />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Approve"
+            android:paddingLeft="10dp"
+            android:button="@drawable/check_box"
+            android:fontFamily="@font/poppins_bold"
+            android:textColor="#A8727FC8"
+            android:id="@+id/student"
+            />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:paddingLeft="10dp"
+            android:button="@drawable/check_box"
+            android:fontFamily="@font/poppins_bold"
+            android:textColor="#A8727FC8"
+            android:id="@+id/cancel"
+            />
+
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:layout_marginBottom="30dp"
+        >
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_save_leave_status"
+            android:text="save Leave Status"
+            android:fontFamily="@font/poppins_light"
+            android:background="@drawable/login_button_shape"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>
