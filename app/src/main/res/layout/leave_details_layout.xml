@@ -12,7 +12,7 @@
         android:textColor="#415094"
         android:layout_marginTop="30dp"
         android:layout_marginStart="25dp"
-        android:id="@+id/txtDRoute"
+        android:id="@+id/txt_reason"
         />
 
     <LinearLayout
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:text="Casual Leave"
                 android:textSize="12dp"
-                android:id="@+id/txtDVehicleNo"
+                android:id="@+id/txt_leave_type"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/poppins_medium"
                 android:padding="2dp"
@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:text="29th sep ,2019"
                 android:textSize="12dp"
-                android:id="@+id/txtDVehicalModel"
+                android:id="@+id/txt_leave_from"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/poppins_medium"
                 android:padding="2dp"
@@ -117,7 +117,7 @@
                 android:layout_height="wrap_content"
                 android:text="29th sep ,2019"
                 android:textSize="12dp"
-                android:id="@+id/txtDVehicleMadeYear"
+                android:id="@+id/txt_leave_to"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/poppins_medium"
                 android:padding="2dp"
@@ -148,7 +148,7 @@
                 android:layout_height="wrap_content"
                 android:text="29th sep ,2019"
                 android:textSize="12dp"
-                android:id="@+id/txtDVehicalDriverName"
+                android:id="@+id/txt_apply_date"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/poppins_medium"
                 android:padding="2dp"
@@ -196,7 +196,7 @@
             android:button="@drawable/check_box"
             android:fontFamily="@font/poppins_bold"
             android:textColor="#A8727FC8"
-            android:id="@+id/student"
+            android:id="@+id/approved"
             />
 
         <RadioButton

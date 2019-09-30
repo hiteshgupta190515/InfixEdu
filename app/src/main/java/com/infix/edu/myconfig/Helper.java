@@ -27,6 +27,8 @@ import java.util.ArrayList;
 
 public class Helper {
 
+    private boolean isSuccess;
+
     public ArrayList<SearchData> getClassData(final Context ctx) {
 
         final ArrayList<SearchData> classData = new ArrayList<>();
@@ -122,6 +124,45 @@ public class Helper {
         req.add(request);
 
         return sectionData;
+
+    }
+
+    public boolean setLeaveStatus(int id, String s, final Context ctx) {
+
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, MyConfig.setLeaveStatus(id,s), null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                try {
+                    if (response.getBoolean("success")) {
+
+                        isSuccess = true;
+
+                        Toast.makeText(ctx,"successful",Toast.LENGTH_SHORT).show();
+
+                    }else{
+
+                        Toast.makeText(ctx,"not successful",Toast.LENGTH_SHORT).show();
+
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(ctx, "error", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        RequestQueue req = Volley.newRequestQueue(ctx);
+        req.add(request);
+
+        return isSuccess;
 
     }
 

@@ -9,8 +9,10 @@ public class LeaveList {
     private String status;
     private int id;
     private int role_id;
+    private String reason;
+    private String strRadio;
 
-    public LeaveList(String title, String from, String to, String apply, String status, int id, int role_id) {
+    public LeaveList(String title, String from, String to, String apply, String status, int id, int role_id, String reason) {
         this.title = title;
         this.from = from;
         this.to = to;
@@ -18,6 +20,7 @@ public class LeaveList {
         this.status = status;
         this.id = id;
         this.role_id = role_id;
+        this.reason = reason;
     }
 
     public LeaveList(String title, String from, String to, String apply, String status) {
@@ -34,6 +37,14 @@ public class LeaveList {
 
     public void setRole_id(int role_id) {
         this.role_id = role_id;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
     }
 
     public int getId() {

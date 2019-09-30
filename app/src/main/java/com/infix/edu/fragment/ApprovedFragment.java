@@ -1,11 +1,10 @@
 package com.infix.edu.fragment;
 
+
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -33,9 +31,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 
-public class PendingFragment extends Fragment {
+public class ApprovedFragment extends Fragment {
 
     private ArrayList<LeaveList> leaves = new ArrayList<>();
     private RecyclerView recyclerView;
@@ -43,37 +40,36 @@ public class PendingFragment extends Fragment {
     private SharedPreferences sharedPreferences;
     private int role_id;
 
-    public PendingFragment() {
+    public ApprovedFragment() {
         // Required empty public constructor
     }
-
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_pending, container, false);
+        View v = inflater.inflate(R.layout.fragment_approved, container, false);
         sharedPreferences = getActivity().getSharedPreferences("default", Context.MODE_PRIVATE);
         role_id = sharedPreferences.getInt("role", 0);
 
 
         //main recyclerview
-        recyclerView = v.findViewById(R.id.pending_recyclerview);
+        recyclerView = v.findViewById(R.id.approved_recyclerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        getAllLeaves();
+        getAllApprovedLeaves();
 
+        // Inflate the layout for this fragment
         return v;
     }
 
-
-    void getAllLeaves(){
+    void getAllApprovedLeaves(){
 
         leaves.clear();
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, MyConfig.PENDING_LEAVE, null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, MyConfig.APPROVED_LEAVE, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 
@@ -81,7 +77,7 @@ public class PendingFragment extends Fragment {
                 try {
                     if(response.getBoolean("success")){
 
-                        JSONArray array = response.getJSONObject("data").getJSONArray("pending_request");
+                        JSONArray array = response.getJSONObject("data").getJSONArray("approved_request");
 
 
 
@@ -128,6 +124,5 @@ public class PendingFragment extends Fragment {
         req.add(request);
 
     }
-
 
 }

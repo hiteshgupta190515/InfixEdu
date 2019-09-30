@@ -7,9 +7,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import com.infix.edu.fragment.ApprovedFragment;
 import com.infix.edu.fragment.OthersFragment;
 import com.infix.edu.fragment.PendingFragment;
 import com.infix.edu.fragment.PersonalFragment;
+import com.infix.edu.fragment.RejectedFragment;
 import com.infix.edu.fragment.TransportFragment;
 
 public class CustomTabAdapter extends FragmentPagerAdapter {
@@ -32,11 +34,11 @@ public class CustomTabAdapter extends FragmentPagerAdapter {
                 PendingFragment homeFragment = new PendingFragment();
                 return homeFragment;
             case 1:
-                TransportFragment sportFragment = new TransportFragment();
-                return sportFragment;
+                ApprovedFragment approvedFragment = new ApprovedFragment();
+                return approvedFragment;
             case 2:
-                OthersFragment movieFragment = new OthersFragment();
-                return movieFragment;
+                RejectedFragment rejectedFragment = new RejectedFragment();
+                return rejectedFragment;
             default:
                 return null;
         }

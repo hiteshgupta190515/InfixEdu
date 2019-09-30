@@ -8,6 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.infix.edu.R;
 import com.infix.edu.model.LeaveList;
+import com.infix.edu.myconfig.Helper;
+import com.infix.edu.myconfig.MyConfig;
 
 import java.util.ArrayList;
 
@@ -24,6 +29,7 @@ public class LeaveListAdapter extends RecyclerView.Adapter<LeaveListAdapter.Leav
 
     private ArrayList<LeaveList> leaveLists;
     private Context context;
+    private  String strRadio;
 
     public LeaveListAdapter(ArrayList<LeaveList> leaveLists, Context context) {
         this.leaveLists = leaveLists;
@@ -45,6 +51,7 @@ public class LeaveListAdapter extends RecyclerView.Adapter<LeaveListAdapter.Leav
         holder.txtFrom.setText(leaveLists.get(position).getFrom());
         holder.txtTo.setText(leaveLists.get(position).getTo());
         holder.txtApply.setText(leaveLists.get(position).getApply());
+        holder.txtTitle.setText(leaveLists.get(position).getTitle());
         if(leaveLists.get(position).getStatus().equalsIgnoreCase("P")) {
             holder.txtStatus.setText(R.string.pending);
             holder.txtStatus.setBackgroundColor(context.getResources().getColor(R.color.yellow));
@@ -65,16 +72,69 @@ public class LeaveListAdapter extends RecyclerView.Adapter<LeaveListAdapter.Leav
                 @Override
                 public void onClick(View view) {
 
-                    Toast.makeText(context,leaveLists.get(position).getId()+"",Toast.LENGTH_SHORT).show();
-
                     AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context,R.style.DialogTheme);
                     View mView = LayoutInflater.from(context).inflate(R.layout.leave_details_layout, null);
+                    final Helper helper = new Helper();
 
 
+                    TextView txtReason = mView.findViewById(R.id.txt_reason);
+                    TextView txtLeaveType = mView.findViewById(R.id.txt_leave_type);
+                    TextView txtLeaveFrom = mView.findViewById(R.id.txt_leave_from);
+                    TextView txtLeaveTo = mView.findViewById(R.id.txt_leave_to);
+                    TextView txtApplyDate = mView.findViewById(R.id.txt_apply_date);
+                    RadioGroup radioGroup = mView.findViewById(R.id.radio_group);
+                    RadioButton rbPending = mView.findViewById(R.id.pending);
+                    RadioButton rbCancel = mView.findViewById(R.id.cancel);
+                    RadioButton rbApproved = mView.findViewById(R.id.approved);
+                    Button button = mView.findViewById(R.id.btn_save_leave_status);
 
+
+                    if(leaveLists.get(position).getStatus().equalsIgnoreCase("P")){
+
+                        rbPending.setChecked(true);
+                        strRadio = "P";
+
+                    }else if(leaveLists.get(position).getStatus().equalsIgnoreCase("A")){
+
+                        strRadio = "A";
+                        rbApproved.setChecked(true);
+                    }
+                    else {
+                        rbCancel.setChecked(true);
+                        strRadio = "C";
+                    }
+
+
+                    txtReason.setText(leaveLists.get(position).getReason());
+                    txtLeaveType.setText(leaveLists.get(position).getTitle());
+                    txtLeaveFrom.setText(leaveLists.get(position).getFrom());
+                    txtLeaveTo.setText(leaveLists.get(position).getTo());
+                    txtApplyDate.setText(leaveLists.get(position).getApply());
+
+
+                    radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                        public void onCheckedChanged(RadioGroup group, int checkedId) {
+                            switch (checkedId) {
+
+                                case R.id.pending:
+                                    strRadio  = "P";
+                                    break;
+
+                                case R.id.approved:
+                                    strRadio  = "A";
+                                    break;
+
+                                case R.id.cancel:
+                                    strRadio  = "C";
+                                    break;
+
+                            }
+                        }
+
+                    });
 
                     alertBuilder.setView(mView);
-                    AlertDialog dialog = alertBuilder.create();
+                    final AlertDialog dialog = alertBuilder.create();
 
                     Rect displayRectangle = new Rect();
                     Window window = dialog.getWindow();
@@ -85,6 +145,21 @@ public class LeaveListAdapter extends RecyclerView.Adapter<LeaveListAdapter.Leav
 
                     dialog.getWindow().setGravity(Gravity.BOTTOM);
                     dialog.show();
+
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                           helper.setLeaveStatus(leaveLists.get(position).getId(),strRadio,context);
+
+                                if(!strRadio.equals(leaveLists.get(position).getStatus()))
+                                leaveLists.remove(position);
+                                notifyDataSetChanged();
+                                dialog.dismiss();
+
+
+                        }
+                    });
 
                 }
             });
@@ -105,6 +180,7 @@ public class LeaveListAdapter extends RecyclerView.Adapter<LeaveListAdapter.Leav
         TextView txtApply;
         TextView txtStatus;
         TextView txtView;
+        TextView txtTitle;
 
         public LeaveViewHolder(@NonNull View v) {
             super(v);
@@ -114,6 +190,7 @@ public class LeaveListAdapter extends RecyclerView.Adapter<LeaveListAdapter.Leav
          txtApply = v.findViewById(R.id.apply_date);
          txtStatus = v.findViewById(R.id.status);
          txtView = v.findViewById(R.id.txtLeaveView);
+         txtTitle = v.findViewById(R.id.txtLeaveTitle);
 
         }
     }

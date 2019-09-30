@@ -26,6 +26,8 @@ public class MyConfig {
     final public static String LEAVE_APPLY = BASE_URL+"staff-apply-leave";
     final public static String LEAVE_TYPE = BASE_URL+"staff-leave-type";
     final public static String PENDING_LEAVE = BASE_URL+"pending-leave";
+    final public static String APPROVED_LEAVE = BASE_URL+"approved-leave";
+    final public static String REJECTED_LEAVE = BASE_URL+"reject-leave";
 
     public static String getLoginUrl(String email,String password){
 
@@ -47,6 +49,9 @@ public class MyConfig {
     }
     public static String getLeaveList(int id){
         return BASE_URL+"staff-apply-list/"+id;
+    }
+    public static String setLeaveStatus(int id,String status){
+        return BASE_URL+"update-leave?id="+id+"&status="+status;
     }
 
     public static String getFeesUrl(int id){
