@@ -113,6 +113,8 @@ public class HomeActivity extends AppCompatActivity{
                 profile_image_tag = "student_photo";
             if(role_id == 3)
                 profile_image_tag = "fathers_photo";
+            if(role_id == 1)
+                profile_image_tag = "staff_photo";
         }
 
 

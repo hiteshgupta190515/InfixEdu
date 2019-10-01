@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -30,6 +32,7 @@ public class LeaveListAdapter extends RecyclerView.Adapter<LeaveListAdapter.Leav
     private ArrayList<LeaveList> leaveLists;
     private Context context;
     private  String strRadio;
+    private int last_position = -1;
 
     public LeaveListAdapter(ArrayList<LeaveList> leaveLists, Context context) {
         this.leaveLists = leaveLists;
@@ -63,6 +66,8 @@ public class LeaveListAdapter extends RecyclerView.Adapter<LeaveListAdapter.Leav
             holder.txtStatus.setText(R.string.rejected);
             holder.txtStatus.setBackgroundColor(Color.RED);
         }
+
+        set_animation(holder.mView,position);
 
         if(leaveLists.get(position).getRole_id() == 1){
 
@@ -101,7 +106,7 @@ public class LeaveListAdapter extends RecyclerView.Adapter<LeaveListAdapter.Leav
                     }
                     else {
                         rbCancel.setChecked(true);
-                        strRadio = "C";
+                        strRadio = "R";
                     }
 
 
@@ -125,7 +130,7 @@ public class LeaveListAdapter extends RecyclerView.Adapter<LeaveListAdapter.Leav
                                     break;
 
                                 case R.id.cancel:
-                                    strRadio  = "C";
+                                    strRadio  = "R";
                                     break;
 
                             }
@@ -168,6 +173,19 @@ public class LeaveListAdapter extends RecyclerView.Adapter<LeaveListAdapter.Leav
 
     }
 
+    public void set_animation(View v,int position){
+
+        if (position > last_position){
+
+            //Load the animation from the xml file and set it to the row
+            Animation animation = AnimationUtils.loadAnimation(context, R.anim.push_left_anim);
+            animation.setDuration(500);
+            v.startAnimation(animation);
+            last_position = position;
+        }
+
+    }
+
     @Override
     public int getItemCount() {
         return leaveLists.size();
@@ -181,9 +199,12 @@ public class LeaveListAdapter extends RecyclerView.Adapter<LeaveListAdapter.Leav
         TextView txtStatus;
         TextView txtView;
         TextView txtTitle;
+        View mView;
 
         public LeaveViewHolder(@NonNull View v) {
             super(v);
+
+            mView = v;
 
          txtFrom = v.findViewById(R.id.from_date);
          txtTo = v.findViewById(R.id.to_date);

@@ -137,7 +137,6 @@ public class TeacherStudentActivity extends AppCompatActivity {
                         }
 
                         if(students.size() > 0){
-
                             adapter = new StudentListAdapter(students,TeacherStudentActivity.this,status);
                             studentRecyclerView.setAdapter(adapter);
                             adapter.notifyDataSetChanged();

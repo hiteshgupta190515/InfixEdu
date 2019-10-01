@@ -7,6 +7,8 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +37,7 @@ public class StudentListAdapter  extends RecyclerView.Adapter<StudentListAdapter
     private ArrayList<Tstudent> students;
     private Context ctx;
     private String status;
+    private int last_position = -1;
 
     public StudentListAdapter(ArrayList<Tstudent> students, Context ctx,String status){
         this.students = students;
@@ -73,6 +76,8 @@ public class StudentListAdapter  extends RecyclerView.Adapter<StudentListAdapter
 
         }
 
+        set_animation(holder.mView,position);
+
 
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,6 +114,19 @@ public class StudentListAdapter  extends RecyclerView.Adapter<StudentListAdapter
 
     }
 
+    public void set_animation(View v,int position){
+
+        if (position > last_position){
+
+            //Load the animation from the xml file and set it to the row
+            Animation animation = AnimationUtils.loadAnimation(ctx, R.anim.push_left_anim);
+            animation.setDuration(500);
+            v.startAnimation(animation);
+            last_position = position;
+        }
+
+    }
+
     @Override
     public int getItemCount() {
         return students.size();
@@ -120,6 +138,7 @@ public class StudentListAdapter  extends RecyclerView.Adapter<StudentListAdapter
         TextView txtName;
         TextView txtDes;
         RelativeLayout layout;
+        View mView;
 
         public studentViewHolder(View v) {
             super(v);
@@ -128,6 +147,7 @@ public class StudentListAdapter  extends RecyclerView.Adapter<StudentListAdapter
             txtName = v.findViewById(R.id.student_name);
             txtDes = v.findViewById(R.id.student_description);
             layout = v.findViewById(R.id.relative_layout);
+            mView = v;
 
         }
     }

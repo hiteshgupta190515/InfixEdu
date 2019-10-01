@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.infix.edu.R;
 import com.infix.edu.activity.AdminLeaveActivity;
+import com.infix.edu.activity.StudentListActivity;
 import com.infix.edu.activity.StudentSearchActivity;
 
 import java.util.ArrayList;
@@ -74,6 +75,12 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.ViewHolder>{
                     case "Leave":
                         Intent adminLeave = new Intent(activity, AdminLeaveActivity.class);
                         activity.startActivity(adminLeave);
+                        break;
+
+                    case "Students":
+                        Intent student = new Intent(activity, StudentListActivity.class);
+                        student.putExtra("status","admin");
+                        activity.startActivity(student);
                         break;
 
                 }

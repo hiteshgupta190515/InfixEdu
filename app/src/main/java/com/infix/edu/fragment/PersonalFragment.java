@@ -121,6 +121,7 @@ public class PersonalFragment extends Fragment{
                                 bloodGroup = response.getJSONObject("data").getJSONObject("blood_group").getString("name");
                                 dateOfBirth = detailsObj.getString("date_of_birth");
                                 phone = detailsObj.getString("mobile");
+                                email = detailsObj.getString("email");
 
                         personalData.add(new PersonalData("Date Of Birth",dateOfBirth));
                         personalData.add(new PersonalData("Religion",religion));
