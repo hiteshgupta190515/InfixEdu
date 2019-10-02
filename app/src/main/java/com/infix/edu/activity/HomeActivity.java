@@ -3,15 +3,21 @@ package com.infix.edu.activity;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ActivityManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Rect;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,12 +36,15 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.infix.edu.R;
 import com.infix.edu.adapter.AdminAdapter;
 import com.infix.edu.adapter.HomeAdapterHome;
 import com.infix.edu.adapter.TeacherHomeAdapter;
 import com.infix.edu.myconfig.MyConfig;
 import com.google.android.material.textfield.TextInputEditText;
+import com.infix.edu.receiver.SensorRestarterBroadcastReceiver;
+import com.infix.edu.service.FcmMessagingService;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -69,6 +78,8 @@ public class HomeActivity extends AppCompatActivity{
     TextView txtProfile;
     TextView txtChangePassword;
     TextView txtLogout;
+    Intent intent;
+    FcmMessagingService fcmMessagingService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,12 +93,23 @@ public class HomeActivity extends AppCompatActivity{
         txtToolbarText = findViewById(R.id.txtTitle);
 
 
+        Log.d("firebase_token", FirebaseInstanceId.getInstance().getToken());
+
+        BroadcastReceiver br = new SensorRestarterBroadcastReceiver();
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        filter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+        this.registerReceiver(br,filter);
+
+        fcmMessagingService = new FcmMessagingService();
+        intent = new Intent(this, fcmMessagingService.getClass());
+        if (!isMyServiceRunning(fcmMessagingService.getClass())) {
+            startService(intent);
+        }
 
         gridLayoutManager = new GridLayoutManager(HomeActivity.this,4);
         recycler.setLayoutManager(gridLayoutManager);
 
         sharedPreferences = getSharedPreferences("default", Context.MODE_PRIVATE);
-
         //Fetching the boolean value form sharedpreferences
         email = sharedPreferences.getString("email", null);
         password = sharedPreferences.getString("password",null);
@@ -251,6 +273,18 @@ public class HomeActivity extends AppCompatActivity{
             }
         });
 
+    }
+
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                Log.i ("isMyServiceRunning?", true+"");
+                return true;
+            }
+        }
+        Log.i ("isMyServiceRunning?", false+"");
+        return false;
     }
 
     private void showPasswordChangedSuccess(){
@@ -466,6 +500,14 @@ public class HomeActivity extends AppCompatActivity{
         });
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(request);
+    }
+
+    @Override
+    protected void onDestroy() {
+        stopService(intent);
+        Log.i("MAINACT", "onDestroy!");
+        super.onDestroy();
+
     }
 
 }
