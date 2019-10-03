@@ -53,6 +53,12 @@ public class MyConfig {
     public static String setLeaveStatus(int id,String status){
         return BASE_URL+"update-leave?id="+id+"&status="+status;
     }
+    public static String setToken(int id,String token){
+        return BASE_URL+"set-token?id="+id+"&token="+token;
+    }
+    public static String sentNotification(String title,String body,String token){
+        return ROOT_URL+"notification-api?send_notification&token="+token+"&body="+body+"&title="+title;
+    }
 
     public static String getFeesUrl(int id){
         return BASE_URL+"fees-collect-student-wise/"+id;

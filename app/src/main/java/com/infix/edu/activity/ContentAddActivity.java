@@ -35,12 +35,21 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.infix.edu.R;
+import com.infix.edu.adapter.StudentListAdapter;
 import com.infix.edu.model.AddHomeWork;
 import com.infix.edu.model.SearchData;
+import com.infix.edu.model.Tstudent;
 import com.infix.edu.myconfig.Helper;
 import com.infix.edu.myconfig.MyConfig;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -94,7 +103,6 @@ public class ContentAddActivity extends AppCompatActivity implements View.OnClic
     private int id;
     private String profile_image_url;
     private CircleImageView profile;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -201,7 +209,7 @@ public class ContentAddActivity extends AppCompatActivity implements View.OnClic
 
                 String content_type = helper.getMimeType(f.getPath());
                 String file_path = f.getPath();
-                String file_name = file_path.substring(file_path.lastIndexOf("/") + 1);
+                final String file_name = file_path.substring(file_path.lastIndexOf("/") + 1);
 
 
                 RequestBody file_body = RequestBody.create(MediaType.parse(content_type),f);
@@ -244,6 +252,7 @@ public class ContentAddActivity extends AppCompatActivity implements View.OnClic
                                     @Override
                                     public void run() {
                                         showSuccess();
+                                        getAllStudentByClass(class_id,section_id);
                                     }
                                 });
 
@@ -321,6 +330,7 @@ public class ContentAddActivity extends AppCompatActivity implements View.OnClic
                    spnClass.setVisibility(View.VISIBLE);
                    spnSection.setVisibility(View.VISIBLE);
                    allClasses = 0;
+
 
                }
            }
@@ -420,8 +430,8 @@ public class ContentAddActivity extends AppCompatActivity implements View.OnClic
 
                         send_data_to_server(title, reason);
 
-
                     }
+
                 }
 
                 break;
@@ -484,6 +494,50 @@ public class ContentAddActivity extends AppCompatActivity implements View.OnClic
         dialog.getWindow().setGravity(Gravity.BOTTOM);
         dialog.show();
 
+
+    }
+
+    public void getAllStudentByClass(int classId,int sectionId){
+
+        final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, MyConfig.getStudentByClassAndSection(classId,sectionId), null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        try {
+
+                            if(response.getBoolean("success")){
+
+
+                                JSONArray jsonArray = response.getJSONObject("data").getJSONArray("students");
+
+                                for(int i = 0 ; i < jsonArray.length() ; i++){
+
+
+                                    String token = jsonArray.getJSONObject(i).getString("notificationToken");
+
+                                    helper.sentNotification("Content upload","A new content uploaded please check",token,ContentAddActivity.this);
+                                }
+
+
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        });
+        RequestQueue req = Volley.newRequestQueue(this);
+        req.add(request);
 
     }
 

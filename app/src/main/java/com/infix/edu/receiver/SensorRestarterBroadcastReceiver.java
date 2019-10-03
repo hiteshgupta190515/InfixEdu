@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.infix.edu.service.FcmMessagingService;
+import com.infix.edu.service.SensorService;
 
 public class SensorRestarterBroadcastReceiver extends BroadcastReceiver {
     @Override
@@ -17,7 +18,7 @@ public class SensorRestarterBroadcastReceiver extends BroadcastReceiver {
         Log.i(SensorRestarterBroadcastReceiver.class.getSimpleName(), "Service Stops! Oooooooooooooppppssssss!!!!");
 
 
-        context.startService(new Intent(context, FcmMessagingService.class));;
+        context.startService(new Intent(context, SensorService.class));;
 
 
     }

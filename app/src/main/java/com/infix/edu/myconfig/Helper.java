@@ -166,6 +166,70 @@ public class Helper {
 
     }
 
+    public boolean setToken(int id, String token, final Context ctx) {
+
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, MyConfig.setToken(id,token), null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                try {
+                    if (response.getBoolean("success")) {
+
+                        isSuccess = true;
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        });
+
+        RequestQueue req = Volley.newRequestQueue(ctx);
+        req.add(request);
+
+        return isSuccess;
+
+    }
+
+    public boolean sentNotification(String title,String body, String token,final Context ctx) {
+
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, MyConfig.sentNotification(title,body,token), null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                try {
+                    if (response.getInt("success") == 1) {
+
+                        isSuccess = true;
+
+
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(ctx, "error", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        RequestQueue req = Volley.newRequestQueue(ctx);
+        req.add(request);
+
+        return isSuccess;
+    }
+
     public String selectDate(int day, int month, int year) {
 
         String monthYear;

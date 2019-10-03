@@ -48,6 +48,7 @@ import com.infix.edu.R;
 import com.infix.edu.model.AddHomeWork;
 import com.infix.edu.model.HomeWork;
 import com.infix.edu.model.SearchData;
+import com.infix.edu.myconfig.Helper;
 import com.infix.edu.myconfig.MyConfig;
 import com.nbsp.materialfilepicker.MaterialFilePicker;
 import com.nbsp.materialfilepicker.ui.FilePickerActivity;
@@ -105,6 +106,7 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
     private DatePickerDialog datePickerDialog;
     private String mAssign_date, mSubmission_date;
     private TextView txtAssign, txtSubmission;
+    private Helper helper;
 
     private Uri path;
     //storage permission code
@@ -117,6 +119,8 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_home_work);
+
+        helper = new Helper();
 
         spnClass = findViewById(R.id.choose_class_spinner);
         spnSection = findViewById(R.id.choose_section_spinner);
@@ -170,9 +174,9 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
                 String description = etDescription.getText().toString();
                 String marks = etMarks.getText().toString();
 
-                AddHomeWork homeWork = new AddHomeWork(mAssign_date,mSubmission_date,description,class_id,section_id,subject_id,id);
 
-                if(path != null && !TextUtils.isEmpty(marks)){
+                if(path != null && !TextUtils.isEmpty(marks) && class_id != 0 && section_id != 0){
+                    AddHomeWork homeWork = new AddHomeWork(mAssign_date,mSubmission_date,description,class_id,section_id,subject_id,id);
                     send_data_to_server(homeWork,marks);
                 }
 
@@ -233,6 +237,8 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
 
                           if(jsonObject.getBoolean("success")){
 
+                              getAllStudentByClass(class_id,section_id);
+
                               AddHomeWorkActivity.this.runOnUiThread(new Runnable() {
                                   @Override
                                   public void run() {
@@ -287,14 +293,6 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
 
             }
         }
-    }
-
-    public String getPathFromUri(Uri uri, Activity activity) {
-        String[] projection = {MediaStore.MediaColumns.DATA};
-        Cursor cursor = activity.managedQuery(uri, projection, null, null, null);
-        int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
-        cursor.moveToFirst();
-        return cursor.getString(column_index);
     }
 
     void getClassAndSectionName() {
@@ -359,7 +357,6 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
                             if (i > 0) {
                                 section_name = classData.get(i - 1).getKey();
                                 section_id = classData.get(i - 1).getValue();
-//                                Toast.makeText(getApplicationContext(),sectionData.get(i-1).getKey()+"   "+sectionData.get(i-1).getValue(),Toast.LENGTH_SHORT).show();
                             }
 
                         }
@@ -616,6 +613,51 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
         dialog.getWindow().setGravity(Gravity.BOTTOM);
         dialog.show();
 
+
+    }
+
+    public void getAllStudentByClass(int classId,int sectionId){
+
+
+        final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, MyConfig.getStudentByClassAndSection(classId,sectionId), null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        try {
+
+                            if(response.getBoolean("success")){
+
+
+                                JSONArray jsonArray = response.getJSONObject("data").getJSONArray("students");
+
+                                for(int i = 0 ; i < jsonArray.length() ; i++){
+
+
+                                    String token = jsonArray.getJSONObject(i).getString("notificationToken");
+
+                                    helper.sentNotification("Homework upload","A new homework uploaded please check",token,AddHomeWorkActivity.this);
+                                }
+
+
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        });
+        RequestQueue req = Volley.newRequestQueue(this);
+        req.add(request);
 
     }
 

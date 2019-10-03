@@ -41,10 +41,12 @@ import com.infix.edu.R;
 import com.infix.edu.adapter.AdminAdapter;
 import com.infix.edu.adapter.HomeAdapterHome;
 import com.infix.edu.adapter.TeacherHomeAdapter;
+import com.infix.edu.myconfig.Helper;
 import com.infix.edu.myconfig.MyConfig;
 import com.google.android.material.textfield.TextInputEditText;
 import com.infix.edu.receiver.SensorRestarterBroadcastReceiver;
 import com.infix.edu.service.FcmMessagingService;
+import com.infix.edu.service.SensorService;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -75,11 +77,12 @@ public class HomeActivity extends AppCompatActivity{
     private AlertDialog.Builder alertBuilder;
     private AlertDialog dialog;
     private SharedPreferences sharedPreferences;
+    private Helper helper;
     TextView txtProfile;
     TextView txtChangePassword;
     TextView txtLogout;
     Intent intent;
-    FcmMessagingService fcmMessagingService;
+    SensorService sensorService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,18 +94,21 @@ public class HomeActivity extends AppCompatActivity{
 
         toolbar = findViewById(R.id.toolbar);
         txtToolbarText = findViewById(R.id.txtTitle);
+        helper = new Helper();
 
 
         Log.d("firebase_token", FirebaseInstanceId.getInstance().getToken());
+
+
 
         BroadcastReceiver br = new SensorRestarterBroadcastReceiver();
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         filter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
         this.registerReceiver(br,filter);
 
-        fcmMessagingService = new FcmMessagingService();
-        intent = new Intent(this, fcmMessagingService.getClass());
-        if (!isMyServiceRunning(fcmMessagingService.getClass())) {
+        sensorService = new SensorService(this);
+        intent = new Intent(this, sensorService.getClass());
+        if (!isMyServiceRunning(sensorService.getClass())) {
             startService(intent);
         }
 
@@ -129,6 +135,8 @@ public class HomeActivity extends AppCompatActivity{
             role_id = sharedPreferences.getInt("role", 0);
             id = sharedPreferences.getInt("id", 0);
             url = MyConfig.getLoginUrl(email, password);
+
+            helper.setToken(id,FirebaseInstanceId.getInstance().getToken(),this);
 
             //getting this content by role_id and show profile image by this tag
             if(role_id == 2)
