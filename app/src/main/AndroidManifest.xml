@@ -20,7 +20,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.AdminLeaveActivity"></activity>
+        <activity android:name=".activity.AdminDormitoryActivity"></activity>
+        <activity android:name=".activity.AdminLeaveActivity" />
         <activity android:name=".activity.ContentListActivity" />
         <activity android:name=".activity.ContentAddActivity" />
         <activity android:name=".activity.TeacherContentActivity" />
@@ -43,24 +44,19 @@
             android:enabled="true"
             android:exported="true"
             android:label="RestartServiceWhenStopped">
-
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
-
         </receiver>
 
-
-        <service android:name=".service.FcmMessagingService"
-            >
+        <service android:name=".service.FcmMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <service android:name=".service.SensorService"
-            >
+        <service android:name=".service.SensorService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 

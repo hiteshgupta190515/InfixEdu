@@ -48,6 +48,7 @@ import com.infix.edu.model.SearchData;
 import com.infix.edu.model.Tstudent;
 import com.infix.edu.myconfig.Helper;
 import com.infix.edu.myconfig.MyConfig;
+import com.nbsp.materialfilepicker.ui.FilePickerActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -103,6 +104,7 @@ public class ContentAddActivity extends AppCompatActivity implements View.OnClic
     private int id;
     private String profile_image_url;
     private CircleImageView profile;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -198,14 +200,13 @@ public class ContentAddActivity extends AppCompatActivity implements View.OnClic
 
     private void send_data_to_server(final String title, final String description) {
 
-
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
 
                 OkHttpClient client = new OkHttpClient();
 
-                File f = new File(helper.getPathFromUri(path,ContentAddActivity.this));
+                File f = new File(path.getPath());
 
                 String content_type = helper.getMimeType(f.getPath());
                 String file_path = f.getPath();
@@ -252,7 +253,19 @@ public class ContentAddActivity extends AppCompatActivity implements View.OnClic
                                     @Override
                                     public void run() {
                                         showSuccess();
-                                        getAllStudentByClass(class_id,section_id);
+
+                                        if(strRadio.equals("admin")){
+                                            helper.sentNotificationForAll(1,ContentAddActivity.this);
+                                            Toast.makeText(getApplicationContext(),"admin",Toast.LENGTH_SHORT).show();
+                                        }else{
+                                            if(allClasses == 1){
+                                                helper.sentNotificationForAll(2,ContentAddActivity.this);
+                                                Toast.makeText(getApplicationContext(),"studnet",Toast.LENGTH_SHORT).show();
+                                            }else{
+                                                getAllStudentByClass(class_id,section_id);
+                                                Toast.makeText(getApplicationContext(),"class section",Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
                                     }
                                 });
 
@@ -261,14 +274,11 @@ public class ContentAddActivity extends AppCompatActivity implements View.OnClic
                             e.printStackTrace();
                         }
 
-
                     }
-
 
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
 
             }
         });
@@ -280,8 +290,15 @@ public class ContentAddActivity extends AppCompatActivity implements View.OnClic
         super.onActivityResult(requestCode, resultCode, result);
         if (resultCode == RESULT_OK) {
             if (requestCode == 1) {
-                path = result.getData();
-                txt_attach_file.setText(helper.getPathFromUri(path,this));
+//                path = result.getData();
+//                txt_attach_file.setText(helper.getPathFromUri(path,this));
+                File f  = new File(result.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
+
+                path = Uri.parse(f.getAbsolutePath());
+
+
+                txt_attach_file.setText(path.getPath());
+
             }
         }
     }
@@ -324,13 +341,13 @@ public class ContentAddActivity extends AppCompatActivity implements View.OnClic
                    allClasses = 1;
 
                }else{
+
                    isChecked = false;
                    radioButton.setChecked(isChecked);
 
                    spnClass.setVisibility(View.VISIBLE);
                    spnSection.setVisibility(View.VISIBLE);
                    allClasses = 0;
-
 
                }
            }
@@ -411,7 +428,7 @@ public class ContentAddActivity extends AppCompatActivity implements View.OnClic
 
             case R.id.attach_file:
 
-                helper.getFile(this);
+                helper.getFile(ContentAddActivity.this);
 
                 break;
 

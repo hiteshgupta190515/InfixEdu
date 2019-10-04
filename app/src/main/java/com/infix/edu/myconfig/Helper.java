@@ -18,6 +18,7 @@ import com.android.volley.toolbox.Volley;
 import com.infix.edu.R;
 import com.infix.edu.activity.AddHomeWorkActivity;
 import com.infix.edu.model.SearchData;
+import com.nbsp.materialfilepicker.MaterialFilePicker;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -230,6 +231,43 @@ public class Helper {
         return isSuccess;
     }
 
+    public void sentNotificationForAll(int id, final Context ctx) {
+
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, MyConfig.sentNotificationForAll(id), null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                try {
+                    if (response.getBoolean("success")) {
+
+                        JSONArray array = response.getJSONArray("data");
+
+                        for (int i = 0 ; i < array.length() ; i++){
+
+                            String token = array.getJSONObject(i).getString("notificationToken");
+
+                            sentNotification("Content upload","A new content uploaded please check",token,ctx);
+
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        RequestQueue req = Volley.newRequestQueue(ctx);
+        req.add(request);
+
+    }
+
     public String selectDate(int day, int month, int year) {
 
         String monthYear;
@@ -251,10 +289,16 @@ public class Helper {
     }
 
     public void getFile(Activity activity) {
-        Intent intent = new Intent();
-        intent.setType("*/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        activity.startActivityForResult(Intent.createChooser(intent, "Select PDF"), 1);
+//        Intent intent = new Intent();
+//        intent.setType("*/*");
+//        intent.setAction(Intent.ACTION_GET_CONTENT);
+//        activity.startActivityForResult(Intent.createChooser(intent, "Select PDF"), 1);
+
+        new MaterialFilePicker()
+                .withActivity(activity)
+                .withRequestCode(1)
+                .start();
+
     }
 
     public String getMimeType(String path) {

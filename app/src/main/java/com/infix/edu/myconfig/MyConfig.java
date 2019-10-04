@@ -15,6 +15,7 @@ public class MyConfig {
     final public static String BASE_URL = ROOT_URL+"api/";
     final public static String STUDENT_LIST = BASE_URL+"student-list";
     final public static String STUDENT_DORMITORY_LIST = BASE_URL+"student-dormitory";
+    final public static String ADMIN_DORMITORY_LIST = BASE_URL+"room-list";
     final public static String STUDENT_TRANSPORT_LIST = BASE_URL+"student-transport-report";
     final public static String BOOK_LIST = BASE_URL+"book-list";
     final public static String INVENTORY_LIST = BASE_URL+"item-list";
@@ -55,6 +56,9 @@ public class MyConfig {
     }
     public static String setToken(int id,String token){
         return BASE_URL+"set-token?id="+id+"&token="+token;
+    }
+    public static String sentNotificationForAll(int id){
+        return BASE_URL+"group-token?id="+id;
     }
     public static String sentNotification(String title,String body,String token){
         return ROOT_URL+"notification-api?send_notification&token="+token+"&body="+body+"&title="+title;

@@ -507,7 +507,7 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
                 requestStoragePermission();
 
                 if (isPermissionGranted) {
-                    getFile();
+                   helper.getFile(this);
                 }
                 break;
 
@@ -532,20 +532,6 @@ public class AddHomeWorkActivity extends AppCompatActivity implements View.OnCli
         }
 
         return year + "-" + monthYear + "-" + dayMonth;
-
-    }
-
-    public void getFile() {
-//        Intent intent = new Intent();
-//        intent.setType("*/*");
-//        intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
-//        startActivityForResult(Intent.createChooser(intent, "Select file"), 1);
-
-
-        new MaterialFilePicker()
-                .withActivity(AddHomeWorkActivity.this)
-                .withRequestCode(1)
-                .start();
 
     }
 

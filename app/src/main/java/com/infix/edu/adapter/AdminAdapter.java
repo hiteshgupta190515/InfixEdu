@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.infix.edu.R;
+import com.infix.edu.activity.AdminDormitoryActivity;
 import com.infix.edu.activity.AdminLeaveActivity;
 import com.infix.edu.activity.StudentListActivity;
 import com.infix.edu.activity.StudentSearchActivity;
@@ -81,6 +82,10 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.ViewHolder>{
                         Intent student = new Intent(activity, StudentListActivity.class);
                         student.putExtra("status","admin");
                         activity.startActivity(student);
+                        break;
+                    case "Dormitory":
+                        Intent dormitory = new Intent(activity, AdminDormitoryActivity.class);
+                        activity.startActivity(dormitory);
                         break;
 
                 }
