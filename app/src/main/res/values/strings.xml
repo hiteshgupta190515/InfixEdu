@@ -35,6 +35,12 @@
         <item>HW List</item>
     </string-array>
 
+    <string-array name="admin_dormitory_functions_name">
+        <item>Add Room</item>
+        <item>Add Dormitory</item>
+        <item>Room List</item>
+    </string-array>
+
     <string-array name="teachers_leave_functions_name">
         <item>Leave List</item>
         <item>Apply Leave</item>

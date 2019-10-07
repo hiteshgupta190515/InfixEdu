@@ -15,7 +15,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.infix.edu.R;
+import com.infix.edu.activity.AddDormitoryRoomActivity;
 import com.infix.edu.activity.AdminDormitoryActivity;
+import com.infix.edu.activity.AdminDormitoryDashActivity;
 import com.infix.edu.activity.AdminLeaveActivity;
 import com.infix.edu.activity.StudentListActivity;
 import com.infix.edu.activity.StudentSearchActivity;
@@ -84,8 +86,16 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.ViewHolder>{
                         activity.startActivity(student);
                         break;
                     case "Dormitory":
-                        Intent dormitory = new Intent(activity, AdminDormitoryActivity.class);
+                        Intent dormitory = new Intent(activity, AdminDormitoryDashActivity.class);
                         activity.startActivity(dormitory);
+                        break;
+                    case "Room List":
+                        Intent adddormitory = new Intent(activity, AdminDormitoryActivity.class);
+                        activity.startActivity(adddormitory);
+                        break;
+                    case "Add Room":
+                        Intent add_room = new Intent(activity, AddDormitoryRoomActivity.class);
+                        activity.startActivity(add_room);
                         break;
 
                 }

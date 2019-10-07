@@ -15,7 +15,9 @@ public class MyConfig {
     final public static String BASE_URL = ROOT_URL+"api/";
     final public static String STUDENT_LIST = BASE_URL+"student-list";
     final public static String STUDENT_DORMITORY_LIST = BASE_URL+"student-dormitory";
-    final public static String ADMIN_DORMITORY_LIST = BASE_URL+"room-list";
+    final public static String ADMIN_DORMITORY_ROOM_LIST = BASE_URL+"room-list";
+    final public static String ADMIN_DORMITORY_LIST = BASE_URL+"dormitory-list";
+    final public static String ADMIN_DORMITORY_ROOM_TYPE_LIST = BASE_URL+"room-type-list";
     final public static String STUDENT_TRANSPORT_LIST = BASE_URL+"student-transport-report";
     final public static String BOOK_LIST = BASE_URL+"book-list";
     final public static String INVENTORY_LIST = BASE_URL+"item-list";

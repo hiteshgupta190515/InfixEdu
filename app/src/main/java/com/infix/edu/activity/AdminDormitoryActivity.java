@@ -59,7 +59,7 @@ public class AdminDormitoryActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        txtToolbarText.setText("Dormitory");
+        txtToolbarText.setText("Room List");
         profile = findViewById(R.id.profile);
         profile_image_url = sharedPreferences.getString("profile_image",null);
 
@@ -89,7 +89,7 @@ public class AdminDormitoryActivity extends AppCompatActivity {
 
         dormitories.clear();
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, MyConfig.ADMIN_DORMITORY_LIST, null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, MyConfig.ADMIN_DORMITORY_ROOM_LIST, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 
