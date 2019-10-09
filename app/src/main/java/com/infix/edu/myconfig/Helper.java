@@ -128,6 +128,100 @@ public class Helper {
 
     }
 
+    public ArrayList<SearchData> getRoomTypeData(final Context ctx) {
+
+        final ArrayList<SearchData> sectionData = new ArrayList<>();
+        sectionData.clear();
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, MyConfig.ADMIN_DORMITORY_ROOM_TYPE_LIST, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+
+                try {
+                    if (response.getBoolean("success")) {
+
+                        JSONObject main = response.getJSONObject("data");
+                        JSONArray sectionNameArray = main.getJSONArray("room_type_lists");
+
+                        for (int i = 0; i < sectionNameArray.length(); i++) {
+
+                            String sectionName = sectionNameArray.getJSONObject(i).getString("type");
+                            int section_id = sectionNameArray.getJSONObject(i).getInt("id");
+                            sectionData.add(new SearchData(sectionName, section_id));
+
+                        }
+
+
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(ctx, "error", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        RequestQueue req = Volley.newRequestQueue(ctx);
+        req.add(request);
+
+        return sectionData;
+
+    }
+
+    public ArrayList<SearchData> getDormitoryListeData(final Context ctx) {
+
+        final ArrayList<SearchData> sectionData = new ArrayList<>();
+        sectionData.clear();
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, MyConfig.ADMIN_DORMITORY_LIST, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+
+                try {
+                    if (response.getBoolean("success")) {
+
+                        JSONObject main = response.getJSONObject("data");
+                        JSONArray sectionNameArray = main.getJSONArray("dormitory_lists");
+
+                        for (int i = 0; i < sectionNameArray.length(); i++) {
+
+                            String sectionName = sectionNameArray.getJSONObject(i).getString("dormitory_name");
+                            int section_id = sectionNameArray.getJSONObject(i).getInt("id");
+                            sectionData.add(new SearchData(sectionName, section_id));
+
+                        }
+
+
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(ctx, "error", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        RequestQueue req = Volley.newRequestQueue(ctx);
+        req.add(request);
+
+        return sectionData;
+
+    }
+
+
     public boolean setLeaveStatus(int id, String s, final Context ctx) {
 
 

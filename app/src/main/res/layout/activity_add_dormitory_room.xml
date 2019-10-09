@@ -14,11 +14,12 @@
         <include layout="@layout/toolbar"/>
 
         <EditText
-            android:id="@+id/content_title"
+            android:id="@+id/et_room_no"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Room number"
             android:maxLines="1"
+            android:fontFamily="@font/poppins_light"
             android:backgroundTint="#ddd"
             android:layout_marginTop="10dp"
             android:layout_marginStart="20dp"
@@ -73,6 +74,8 @@
             android:layout_height="wrap_content"
             android:hint="Number of bed"
             android:maxLines="1"
+            android:fontFamily="@font/poppins_light"
+            android:maxLength="2"
             android:backgroundTint="#ddd"
             android:layout_marginBottom="10dp"
             android:layout_marginStart="20dp"
@@ -87,6 +90,7 @@
             android:layout_height="wrap_content"
             android:hint="Cost per bed"
             android:maxLines="1"
+            android:fontFamily="@font/poppins_light"
             android:backgroundTint="#ddd"
             android:layout_marginBottom="10dp"
             android:layout_marginStart="20dp"
@@ -96,11 +100,12 @@
 
 
         <EditText
-            android:id="@+id/reason_textbox"
+            android:id="@+id/et_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Description"
             android:maxLines="4"
+            android:fontFamily="@font/poppins_light"
             android:backgroundTint="#ddd"
             android:layout_marginBottom="10dp"
             android:layout_marginStart="20dp"
