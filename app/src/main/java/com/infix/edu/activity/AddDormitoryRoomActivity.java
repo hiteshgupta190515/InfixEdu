@@ -3,7 +3,6 @@ package com.infix.edu.activity;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Rect;
@@ -23,27 +22,19 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
-import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.HttpHeaderParser;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.infix.edu.R;
 import com.infix.edu.model.SearchData;
 import com.infix.edu.myconfig.Helper;
 import com.infix.edu.myconfig.MyConfig;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -288,7 +279,7 @@ public class AddDormitoryRoomActivity extends AppCompatActivity {
             public void run() {
                 finish();
             }
-        },5000);
+        },3000);
 
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(AddDormitoryRoomActivity.this,R.style.DialogTheme);
         View mView = LayoutInflater.from(AddDormitoryRoomActivity.this).inflate(R.layout.pssword_change_success, null);

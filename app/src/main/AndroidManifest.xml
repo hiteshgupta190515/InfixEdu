@@ -20,7 +20,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.AddDormitoryRoomActivity"></activity>
+        <activity android:name=".activity.AddDormitoryActivity"></activity>
+        <activity android:name=".activity.AddDormitoryRoomActivity" />
         <activity android:name=".activity.AdminDormitoryDashActivity" />
         <activity android:name=".activity.AdminDormitoryActivity" />
         <activity android:name=".activity.AdminLeaveActivity" />

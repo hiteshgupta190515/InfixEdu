@@ -12,15 +12,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.infix.edu.R;
+import com.infix.edu.activity.AddDormitoryActivity;
 import com.infix.edu.activity.AddDormitoryRoomActivity;
 import com.infix.edu.activity.AdminDormitoryActivity;
 import com.infix.edu.activity.AdminDormitoryDashActivity;
 import com.infix.edu.activity.AdminLeaveActivity;
 import com.infix.edu.activity.StudentListActivity;
-import com.infix.edu.activity.StudentSearchActivity;
 
 import java.util.ArrayList;
 
@@ -72,30 +73,36 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.ViewHolder>{
 
                 row_index = position;
                 notifyDataSetChanged();
+                ActivityOptionsCompat options = ActivityOptionsCompat.
+                        makeSceneTransitionAnimation((Activity) ctx);
 
                 switch (name[position]) {
 
                     case "Leave":
                         Intent adminLeave = new Intent(activity, AdminLeaveActivity.class);
-                        activity.startActivity(adminLeave);
+                        activity.startActivity(adminLeave, options.toBundle());
                         break;
 
                     case "Students":
                         Intent student = new Intent(activity, StudentListActivity.class);
                         student.putExtra("status","admin");
-                        activity.startActivity(student);
+                        activity.startActivity(student, options.toBundle());
                         break;
                     case "Dormitory":
                         Intent dormitory = new Intent(activity, AdminDormitoryDashActivity.class);
-                        activity.startActivity(dormitory);
+                        activity.startActivity(dormitory, options.toBundle());
                         break;
                     case "Room List":
                         Intent adddormitory = new Intent(activity, AdminDormitoryActivity.class);
-                        activity.startActivity(adddormitory);
+                        activity.startActivity(adddormitory, options.toBundle());
                         break;
                     case "Add Room":
                         Intent add_room = new Intent(activity, AddDormitoryRoomActivity.class);
-                        activity.startActivity(add_room);
+                        activity.startActivity(add_room, options.toBundle());
+                        break;
+                    case "Add Dormitory":
+                        Intent add_dormitory = new Intent(activity, AddDormitoryActivity.class);
+                        activity.startActivity(add_dormitory, options.toBundle());
                         break;
 
                 }

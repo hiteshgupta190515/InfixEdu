@@ -37,6 +37,11 @@ public class MyConfig {
         return BASE_URL+"login?email="+email+"&password="+password;
     }
 
+    public static String addDormitory(String name,String type,String intake, String address,String description){
+
+        return BASE_URL+"add-dormitory?dormitory_name="+name+"&type="+type+"&intake="+intake+"&address="+address+"&description="+description;
+    }
+
     public static String isEnabled(){
         return BASE_URL+"is-enabled";
     }

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:fillViewport="true"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <include layout="@layout/toolbar"/>
+
+        <EditText
+            android:id="@+id/et_dormitory_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Dormitory name"
+            android:maxLines="1"
+            android:fontFamily="@font/poppins_light"
+            android:backgroundTint="#ddd"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:longClickable="false" />
+
+        <EditText
+            android:id="@+id/et_intake"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Intake"
+            android:maxLines="1"
+            android:fontFamily="@font/poppins_light"
+            android:backgroundTint="#ddd"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:longClickable="false" />
+
+        <Spinner
+            android:id="@+id/choose_dormitory_type_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:backgroundTint="#ddd"
+            android:minHeight="40dp" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#ddd"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            />
+
+        <EditText
+            android:id="@+id/et_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="address"
+            android:maxLines="1"
+            android:fontFamily="@font/poppins_light"
+            android:backgroundTint="#ddd"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:longClickable="false" />
+
+
+        <EditText
+            android:id="@+id/et_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Description"
+            android:maxLines="4"
+            android:fontFamily="@font/poppins_light"
+            android:backgroundTint="#ddd"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:inputType="textMultiLine"
+            android:longClickable="false" />
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            android:layout_marginBottom="30dp"
+            >
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_save"
+                android:text="save"
+                android:fontFamily="@font/poppins_light"
+                android:background="@drawable/login_button_shape"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:paddingLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

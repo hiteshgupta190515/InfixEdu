@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +24,7 @@ public class DormitoryAdapter extends RecyclerView.Adapter<DormitoryAdapter.Dorm
     private Context ctx;
     private SharedPreferences sharedPreferences;
     private int role_id;
+    private int last_position = -1;
 
     public DormitoryAdapter(ArrayList<Dormitory> dormitories, Context ctx) {
         this.dormitories = dormitories;
@@ -36,6 +39,19 @@ public class DormitoryAdapter extends RecyclerView.Adapter<DormitoryAdapter.Dorm
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.dormitory_row_layout,parent,false);
 
         return new DormitoryViewHolder(v);
+    }
+
+    public void set_animation(View v,int position){
+
+        if (position > last_position){
+
+            //Load the animation from the xml file and set it to the row
+            Animation animation = AnimationUtils.loadAnimation(ctx, R.anim.push_left_anim);
+            animation.setDuration(500);
+            v.startAnimation(animation);
+            last_position = position;
+        }
+
     }
 
     @Override
@@ -53,6 +69,8 @@ public class DormitoryAdapter extends RecyclerView.Adapter<DormitoryAdapter.Dorm
             holder.txtStatus.setText("available");
         else
             holder.txtStatus.setText("not available");
+
+        set_animation(holder.mView,position);
 
         if (role_id == 1){
 

@@ -97,9 +97,6 @@ public class HomeActivity extends AppCompatActivity{
         helper = new Helper();
 
 
-        Log.d("firebase_token", FirebaseInstanceId.getInstance().getToken());
-
-
 
         BroadcastReceiver br = new SensorRestarterBroadcastReceiver();
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
@@ -503,7 +500,7 @@ public class HomeActivity extends AppCompatActivity{
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(HomeActivity.this, "try again later", Toast.LENGTH_LONG).show();
+
             }
         });
         RequestQueue requestQueue = Volley.newRequestQueue(this);
