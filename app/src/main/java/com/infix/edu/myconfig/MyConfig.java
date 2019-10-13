@@ -31,6 +31,7 @@ public class MyConfig {
     final public static String PENDING_LEAVE = BASE_URL+"pending-leave";
     final public static String APPROVED_LEAVE = BASE_URL+"approved-leave";
     final public static String REJECTED_LEAVE = BASE_URL+"reject-leave";
+    final public static String DRIVER_LIST = BASE_URL+"driver-list";
 
     public static String getLoginUrl(String email,String password){
 
@@ -40,6 +41,16 @@ public class MyConfig {
     public static String addDormitory(String name,String type,String intake, String address,String description){
 
         return BASE_URL+"add-dormitory?dormitory_name="+name+"&type="+type+"&intake="+intake+"&address="+address+"&description="+description;
+    }
+    public static String addVehicle(String vehicleNo,String model,String driver_id, String note,String year){
+
+        return BASE_URL+"vehicle?vehicle_number="+vehicleNo+"&vehicle_model="+model+"&driver_id="+driver_id+"&note="+note+"&year_made="+year;
+
+    }
+    public static String addRoute(String title,String fare){
+
+        return BASE_URL+"transport-route?title="+title+"&far="+fare;
+
     }
 
     public static String isEnabled(){
@@ -195,37 +206,6 @@ public class MyConfig {
 return category;
     }
 
-    public static String getComplaintType(int id){
-
-        String category;
-
-        switch (id){
-
-            case 1:
-
-                category = "Raw Materials Inventory";
-                break;
-            case 2:
-                category = "Transit Inventory";
-                break;
-            case 3:
-                category = "Buffer Inventory";
-                break;
-            case 4:
-                category = "Application Inventory";
-                break;
-            case 5:
-                category = "Enterprice Inventory";
-            case 6:
-                category = "Others Inventory";
-            default:
-                category = "Others Inventory";
-                break;
-
-        }
-        return category;
-    }
-
     public static String getMonth(int id){
 
         String category = null;
@@ -300,66 +280,6 @@ return category;
             default:
                 category = 0;
                 break;
-        }
-        return category;
-    }
-
-    public static String getUserRole(int id){
-
-        String category;
-
-        switch (id){
-
-            case 1:
-                category = "Super admin";
-                break;
-            case 2:
-                category = "Student";
-                break;
-            case 3:
-                category = "Parents";
-                break;
-            case 4:
-                category = "Teacher";
-                break;
-            case 5:
-                category = "Admin";
-            case 6:
-                category = "Accountant";
-            default:
-                category = "Others";
-                break;
-
-        }
-        return category;
-    }
-
-    public static String getStudentClass(int id){
-
-        String category;
-
-        switch (id){
-
-            case 1:
-                category = "Super admin";
-                break;
-            case 2:
-                category = "Student";
-                break;
-            case 3:
-                category = "Parents";
-                break;
-            case 4:
-                category = "Teacher";
-                break;
-            case 5:
-                category = "Admin";
-            case 6:
-                category = "Accountant";
-            default:
-                category = "Others";
-                break;
-
         }
         return category;
     }

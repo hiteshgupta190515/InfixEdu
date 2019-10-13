@@ -8,8 +8,6 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
@@ -20,7 +18,11 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.AddDormitoryActivity"></activity>
+        <activity android:name=".activity.AdminTransportListActivity"></activity>
+        <activity android:name=".activity.AddVehicleActivity" />
+        <activity android:name=".activity.AddRouteActivity" />
+        <activity android:name=".activity.AdminTransportActivity" />
+        <activity android:name=".activity.AddDormitoryActivity" />
         <activity android:name=".activity.AddDormitoryRoomActivity" />
         <activity android:name=".activity.AdminDormitoryDashActivity" />
         <activity android:name=".activity.AdminDormitoryActivity" />
@@ -41,16 +43,6 @@
         <activity android:name=".activity.TeacherAcademicsActivity" />
         <activity android:name=".activity.TeacherStudentActivity" />
         <activity android:name=".activity.StudentSearchActivity" />
-
-        <receiver
-            android:name=".receiver.SensorRestarterBroadcastReceiver"
-            android:enabled="true"
-            android:exported="true"
-            android:label="RestartServiceWhenStopped">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
 
         <service android:name=".service.FcmMessagingService">
             <intent-filter>

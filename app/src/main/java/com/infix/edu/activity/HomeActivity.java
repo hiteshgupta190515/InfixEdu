@@ -44,8 +44,6 @@ import com.infix.edu.adapter.TeacherHomeAdapter;
 import com.infix.edu.myconfig.Helper;
 import com.infix.edu.myconfig.MyConfig;
 import com.google.android.material.textfield.TextInputEditText;
-import com.infix.edu.receiver.SensorRestarterBroadcastReceiver;
-import com.infix.edu.service.FcmMessagingService;
 import com.infix.edu.service.SensorService;
 
 import org.json.JSONException;
@@ -96,13 +94,6 @@ public class HomeActivity extends AppCompatActivity{
         txtToolbarText = findViewById(R.id.txtTitle);
         helper = new Helper();
 
-
-
-        BroadcastReceiver br = new SensorRestarterBroadcastReceiver();
-        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-        filter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
-        this.registerReceiver(br,filter);
-
         sensorService = new SensorService(this);
         intent = new Intent(this, sensorService.getClass());
         if (!isMyServiceRunning(sensorService.getClass())) {
@@ -133,6 +124,7 @@ public class HomeActivity extends AppCompatActivity{
             id = sharedPreferences.getInt("id", 0);
             url = MyConfig.getLoginUrl(email, password);
 
+            //getting device token from this line
             helper.setToken(id,FirebaseInstanceId.getInstance().getToken(),this);
 
             //getting this content by role_id and show profile image by this tag

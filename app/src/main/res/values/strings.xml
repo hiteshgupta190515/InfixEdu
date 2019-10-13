@@ -83,6 +83,12 @@
         <item>Girls</item>
     </string-array>
 
+    <string-array name="admin_transport_option">
+        <item>Add Route</item>
+        <item>Add Vehicle</item>
+        <item>Transport List</item>
+    </string-array>
+
     <string-array name="default_functions_name">
         <item>About</item>
     </string-array>

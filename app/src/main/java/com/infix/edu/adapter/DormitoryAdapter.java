@@ -83,7 +83,7 @@ public class DormitoryAdapter extends RecyclerView.Adapter<DormitoryAdapter.Dorm
                 }
             });
 
-    }
+         }
 
     }
 

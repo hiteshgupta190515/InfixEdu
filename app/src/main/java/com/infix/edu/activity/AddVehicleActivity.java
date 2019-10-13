@@ -23,7 +23,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -39,49 +38,52 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class AddDormitoryActivity extends AppCompatActivity {
+public class AddVehicleActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private TextView txtToolbarText;
     private SharedPreferences sharedPreferences;
     private String profile_image_url;
     private CircleImageView profile;
-    private ArrayList<SearchData> roomTypes = new ArrayList<>();
-    private ArrayList<String> roomTypeData = new ArrayList<>();
-    private Spinner spn_room_type;
-    private String type_id;
-    private String[] intake;
+    private EditText et_vehicle_no;
+    private EditText et_vehicle_model;
+    private EditText et_vehicle_note;
+    private EditText et_vehicle_made;
+    private Spinner vehicle_driver_spiner;
+    private ArrayList<SearchData> driverlist = new ArrayList<>();
+    private ArrayList<String> driverName = new ArrayList<>();
+    private Helper helper;
+    private int driver_id;
     private Button btn_save;
-    private EditText et_dormitory_name,et_address,et_description,et_intake;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_dormitory);
+        setContentView(R.layout.activity_add_vehicle);
 
-        spn_room_type = findViewById(R.id.choose_dormitory_type_spinner);
+        helper = new Helper();
+        driverlist = helper.getAllDriver(this);
+
         btn_save = findViewById(R.id.btn_save);
-        et_address = findViewById(R.id.et_address);
-        et_description = findViewById(R.id.et_description);
-        et_dormitory_name = findViewById(R.id.et_dormitory_name);
-        et_intake = findViewById(R.id.et_intake);
+        et_vehicle_no = findViewById(R.id.et_vehicle_no);
+        et_vehicle_model =findViewById(R.id.et_model);
+        et_vehicle_note = findViewById(R.id.et_note);
+        et_vehicle_made = findViewById(R.id.et_made_year);
+        vehicle_driver_spiner  = findViewById(R.id.choose_driver_spinner);
 
         sharedPreferences = getSharedPreferences("default", Context.MODE_PRIVATE);
-        intake = getResources().getStringArray(R.array.intake_option);
         toolbar = findViewById(R.id.toolbar);
         txtToolbarText = findViewById(R.id.txtTitle);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        txtToolbarText.setText("Add Dormitory");
+        txtToolbarText.setText("Add Vehicle");
         profile = findViewById(R.id.profile);
         profile_image_url = sharedPreferences.getString("profile_image",null);
-        MyConfig.getProfileImage(profile_image_url,profile,AddDormitoryActivity.this);
+        MyConfig.getProfileImage(profile_image_url,profile,AddVehicleActivity.this);
 
         showSpinnerData();
 
@@ -89,19 +91,20 @@ public class AddDormitoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                String name = et_dormitory_name.getText().toString();
-                String address = et_address.getText().toString();
-                String description = et_description.getText().toString();
-                String intake = et_intake.getText().toString();
+                String vehicle_no = et_vehicle_no.getText().toString();
+                String vehicle_model = et_vehicle_model.getText().toString();
+                String vehicle_note = et_vehicle_note.getText().toString();
+                String vehicle_made = et_vehicle_made.getText().toString();
 
-                if(!TextUtils.isEmpty(name) && !TextUtils.isEmpty(address) && !TextUtils.isEmpty(description) && !TextUtils.isEmpty(intake)){
+                if(!TextUtils.isEmpty(vehicle_no) && !TextUtils.isEmpty(vehicle_model) && !TextUtils.isEmpty(vehicle_note) && !TextUtils.isEmpty(vehicle_made)){
 
-                    send_dormitory_data(name,intake,String.valueOf(type_id),description,address);
+                    send_route_data(vehicle_no,vehicle_model,String.valueOf(driver_id),vehicle_made,vehicle_note);
 
                 }
 
             }
         });
+
 
     }
 
@@ -112,17 +115,19 @@ public class AddDormitoryActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                ArrayAdapter adapter1 = new ArrayAdapter(AddDormitoryActivity.this, R.layout.spinner_row_layout, R.id.spn_text, intake);
-                spn_room_type.setAdapter(adapter1);
+                for(SearchData s: driverlist){
+                    driverName.add(s.getKey());
+                }
 
-                spn_room_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                ArrayAdapter adapter1 = new ArrayAdapter(AddVehicleActivity.this, R.layout.spinner_row_layout, R.id.spn_text, driverName);
+                vehicle_driver_spiner.setAdapter(adapter1);
+
+                vehicle_driver_spiner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                        if(adapterView.getSelectedItem().toString().equalsIgnoreCase("Boys"))
-                            type_id = "B";
-                        else
-                            type_id = "G";
+                        driver_id = driverlist.get(i).getValue();
+
 
                     }
                     @Override
@@ -147,11 +152,11 @@ public class AddDormitoryActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    void send_dormitory_data(final String dormitory_name, final String intake, final String type, final String description, final String address){
+    void send_route_data(final String vehicleNo, final String vehicleMOdel,String driverId,String madeYear,String note){
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, MyConfig.addDormitory(dormitory_name,type,intake,address,description), new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, MyConfig.addVehicle(vehicleNo,vehicleMOdel,driverId,note,madeYear), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
@@ -164,7 +169,7 @@ public class AddDormitoryActivity extends AppCompatActivity {
                         showSuccess();
 
                     else
-                        Toast.makeText(AddDormitoryActivity.this,"data does not save",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddVehicleActivity.this,"data does not save",Toast.LENGTH_SHORT).show();
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -174,7 +179,7 @@ public class AddDormitoryActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(AddDormitoryActivity.this,"server does not response",Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddVehicleActivity.this,"server does not response",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -192,11 +197,11 @@ public class AddDormitoryActivity extends AppCompatActivity {
             }
         },3000);
 
-        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(AddDormitoryActivity.this,R.style.DialogTheme);
-        View mView = LayoutInflater.from(AddDormitoryActivity.this).inflate(R.layout.pssword_change_success, null);
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(AddVehicleActivity.this,R.style.DialogTheme);
+        View mView = LayoutInflater.from(AddVehicleActivity.this).inflate(R.layout.pssword_change_success, null);
 
         TextView textView = mView.findViewById(R.id.txt_message_body);
-        textView.setText("Dormitory add successfully!");
+        textView.setText("Vehicle add successfully!");
 
         alertBuilder.setView(mView);
         AlertDialog dialog = alertBuilder.create();

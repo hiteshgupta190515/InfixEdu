@@ -18,9 +18,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.infix.edu.R;
 import com.infix.edu.activity.AddDormitoryActivity;
 import com.infix.edu.activity.AddDormitoryRoomActivity;
+import com.infix.edu.activity.AddRouteActivity;
+import com.infix.edu.activity.AddVehicleActivity;
 import com.infix.edu.activity.AdminDormitoryActivity;
 import com.infix.edu.activity.AdminDormitoryDashActivity;
 import com.infix.edu.activity.AdminLeaveActivity;
+import com.infix.edu.activity.AdminTransportActivity;
+import com.infix.edu.activity.AdminTransportListActivity;
 import com.infix.edu.activity.StudentListActivity;
 
 import java.util.ArrayList;
@@ -103,6 +107,22 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.ViewHolder>{
                     case "Add Dormitory":
                         Intent add_dormitory = new Intent(activity, AddDormitoryActivity.class);
                         activity.startActivity(add_dormitory, options.toBundle());
+                        break;
+                    case "Transport":
+                        Intent transport = new Intent(activity, AdminTransportActivity.class);
+                        activity.startActivity(transport, options.toBundle());
+                        break;
+                    case "Add Route":
+                        Intent route = new Intent(activity, AddRouteActivity.class);
+                        activity.startActivity(route, options.toBundle());
+                        break;
+                    case "Add Vehicle":
+                        Intent vehicle = new Intent(activity, AddVehicleActivity.class);
+                        activity.startActivity(vehicle, options.toBundle());
+                        break;
+                    case "Transport List":
+                        Intent transport_list = new Intent(activity, AdminTransportListActivity.class);
+                        activity.startActivity(transport_list, options.toBundle());
                         break;
 
                 }

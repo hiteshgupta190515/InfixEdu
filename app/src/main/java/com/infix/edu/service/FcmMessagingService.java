@@ -21,10 +21,6 @@ import com.infix.edu.activity.HomeActivity;
 
 public class FcmMessagingService extends FirebaseMessagingService {
 
-
-    String type = "";
-    public int counter=0;
-
     public FcmMessagingService() {
         super();
     }

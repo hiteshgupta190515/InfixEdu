@@ -8,7 +8,6 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
-import com.infix.edu.receiver.SensorRestarterBroadcastReceiver;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -22,21 +21,12 @@ public class SensorService extends Service {
         Intent service = new Intent(applicationContext, FcmMessagingService.class);
         applicationContext.startService(service);
 
-
     }
 
     public SensorService() {
     }
 
-    @Override
-    public void onTaskRemoved(Intent rootIntent) {
-        super.onTaskRemoved(rootIntent);
 
-        Intent broadcastIntent = new Intent(this, SensorRestarterBroadcastReceiver.class);
-
-        sendBroadcast(broadcastIntent);
-
-    }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -44,15 +34,7 @@ public class SensorService extends Service {
         startTimer();
         return START_STICKY;
     }
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Log.i("EXIT", "ondestroy from sensor!");
-        Intent broadcastIntent = new Intent(this, SensorRestarterBroadcastReceiver.class);
 
-        sendBroadcast(broadcastIntent);
-        stoptimertask();
-    }
 
     private Timer timer;
     private TimerTask timerTask;
