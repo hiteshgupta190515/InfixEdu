@@ -1,23 +1,31 @@
 package com.infix.edu.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.infix.edu.R;
+import com.infix.edu.model.SearchData;
+
+import java.util.ArrayList;
+
+import io.armcha.elasticview.ElasticView;
 
 public class OptionAdapter extends RecyclerView.Adapter <OptionAdapter.OptionViewHolder>{
 
-    static String[] items;
-    Context ctx;
+    private static ArrayList<SearchData> items;
+    private Context ctx;
     private static ClickListener clickListener;
+    private int row_index = 0;
 
-    public OptionAdapter(String[] items, Context ctx) {
+    public OptionAdapter(ArrayList<SearchData> items, Context ctx) {
         this.items = items;
         this.ctx = ctx;
     }
@@ -32,15 +40,36 @@ public class OptionAdapter extends RecyclerView.Adapter <OptionAdapter.OptionVie
     }
 
     @Override
-    public void onBindViewHolder(@NonNull OptionViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull OptionViewHolder holder, final int position) {
 
-        holder.txtOptionName.setText(items[position]);
+        holder.txtOptionName.setText(items.get(position).getKey());
+
+        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                row_index = position;
+                notifyDataSetChanged();
+
+                if (clickListener != null) {
+                    clickListener.itemClicked(items.get(position).getKey(), position,view);
+                }
+            }
+        });
+
+        if (row_index == position) {
+            holder.linearLayout.setBackgroundDrawable(ctx.getResources().getDrawable(R.drawable.toolbar_gradient));
+            holder.txtOptionName.setTextColor(ctx.getResources().getColor(R.color.white));
+        } else {
+            holder.linearLayout.setBackgroundColor(Color.WHITE);
+            holder.txtOptionName.setTextColor(Color.GRAY);
+        }
 
     }
 
     @Override
     public int getItemCount() {
-        return items.length;
+        return items.size();
     }
 
     public void setClickListener(ClickListener clickListener) {
@@ -57,20 +86,13 @@ public class OptionAdapter extends RecyclerView.Adapter <OptionAdapter.OptionVie
     public static class OptionViewHolder extends RecyclerView.ViewHolder{
 
         TextView txtOptionName;
+        private ElasticView linearLayout;
 
         public OptionViewHolder(@NonNull View v) {
             super(v);
 
             txtOptionName = v.findViewById(R.id.txtOptName);
-
-            txtOptionName.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (clickListener != null) {
-                        clickListener.itemClicked(items[getPosition()], getPosition(),view);
-                    }
-                }
-            });
+            linearLayout = itemView.findViewById(R.id.linearLayout_home_adapter);
 
         }
     }

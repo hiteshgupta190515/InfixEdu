@@ -63,9 +63,9 @@ public class InventoryActivity extends AppCompatActivity implements OptionAdapte
         recyclerViewOption.setLayoutManager(gridLayoutManager);
 
         names = getResources().getStringArray(R.array.inventory_functions_name);
-        OptionAdapter optionAdapter = new OptionAdapter(names,InventoryActivity.this);
-        optionAdapter.setClickListener(InventoryActivity.this);
-        recyclerViewOption.setAdapter(optionAdapter);
+        //OptionAdapter optionAdapter = new OptionAdapter(names,InventoryActivity.this);
+        //optionAdapter.setClickListener(InventoryActivity.this);
+       // recyclerViewOption.setAdapter(optionAdapter);
 
         getAlInventories();
 

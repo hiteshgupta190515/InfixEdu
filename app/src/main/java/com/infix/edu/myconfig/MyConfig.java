@@ -32,6 +32,7 @@ public class MyConfig {
     final public static String APPROVED_LEAVE = BASE_URL+"approved-leave";
     final public static String REJECTED_LEAVE = BASE_URL+"reject-leave";
     final public static String DRIVER_LIST = BASE_URL+"driver-list";
+    final public static String STAFF_ROLE = BASE_URL+"staff-roles";
 
     public static String getLoginUrl(String email,String password){
 
@@ -68,6 +69,9 @@ public class MyConfig {
     }
     public static String getLeaveList(int id){
         return BASE_URL+"staff-apply-list/"+id;
+    }
+    public static String getAllStaff(int id){
+        return BASE_URL+"staff-list/"+id;
     }
     public static String setLeaveStatus(int id,String status){
         return BASE_URL+"update-leave?id="+id+"&status="+status;

@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    >
 
     <io.armcha.elasticview.ElasticView
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,12 +12,13 @@
         android:layout_margin="8dp"
         app:cardCornerRadius="6dp"
         app:cardElevation="6dp"
+        android:id="@+id/linearLayout_home_adapter"
         >
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="all"
+            android:text="Super admin"
             android:textSize="12dp"
             android:padding="5dp"
             android:fontFamily="@font/poppins_medium"

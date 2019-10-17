@@ -3,34 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/toolbar_gradient"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:theme="@style/ThemeOverlay.AppCompat">
-
-        <TextView
-            android:id="@+id/logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Details"
-            android:textColor="#E4DCDC"
-            android:textSize="20sp" />
-    </androidx.appcompat.widget.Toolbar>
+    android:layout_height="wrap_content">
 
     <ScrollView
-        android:layout_below="@id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
 
 
@@ -69,17 +50,17 @@
                         android:textAppearance="?android:textAppearanceLarge" />
 
                     <TextView
-                        android:id="@+id/birth"
+                        android:id="@+id/qualification"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
-                        android:text="12-16-2019"
+                        android:text="B.Sc in Computer Science"
                         android:fontFamily="sans-serif-condensed"
                         android:textAppearance="?android:textAppearanceMedium" />
 
                     <TextView
-                        android:id="@+id/birth_place"
+                        android:id="@+id/address"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
@@ -120,7 +101,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:layout_below="@+id/card_holder"
-                        android:padding="15dp"
+                        android:padding="5dp"
                         >
 
                         <LinearLayout
@@ -135,22 +116,22 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Class : two"
+                                android:text="Phone : 0190235867"
                                 android:textSize="13dp"
                                 android:fontFamily="@font/poppins_medium"
                                 android:maxLines="1"
-                                android:id="@+id/txtClass"
+                                android:id="@+id/txtMobileNo"
                                 />
 
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Section : B"
+                                android:text="Title : Assistant Head Master"
                                 android:textSize="13dp"
                                 android:maxLines="1"
                                 android:fontFamily="@font/poppins_medium"
-                                android:id="@+id/txtSection"/>
+                                android:id="@+id/txtTitle"/>
 
                         </LinearLayout>
 
@@ -167,127 +148,25 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Roll : 02"
+                                android:text="Birth : 1983-02-24"
                                 android:textSize="13dp"
                                 android:maxLines="1"
                                 android:fontFamily="@font/poppins_medium"
-                                android:id="@+id/txtRoll"
+                                android:id="@+id/txtBirth"
                                 />
 
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="admission no : 2525"
+                                android:text="status : Married"
                                 android:textSize="13dp"
                                 android:maxLines="1"
                                 android:fontFamily="@font/poppins_medium"
-                                android:id="@+id/txtAdmission"
+                                android:id="@+id/txtMaritalStatus"
                                 />
 
                         </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal"
-                            android:layout_marginTop="5dp"
-                            android:maxLines="1"
-                            android:padding="5dp"
-                            android:background="#EBE3E3"
-                            >
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Nationality : Bengali"
-                                android:textSize="13dp"
-                                android:fontFamily="@font/poppins_medium"
-                                android:id="@+id/txtNationality"
-                                android:maxLines="1"
-                                />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Religion : Islam"
-                                android:textSize="13dp"
-                                android:fontFamily="@font/poppins_medium"
-                                android:id="@+id/txtReligion"
-                                android:maxLines="1"
-                                />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal"
-                            android:layout_marginTop="5dp"
-                            android:background="#F0D1D1"
-                            android:padding="5dp"
-                            >
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Father : Abul kasem"
-                                android:textSize="13dp"
-                                android:fontFamily="@font/poppins_medium"
-                                android:id="@+id/txtFather"
-                                android:maxLines="1"
-                                />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Mother : Hazara begum"
-                                android:textSize="13dp"
-                                android:maxLines="1"
-                                android:fontFamily="@font/poppins_medium"
-                                android:id="@+id/txtMother"
-                                />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal"
-                            android:layout_marginTop="5dp"
-                            android:maxLines="1"
-                            android:padding="5dp"
-                            android:background="#EBE3E3"
-                            >
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Phone : 01903273865"
-                                android:textSize="13dp"
-                                android:fontFamily="@font/poppins_medium"
-                                android:id="@+id/txtPhone"
-                                android:maxLines="1"
-                                />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Bloog group : O+"
-                                android:textSize="13dp"
-                                android:fontFamily="@font/poppins_medium"
-                                android:id="@+id/txtBlood"
-                                android:maxLines="1"
-                                />
-
-                        </LinearLayout>
-
 
                     </LinearLayout>
 

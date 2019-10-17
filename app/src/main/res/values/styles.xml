@@ -9,11 +9,17 @@
         <item name="colorControlNormal">@color/white</item>
     </style>
 
-    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
+    <style name="DialogTheme" parent="@android:style/Theme.Dialog">
         <!-- Customize your theme here. -->
         <item name="android:windowBackground">@color/white</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">true</item>
+        <item name="android:windowAnimationStyle">@style/DialonAnimation</item>
+    </style>
+
+    <style name="DialonAnimation" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowEnterAnimation">@anim/fadin</item>
+        <item name="android:windowExitAnimation">@anim/fadout</item>
     </style>
 
     <style name="poppins_light_text" parent="TextAppearance.AppCompat">

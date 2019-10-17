@@ -23,9 +23,10 @@ import com.infix.edu.activity.AddVehicleActivity;
 import com.infix.edu.activity.AdminDormitoryActivity;
 import com.infix.edu.activity.AdminDormitoryDashActivity;
 import com.infix.edu.activity.AdminLeaveActivity;
+import com.infix.edu.activity.AdminStaffListActivity;
 import com.infix.edu.activity.AdminTransportActivity;
-import com.infix.edu.activity.AdminTransportListActivity;
 import com.infix.edu.activity.StudentListActivity;
+import com.infix.edu.activity.TransportActivity;
 
 import java.util.ArrayList;
 
@@ -121,8 +122,12 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.ViewHolder>{
                         activity.startActivity(vehicle, options.toBundle());
                         break;
                     case "Transport List":
-                        Intent transport_list = new Intent(activity, AdminTransportListActivity.class);
+                        Intent transport_list = new Intent(activity, TransportActivity.class);
                         activity.startActivity(transport_list, options.toBundle());
+                        break;
+                    case "Teacher":
+                        Intent teacher = new Intent(activity, AdminStaffListActivity.class);
+                        activity.startActivity(teacher, options.toBundle());
                         break;
 
                 }
