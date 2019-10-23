@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +40,7 @@ public class TeacherStudentActivity extends AppCompatActivity {
     private TextView txtToolbarText;
     private String url;
     private String status;
+    private String date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,7 @@ public class TeacherStudentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_teacher_student);
         toolbar = findViewById(R.id.toolbar);
         txtToolbarText = findViewById(R.id.txtTitle);
+
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
@@ -65,6 +68,7 @@ public class TeacherStudentActivity extends AppCompatActivity {
         String name = getIntent().getStringExtra("name").trim();
         String roll = getIntent().getStringExtra("roll").trim();
         status = getIntent().getStringExtra("status");
+        date = getIntent().getStringExtra("date");
 
         if(!roll.equals("")){
             url = MyConfig.getStudentByRoll(roll);

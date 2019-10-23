@@ -3,6 +3,7 @@ package com.infix.edu.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -10,6 +11,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +26,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputEditText;
 import com.infix.edu.R;
 import com.infix.edu.model.SearchData;
+import com.infix.edu.myconfig.Helper;
 import com.infix.edu.myconfig.MyConfig;
 
 import org.json.JSONArray;
@@ -30,6 +34,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class StudentSearchActivity extends AppCompatActivity {
 
@@ -49,6 +54,12 @@ public class StudentSearchActivity extends AppCompatActivity {
     private TextInputEditText etName;
     private TextInputEditText etRoll;
     private String status;
+    private LinearLayout linearLayout;
+    private DatePickerDialog datePickerDialog;
+    private Helper helper = new Helper();
+    private TextView txt_date;
+    private String current_date;
+    private int year, month, day;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,13 +75,28 @@ public class StudentSearchActivity extends AppCompatActivity {
         spnClass = findViewById(R.id.choose_class_spinner);
         spnSection = findViewById(R.id.choose_section_spinner);
         btnSearch = findViewById(R.id.btnSearch);
+        linearLayout = findViewById(R.id.update_date);
+        txt_date = findViewById(R.id.update_date_text);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         txtToolbarText.setText("Student Search");
 
+        Calendar c = Calendar.getInstance();
+        year = c.get(Calendar.YEAR);
+        month = c.get(Calendar.MONTH);
+        day = c.get(Calendar.DAY_OF_MONTH);
+
         status = getIntent().getStringExtra("status");
+
+        if(status.equalsIgnoreCase("admin_attendance")){
+            etRoll.setVisibility(View.GONE);
+            etName.setVisibility(View.GONE);
+            linearLayout.setVisibility(View.VISIBLE);
+
+            setDateToTextView();
+        }
 
 
         getClassAndSectionName();
@@ -88,16 +114,34 @@ public class StudentSearchActivity extends AppCompatActivity {
                 intent.putExtra("status",status);
                 intent.putExtra("name",name);
                 intent.putExtra("roll",roll);
+                intent.putExtra("date",current_date);
                 startActivity(intent);
-
-
-                //Toast.makeText(getApplicationContext(),section_id + " "+class_id + " "+name+" "+roll, Toast.LENGTH_SHORT).show();
-
-
 
             }
         });
 
+        linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setDateToTextView();
+            }
+        });
+
+
+    }
+
+    private void setDateToTextView() {
+
+        datePickerDialog = new DatePickerDialog(StudentSearchActivity.this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+                current_date = helper.selectDate(dayOfMonth, month, year);
+                txt_date.setText(current_date);
+            }
+        }, year, month, day);
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+        datePickerDialog.show();
 
     }
 

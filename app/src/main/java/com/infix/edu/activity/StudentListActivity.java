@@ -85,7 +85,6 @@ public class StudentListActivity extends AppCompatActivity{
     }
 
     private void replaceFragment(Fragment fragment){
-
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.student_container,fragment);
         transaction.commit();

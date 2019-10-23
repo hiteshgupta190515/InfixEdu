@@ -4,9 +4,9 @@
     <string-array name="admins_functions_name">
         <item>Students</item>
         <item>Leave</item>
-        <item>Teacher</item>
+        <item>Staff</item>
         <item>Dormitory</item>
-        <item>attendance</item>
+        <item>Attendance</item>
         <item>Fees</item>
         <item>Library</item>
         <item>Transport</item>

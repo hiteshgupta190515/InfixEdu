@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,8 @@ public class StudentListAdapter  extends RecyclerView.Adapter<StudentListAdapter
     private Context ctx;
     private String status;
     private int last_position = -1;
+    private ArrayList<String> ids = new ArrayList<>();
+    private ArrayList<String> attens = new ArrayList<>();
 
     public StudentListAdapter(ArrayList<Tstudent> students, Context ctx,String status){
         this.students = students;
@@ -55,11 +58,12 @@ public class StudentListAdapter  extends RecyclerView.Adapter<StudentListAdapter
     }
 
     @Override
-    public void onBindViewHolder(@NonNull studentViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final studentViewHolder holder, final int position) {
 
         final String url =MyConfig.ROOT_URL+students.get(position).getImage();
         String name = students.get(position).getName();
         String des = "Class "+students.get(position).getClassName()+" | Section "+students.get(position).getSectionName()+" | Roll "+students.get(position).getRoll();
+        final boolean[] isSelected = {false};
 
         try {
             Glide.with(ctx)
@@ -67,7 +71,7 @@ public class StudentListAdapter  extends RecyclerView.Adapter<StudentListAdapter
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .fitCenter()
                     .into(holder.image);
-        } catch (Exception e){
+         } catch (Exception e){
         }
         if(name != null && des != null){
 
@@ -78,39 +82,81 @@ public class StudentListAdapter  extends RecyclerView.Adapter<StudentListAdapter
 
         set_animation(holder.mView,position);
 
+        if(status.equalsIgnoreCase("admin_attendance")){
 
-        holder.layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            holder.layout.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
 
-                Intent intent;
+                    if(isSelected[0]){
+                        try {
+                            isSelected[0] = false;
 
-                //Toast.makeText(ctx,students.get(position).getFull_name(), Toast.LENGTH_SHORT).show();
-                if(status.equalsIgnoreCase("attendance")){
-                     intent = new Intent(ctx, AttendenceCalenderActivity.class);
-                     intent.putExtra("status",status);
-                }else{
-                     intent = new Intent(ctx, ProfileActivity.class);
+                            Glide.with(ctx)
+                                    .load(url)
+                                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                    .fitCenter()
+                                    .into(holder.image);
+
+                        } catch (Exception e){
+                        }
+                    }else{
+                        isSelected[0] = true;
+
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                if(isSelected[0]){
+                                    ids.add(String.valueOf(students.get(position).getId()));
+                                    students.remove(position);
+                                    notifyDataSetChanged();
+                                }
+                            }
+                        },5000);
+
+                        holder.image.setImageDrawable(ctx.getResources().getDrawable(R.mipmap.ic_password_check));
+                    }
+                    return false;
                 }
+            });
 
-                intent.putExtra("id",students.get(position).getId());
 
-                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
+        }else{
 
-                    Pair<View, String> p1 = Pair.create(view.findViewById(R.id.student_poster), "profile");
-                    Pair<View, String> p2 = Pair.create(view.findViewById(R.id.student_name), "name");
+            holder.layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
-                    ActivityOptionsCompat options = ActivityOptionsCompat.
-                            makeSceneTransitionAnimation((Activity) ctx, p1, p2);
-                    ctx.startActivity(intent, options.toBundle());
+                    Intent intent;
 
-                } else {
-                    ctx.startActivity(intent);
+                    if(status.equalsIgnoreCase("attendance")){
+                        intent = new Intent(ctx, AttendenceCalenderActivity.class);
+                        intent.putExtra("status",status);
+                    }else{
+                        intent = new Intent(ctx, ProfileActivity.class);
+                    }
+
+                    intent.putExtra("id",students.get(position).getId());
+
+                    if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
+
+                        Pair<View, String> p1 = Pair.create(view.findViewById(R.id.student_poster), "profile");
+                        Pair<View, String> p2 = Pair.create(view.findViewById(R.id.student_name), "name");
+
+                        ActivityOptionsCompat options = ActivityOptionsCompat.
+                                makeSceneTransitionAnimation((Activity) ctx, p1, p2);
+                        ctx.startActivity(intent, options.toBundle());
+
+                    } else {
+                        ctx.startActivity(intent);
+                    }
+
                 }
+            });
 
-
-            }
-        });
+        }
 
     }
 
@@ -150,6 +196,7 @@ public class StudentListAdapter  extends RecyclerView.Adapter<StudentListAdapter
             mView = v;
 
         }
+
     }
 
 }

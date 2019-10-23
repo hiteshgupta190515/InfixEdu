@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -23,7 +23,7 @@
                 android:orientation="vertical">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/cast_poster"
+                    android:id="@+id/staff_image"
                     android:layout_width="100dp"
                     android:layout_margin="16dp"
                     android:transitionName="profile"
@@ -34,11 +34,11 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_toRightOf="@+id/cast_poster"
+                    android:layout_toRightOf="@+id/staff_image"
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/cast_name"
+                        android:id="@+id/staff_name"
                         android:transitionName="name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -46,7 +46,8 @@
                         android:layout_marginRight="16dp"
                         android:layout_marginTop="16dp"
                         android:text="Mamun Hossain"
-                        android:fontFamily="sans-serif-condensed"
+                        android:maxLines="1"
+                        android:fontFamily="@font/poppins_bold"
                         android:textAppearance="?android:textAppearanceLarge" />
 
                     <TextView
@@ -56,8 +57,8 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
                         android:text="B.Sc in Computer Science"
-                        android:fontFamily="sans-serif-condensed"
-                        android:textAppearance="?android:textAppearanceMedium" />
+                        android:fontFamily="@font/poppins_medium"
+                        android:textAppearance="?android:textAppearanceSmall" />
 
                     <TextView
                         android:id="@+id/address"
@@ -66,8 +67,8 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
                         android:text="Mirpur ,Dhaka"
-                        android:fontFamily="sans-serif-condensed"
-                        android:textAppearance="?android:textAppearanceMedium" />
+                        android:fontFamily="@font/poppins_medium"
+                        android:textAppearance="?android:textAppearanceSmall" />
                 </LinearLayout>
 
 
@@ -78,6 +79,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/cast_detail_description"
+                app:cardElevation="6sp"
                 app:cardCornerRadius="0dp">
 
                 <RelativeLayout
@@ -108,7 +110,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="horizontal"
-                            android:background="#EBE3E3"
                             android:padding="5dp"
                             >
 
@@ -135,12 +136,18 @@
 
                         </LinearLayout>
 
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#ddd"
+                            android:layout_marginBottom="10dp"
+                            />
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="horizontal"
                             android:layout_marginTop="5dp"
-                            android:background="#F0D1D1"
                             android:padding="5dp"
                             >
 
@@ -148,11 +155,11 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Birth : 1983-02-24"
+                                android:text="Join : 1983-02-24"
                                 android:textSize="13dp"
                                 android:maxLines="1"
                                 android:fontFamily="@font/poppins_medium"
-                                android:id="@+id/txtBirth"
+                                android:id="@+id/txtJoining"
                                 />
 
                             <TextView
@@ -168,6 +175,13 @@
 
                         </LinearLayout>
 
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#ddd"
+                            android:layout_marginBottom="10dp"
+                            />
+
                     </LinearLayout>
 
 
@@ -178,4 +192,4 @@
         </RelativeLayout>
 
     </ScrollView>
-</RelativeLayout>
+</LinearLayout>

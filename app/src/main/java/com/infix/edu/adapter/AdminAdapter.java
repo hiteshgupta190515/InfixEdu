@@ -26,6 +26,8 @@ import com.infix.edu.activity.AdminLeaveActivity;
 import com.infix.edu.activity.AdminStaffListActivity;
 import com.infix.edu.activity.AdminTransportActivity;
 import com.infix.edu.activity.StudentListActivity;
+import com.infix.edu.activity.StudentSearchActivity;
+import com.infix.edu.activity.TeacherStudentActivity;
 import com.infix.edu.activity.TransportActivity;
 
 import java.util.ArrayList;
@@ -125,9 +127,14 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.ViewHolder>{
                         Intent transport_list = new Intent(activity, TransportActivity.class);
                         activity.startActivity(transport_list, options.toBundle());
                         break;
-                    case "Teacher":
+                    case "Staff":
                         Intent teacher = new Intent(activity, AdminStaffListActivity.class);
                         activity.startActivity(teacher, options.toBundle());
+                        break;
+                    case "Attendance":
+                        Intent attendance = new Intent(activity, StudentSearchActivity.class);
+                        attendance.putExtra("status","admin_attendance");
+                        activity.startActivity(attendance, options.toBundle());
                         break;
 
                 }
