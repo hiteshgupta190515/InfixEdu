@@ -9,6 +9,7 @@ import android.provider.MediaStore;
 import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -17,6 +18,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.infix.edu.R;
 import com.infix.edu.activity.AddHomeWorkActivity;
+import com.infix.edu.adapter.StudentListAdapter;
 import com.infix.edu.model.SearchData;
 import com.nbsp.materialfilepicker.MaterialFilePicker;
 
@@ -25,6 +27,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Helper {
 
@@ -305,6 +309,40 @@ public class Helper {
 
     }
 
+    public void setAttendanceData(String id,String atten, final String date, final Context ctx) {
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, MyConfig.attendance_data_send(id,atten,date), null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                try {
+                    if (response.getBoolean("success")) {
+
+                        Toast.makeText(ctx,"successful",Toast.LENGTH_SHORT).show();
+
+                    }else{
+
+                        Toast.makeText(ctx,"not successful",Toast.LENGTH_SHORT).show();
+
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        },new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(ctx, "error", Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
+        RequestQueue req = Volley.newRequestQueue(ctx);
+        req.add(request);
+    }
+
     public boolean setToken(int id, String token, final Context ctx) {
 
 
@@ -497,6 +535,94 @@ public class Helper {
 
         return sectionData;
 
+    }
+
+    public ArrayList<SearchData> getBookCategoryData(final Context ctx) {
+
+        final ArrayList<SearchData> bookData = new ArrayList<>();
+        bookData.clear();
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, MyConfig.BOOK_CATEGORY, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+
+                try {
+                    if (response.getBoolean("success")) {
+
+                        JSONArray classNameArray = response.getJSONArray("data");
+
+
+                        for (int i = 0; i < classNameArray.length(); i++) {
+
+                            String className = classNameArray.getJSONObject(i).getString("category_name");
+                            int class_id = classNameArray.getJSONObject(i).getInt("id");
+                            bookData.add(new SearchData(className, class_id));
+
+                        }
+
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(ctx, "error", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        RequestQueue req = Volley.newRequestQueue(ctx);
+        req.add(request);
+
+        return bookData;
+
+    }
+
+    public ArrayList<SearchData> subjectList(final Context ctx) {
+
+        final ArrayList<SearchData> subjectData = new ArrayList<>();
+        subjectData.clear();
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, MyConfig.SUBJECT_LIST, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                try {
+                    if (response.getBoolean("success")) {
+
+                        JSONArray classNameArray = response.getJSONArray("data");
+
+
+                        for (int i = 0; i < classNameArray.length(); i++) {
+
+                            String className = classNameArray.getJSONObject(i).getString("subject_name");
+                            int class_id = classNameArray.getJSONObject(i).getInt("id");
+                            subjectData.add(new SearchData(className, class_id));
+
+                        }
+
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(ctx, "error", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        RequestQueue req = Volley.newRequestQueue(ctx);
+        req.add(request);
+
+        return subjectData;
     }
 
 

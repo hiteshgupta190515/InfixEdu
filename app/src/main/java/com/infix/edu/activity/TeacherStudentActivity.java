@@ -6,10 +6,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +27,7 @@ import com.android.volley.toolbox.Volley;
 import com.infix.edu.R;
 import com.infix.edu.adapter.StudentListAdapter;
 import com.infix.edu.model.Tstudent;
+import com.infix.edu.myconfig.Helper;
 import com.infix.edu.myconfig.MyConfig;
 
 import org.json.JSONArray;
@@ -30,7 +36,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class TeacherStudentActivity extends AppCompatActivity {
+public class TeacherStudentActivity extends AppCompatActivity{
 
     private RecyclerView studentRecyclerView;
     private StudentListAdapter adapter;
@@ -41,6 +47,12 @@ public class TeacherStudentActivity extends AppCompatActivity {
     private String url;
     private String status;
     private String date;
+    private Button btnSave;
+    private LinearLayout linearLayout;
+    private RadioGroup radioGroup;
+    public static String selected_radio_btn;
+    private RadioButton rdPresent;
+    private Helper helper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +60,20 @@ public class TeacherStudentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_teacher_student);
         toolbar = findViewById(R.id.toolbar);
         txtToolbarText = findViewById(R.id.txtTitle);
+        btnSave = findViewById(R.id.btn_attendance_save);
+        linearLayout = findViewById(R.id.attendance_linear_layout);
+        radioGroup = findViewById(R.id.attendance_radio_group);
+        rdPresent = findViewById(R.id.present);
 
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         txtToolbarText.setText("Student List");
+        selected_radio_btn = "P";
+        rdPresent.setChecked(true);
+
+        helper = new Helper();
 
 
         progressBar = findViewById(R.id.loading);
@@ -69,6 +89,34 @@ public class TeacherStudentActivity extends AppCompatActivity {
         String roll = getIntent().getStringExtra("roll").trim();
         status = getIntent().getStringExtra("status");
         date = getIntent().getStringExtra("date");
+
+        if(status.equalsIgnoreCase("admin_attendance")){
+
+            btnSave.setVisibility(View.VISIBLE);
+            linearLayout.setVisibility(View.VISIBLE);
+
+            btnSave.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    for(int i = 0 ; i < StudentListAdapter.ids.size() ; i++){
+
+                        final String id = StudentListAdapter.ids.get(i);
+                        final String attn = StudentListAdapter.abs.get(i);
+
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                helper.setAttendanceData(id,attn,date,getApplicationContext());
+                            }
+                        },500);
+
+                    }
+
+                }
+            });
+        }
 
         if(!roll.equals("")){
             url = MyConfig.getStudentByRoll(roll);
@@ -88,6 +136,28 @@ public class TeacherStudentActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"student does not found!",Toast.LENGTH_SHORT).show();
             progressBar.setVisibility(View.GONE);
         }
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+
+                switch (i){
+
+                    case R.id.present:
+                        selected_radio_btn = "P";
+                        break;
+                    case R.id.absent:
+                        selected_radio_btn = "A";
+                        break;
+                    case R.id.late:
+                        selected_radio_btn = "L";
+                        break;
+                    case R.id.half_day:
+                        selected_radio_btn = "H";
+                        break;
+                }
+            }
+        });
 
 
     }

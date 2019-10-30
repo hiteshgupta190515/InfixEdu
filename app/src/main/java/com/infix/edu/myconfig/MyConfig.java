@@ -33,10 +33,16 @@ public class MyConfig {
     final public static String REJECTED_LEAVE = BASE_URL+"reject-leave";
     final public static String DRIVER_LIST = BASE_URL+"driver-list";
     final public static String STAFF_ROLE = BASE_URL+"staff-roles";
+    final public static String BOOK_CATEGORY = BASE_URL+"book-category";
+    final public static String SUBJECT_LIST = BASE_URL+"subject";
 
     public static String getLoginUrl(String email,String password){
 
         return BASE_URL+"login?email="+email+"&password="+password;
+    }
+    public static String attendance_data_send(String id,String atten,String date){
+
+        return BASE_URL+"student-attendance-store?id="+id+"&attendance="+atten+"&date="+date;
     }
 
     public static String addDormitory(String name,String type,String intake, String address,String description){
@@ -48,10 +54,14 @@ public class MyConfig {
         return BASE_URL+"vehicle?vehicle_number="+vehicleNo+"&vehicle_model="+model+"&driver_id="+driver_id+"&note="+note+"&year_made="+year;
 
     }
+    public static String addBook(String title,String category_id,String book_no, String isbn,String publisher_name,String author_name,String subject_id,String reck_no,String quantity,String price,String details,String date,String user_id){
+
+        return BASE_URL+"save-book-data?book_title="+title+"&book_category_id="+category_id+"&book_number="+book_no+"&isbn_no="+isbn+"&publisher_name="+
+                publisher_name+"&author_name="+author_name+"&subject_id="+subject_id+"&rack_number="+reck_no+"&quantity="+quantity+"&book_price="+price+"&details="+details+"&post_date="+date+"&user_id="+user_id;
+
+    }
     public static String addRoute(String title,String fare){
-
         return BASE_URL+"transport-route?title="+title+"&far="+fare;
-
     }
 
     public static String isEnabled(){

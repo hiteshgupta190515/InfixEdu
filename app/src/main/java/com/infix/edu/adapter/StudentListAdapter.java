@@ -21,10 +21,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.android.material.snackbar.Snackbar;
 import com.infix.edu.activity.AttendenceCalenderActivity;
 import com.infix.edu.activity.ProfileActivity;
 import com.infix.edu.activity.StudentInformation;
 import com.infix.edu.R;
+import com.infix.edu.activity.TeacherStudentActivity;
 import com.infix.edu.model.Student;
 import com.infix.edu.model.Tstudent;
 import com.infix.edu.myconfig.MyConfig;
@@ -39,13 +41,15 @@ public class StudentListAdapter  extends RecyclerView.Adapter<StudentListAdapter
     private Context ctx;
     private String status;
     private int last_position = -1;
-    private ArrayList<String> ids = new ArrayList<>();
-    private ArrayList<String> attens = new ArrayList<>();
+    public static ArrayList<String> ids = new ArrayList<>();
+    public static ArrayList<String> abs = new ArrayList<>();
 
     public StudentListAdapter(ArrayList<Tstudent> students, Context ctx,String status){
         this.students = students;
         this.ctx = ctx;
         this.status = status;
+        ids.clear();
+        abs.clear();
     }
 
     @NonNull
@@ -61,7 +65,7 @@ public class StudentListAdapter  extends RecyclerView.Adapter<StudentListAdapter
     public void onBindViewHolder(@NonNull final studentViewHolder holder, final int position) {
 
         final String url =MyConfig.ROOT_URL+students.get(position).getImage();
-        String name = students.get(position).getName();
+        final String name = students.get(position).getName();
         String des = "Class "+students.get(position).getClassName()+" | Section "+students.get(position).getSectionName()+" | Roll "+students.get(position).getRoll();
         final boolean[] isSelected = {false};
 
@@ -71,8 +75,8 @@ public class StudentListAdapter  extends RecyclerView.Adapter<StudentListAdapter
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .fitCenter()
                     .into(holder.image);
-         } catch (Exception e){
-        }
+         }catch (Exception e){}
+
         if(name != null && des != null){
 
             holder.txtName.setText(name);
@@ -101,6 +105,10 @@ public class StudentListAdapter  extends RecyclerView.Adapter<StudentListAdapter
                         } catch (Exception e){
                         }
                     }else{
+
+                        Snackbar.make(holder.mView, students.get(position).getName()+" added to the list", Snackbar.LENGTH_SHORT)
+                                .show();
+
                         isSelected[0] = true;
 
                         Handler handler = new Handler();
@@ -109,12 +117,14 @@ public class StudentListAdapter  extends RecyclerView.Adapter<StudentListAdapter
                             public void run() {
 
                                 if(isSelected[0]){
+
                                     ids.add(String.valueOf(students.get(position).getId()));
+                                    abs.add(TeacherStudentActivity.selected_radio_btn);
                                     students.remove(position);
                                     notifyDataSetChanged();
                                 }
                             }
-                        },5000);
+                        },1000);
 
                         holder.image.setImageDrawable(ctx.getResources().getDrawable(R.mipmap.ic_password_check));
                     }
@@ -163,7 +173,6 @@ public class StudentListAdapter  extends RecyclerView.Adapter<StudentListAdapter
     public void set_animation(View v,int position){
 
         if (position > last_position){
-
             //Load the animation from the xml file and set it to the row
             Animation animation = AnimationUtils.loadAnimation(ctx, R.anim.push_left_anim);
             animation.setDuration(500);

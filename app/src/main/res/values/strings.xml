@@ -34,6 +34,10 @@
         <item>Add HW</item>
         <item>HW List</item>
     </string-array>
+    <string-array name="admin_library_functions_name">
+        <item>Add Books</item>
+        <item>Book List</item>
+    </string-array>
 
     <string-array name="admin_dormitory_functions_name">
         <item>Add Room</item>
@@ -145,5 +149,6 @@
     <string name="pending">Pending</string>
     <string name="approved">Approved</string>
     <string name="rejected">Rejected</string>
+    <string name="save">save</string>
 
 </resources>

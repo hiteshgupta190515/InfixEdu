@@ -18,7 +18,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.AdminStaffListActivity"></activity>
+        <activity android:name=".activity.AddBookActivity"></activity>
+        <activity android:name=".activity.LibraryAdminActivity" />
+        <activity android:name=".activity.AdminStaffListActivity" />
         <activity android:name=".activity.AddVehicleActivity" />
         <activity android:name=".activity.AddRouteActivity" />
         <activity android:name=".activity.AdminTransportActivity" />

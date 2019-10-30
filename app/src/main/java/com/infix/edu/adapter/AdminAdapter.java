@@ -16,6 +16,7 @@ import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.infix.edu.R;
+import com.infix.edu.activity.AddBookActivity;
 import com.infix.edu.activity.AddDormitoryActivity;
 import com.infix.edu.activity.AddDormitoryRoomActivity;
 import com.infix.edu.activity.AddRouteActivity;
@@ -25,6 +26,8 @@ import com.infix.edu.activity.AdminDormitoryDashActivity;
 import com.infix.edu.activity.AdminLeaveActivity;
 import com.infix.edu.activity.AdminStaffListActivity;
 import com.infix.edu.activity.AdminTransportActivity;
+import com.infix.edu.activity.LibraryActivity;
+import com.infix.edu.activity.LibraryAdminActivity;
 import com.infix.edu.activity.StudentListActivity;
 import com.infix.edu.activity.StudentSearchActivity;
 import com.infix.edu.activity.TeacherStudentActivity;
@@ -136,7 +139,19 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.ViewHolder>{
                         attendance.putExtra("status","admin_attendance");
                         activity.startActivity(attendance, options.toBundle());
                         break;
-
+                    case "Library":
+                        Intent library = new Intent(activity, LibraryAdminActivity.class);
+                        library.putExtra("status","admin_attendance");
+                        activity.startActivity(library, options.toBundle());
+                        break;
+                    case "Book List":
+                        Intent libraryList = new Intent(activity, LibraryActivity.class);
+                        activity.startActivity(libraryList, options.toBundle());
+                        break;
+                    case "Add Books":
+                        Intent addbook = new Intent(activity, AddBookActivity.class);
+                        activity.startActivity(addbook, options.toBundle());
+                        break;
                 }
 
             }

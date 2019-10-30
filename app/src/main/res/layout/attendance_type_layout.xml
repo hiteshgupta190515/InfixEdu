@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:layout_marginTop="5dp"
+    android:visibility="gone"
+    android:id="@+id/attendance_linear_layout"
+    >
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/attendance_radio_group"
+        android:orientation="horizontal"
+        >
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Present"
+            android:button="@drawable/check_box"
+            android:fontFamily="@font/poppins_light"
+            android:paddingLeft="10dp"
+            android:id="@+id/present"
+            android:layout_marginStart="10sp"
+            />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Absent"
+            android:button="@drawable/check_box"
+            android:fontFamily="@font/poppins_light"
+            android:paddingLeft="10dp"
+            android:id="@+id/absent"
+            android:layout_marginStart="10sp"
+            />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Late"
+            android:button="@drawable/check_box"
+            android:fontFamily="@font/poppins_light"
+            android:paddingLeft="10dp"
+            android:id="@+id/late"
+            android:layout_marginStart="10sp"
+            />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Half day"
+            android:button="@drawable/check_box"
+            android:fontFamily="@font/poppins_light"
+            android:paddingLeft="10dp"
+            android:id="@+id/half_day"
+            android:layout_marginStart="10sp"
+            />
+
+    </RadioGroup>
+
+</LinearLayout>
