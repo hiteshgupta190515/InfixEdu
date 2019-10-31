@@ -4,10 +4,19 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Rect;
 import android.net.Uri;
+import android.os.Handler;
 import android.provider.MediaStore;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.Window;
 import android.webkit.MimeTypeMap;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -17,6 +26,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.infix.edu.R;
+import com.infix.edu.activity.AddBookActivity;
 import com.infix.edu.activity.AddHomeWorkActivity;
 import com.infix.edu.adapter.StudentListAdapter;
 import com.infix.edu.model.SearchData;
@@ -625,5 +635,185 @@ public class Helper {
         return subjectData;
     }
 
+
+    public boolean send_book_data(final Activity activity,String title,String category_id,String book_no, String isbn,String publisher_name,String author_name,String subject_id,String reck_no,String quantity,String price,String details,String date,String user_id) {
+
+        final boolean[] isSuccess = {false};
+
+        final ArrayList<SearchData> subjectData = new ArrayList<>();
+        subjectData.clear();
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, MyConfig.addBook(title,category_id,book_no,isbn,publisher_name,author_name,subject_id,reck_no,quantity,price,details,date,user_id), null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                try {
+                    if (response.getBoolean("success")) {
+                        isSuccess[0] = true;
+                       showSuccess("Book added successfully",activity);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(activity, "error", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        RequestQueue req = Volley.newRequestQueue(activity);
+        req.add(request);
+
+        return isSuccess[0];
+    }
+
+    private void showSuccess(String message, final Activity activity){
+
+
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(activity,R.style.DialogTheme);
+        View mView = LayoutInflater.from(activity).inflate(R.layout.pssword_change_success, null);
+
+        TextView textView = mView.findViewById(R.id.txt_message_body);
+        textView.setText(message);
+
+        alertBuilder.setView(mView);
+        final AlertDialog dialog = alertBuilder.create();
+
+        Rect displayRectangle = new Rect();
+        Window window = dialog.getWindow();
+        window.getDecorView().getWindowVisibleDisplayFrame(displayRectangle);
+
+        mView.setMinimumWidth((int)(displayRectangle.width()));
+        mView.setMinimumHeight((int)(displayRectangle.height() * 0.5f));
+
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                activity.finish();
+                dialog.dismiss();
+            }
+        },3000);
+
+    }
+
+    public ArrayList<SearchData> getAllFeesList(final Context ctx) {
+
+        final ArrayList<SearchData> feesData = new ArrayList<>();
+        feesData.clear();
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, MyConfig.FEES_GROUP, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+
+                try {
+                    if (response.getBoolean("success")) {
+
+                        JSONArray classNameArray = response.getJSONArray("data");
+
+                        for (int i = 0; i < classNameArray.length(); i++) {
+
+                            String className = classNameArray.getJSONObject(i).getString("name")+"="+classNameArray.getJSONObject(i).getString("description");
+                            int class_id = classNameArray.getJSONObject(i).getInt("id");
+                            feesData.add(new SearchData(className, class_id));
+
+                        }
+
+
+//                        Toast.makeText(getApplicationContext(),title +" "+array.length(), Toast.LENGTH_SHORT).show();
+
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(ctx, "error", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        RequestQueue req = Volley.newRequestQueue(ctx);
+        req.add(request);
+
+        return feesData;
+
+    }
+
+    public boolean update_fees_data(String name,String description, String id,final Activity activity) {
+
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, MyConfig.fees_data_update(name,description,id), null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                try {
+                    if (response.getBoolean("success")) {
+
+                        isSuccess = true;
+                        showSuccess("fees updated!",activity);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(activity, "error", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        RequestQueue req = Volley.newRequestQueue(activity);
+        req.add(request);
+
+        return isSuccess;
+    }
+
+    public boolean sent_fees_data(String name,String description,final Activity activity) {
+
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, MyConfig.fees_data_send(name,description), null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                try {
+                    if (response.getBoolean("success")) {
+
+                        isSuccess = true;
+                        showSuccess("fees created!",activity);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(activity, "error", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        RequestQueue req = Volley.newRequestQueue(activity);
+        req.add(request);
+
+        return isSuccess;
+    }
 
 }

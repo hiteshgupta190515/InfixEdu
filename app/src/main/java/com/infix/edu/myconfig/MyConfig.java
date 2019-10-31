@@ -35,6 +35,7 @@ public class MyConfig {
     final public static String STAFF_ROLE = BASE_URL+"staff-roles";
     final public static String BOOK_CATEGORY = BASE_URL+"book-category";
     final public static String SUBJECT_LIST = BASE_URL+"subject";
+    final public static String FEES_GROUP = BASE_URL+"fees-group";
 
     public static String getLoginUrl(String email,String password){
 
@@ -43,6 +44,12 @@ public class MyConfig {
     public static String attendance_data_send(String id,String atten,String date){
 
         return BASE_URL+"student-attendance-store?id="+id+"&attendance="+atten+"&date="+date;
+    }
+    public static String fees_data_send(String name,String description){
+        return BASE_URL+"fees-group-store?name="+name+"&description="+description;
+    }
+    public static String fees_data_update(String name,String description,String id){
+        return BASE_URL+"fees-group-update?name="+name+"&description="+description+"&id="+id;
     }
 
     public static String addDormitory(String name,String type,String intake, String address,String description){

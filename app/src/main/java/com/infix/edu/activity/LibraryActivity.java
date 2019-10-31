@@ -139,9 +139,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
                             books.add(book);
 
-
                         }
-
 
 //                        Toast.makeText(getApplicationContext(),title +" "+array.length(), Toast.LENGTH_SHORT).show();
 
@@ -152,12 +150,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
                 }
 
                 if(books.size() > 0){
-
                     adapter = new BookAdapter(books,getApplicationContext());
                     adapter.setClickListener(LibraryActivity.this);
                     recyclerView.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
-
                 }
 
             }
@@ -176,7 +171,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
      @Override
      public void itemClicked(Book setterGetter, int position, View view) {
-
                 Intent intent = new Intent(this,BookDetailsActivity.class);
                 startActivity(intent);
                 finish();

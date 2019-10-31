@@ -19,6 +19,7 @@ import com.infix.edu.R;
 import com.infix.edu.activity.AddBookActivity;
 import com.infix.edu.activity.AddDormitoryActivity;
 import com.infix.edu.activity.AddDormitoryRoomActivity;
+import com.infix.edu.activity.AddFeesActivity;
 import com.infix.edu.activity.AddRouteActivity;
 import com.infix.edu.activity.AddVehicleActivity;
 import com.infix.edu.activity.AdminDormitoryActivity;
@@ -26,6 +27,8 @@ import com.infix.edu.activity.AdminDormitoryDashActivity;
 import com.infix.edu.activity.AdminLeaveActivity;
 import com.infix.edu.activity.AdminStaffListActivity;
 import com.infix.edu.activity.AdminTransportActivity;
+import com.infix.edu.activity.FeesAdminActivity;
+import com.infix.edu.activity.FeesListActivity;
 import com.infix.edu.activity.LibraryActivity;
 import com.infix.edu.activity.LibraryAdminActivity;
 import com.infix.edu.activity.StudentListActivity;
@@ -151,6 +154,19 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.ViewHolder>{
                     case "Add Books":
                         Intent addbook = new Intent(activity, AddBookActivity.class);
                         activity.startActivity(addbook, options.toBundle());
+                        break;
+                    case "Fees":
+                        Intent fees = new Intent(activity, FeesAdminActivity.class);
+                        activity.startActivity(fees, options.toBundle());
+                        break;
+
+                    case "Fees List":
+                        Intent feeslist = new Intent(activity, FeesListActivity.class);
+                        activity.startActivity(feeslist, options.toBundle());
+                        break;
+                    case "Add fees":
+                        Intent feesadd = new Intent(activity, AddFeesActivity.class);
+                        activity.startActivity(feesadd, options.toBundle());
                         break;
                 }
 

@@ -49,22 +49,6 @@ public class Book {
 
     }
 
-//    @Override
-//    public boolean equals(Object obj) {
-//
-//        if (obj == null) {
-//            return false;
-//        }
-//
-//        if (!(obj instanceof Book)) {
-//            return false;
-//        }
-//
-//       Book book = (Book) obj;
-//
-//        return this.bookTitle.contains(book.bookTitle);
-//
-//    }
 
 
     public String getBook_no() {

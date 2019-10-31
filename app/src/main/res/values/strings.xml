@@ -34,9 +34,15 @@
         <item>Add HW</item>
         <item>HW List</item>
     </string-array>
+
     <string-array name="admin_library_functions_name">
         <item>Add Books</item>
         <item>Book List</item>
+    </string-array>
+
+    <string-array name="admin_fees_functions_name">
+        <item>Add fees</item>
+        <item>Fees List</item>
     </string-array>
 
     <string-array name="admin_dormitory_functions_name">
