@@ -38,6 +38,7 @@
     <string-array name="admin_library_functions_name">
         <item>Add Books</item>
         <item>Book List</item>
+        <item>Add member</item>
     </string-array>
 
     <string-array name="admin_fees_functions_name">

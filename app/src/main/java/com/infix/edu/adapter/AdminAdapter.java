@@ -20,6 +20,7 @@ import com.infix.edu.activity.AddBookActivity;
 import com.infix.edu.activity.AddDormitoryActivity;
 import com.infix.edu.activity.AddDormitoryRoomActivity;
 import com.infix.edu.activity.AddFeesActivity;
+import com.infix.edu.activity.AddLibraryMemberActivity;
 import com.infix.edu.activity.AddRouteActivity;
 import com.infix.edu.activity.AddVehicleActivity;
 import com.infix.edu.activity.AdminDormitoryActivity;
@@ -167,6 +168,10 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.ViewHolder>{
                     case "Add fees":
                         Intent feesadd = new Intent(activity, AddFeesActivity.class);
                         activity.startActivity(feesadd, options.toBundle());
+                        break;
+                    case "Add member":
+                        Intent add_member = new Intent(activity, AddLibraryMemberActivity.class);
+                        activity.startActivity(add_member, options.toBundle());
                         break;
                 }
 

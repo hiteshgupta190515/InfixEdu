@@ -36,6 +36,7 @@ public class MyConfig {
     final public static String BOOK_CATEGORY = BASE_URL+"book-category";
     final public static String SUBJECT_LIST = BASE_URL+"subject";
     final public static String FEES_GROUP = BASE_URL+"fees-group";
+    final public static String ROLE = BASE_URL+"library-member-role";
 
     public static String getLoginUrl(String email,String password){
 
@@ -44,6 +45,9 @@ public class MyConfig {
     public static String attendance_data_send(String id,String atten,String date){
 
         return BASE_URL+"student-attendance-store?id="+id+"&attendance="+atten+"&date="+date;
+    }
+    public static String add_library_member(String member_type,String member_ud_id,String cls_id,String sec_id,String student_id,String stuff_id,String created_by){
+        return BASE_URL+"add-library-member?member_type="+member_type+"&member_ud_id="+member_ud_id+"&class="+cls_id+"&section="+sec_id+"&student="+student_id+"&staff="+stuff_id+"&created_by="+created_by;
     }
     public static String fees_data_send(String name,String description){
         return BASE_URL+"fees-group-store?name="+name+"&description="+description;

@@ -18,7 +18,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.AddFeesActivity"></activity>
+        <activity android:name=".activity.AddLibraryMemberActivity"></activity>
+        <activity android:name=".activity.AddFeesActivity" />
         <activity android:name=".activity.FeesListActivity" />
         <activity android:name=".activity.FeesAdminActivity" />
         <activity android:name=".activity.AddBookActivity" />

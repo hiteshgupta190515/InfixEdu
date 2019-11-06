@@ -28,8 +28,11 @@ import com.android.volley.toolbox.Volley;
 import com.infix.edu.R;
 import com.infix.edu.activity.AddBookActivity;
 import com.infix.edu.activity.AddHomeWorkActivity;
+import com.infix.edu.activity.AdminStaffListActivity;
+import com.infix.edu.adapter.StaffListAdapter;
 import com.infix.edu.adapter.StudentListAdapter;
 import com.infix.edu.model.SearchData;
+import com.infix.edu.model.StaffData;
 import com.nbsp.materialfilepicker.MaterialFilePicker;
 
 import org.json.JSONArray;
@@ -814,6 +817,90 @@ public class Helper {
         req.add(request);
 
         return isSuccess;
+    }
+
+
+    public ArrayList<SearchData> getAllMemberType(final Context ctx) {
+
+        final ArrayList<SearchData> classData = new ArrayList<>();
+        classData.clear();
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, MyConfig.ROLE, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+
+                try {
+                    if (response.getBoolean("success")) {
+
+                        JSONArray catArray = response.getJSONArray("data");
+
+                        for (int i = 0; i < catArray.length(); i++) {
+
+                            String className = catArray.getJSONObject(i).getString("name");
+                            int class_id = catArray.getJSONObject(i).getInt("id");
+                            classData.add(new SearchData(className, class_id));
+
+                        }
+//                        Toast.makeText(getApplicationContext(),title +" "+array.length(), Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(ctx, "error", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        RequestQueue req = Volley.newRequestQueue(ctx);
+        req.add(request);
+
+        return classData;
+
+    }
+
+    public ArrayList<SearchData> getAllStaff(int type, final Context ctx){
+
+        final ArrayList<SearchData> staffs = new ArrayList<>();
+        staffs.clear();
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, MyConfig.getAllStaff(type), null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                try {
+                    if (response.getBoolean("success")) {
+
+                        JSONArray staffArray = response.getJSONArray("data");
+
+                        for (int i = 0; i < staffArray.length(); i++) {
+                            String name = staffArray.getJSONObject(i).getString("full_name");
+                            int id = staffArray.getJSONObject(i).getInt("user_id");
+                            staffs.add(new SearchData(name, id));
+                        }
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(ctx, "error", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        RequestQueue req = Volley.newRequestQueue(ctx);
+        req.add(request);
+
+        return staffs;
     }
 
 }
